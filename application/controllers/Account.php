@@ -19,16 +19,63 @@ class Account extends CI_Controller {
 			if ($this->session->userdata['logged_in']['akses'] == 'admin') {
 				redirect('Admin_C/view_read_obat');
 			}
-			elseif ($this->session->userdata['logged_in']['akses'] == 'ppk') {
+			elseif ($this->session->userdata['logged_in']['akses'] == 'non_admin') {
 				redirect('Ppk_C/view_id');
 			}
-			else if ($this->session->userdata['logged_in']['akses'] == 'pasien') {
+			else if ($this->session->userdata['logged_in']['akses'] == 'pendaftaran') {
 				redirect('Pasien_C/view_log_pengobatan/');
 			}
 		}else{
 			$this->load->view('header');
 			$this->load->view('login');
 			$this->load->view('footer');
+		}
+	}
+
+	public function register_handler()
+	{
+		if ($this->input->post() !== null) {
+
+			if ($hak_akses != 'pendaftaran') {
+				$data_insert['sip']			= $this->input->post('sip');
+			}
+
+			$config['upload_path']          = FCPATH."assets/images/users_photo/";
+			$config['allowed_types']        = 'jpg|png|jpeg';
+			$this->load->library('upload',$config);
+			
+			if($this->upload->do_upload('link_foto')){
+				$datax = $this->upload->data();	
+
+				alert('alert_register_foto','success','Berhasil','Foto profil telah ditambahkan');
+
+				$data = array(
+										'nama'		 	=> "dr. ".$this->input->post('nama'),
+										'nik'			=> $this->input->post('nik'),
+										'jk'		 	=> $this->input->post('jenis_kelamin'),
+										'alamat'		=> $this->input->post('alamat'),
+										'username'		=> $this->input->post('username'),
+										'password'		=> $this->input->post('password')
+								);
+
+				$query = $this->SO_M->create('user',$data);
+				$result	=	json_decode($query,true);
+				if ($result['status']) {
+					alert('alert_register_user','success','Berhasil','Registrasi berhasil');
+				}else{
+					alert('alert_register_user','success','Gagal','Kegagalan database');
+				}
+			}
+			else{
+				alert('alert_register_foto','warning','Gagal','Upload foto profil gagal');
+			}
+
+			redirect('Akun_C/view_register_user');
+
+		}else{
+			$data['heading']		=	"Null POST";
+			$data['message']		=	"<p>Tidak ada data yang di post</p>";
+			$this->load->view('errors/html/error_general',$data);
 		}
 	}
 
@@ -88,7 +135,7 @@ class Account extends CI_Controller {
 
 	function edit_identitas_handler()
 	{
-		$update = $this->SO_M->update('user',array('id_user'=>$this->input->post('id_user')),array(
+		$update = $this->Kesehatan_M->update('user',array('id_user'=>$this->input->post('id_user')),array(
 																									'nomor_identitas'	=>	$this->input->post('nomor_identitas'),
 																									'tanggal_lahir'		=>	$this->input->post('tanggal_lahir')));
 		$update = json_decode($update);
@@ -132,4 +179,6 @@ class Account extends CI_Controller {
 		}
 		redirect('Akun_C/view_ubah_password/'.$id_user);
 	}
+
+
 }

@@ -5,20 +5,34 @@ class Kesehatan_M extends CI_Model {
 		parent::__construct();
 	}
 	
-	/*select * from table*/
+	/*
+	* query : select * from table
+	* select semua kolom pada tabel
+	* $table (string) nama tabel
+	*/
 	public function readS($table){
 		$query = $this->db->get($table);
 		return $query;
 	}
 	
-	/*select from table where*/
+	/*
+	* query : select from table where
+	* select semua kolom pada tabel dengan kriteria tertentu(dataCondition)
+	* $table (string) nama tabel
+	* $dataCondition (sosiatif array/string) parameter where
+	*/
 	public function read($table,$dataCondition){
 		$this->db->where($dataCondition);
 		$query = $this->db->get($table);
 		return $query;
 	}
 
-	/*select kolom1, kolom2 from table*/
+	/*
+	* query : select kolom1, kolom2 from table
+	* select beberapa kolom pada tabel
+	* $table (string) nama tabel
+	* $cols (asosiatif array) kolom-kolom yang ingin di select
+	*/
 	public function readSCol($table,$cols)
 	{
 		$this->db->select($cols);
@@ -26,7 +40,13 @@ class Kesehatan_M extends CI_Model {
 		return $query;
 	}
 
-	/*select kolom1,kolom2 from table where*/
+	/*
+	* query : select kolom1,kolom2 from table where
+	* select ebeberapa kolom pada tabel dengan kriteria where
+	* $table (string) nama tabel
+	* $dataCondition (asosiatif array) kriteria where
+	* $cols (asosiatif array) kolom-kolom yang ingin di select
+	*/
 	public function readCol($table,$dataCondition,$cols)
 	{
 		$this->db->select($cols);
@@ -36,8 +56,11 @@ class Kesehatan_M extends CI_Model {
 	}
 
 	/*
-	* insert into table values
-	* json_decode() @ controller untuk membuka return.
+	* query : insert into table values('','','')
+	* $tabel (string) nama tabel
+	* $data (asosiatif array) record yang akan masuk.
+	* json_decode() pada controller untuk membuka(bungkus) return.
+	* kebutuhan encode karena ada kemungkinan dihandle ajax dan lebih enak transaksi melalui json
 	*/
 	public function create($table,$data){
 		$query = $this->db->insert($table, $data);
@@ -57,7 +80,7 @@ class Kesehatan_M extends CI_Model {
 
 	/*
 	* insert yang return id dari last inserted
-	* gunakan json_decode()
+	* gunakan json_decode() pada controller
 	*/
 	public function create_id($table,$data)
 	{
@@ -96,7 +119,10 @@ class Kesehatan_M extends CI_Model {
 		}
 	}
 	
-	/*return boolean*/
+	/*
+	* untuk delete record dengan kondisi tertentu
+	* return boolean
+	*/
 	public function delete($table,$dataCondition){
 		$this->db->where($dataCondition);
 		$result = $this->db->delete($table);
@@ -141,7 +167,7 @@ class Kesehatan_M extends CI_Model {
 
 	public function truncateTable($tabel)
 	{
-		$this->db->query('TRUNCATE TABLE wm_kondisi');
+		$this->db->query('TRUNCATE TABLE'.$tabel);
 	}	
 }
 ?>
