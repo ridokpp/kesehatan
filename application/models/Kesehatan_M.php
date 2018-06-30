@@ -169,5 +169,44 @@ class Kesehatan_M extends CI_Model {
 	{
 		$this->db->query('TRUNCATE TABLE'.$tabel);
 	}	
+
+
+
+	//read data pasien pada rekam medis
+	public function readCol($pasien,$kd_pasien)
+	{
+		$this->db->select($kd_pasien,$nama,$nik,$tmp_lahir,$tgl_lahirm,$usia,$alamat,$jkelamin,$pekerjaan,$kd_kelurahan);
+		$this->db->where('kd_pasien',$kd_pasien);
+		$query = $this->db->get($pasien);
+		return $query;
+	}
+
+	//read data objek pada rekam medis
+	public function read($objek,$kd_objek){
+		$this->db->where('$kd_objek',$kd_objek);
+		$query = $this->db->get($objek);
+		return $query;
+	}
+
+
+	//create new data pada rekam medis
+	public function create_id($rkm_medis,$d_rkm)
+	{
+		$query = $this->db->insert($rkm_medis, $d_rkm);
+		if (!$query) {
+			return json_encode(array(
+										'status' => false,
+										'error_message' => $this->db->error()
+			));
+		}
+		else{
+			return json_encode(array(
+										'status' => true,
+										'message' => $this->db->insert_id()
+			));
+		}
+	}
+
+
 }
 ?>
