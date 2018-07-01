@@ -12,18 +12,18 @@ class Account extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	public function login()
+	function login()
 	{
 		if(isset($this->session->userdata['logged_in'])){
 			alert('alert_login','warning','Peringatan','Sudah Login');
 			if ($this->session->userdata['logged_in']['akses'] == 'admin') {
-				redirect('Admin_C/view_read_obat');
+				redirect();
 			}
-			elseif ($this->session->userdata['logged_in']['akses'] == 'ppk') {
-				redirect('Ppk_C/view_id');
+			elseif ($this->session->userdata['logged_in']['akses'] == 'non_admin') {
+				redirect();
 			}
-			else if ($this->session->userdata['logged_in']['akses'] == 'pasien') {
-				redirect('Pasien_C/view_log_pengobatan/');
+			else if ($this->session->userdata['logged_in']['akses'] == 'petugas') {
+				redirect();
 			}
 		}else{
 			$this->load->view('header');
@@ -32,7 +32,54 @@ class Account extends CI_Controller {
 		}
 	}
 
-	public function login_handler()
+	function register_handler()
+	{
+		if ($this->input->post() !== null) {
+
+			if ($hak_akses != 'petugas') {
+				$data_insert['sip']			= $this->input->post('sip');
+			}
+
+			// $config['upload_path']          = FCPATH."assets/images/users_photo/";
+			// $config['allowed_types']        = 'jpg|png|jpeg';
+			// $this->load->library('upload',$config);
+			
+			if($this->upload->do_upload('link_foto')){
+				$datax = $this->upload->data();	
+
+				alert('alert_register_foto','success','Berhasil','Foto profil telah ditambahkan');
+
+				$data = array(
+										'nama'		 	=> "dr. ".$this->input->post('nama'),
+										'nik'			=> $this->input->post('nik'),
+										'jk'		 	=> $this->input->post('jenis_kelamin'),
+										'alamat'		=> $this->input->post('alamat'),
+										'username'		=> $this->input->post('username'),
+										'password'		=> $this->input->post('password')
+								);
+
+				$query = $this->SO_M->create('user',$data);
+				$result	=	json_decode($query,true);
+				if ($result['status']) {
+					alert('alert_register_user','success','Berhasil','Registrasi berhasil');
+				}else{
+					alert('alert_register_user','success','Gagal','Kegagalan database');
+				}
+			}
+			else{
+				alert('alert_register_foto','warning','Gagal','Upload foto profil gagal');
+			}
+
+			redirect();
+
+		}else{
+			$data['heading']		=	"Null POST";
+			$data['message']		=	"<p>Tidak ada data yang di post</p>";
+			$this->load->view('errors/html/error_general',$data);
+		}
+	}
+
+	function login_handler()
 	{
 		if ($this->input->post() !== null) {
 
@@ -73,7 +120,7 @@ class Account extends CI_Controller {
 		}
 	}
 
-	public function logout_handler()
+	function logout_handler()
 	{
 		$sess_array = array(
 							'hak_akses'	=>	'',
@@ -88,7 +135,7 @@ class Account extends CI_Controller {
 
 	function edit_identitas_handler()
 	{
-		$update = $this->SO_M->update('user',array('id_user'=>$this->input->post('id_user')),array(
+		$update = $this->Kesehatan_M->update('user',array('id_user'=>$this->input->post('id_user')),array(
 																									'nomor_identitas'	=>	$this->input->post('nomor_identitas'),
 																									'tanggal_lahir'		=>	$this->input->post('tanggal_lahir')));
 		$update = json_decode($update);
@@ -97,7 +144,7 @@ class Account extends CI_Controller {
 		}else{
 			alert('alert_edit_identitas','danger','Gagal','Perubahan tidak masuk database');
 		}
-		redirect('Akun_C/view_edit_identitas/'.$this->input->post('id_user'));
+		redirect();
 	}
 
 	function ubah_password_handler()
@@ -130,6 +177,8 @@ class Account extends CI_Controller {
 		}else{
 			alert('alert_ubah_password','danger','Gagal','tidak ada data yang di post');
 		}
-		redirect('Akun_C/view_ubah_password/'.$id_user);
+		redirect();
 	}
+
+
 }
