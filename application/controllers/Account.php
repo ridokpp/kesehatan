@@ -12,18 +12,18 @@ class Account extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	public function login()
+	function login()
 	{
 		if(isset($this->session->userdata['logged_in'])){
 			alert('alert_login','warning','Peringatan','Sudah Login');
 			if ($this->session->userdata['logged_in']['akses'] == 'admin') {
-				redirect('Admin_C/view_read_obat');
+				redirect();
 			}
 			elseif ($this->session->userdata['logged_in']['akses'] == 'non_admin') {
-				redirect('Ppk_C/view_id');
+				redirect();
 			}
-			else if ($this->session->userdata['logged_in']['akses'] == 'pendaftaran') {
-				redirect('Pasien_C/view_log_pengobatan/');
+			else if ($this->session->userdata['logged_in']['akses'] == 'petugas') {
+				redirect();
 			}
 		}else{
 			$this->load->view('header');
@@ -32,17 +32,17 @@ class Account extends CI_Controller {
 		}
 	}
 
-	public function register_handler()
+	function register_handler()
 	{
 		if ($this->input->post() !== null) {
 
-			if ($hak_akses != 'pendaftaran') {
+			if ($hak_akses != 'petugas') {
 				$data_insert['sip']			= $this->input->post('sip');
 			}
 
-			$config['upload_path']          = FCPATH."assets/images/users_photo/";
-			$config['allowed_types']        = 'jpg|png|jpeg';
-			$this->load->library('upload',$config);
+			// $config['upload_path']          = FCPATH."assets/images/users_photo/";
+			// $config['allowed_types']        = 'jpg|png|jpeg';
+			// $this->load->library('upload',$config);
 			
 			if($this->upload->do_upload('link_foto')){
 				$datax = $this->upload->data();	
@@ -70,7 +70,7 @@ class Account extends CI_Controller {
 				alert('alert_register_foto','warning','Gagal','Upload foto profil gagal');
 			}
 
-			redirect('Akun_C/view_register_user');
+			redirect();
 
 		}else{
 			$data['heading']		=	"Null POST";
@@ -79,7 +79,7 @@ class Account extends CI_Controller {
 		}
 	}
 
-	public function login_handler()
+	function login_handler()
 	{
 		if ($this->input->post() !== null) {
 
@@ -120,7 +120,7 @@ class Account extends CI_Controller {
 		}
 	}
 
-	public function logout_handler()
+	function logout_handler()
 	{
 		$sess_array = array(
 							'hak_akses'	=>	'',
@@ -144,7 +144,7 @@ class Account extends CI_Controller {
 		}else{
 			alert('alert_edit_identitas','danger','Gagal','Perubahan tidak masuk database');
 		}
-		redirect('Akun_C/view_edit_identitas/'.$this->input->post('id_user'));
+		redirect();
 	}
 
 	function ubah_password_handler()
@@ -177,7 +177,7 @@ class Account extends CI_Controller {
 		}else{
 			alert('alert_ubah_password','danger','Gagal','tidak ada data yang di post');
 		}
-		redirect('Akun_C/view_ubah_password/'.$id_user);
+		redirect();
 	}
 
 
