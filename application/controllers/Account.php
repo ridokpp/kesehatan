@@ -12,25 +12,17 @@ class Account extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	function login()
+	function menu($menu)
 	{
-		if(isset($this->session->userdata['logged_in'])){
-			alert('alert_login','warning','Peringatan','Sudah Login');
-			if ($this->session->userdata['logged_in']['akses'] == 'admin') {
-				redirect();
-			}
-			elseif ($this->session->userdata['logged_in']['akses'] == 'non_admin') {
-				redirect();
-			}
-			else if ($this->session->userdata['logged_in']['akses'] == 'petugas') {
-				redirect();
-			}
-		}else{
-			$this->load->view('header');
-			$this->load->view('login');
-			$this->load->view('footer');
+		$this->load->view('static/header');
+		if ($menu == 'login') {
+			$this->load->view('account/login');
+		}elseif ($menu == 'register') {
+			$this->load->view('account/register');
 		}
+		$this->load->view('static/footer');
 	}
+
 
 	function register_handler()
 	{
@@ -45,7 +37,7 @@ class Account extends CI_Controller {
 			// $this->load->library('upload',$config);
 			
 			if($this->upload->do_upload('link_foto')){
-				$datax = $this->upload->data();	
+				$datax = $this->upload->data();
 
 				alert('alert_register_foto','success','Berhasil','Foto profil telah ditambahkan');
 
@@ -86,9 +78,9 @@ class Account extends CI_Controller {
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
-			$record = $this->Kesehatan_M->read('tabel_user',array(	'username'	=>	$this->input->post('username',
+			$record = $this->Kesehatan_M->read('tabel_user',array(	'username'	=>	$this->input->post('username'),
 																	'password'	=>	$this->input->post('password')
-																)));
+																));
 
 			if ($record->num_rows() == 1) {
 				
