@@ -21,7 +21,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('static/header');
-		$this->load->view('petugas/pendaftaran_pasien_baru');
+		$this->load->view('petugas/pendaftaran_pasien');
 		$this->load->view('static/footer');
 	}
 
