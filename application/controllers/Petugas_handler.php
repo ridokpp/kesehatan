@@ -9,10 +9,15 @@ class Petugas_handler extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	function register(){
+	/*
+	* form handler untuk register pasien
+	*/
+	function pendaftaran(){
 
 		// ambil id terakhir
 		$no_urut 	= $this->Kesehatan_M->rawQuery("SELECT AUTO_INCREMENT AS no_urut FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'kesehatan' AND TABLE_NAME = 'pasien'")->result();
+
+		// ambil id untuk dijadikan nomor identitas pasien
 		if ($no_urut == array()) {
 			$no_urut = 0;
 		}else{
@@ -53,7 +58,7 @@ class Petugas_handler extends CI_Controller {
 							'tmp_lahir'		=>$this->input->post('tempat_lahir'),
 							'tgl_lahir'		=>$tgl_lahir->format('Y-m-d'),
 							'usia'			=>$usia,
-							'alamat'		=>$this->input->post('jalan').substr($kelurahan, 4).$kecamatan.$kota,
+							'alamat'		=>$this->input->post('jalan')." RT".$this->input->post('RT')." RW".$this->input->post("RW")." ".substr($kelurahan, 4)." ".$kecamatan." ".$kota,
 							'jkelamin'		=>$jenis_kelamin,
 							'pekerjaan'		=>$this->input->post('pekerjaan'),
 							'kd_kelurahan'	=>$kd_kelurahan,
@@ -62,6 +67,27 @@ class Petugas_handler extends CI_Controller {
 						);
 
 		$result = json_decode($this->Kesehatan_M->create('pasien',$dataForm),false);
+		if ($result->status) {
+			alert('alert','success','Berhasil','Registrasi berhasil');
+		}else{
+			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
+		}
+	}
+
+	/*
+	* form handler untuk pemeriksaan awal
+	*/
+	function pemeriksaan(){
+		$postedData = 	array(
+								'kd_pasien'=>$this->input->post('kd_pasien'),
+								'TB'	=>	$this->input->post('TB'),
+								'BB'	=>	$this->input->post('BB'),
+								'TD'	=>	$this->input->post('TD'),
+								'Nadi'	=>	$this->input->post('Nadi'),
+								'RR'	=>	$this->input->post('RR'),
+								'Temperature Axilla'=>$this->input->post('temperature_axilla'),
+						);
+		$result = json_decode($this->Kesehatan_M->create('tabe_pemeriksaan',$postedData),false);
 		if ($result->status) {
 			alert('alert','success','Berhasil','Registrasi berhasil');
 		}else{
