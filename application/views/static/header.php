@@ -7,7 +7,7 @@
 	<script src="<?php echo base_url()?>assets/bootstrap/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="<?php echo base_url()?>assets/bootstrap/js/popper.min.js"></script>
 	<script src="<?php echo base_url()?>assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?php echo base_url()?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<!-- <script src="<?php echo base_url()?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> -->
 	<script src="<?php echo base_url()?>assets/select2/dist/js/select2.min.js"></script>
    <style>
         body{padding: 20px}

@@ -12,13 +12,14 @@ class Petugas extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	function menu($menu)
+	function menu($menu,$nomor_pasien='')
 	{
 		$this->load->view('static/header');
 		if ($menu == 'pendaftaran') {
 			$this->load->view('petugas/pendaftaran_pasien');
 		}elseif ($menu == 'pemeriksaan') {
-			$this->load->view('petugas/pemeriksaan_awal');
+			$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
+			$this->load->view('petugas/pemeriksaan_awal',$data);
 		}
 		$this->load->view('static/footer');
 	}
