@@ -1,89 +1,172 @@
-<form action="<?=base_url()?>Petugas_handler/register" method="POST" class="mt-5">
+<h3 class="text-center mt-3">Pendafataran Awal Pasien</h3>
+
+<form action="action">
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<div class="form-group">
-					<label for="" class="control-label">Nama Lengkap</label>
-					<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Nama Lengkap" required="">
-				</div>	
 
-				<div class="form-group"> 
-					<label for="" class="control-label">NIK</label>
-					<input type="number" class="form-control" id="" name="nik" placeholder="NIK" required="">
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">Nama</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<input type="text" class="form-control" id="" name="" placeholder="Nama Lengkap" required="">
+				    </div>
 				</div>
 
-				<div class="form-row">
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">NIK</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<input type="text" class="form-control" id="" name="" placeholder="Nomor Induk Kependudukan" required="">
+				    </div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col">	
+					    <label class="control-label"><strong>Tempat, Tanggal Lahir</strong></label> 
+					</div>
+				</div>
+
+				<div class="row">
+			 		<div class="col">
+				     	<div class="form-group row">
+				   			<label for="inputEmail3" class="col-sm-3 col-form-label">Tempat</label>
+				  		  	<div class="input-group-prepend col-sm-9">
+				      			<input type="text" class="form-control" id="" name="" placeholder="Tempat Lahir" required="">
+				    		</div>
+						</div>
+					</div>
+			    	<div class="col">
+				     	<div class="form-group row">
+				    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal</label>
+				    		<div class="input-group-prepend col-sm-8">
+				      			<input type="date" class="form-control" required="">
+				   			</div>
+						</div>
+					</div>
 					<div class="col">
-						<label class="control-label">Tempat Lahir</label>
-				      <input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Tempat Lahir" required="">
-				   </div>
-				   <div class="col">
-				   	<label class="control-label">Tanggal Lahir</label>
-				      <input type="date" class="form-control" name="tanggal_lahir" required="">
-				      <br>
-				   </div>
+				     	<div class="form-group row">
+				    		<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+				    		<div class="input-group-prepend col-sm-10">
+				      		
+				   			</div>
+						</div>
+					</div>
+
+			 	</div>
+
+			 	<div class="form-group row">
+					<div class="col">	
+					    <label class="control-label"><strong>Alamat</strong></label> 
+					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="" class="control-label">Alamat</label>
-					<select class="form-control" id="" name="kota" required="">
-						<option value="" disabled="" selected="">Kota / Kabupaten</option>
-						<option value="Kota Malang">Kota Malang</option>
-						<option value="Kabupaten Malang">Kabupaten Malang</option>
-						<option value="Lain-lain">Lain-lain</option>
-					</select>
-					<br>
-					<select class="form-control" name="kecamatan" id="" required="">
-						<option value="" disabled="" selected="">Kecamatan</option>
-						<option value="Kedungkandang">Kedungkandang</option>
-						<option value="Lowokwaru">Lowokwaru</option>
-						<option value="Klojen">Klojen</option>
-						<option value="Sukun">Sukun</option>
-						<option value="Blimbing">Blimbing</option>
-						<option value="Lain-lain">Lain-lain</option>
-					</select>
-					<br>
-					<select class="form-control" id="" name="kelurahan" required="">
-						<option value="" disabled="" selected="">Kelurahan</option>
-						<option value="001 Arjowinangun">001 Arjowinangun</option>
-						<option value="002 Bumiayu">002 Bumiayu</option>
-						<option value="003 Buring">003 Buring</option>
-						<option value="004 Cemoro Kandang">004 Cemoro Kandang</option>
-						<option value="005 Kedung Kandang">005 Kedung Kandang</option>
-						<option value="006 Kota Lama">006 Kota Lama</option>
-						<option value="007 Lesanpuro">007 Lesanpuro</option>
-						<option value="008 Madyopuro">008 Madyopuro</option>
-						<option value="009 Mergosono">009 Mergosono</option>
-						<option value="010 Sawojajar">010 Sawojajar</option>
-						<option value="011 Tlogowaru">011 Tlogowaru</option>
-						<option value="012 Wonokoyo">012 Wonokoyo</option>
-						<option value="013 Lain-Lain">013 Lain-Lain</option>
-					</select>
-					<br>
-					<input type="text" class="form-control" id="" name="jalan" placeholder="Jalan" required="">
+				<div class="form-group row">
+					<div class="col">
+						<div class="form-group row">
+						    <label class="col-sm-3 col-form-label">Kota</label>
+						    <div class="input-group-prepend col-sm-9">
+						      	<select class="form-control" id="" required="">
+									<option value="" disabled="" selected="">Kota / Kabupaten</option>
+									<option value="">Kota Malang</option>
+									<option value="">Kabupaten Malang</option>
+								</select>
+						    </div>
+						</div>
+					</div>
+
+					<div class="col">
+						<div class="form-group row">
+						    <label class="col-sm-4 col-form-label">Kecamatan</label>
+						    <div class="input-group-prepend col-sm-8">
+						      	<select class="form-control" id="" required="">
+									<option value="" disabled="" selected="">Kecamatan</option>
+									<option value="">Kedungkandang</option>
+									<option value="">Lowokwaru</option>
+									<option value="">Klojen</option>
+									<option value="">Sukun</option>
+									<option value="">Blimbing</option>
+								</select>
+						    </div>
+						</div>	
+					</div>
+
+					<div class="col">
+						<div class="form-group row">
+						    <label class="col-sm-4 col-form-label">Kelurahan</label>
+						    <div class="input-group-prepend col-sm-8">
+						      	<select class="form-control" id="" required="">
+									<option value="" disabled="" selected="">Kelurahan</option>
+									<option value="">001 Arjowinangun</option>
+									<option value="">002 Bumiayu</option>
+									<option value="">003 Buring</option>
+									<option value="">004 Cemoro Kandang</option>
+									<option value="">005 Kedung Kandang</option>
+									<option value="">006 Kota Lama</option>
+									<option value="">007 Lesanpuro</option>
+									<option value="">008 Madyopuro</option>
+									<option value="">009 Mergosono</option>
+									<option value="">010 Sawojajar</option>
+									<option value="">011 Tlogowaru</option>
+									<option value="">012 Wonokoyo</option>
+									<option value="">013 Lain-Lain</option>
+								</select>
+						    </div>
+						</div>	
+					</div>
 				</div>	
 
-										
-				<div class="form-group"> 
-					<label for="state_id" class="control-label">Jenis Kelamin</label>
-					<select class="form-control" id="state_id" name="jenis_kelamin" required="">
-						<option value="01">Laki - Laki</option>
-						<option value="02">Perempuan</option>
-					</select>					
+				<div class="form-group row">
+					<div class="col">
+						<div class="form-group row">
+						    <label class="col-sm-3 col-form-label">Jalan</label>
+						    <div class="input-group-prepend col-sm-9">
+						      	<input type="text" class="form-control" id="" name="" placeholder="Jalan" required="">
+						    </div>
+						</div>	
+					</div>
+					<div class="col">
+						<div class="form-group row">
+						    <label class="col-sm-1 col-form-label">RT</label>
+						    <div class="input-group-prepend col-sm-5">
+						      	<input type="number" class="form-control" id="" name="" placeholder="RT" required="">
+						    </div>
+						    <label class="col-sm-1 col-form-label">RW</label>
+						    <div class="input-group-prepend col-sm-5">
+						      	<input type="number" class="form-control" id="" name="" placeholder="RW" required="">
+						    </div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group row">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">Genre</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<select class="form-control" id="state_id" required="">
+							<option value="">Laki - Laki</option>
+							<option value="">Perempuan</option>
+						</select>	
+				    </div>
 				</div>
 				
-				<div class="form-group"> 
-					<label for="" class="control-label">Pembayaran</label>
-					<select class="form-control" id="" name="pembayaran" required="">
-						<option value="Umum">Umum</option>
-						<option value="BPJS">BPJS</option>
-						<option value="RF">Royale Family</option>
-					</select>
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">Pembayaran</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<select class="form-control" id="state_id" required="">
+							<option value="">Umum</option>
+							<option value="">BPJS</option>
+							<option value="">Royale Family</option>
+						</select>	
+				    </div>
 				</div>
 
-				<div class="form-group">
-					<label for="" class="control-label">Pekerjaan</label>
-					<input type="text" class="form-control" id="" name="pekerjaan" placeholder="Pekerjaan" required="">
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">Pekerjaan</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<input type="text" class="form-control" id="" name="" placeholder="Pekerjaan" required="">
+				    </div>
 				</div>		
 				
 				<div class="form-group">
@@ -92,4 +175,7 @@
 			</div>   
 		</div>
 	</div>
-</form>
+</form>			
+
+
+
