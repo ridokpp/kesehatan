@@ -1,36 +1,42 @@
 ROMI
 	REGISTER	 	-> localhost/kesehatan/Account/menu/register 	-> edit file C:\xampp\htdocs\kesehatan\application\views\account\register.php
-				*form biasa
-				*tambahkan alert. gunakan sweetalert yang sudah terintegrasi. dokumentasi ada di https://sweetalert.js.org/
+						*form biasa
+						*tambahkan alert. gunakan sweetalert yang sudah terintegrasi. dokumentasi ada di https://sweetalert.js.org/
 
 	LOGIN			-> localhost/kesehatan/Account/menu/login	-> edit file C:\xampp\htdocs\kesehatan\application\views\account\login.php
-				*form biasa disertai alert sweetalert
+						*form biasa disertai alert sweetalert
 
 	LOG PEMERIKSAAN DOKTER	-> localhost/kesehatan/Dokter/log		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\log.php
-				*gunakan datatable
-				*tampilkan status : RF atau UMUM
-				*log beserta detilnya
+								*gunakan datatable
+								*tampilkan status : RF atau UMUM
+								*log beserta detilnya
 
 	CETAK SURAT SEHAT	-> localhost/kesehatan/Dokter/cetak/suratsehat	-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsehat.php
-				*sediakan form untuk pengisian surat sesuai docx
+							*sediakan form untuk pengisian surat sesuai docx
 
 ALDI
-	PENDAFTARAN PETUGAS	->localhost/kesehatan/Petugas/menu/pendaftaran	->edit file C:\xampp\htdocs\kesehatan\application\views\petugas\pendaftaran_pasien.php
-	PEMERIKSAAN PETUGAS	->localhost/kesehatan/Petugas/menu/pemeriksaan	->edit file C:\xampp\htdocs\kesehatan\application\views\petugas\pemeriksaan_awal.php
+	----PENDAFTARAN PETUGAS	->localhost/kesehatan/Petugas/menu/pendaftaran	->edit file C:\xampp\htdocs\kesehatan\application\views\petugas\pendaftaran_pasien.php----
+	----PEMERIKSAAN PETUGAS	->localhost/kesehatan/Petugas/menu/pemeriksaan	->edit file C:\xampp\htdocs\kesehatan\application\views\petugas\pemeriksaan_awal.php----
 	PEMERIKSAAN DOKTER	->localhost/kesehatan/Dokter/pemeriksaan	->edit file C:\xampp\htdocs\kesehatan\application\views\dokter\pemeriksaan.php
-				*form input sesuai RF atau UMUM
+							*form input sesuai RF atau UMUM
 	CETAK SURAT SAKIT	-> localhost/kesehatan/Dokter/cetak/suratsakit	-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsakit.php
-				*sediakan form untuk pengisian surat sesuai docx
+							*sediakan form untuk pengisian surat sesuai docx
 
 
 RIDHO
-	*setup https://github.com/DoersGuild/jQuery.print taruh di assets/jquery.print.doersguild
-	*setelah tampilan form cetak surat2 jadi, tambahkan JS cetak
-	*form handler pendaftaran pasien, pemeriksaan awal, login, register
-	*debug jqueryprint
+	-setup https://github.com/DoersGuild/jQuery.print taruh di assets/jquery.print.doersguild
+	-setelah tampilan form cetak surat2 jadi, tambahkan JS cetak
+	-form handler pendaftaran pasien, pemeriksaan awal, login, register
+	-debug jqueryprint
 
 PUTRA 	
-	*setup sweetalert : https://sweetalert.js.org/ masukkan assets\sweetalert
-	*buat helper json_encode() alert parser nya
-	*form handler rekam medis, cetak surat
-	*setup datatable
+	-setup sweetalert : https://sweetalert.js.org/ masukkan assets\sweetalert
+	-buat helper json_encode() alert parser nya
+	-form handler rekam medis, cetak surat
+	-setup datatable
+
+
+
+ALUR BARU 12 JULI
+	-Cari nomor/nama pasien yang sudah terdaftar	-> pemeriksaan -> cari nomor/nama pasien
+	-pendaftaran pasien yang belum terdaftar    	-> pemeriksaan -> cari nama/nomor pasien
