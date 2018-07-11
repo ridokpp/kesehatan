@@ -1,3 +1,7 @@
+<?php
+$method = $this->router->fetch_method();
+$menu = $this->uri->segment(3, 0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,11 +27,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Pendafataran<span class="sr-only">(current)</span></a>
+      <li class="nav-item <?=($menu == 'cari') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/cari">Cari</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url()?>Welcome/pemeriksaan_awal">Pemeriksaan Awal<span class="sr-only">(current)</span></a>
+      <li class="nav-item <?=($menu == 'pendaftaran') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pendaftaran">Pendaftaran</a>
+      </li>
+      <li class="nav-item <?=($menu == 'pemeriksaan') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pemeriksaan">Pemeriksaan Awal</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

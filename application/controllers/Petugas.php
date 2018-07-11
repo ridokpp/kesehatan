@@ -20,6 +20,12 @@ class Petugas extends CI_Controller {
 		}elseif ($menu == 'pemeriksaan') {
 			$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 			$this->load->view('petugas/pemeriksaan_awal',$data);
+		}elseif ($menu == 'cari') {
+			$this->load->view('petugas/cari_nomor_pasien');
+		}else{
+			$data['heading']	= "Halaman tidak ditemukan";
+			$data['message']	= "<p> Klik <a href='".base_url()."Petugas/menu/pendaftaran'>disini </a>untuk kembali ke Home </p>";
+			$this->load->view('errors/html/error_404',$data);
 		}
 		$this->load->view('static/footer');
 	}

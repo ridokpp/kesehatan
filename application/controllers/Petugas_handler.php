@@ -102,7 +102,8 @@ class Petugas_handler extends CI_Controller {
 								'pembayaran'	=>$this->input->post('pembayaran'),
 								'nomor_pasien'	=>$no_urut."-".$kd_kelurahan."-".$kode_jenis_kelamin."-".$kode_usia."-".$bulan_datang."-".$tahun_datang
 							);
-
+			// echo "<pre>";
+			// var_dump($dataForm);die();
 			$result = json_decode($this->Kesehatan_M->create('pasien',$dataForm),false);
 			if ($result->status) {
 				alert('alert','success','Berhasil','Registrasi berhasil');
@@ -135,6 +136,29 @@ class Petugas_handler extends CI_Controller {
 			alert('alert','success','Berhasil','Registrasi berhasil');
 		}else{
 			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
+		}
+	}
+
+	/*
+	* cari nomor pasien via ajax
+	*/
+	function cari_nomor(){
+		if ($this->input->post() != NULL) {
+			
+		}else{
+			redirect(base_url());
+		}
+	}
+
+	/*
+	* cari nama pasien via ajax
+	*/
+	function cari_nama()
+	{
+		if ($this->input->post() != NULL) {
+			
+		}else{
+			redirect(base_url());
 		}
 	}
 }
