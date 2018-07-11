@@ -14,15 +14,18 @@ class Petugas extends CI_Controller {
 
 	function menu($menu,$nomor_pasien='')
 	{
-		$this->load->view('static/header');
 		if ($menu == 'pendaftaran') {
+			$this->load->view('static/header');
 			$this->load->view('petugas/pendaftaran_pasien');
 		}elseif ($menu == 'pemeriksaan') {
 			$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
+			$this->load->view('static/header',$data);
 			$this->load->view('petugas/pemeriksaan_awal',$data);
 		}elseif ($menu == 'cari') {
-			$this->load->view('petugas/cari_nomor_pasien');
+			$this->load->view('static/header');
+			$this->load->view('petugas/cari_pasien');
 		}else{
+			$this->load->view('static/header');
 			$data['heading']	= "Halaman tidak ditemukan";
 			$data['message']	= "<p> Klik <a href='".base_url()."Petugas/menu/pendaftaran'>disini </a>untuk kembali ke Home </p>";
 			$this->load->view('errors/html/error_404',$data);

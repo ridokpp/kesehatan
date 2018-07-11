@@ -152,11 +152,16 @@ class Kesehatan_M extends CI_Model {
 		}
 	}
 	
-	public function whereLike($table,$where,$like){
-		$this->db->where($where);
+	public function andLike($table,$like){
 		$this->db->like($like);
 		$query = $this->db->get($table);
-		return $query->result();
+		return $query;
+	}
+
+	public function orLike($table,$like){
+		$this->db->or_like($like);
+		$query = $this->db->get($table);
+		return $query;
 	}
 
 	/*raw query. query as strings*/

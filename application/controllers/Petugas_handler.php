@@ -123,28 +123,30 @@ class Petugas_handler extends CI_Controller {
 	*/
 	function pemeriksaan(){
 		$postedData = 	array(
-								'kd_pasien'=>$this->input->post('kd_pasien'),
-								'TB'	=>	$this->input->post('TB'),
-								'BB'	=>	$this->input->post('BB'),
-								'TD'	=>	$this->input->post('TD'),
-								'Nadi'	=>	$this->input->post('Nadi'),
-								'RR'	=>	$this->input->post('RR'),
-								'Temperature Axilla'=>$this->input->post('temperature_axilla'),
+								'nomor_pasien'=>$this->input->post('nomor_pasien'),
+								'tb'	=>	$this->input->post('tinggi_badan'),
+								'bb'	=>	$this->input->post('berat_badan'),
+								'td1'	=>	$this->input->post('sistol'),
+								'td2'	=>	$this->input->post('diastol'),
+								'N'	=>	$this->input->post('denyut_nadi'),
+								'RR'=>$this->input->post('frekuensi_pernapasan'),
+								'TAx'=>$this->input->post('suhu'),
 						);
-		$result = json_decode($this->Kesehatan_M->create('tabe_pemeriksaan',$postedData),false);
+		$result = json_decode($this->Kesehatan_M->create('objek',$postedData),false);
 		if ($result->status) {
-			alert('alert','success','Berhasil','Registrasi berhasil');
+			alert('alert','success','Berhasil','Data berhasil dimasukkan');
 		}else{
 			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
 		}
+		redirect(base_url()."Petugas/menu/cari/");
 	}
 
 	/*
 	* cari nomor pasien via ajax
 	*/
-	function cari_nomor(){
-		if ($this->input->post() != NULL) {
-			
+	function redirector(){
+		if ($this->input->get() != NULL) {
+			redirect(base_url()."Petugas/menu/pemeriksaan/".$this->input->get('nama_or_nomor'));
 		}else{
 			redirect(base_url());
 		}
@@ -155,8 +157,15 @@ class Petugas_handler extends CI_Controller {
 	*/
 	function cari_nama()
 	{
-		if ($this->input->post() != NULL) {
-			
+		if ($this->input->get() != NULL) {
+			$dataForm = $this->input->get();
+			$dataReturn = $this->Kesehatan_M->orLike('pasien',array('nama'=>$dataForm['term']['term'],'nomor_pasien'=>$dataForm['term']['term']))->result();
+			$data = array();
+			foreach ($dataReturn as $key => $value) {
+				$data[$key]['id'] = $value->nomor_pasien;
+				$data[$key]['text'] = $value->nama." / ".$value->nomor_pasien;
+			}
+			echo json_encode($data);
 		}else{
 			redirect(base_url());
 		}

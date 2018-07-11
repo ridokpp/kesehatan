@@ -1,68 +1,158 @@
 <h3 class="text-center mt-3">Pemeriksaan Awal Pasien</h3>
 
-<form action="action">
+<form action="<?=base_url()."Petugas_handler/pemeriksaan"?>" method="POST">
 	<div class="container">
+		<?=$this->session->flashdata("alert");?>
 		<div class="row">
-			<div class="col">
+			<div class="col-8">
 				<div class="form-group row">
-				    <label class="col-sm-2 col-form-label">Tinggi Badan</label>
-				    <div class="input-group-prepend col-sm-6">
-				      	<input type="number" class="form-control" id="" name="" placeholder="Tinggi Badan" required="">
-			          	<span class="input-group-text" id="inputGroupPrepend">cm</span>
+				    <label class="col-2 col-form-label">Nomor Pasien</label>
+				    <div class="input-group col-10">
+				      	<input type="text" class="form-control" id="" name="nomor_pasien" placeholder="Nomor Pasien" readonly="" value="<?=$pasien[0]->nomor_pasien?>">
+				    </div>
+				</div>
+				<div class="form-group row">
+				    <label class="col-2 col-form-label">Tinggi Badan</label>
+				    <div class="input-group col-10">
+				      	<input type="number" class="form-control" id="" name="tinggi_badan" placeholder="Tinggi Badan" required="">
+				    	<div class="input-group-append">
+				          	<div class="input-group-text">Cm</div>
+			    		</div>
 				    </div>
 				</div>
 
 				<div class="form-group row">
-				    <label class="col-sm-2 col-form-label">Berat Badan</label>
-				    <div class="input-group-prepend col-sm-6">
-				      	<input type="number" class="form-control" id="" name="" placeholder="Berat Badan" required="">
-			          	<span class="input-group-text" id="inputGroupPrepend">kg</span>
+				    <label class="col-2 col-form-label">Berat Badan</label>
+				    <div class="input-group col-10">
+				      	<input type="number" class="form-control" id="" name="berat_badan" placeholder="Berat Badan" required="">
+				    	<div class="input-group-append">
+				          	<div class="input-group-text">Kg</div>
+			    		</div>
 				    </div>
 				</div>
 			    
 			 	<div class="row">
 			 		<div class="col">
 				     	<div class="form-group row">
-				   			<label class="col-sm-2 col-form-label">Sistol/Diastol</label>
-				  		  	<div class="input-group-prepend col-sm-2">
-				      			<input type="number" class="form-control" id="" name="" placeholder="Sistol" required="">
-			          			<span class="input-group-text" id="inputGroupPrepend">mmHg</span>
-			          			<label class="col-sm-2 col-form-label">/</label>
-			          			<input type="number" class="form-control" id="" name="" placeholder="Diastol" required="">
-			          			<span class="input-group-text" id="inputGroupPrepend">mmHg</span>
-				    		</div>
+				   			<label class="col-2 col-form-label">Sistol/Diastol</label>
+							<div class="input-group col">
+				      			<input type="number" class="form-control" id="" name="sistol" placeholder="Sistol" required="">
+								<div class="input-group-append">
+									<div class="input-group-text">mmHg</div>
+								</div>
+							</div>
+							<div class="input-group col">
+				      			<input type="number" class="form-control" id="" name="diastol" placeholder="Diastol" required="">
+								<div class="input-group-append">
+									<div class="input-group-text">mmHg</div>
+								</div>
+							</div>
 						</div>
 					</div>
 			 	</div>
 
 			 	<div class="form-group row">
-				    <label class="col-sm-2 col-form-label">Denyut Nadi</label>
-				    <div class="input-group-prepend col-sm-6">
-				      	<input type="number" class="form-control" id="" name="" placeholder="Denyut Nadi" required="">
-			          	<span class="input-group-text" id="inputGroupPrepend">rpm</span>
+				    <label class="col-2 col-form-label">Denyut Nadi</label>
+				    <div class="input-group col-10">
+				      	<input type="number" class="form-control" id="" name="denyut_nadi" placeholder="Denyut Nadi" required="">
+				    	<div class="input-group-append">
+				          	<div class="input-group-text">Kg</div>
+			    		</div>
 				    </div>
 				</div>
 			    
 			    <div class="form-group row">
-				    <label class="col-sm-2 col-form-label">Frekuensi Pernafasan</label>
-				    <div class="input-group-prepend col-sm-6">
-				      	<input type="number" class="form-control" id="" name="" placeholder="Respiration Rate" required="">
-			          	<span class="input-group-text" id="inputGroupPrepend">rpm</span>
+				    <label class="col-2 col-form-label">Frekuensi Pernapasan</label>
+				    <div class="input-group col-10">
+				      	<input type="number" class="form-control" id="" name="frekuensi_pernapasan" placeholder="Respiration Rate" required="">
+				    	<div class="input-group-append">
+				          	<div class="input-group-text">Kg</div>
+			    		</div>
 				    </div>
 				</div>
 
 				<div class="form-group row">
-				    <label class="col-sm-2 col-form-label">Suhu</label>
-				    <div class="input-group-prepend col-sm-6">
-				      	<input type="number" class="form-control" id="" name="" placeholder="Temperature Axilla" required="">
-			          	<span class="input-group-text" id="inputGroupPrepend">&deg;C</span>
+				    <label class="col-2 col-form-label">Suhu</label>
+				    <div class="input-group col-10">
+				      	<input type="number" class="form-control" id="" name="suhu" placeholder="Temperature Axilla" required="">
+				    	<div class="input-group-append">
+				          	<div class="input-group-text">Kg</div>
+			    		</div>
 				    </div>
 				</div>
 
 			    <div class="form-group">
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary btn-block">Submit</button>
 				</div>  
-			</div>   
+			</div>  
+			<div class="col-4 border rounded">
+				<div class="row mt-2">
+					<div class="col-4">
+						Nama 
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->nama?> 
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-4">
+						NIK 
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->nik?>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-4">
+						Pembayaran 
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->pembayaran?>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-4">
+						Pekerjaan  
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->pekerjaan?>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-4">
+						Usia  
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->usia?>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-4">
+						Alamat  
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->alamat?>
+					</div>
+				</div>
+			</div> 
 		</div>
 	</div>
 </form>	

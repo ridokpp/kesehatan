@@ -1,14 +1,20 @@
 <?php
 $method = $this->router->fetch_method();
 $menu = $this->uri->segment(3, 0);
+if (!isset($title) AND !isset($pasien)) {
+  $title = "Klinik Pratama";
+}else{
+  $title = "Pasien : ".$pasien[0]->nama;
+}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
+  <title><?=$title?></title>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/select2/dist/css/select2.min.css"/>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.css"/>
-	<script src="<?php echo base_url()?>assets/bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="<?php echo base_url()?>assets/bootstrap/js/jquery-3.3.1.min.js"></script>
 	<script src="<?php echo base_url()?>assets/bootstrap/js/popper.min.js"></script>
 	<script src="<?php echo base_url()?>assets/bootstrap/js/bootstrap.min.js"></script>
 	<!-- <script src="<?php echo base_url()?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> -->
@@ -32,20 +38,6 @@ $menu = $this->uri->segment(3, 0);
       </li>
       <li class="nav-item <?=($menu == 'pendaftaran') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pendaftaran">Pendaftaran</a>
-      </li>
-      <li class="nav-item <?=($menu == 'pemeriksaan') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pemeriksaan">Pemeriksaan Awal</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
