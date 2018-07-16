@@ -15,12 +15,14 @@ class Dokter extends CI_Controller {
 	function log()
 	{
 		$this->load->view('static/header');
+		$this->load->view('static/navbar');
 		$this->load->view('dokter/log');
 		$this->load->view('static/footer');
 	}
 	function pemeriksaan()
 	{
 		$this->load->view('static/header');
+		$this->load->view('static/navbar');
 		$this->load->view('dokter/pemeriksaan');
 		$this->load->view('static/footer');
 	}
@@ -28,6 +30,7 @@ class Dokter extends CI_Controller {
 	function cetak($surat)
 	{
 		$this->load->view('static/header');
+		$this->load->view('static/navbar');
 		if ($surat == 'suratsehat') {
 			$this->load->view('dokter/suratsehat');
 		}elseif ($surat == 'suratsakit') {

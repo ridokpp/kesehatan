@@ -27,42 +27,60 @@ class Account extends CI_Controller {
 	function register_handler()
 	{
 		if ($this->input->post() !== null) {
-
-			if ($hak_akses != 'petugas') {
-				$data_insert['sip']			= $this->input->post('sip');
-			}
-
-			// $config['upload_path']          = FCPATH."assets/images/users_photo/";
-			// $config['allowed_types']        = 'jpg|png|jpeg';
-			// $this->load->library('upload',$config);
-			
-			if($this->upload->do_upload('link_foto')){
-				$datax = $this->upload->data();
-
-				alert('alert_register_foto','success','Berhasil','Foto profil telah ditambahkan');
-
-				$data = array(
-										'nama'		 	=> "dr. ".$this->input->post('nama'),
-										'nik'			=> $this->input->post('nik'),
-										'jk'		 	=> $this->input->post('jenis_kelamin'),
-										'alamat'		=> $this->input->post('alamat'),
-										'username'		=> $this->input->post('username'),
-										'password'		=> $this->input->post('password')
-								);
-
-				$query = $this->SO_M->create('user',$data);
-				$result	=	json_decode($query,true);
-				if ($result['status']) {
-					alert('alert_register_user','success','Berhasil','Registrasi berhasil');
-				}else{
-					alert('alert_register_user','success','Gagal','Kegagalan database');
+			$password 		= $this->input->post('password');
+			$hak_akses 		= $this->input->post('hak_akses');
+			if($hak_akses == '1' && substr($password, -5,5) !== 'admin'){
+				alert('alert_','warning','Gagal','Pendaftaran sebagai admin gagal');
+				redirect(base_url().'Account/menu/register');
+			}else{
+				if ($hak_akses != '3') {
+					$sip	= $this->input->post('no_sip');
 				}
-			}
-			else{
-				alert('alert_register_foto','warning','Gagal','Upload foto profil gagal');
-			}
+				if ($hak_akses == '1') {
+					$verified = "sudah";
+				}else{
+					$verified = "belum";
+				}
+				
+				$config['upload_path']          = FCPATH."assets/images/users_photo/";
+				$config['allowed_types']        = 'jpg|png|jpeg';
+				$this->load->library('upload',$config);
+				
+				if($this->upload->do_upload('foto')){
+					$datax = $this->upload->data();
 
-			redirect();
+					alert('alert','success','Berhasil','Foto profil telah ditambahkan');
+
+					$data = array(
+											'username'		=> $this->input->post('username'),
+											'password'		=> hash("sha256", $password),
+											'hak_akses'		=> $hak_akses,
+											'sip'			=> $sip,
+											'jenis_kelamin'	=> $this->input->post('jenis_kelamin'),
+											'alamat'		=> $this->input->post('alamat'),
+											'nik'			=> $this->input->post('nik'),
+											'nama'		 	=> "dr. ".$this->input->post('nama'),
+											'foto'			=> "assets/images/users_photo/".$datax['file_name'],
+											'verified'		=> $verified
+									);
+
+					$query = $this->Kesehatan_M->create('user',$data);
+					$result	=	json_decode($query,true);
+					if ($result['status']) {
+						alert('alert_','success','Berhasil','Registrasi berhasil. Silahkan hubungi admin untuk verifikasi pendaftaran');
+					}else{
+						alert('alert','warning','Peringatan','Foto profil urung terkirim');
+						alert('alert_','danger','Gagal','Kegagalan database '.$result['error_message']['message']." CODE: ".$result['error_message']['code']);
+						unlink(FCPATH."assets/images/users_photo/".$datax['file_name']);
+					}
+				}
+				else{
+				var_dump($this->upload->display_errors());die();
+					alert('alert','warning','Gagal','Upload foto profil gagal. Hanya gambar dengan ekstensi jpg,png, atau jpeg. Harap isi kembali form');
+				}
+
+				redirect(base_url()."Account/menu/register");
+			}
 
 		}else{
 			$data['heading']		=	"Null POST";
@@ -78,31 +96,35 @@ class Account extends CI_Controller {
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
-			$record = $this->Kesehatan_M->read('tabel_user',array(	'username'	=>	$this->input->post('username'),
-																	'password'	=>	$this->input->post('password')
+			$record = $this->Kesehatan_M->read('user',array(	'username'	=>	$this->input->post('username'),
+																	'password'	=>	hash("sha256", $this->input->post('password'))
 																));
 
 			if ($record->num_rows() == 1) {
 				
 				$record 					= $record->row();
 
-				$data_user['id_user']		= $record->id_user;
-				$data_user['nama_user']		= $record->nama_user;
-				$data_user['akses']			= $record->akses;
-				$data_user['foto']			= $record->link_foto;
-
 				$session_data = array(
-											'akses'		=>	$record->akses,
-											'id_user'	=>	$record->id_user,
-											'nama_user'	=>	$record->nama_user,
-											'foto'		=>	$record->link_foto
+											'akses'		=>	$record->hak_akses,
+											'nama_user'	=>	$record->nama,
+											'foto'		=>	$record->foto,
+											'hak_akses'	=>	$record->hak_akses
 				);
+				var_dump($session_data);
+				die();
 				
-				alert('alert_login','success','Berhasil','Selamat datang '.$session_data['nama_user']);
+				alert('alert','success','Berhasil','Selamat datang '.$session_data['nama_user']);
 				$this->session->set_userdata('logged_in', $session_data);
-
+				if ($record->hak_akses == '1') {
+					redirect(base_url().'Admin/menu/dashboard');
+				}elseif ($record->hak_akses == '2') {
+					redirect(base_url().'Petugas/menu/antrian');
+				}elseif ($record->hak_akses == '3') {
+					redirect(base_url().'Petugas/menu/cari');
+				}
 			}else{
-				// redirect to home
+				alert('alert','danger','Gagal','Login gagal');
+				redirect(base_url().'Account/menu/login');
 			}
 
 		}else{
@@ -122,7 +144,7 @@ class Account extends CI_Controller {
 		);
 
 		$this->session->unset_userdata('logged_in', $sess_array);
-		redirect();
+		redirect(base_url()."Account/menu/login");
 	}
 
 	function edit_identitas_handler()

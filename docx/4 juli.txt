@@ -1,9 +1,9 @@
 ROMI
-	REGISTER	 	-> localhost/kesehatan/Account/menu/register 	-> edit file C:\xampp\htdocs\kesehatan\application\views\account\register.php
+	----REGISTER	 	-> localhost/kesehatan/Account/menu/register 	-> edit file C:\xampp\htdocs\kesehatan\application\views\account\register.php
 						*form biasa
 						*tambahkan alert. gunakan sweetalert yang sudah terintegrasi. dokumentasi ada di https://sweetalert.js.org/
 
-	LOGIN			-> localhost/kesehatan/Account/menu/login	-> edit file C:\xampp\htdocs\kesehatan\application\views\account\login.php
+	----LOGIN			-> localhost/kesehatan/Account/menu/login	-> edit file C:\xampp\htdocs\kesehatan\application\views\account\login.php
 						*form biasa disertai alert sweetalert
 
 	LOG PEMERIKSAAN DOKTER	-> localhost/kesehatan/Dokter/log		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\log.php
@@ -14,6 +14,8 @@ ROMI
 	CETAK SURAT SEHAT	-> localhost/kesehatan/Dokter/cetak/suratsehat	-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsehat.php
 							*sediakan form untuk pengisian surat sesuai docx
 
+	VERIFIKASI REGISTRASI PENGGUNA (oleh admin) untuk registrasi dokter dan petugas non admin. cantumkan daftar user yang mengajukan pendaftaran hari ini dan tombol untuk verifikasi registrasi. tampilkan pengguna yang terverifikasi
+
 ALDI
 	----PENDAFTARAN PETUGAS	->localhost/kesehatan/Petugas/menu/pendaftaran	->edit file C:\xampp\htdocs\kesehatan\application\views\petugas\pendaftaran_pasien.php----
 	----PEMERIKSAAN PETUGAS	->localhost/kesehatan/Petugas/menu/pemeriksaan	->edit file C:\xampp\htdocs\kesehatan\application\views\petugas\pemeriksaan_awal.php----
@@ -21,6 +23,7 @@ ALDI
 							*form input sesuai RF atau UMUM
 	CETAK SURAT SAKIT	-> localhost/kesehatan/Dokter/cetak/suratsakit	-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsakit.php
 							*sediakan form untuk pengisian surat sesuai docx
+
 
 
 RIDHO
@@ -34,9 +37,3 @@ PUTRA
 	-buat helper json_encode() alert parser nya
 	-form handler rekam medis, cetak surat
 	-setup datatable
-
-
-
-ALUR BARU 12 JULI
-	-Cari nomor/nama pasien yang sudah terdaftar	-> pemeriksaan -> cari nomor/nama pasien
-	-pendaftaran pasien yang belum terdaftar    	-> pemeriksaan -> cari nama/nomor pasien
