@@ -17,11 +17,9 @@ function deleteSip(){
 }
 </script>
 <div class="container-fluid">
-	<div class="container">
-		<?=$this->session->flashdata("alert");$this->session->flashdata("alert_");?>
-	</div>
 	<div class="row mt-1">	
 		<div class="col-xs-10 offset-xs-1 col-sm-8 offset-sm-2 col-md-4 offset-md-4">
+		<?=$this->session->flashdata("alert");?><?=$this->session->flashdata("alert_");?>
 			<div class="card">
 				<div class="card-header">Register User</div>
 				<div class="card-body">

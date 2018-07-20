@@ -12,10 +12,18 @@ class Account extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	function menu($menu)
+	function menu($menu = 'login')
 	{
 		$this->load->view('static/header');
 		if ($menu == 'login') {
+			$sess_array = array(
+								'hak_akses'	=>	'',
+								'id_user'	=>	'',
+								'nama_user'	=>	'',
+								'foto'		=>	''
+			);
+
+			$this->session->unset_userdata('logged_in', $sess_array);
 			$this->load->view('account/login');
 		}elseif ($menu == 'register') {
 			$this->load->view('account/register');
@@ -69,13 +77,16 @@ class Account extends CI_Controller {
 					if ($result['status']) {
 						alert('alert_','success','Berhasil','Registrasi berhasil. Silahkan hubungi admin untuk verifikasi pendaftaran');
 					}else{
+						var_dump($result);die();
 						alert('alert','warning','Peringatan','Foto profil urung terkirim');
-						alert('alert_','danger','Gagal','Kegagalan database '.$result['error_message']['message']." CODE: ".$result['error_message']['code']);
+						// alert('alert_','danger','Gagal',"Kegagalan database <br><strong> CODE: </strong>".$result['error_message']['code']." <br><strong>Message: </strong>".$result['error_message']['message']);
+						alert('alert_','danger','Gagal',"Kegagalan database".($result['error_message']['code'] == '1062')." <br><strong>Message: </strong>".substr($result['error_message']['message'], -4,3));
+
 						unlink(FCPATH."assets/images/users_photo/".$datax['file_name']);
 					}
 				}
 				else{
-				var_dump($this->upload->display_errors());die();
+				// var_dump($this->upload->display_errors());die();
 					alert('alert','warning','Gagal','Upload foto profil gagal. Hanya gambar dengan ekstensi jpg,png, atau jpeg. Harap isi kembali form');
 				}
 
@@ -97,7 +108,8 @@ class Account extends CI_Controller {
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
 			$record = $this->Kesehatan_M->read('user',array(	'username'	=>	$this->input->post('username'),
-																	'password'	=>	hash("sha256", $this->input->post('password'))
+																	'password'	=>	hash("sha256", $this->input->post('password')),
+																	'verified' => 'sudah'
 																));
 
 			if ($record->num_rows() == 1) {
@@ -105,25 +117,25 @@ class Account extends CI_Controller {
 				$record 					= $record->row();
 
 				$session_data = array(
+											'id_user'	=>	$record->id_user,
 											'akses'		=>	$record->hak_akses,
 											'nama_user'	=>	$record->nama,
 											'foto'		=>	$record->foto,
-											'hak_akses'	=>	$record->hak_akses
 				);
-				var_dump($session_data);
-				die();
+				// var_dump($session_data);
+				// die();
 				
-				alert('alert','success','Berhasil','Selamat datang '.$session_data['nama_user']);
+				// alert('alert','success','Berhasil','Selamat datang '.$session_data['nama_user']);
 				$this->session->set_userdata('logged_in', $session_data);
 				if ($record->hak_akses == '1') {
 					redirect(base_url().'Admin/menu/dashboard');
 				}elseif ($record->hak_akses == '2') {
-					redirect(base_url().'Petugas/menu/antrian');
+					redirect(base_url().'Dokter/antrian');
 				}elseif ($record->hak_akses == '3') {
 					redirect(base_url().'Petugas/menu/cari');
 				}
 			}else{
-				alert('alert','danger','Gagal','Login gagal');
+				alert('alert','danger','Gagal','Login gagal. Anda tidak terdaftar atau akun anda belum diverifikasi oleh admin. Hubungi admin untuk verifikasi akun anda');
 				redirect(base_url().'Account/menu/login');
 			}
 

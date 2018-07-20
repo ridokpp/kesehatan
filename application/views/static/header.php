@@ -1,13 +1,15 @@
 <?php
 if (!isset($title) AND !isset($pasien)) {
-  $title = "Klinik Pratama";
+	$title = "Klinik Pratama";
 }else{
-  $title = "Pasien : ".$pasien[0]->nama;
+	$title = "Pasien : ".$pasien[0]->nama;
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <title><?=$title?></title>
+  	<link rel="icon" href="<?=base_url()?>assets/images/LOGO YAYASAN.jpg">
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/select2/dist/css/select2.min.css"/>
 	<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.css"/> -->
