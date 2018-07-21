@@ -132,13 +132,15 @@ class Petugas_handler extends CI_Controller {
 								'RR'=>$this->input->post('frekuensi_pernapasan'),
 								'TAx'=>$this->input->post('suhu'),
 						);
-		$result = json_decode($this->Kesehatan_M->create('objek',$postedData),false);
+		$this->Kesehatan_M->create('objek',$postedData);
+		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
 		if ($result->status) {
 			alert('alert','success','Berhasil','Data berhasil dimasukkan');
+			redirect(base_url()."Petugas/menu/antrian/");
 		}else{
 			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
+			redirect(base_url()."Petugas/menu/pemeriksaan/$postedData[nomor_pasien]");
 		}
-		redirect(base_url()."Petugas/menu/cari/");
 	}
 
 	/*
@@ -166,6 +168,20 @@ class Petugas_handler extends CI_Controller {
 				$data[$key]['text'] = $value->nama." / ".$value->nomor_pasien;
 			}
 			echo json_encode($data);
+		}else{
+			redirect(base_url());
+		}
+	}
+
+	/*
+	* komunikasi dengan database via ajax
+	*/
+	function getDataS()
+	{
+		if ($this->input->post() != NULL) {
+			$dataForm = $this->input->post();
+			$dataReturn = $this->Kesehatan_M->readS('antrian')->result();
+			echo json_encode($dataReturn);
 		}else{
 			redirect(base_url());
 		}

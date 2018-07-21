@@ -27,31 +27,33 @@ $(document).ready(function() {
 </script>
 <div class="container mt-5">
 	<?=$this->session->flashdata("alert");?>
-	<div class="card card-block" >
-		<div class="card-header">
-			<h3 class="text-center">Cari berdasarkan nama pasien atau nomor pasien</h3>
-		</div>
-		<div class="card-body">
-			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
-				<div class="row">
-					<div class="col">
-					 	<div class="form-group row">
-						    <div class="input-group-prepend col-8 offset-2">
-						      	<select class="js-data-example-ajax form-control" name="nama_or_nomor" id="nama_or_nomor">
-						      		<option value="" selected="selected"></option>
-						      	</select>
-						    </div>
-						</div>
-					</div>   
-				</div>
-				<div class="row">
-					<div class="col-8 offset-2">
-					    <div class="form-group">
-							<button type="submit" class="btn btn-primary btn-block">Submit</button>
+	<div class="col-8 offset-2">
+		<div class="card" >
+			<div class="card-header">
+				<h3 class="text-center">Cari berdasarkan nama pasien atau nomor pasien</h3>
+			</div>
+			<div class="card-body">
+				<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+					<div class="row">
+						<div class="col">
+						 	<div class="form-group row">
+							    <div class="input-group-prepend col-8 offset-2">
+							      	<select class="js-data-example-ajax form-control" name="nama_or_nomor" id="nama_or_nomor">
+							      		<option value="" selected="selected"></option>
+							      	</select>
+							    </div>
+							</div>
+						</div>   
+					</div>
+					<div class="row">
+						<div class="col-8 offset-2">
+						    <div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Submit</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</form>	
+				</form>	
+			</div>
 		</div>
 	</div>
 </div>

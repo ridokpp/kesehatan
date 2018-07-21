@@ -36,9 +36,11 @@ class Petugas extends CI_Controller {
 			$this->load->view('static/navbar');
 			$this->load->view('petugas/cari_pasien');
 		}elseif ($menu == 'antrian') {
+			$data['antrian']=$this->Kesehatan_M->rawQuery('SELECT pasien.nama, antrian.jam_datang, antrian.nomor_antrian, pasien.pembayaran, pasien.nomor_pasien FROM antrian INNER JOIN pasien on antrian.nomor_pasien=pasien.nomor_pasien')->result();
+			$data['proses_antrian']=$this->Kesehatan_M->rawQuery('SELECT pasien.nama, pasien.pembayaran FROM proses_antrian INNER JOIN pasien on proses_antrian.nomor_pasien=pasien.nomor_pasien')->result();
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
-			$this->load->view('petugas/antri');
+			$this->load->view('petugas/antri',$data);
 		}else{
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
