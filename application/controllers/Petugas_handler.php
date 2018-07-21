@@ -172,4 +172,18 @@ class Petugas_handler extends CI_Controller {
 			redirect(base_url());
 		}
 	}
+
+	/*
+	* komunikasi dengan database via ajax
+	*/
+	function getDataS()
+	{
+		if ($this->input->post() != NULL) {
+			$dataForm = $this->input->post();
+			$dataReturn = $this->Kesehatan_M->readS('antrian')->result();
+			echo json_encode($dataReturn);
+		}else{
+			redirect(base_url());
+		}
+	}
 }

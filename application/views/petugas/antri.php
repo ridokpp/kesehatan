@@ -5,9 +5,38 @@
     }
 </style>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        function getAntrian(){
+            var url = <?=base_url()?>+"Petugas_handler/getDataS";
+            $.ajax({
+                url : url,
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data)
+                {
+                    // 
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    console.log(jqXHR, textStatus, errorThrown);
+                    $('#btn-ya-kondisi').text('YA'); //change button text
+                    $('#btn-ya-kondisi').attr('disabled',false); //set button enable 
+                }
+            });
+            $.ajax({
+                url: "test.html",
+                context: document.body
+                }).done(function() {
+                $( this ).addClass( "done" );
+            });
+        }
+    });
+</script>
 
 <h3 class="text-center mt-3">Antrian Pasien</h3>
-
 <div class="row">
     <div class="<?=($proses_antrian != array())? 'col-8':'col'?>">
         <h5 class="text-center mt-3">Daftar Pasien Terdaftar</h5>

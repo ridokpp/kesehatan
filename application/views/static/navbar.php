@@ -43,6 +43,9 @@ echo "$menu";
       <li class="nav-item <?=($menu == 'pendaftaran') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pendaftaran">Pendaftaran</a>
       </li>
+      <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/antrian">Antrian</a>
+      </li>
     </ul>
     <?php } 
     if ($this->session->userdata('logged_in') !== array()) { ?>
