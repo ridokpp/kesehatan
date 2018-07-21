@@ -35,6 +35,10 @@ class Petugas extends CI_Controller {
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
 			$this->load->view('petugas/cari_pasien');
+		}elseif ($menu == 'antrian') {
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$this->load->view('petugas/antri');
 		}else{
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
