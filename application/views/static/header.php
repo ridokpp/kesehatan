@@ -9,7 +9,7 @@ if (!isset($title) AND !isset($pasien)) {
 <html lang="id">
 <head>
   <title><?=$title?></title>
-  	<link rel="icon" href="<?=base_url()?>assets/images/LOGO YAYASAN.jpg">
+  	<link rel="icon" href="<?=base_url()?>assets/images/LOGO YAYASAN.png">
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/select2/dist/css/select2.min.css"/>
 	<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.css"/> -->

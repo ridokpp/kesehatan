@@ -132,13 +132,15 @@ class Petugas_handler extends CI_Controller {
 								'RR'=>$this->input->post('frekuensi_pernapasan'),
 								'TAx'=>$this->input->post('suhu'),
 						);
-		$result = json_decode($this->Kesehatan_M->create('objek',$postedData),false);
+		$this->Kesehatan_M->create('objek',$postedData);
+		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
 		if ($result->status) {
 			alert('alert','success','Berhasil','Data berhasil dimasukkan');
+			redirect(base_url()."Petugas/menu/antrian/");
 		}else{
 			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
+			redirect(base_url()."Petugas/menu/pemeriksaan/$postedData[nomor_pasien]");
 		}
-		redirect(base_url()."Petugas/menu/cari/");
 	}
 
 	/*
