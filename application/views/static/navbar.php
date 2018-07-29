@@ -4,19 +4,22 @@ if ($this->uri->segment(1, 0) == 'Petugas') {
   $menu = $this->uri->segment(3, 0);
 }elseif ($this->uri->segment(1, 0) == 'Dokter') {
   $menu = $this->uri->segment(2, 0);
+}elseif ($this->uri->segment(1, 0) == 'Admin') {
+  $menu = $this->uri->segment(3, 0);
 }
-echo "$menu";
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#"><img src="<?=base_url()?>assets/images/LOGO YAYASAN.png" style="width: 40px" > KLINIK PRATAMA</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <?php
     if ($this->session->userdata('logged_in')['akses'] == '1') { ?>
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item <?=($menu == 'dashboard') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/dashboard">Dashboard</a>
+      </li>
       <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Admin/menu/antrian">Antrian</a>
       </li>
@@ -27,12 +30,12 @@ echo "$menu";
     <?php
     }elseif ($this->session->userdata('logged_in')['akses'] == '2') { ?>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
+      <!-- <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Dokter/antrian">Antrian</a>
-      </li>
-      <li class="nav-item <?=($menu == 'pemeriksaan') ? 'active' : ''?>">
+      </li> -->
+      <!-- <li class="nav-item <?=($menu == 'pemeriksaan') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Dokter/pemeriksaan">Pemeriksaan</a>
-      </li>
+      </li> -->
     </ul>
     <?php 
     }elseif ($this->session->userdata('logged_in')['akses'] == '3') { ?>

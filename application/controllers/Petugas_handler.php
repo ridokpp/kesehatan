@@ -173,17 +173,25 @@ class Petugas_handler extends CI_Controller {
 		}
 	}
 
-	/*
-	* komunikasi dengan database via ajax
-	*/
-	function getDataS()
+	function proses_antrian()
 	{
-		if ($this->input->post() != NULL) {
-			$dataForm = $this->input->post();
-			$dataReturn = $this->Kesehatan_M->readS('antrian')->result();
-			echo json_encode($dataReturn);
+		if ($this->input->post() !== NULL) {
+			$this->Kesehatan_M->create(
+										'proses_antrian',
+										array(
+												'nomor_pasien'	=>	$this->input->post('nomor_pasien'),
+												'nomor_antrian'	=>	$this->input->post('nomor_antrian')
+										)
+									);
+			$this->Kesehatan_M->delete(
+										'antrian',
+										array(
+												'nomor_antrian'	=>	$this->input->post('nomor_antrian')
+										));
+			redirect(base_url()."Petugas/menu/antrian");
 		}else{
-			redirect(base_url());
+			var_dump($this->input->post());
+			die();
 		}
 	}
 }

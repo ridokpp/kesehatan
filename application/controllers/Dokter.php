@@ -57,7 +57,7 @@ class Dokter extends CI_Controller {
 	/*
 	* lihat antrian yang sekarang
 	*/
-	function antrian(){
+	function index(){
 		// baca antrian yang tersedia, tampilkan nama dan waktu datang
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
