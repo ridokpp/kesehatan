@@ -202,7 +202,7 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row mb-3">
 		<div class="col-4">
 			<h5 class="text-center mt-3">Subjektif</h5>
 			<textarea class="form-control" aria-label="With textarea" required="">Subjektif</textarea>
@@ -215,13 +215,83 @@
 
 		<div class="col-4">
 			<h5 class="text-center mt-3">Planing</h5>
-			<textarea class="form-control" aria-label="With textarea" required="">Planing</textarea>
+			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Planing"></textarea>
 		</div>
 	</div>
 
-	<br>
+	<div class="row">
+		<div class="col">
+			<button type="button" class="btn btn-primary btn-block">Submit</button>
+		</div>
 
-	<button type="button" class="btn btn-primary justify-content-md-center">Primary</button>
+		<div class="col">
+			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">Surat Sakit</button>
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+
+				      	<div class="modal-header">
+				        	<h5 class="modal-title" id="exampleModalCenterTitle">Surat Sakit</h5>
+				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          		<span aria-hidden="true">&times;</span>
+				        	</button>
+				      	</div>
+
+				    	<div class="modal-body">
+				    		<div class="form-group row">
+				    			<label class="col-2 col-form-label">Alasan</label>
+				    			<div class="input-group col-10">
+						    		<select class="custom-select">
+										<option value="1">Sakit</option>
+										<option value="2">Pelakuan Khusus</option>
+									</select>
+								</div>
+				    		</div>
+				    		<div class="form-group row">
+							    <label class="col-2 col-form-label">Selama</label>
+							    <div class="input-group col-10">
+							      	<input type="number" class="form-control" id="" name="" placeholder="Hari" required="">
+							    	<div class="input-group-append">
+							          	<div class="input-group-text">Hari</div>
+						    		</div>
+							    </div>
+							</div>
+
+							<div class="form-group row">
+					    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Awal</label>
+					    		<div class="input-group-prepend col-sm-8">
+					      			<input type="date" class="form-control" name="tanggal_lahir" required="">
+					   			</div>
+							</div>
+
+							<div class="form-group row">
+					    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Akhir</label>
+					    		<div class="input-group-prepend col-sm-8">
+					      			<input type="date" class="form-control" name="tanggal_lahir" required="">
+					   			</div>
+							</div>
+					    </div>
+
+				    	<div class="modal-footer">
+				    		<button type="button" class="btn btn-primary">Cetak</button>
+				    	</div>
+
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col">
+			<button type="button" class="btn btn-success btn-block">Surat Sehat</button>
+		</div>
+		<div class="col">
+			<button type="button" class="btn btn-info btn-block">Rujukan</button>
+		</div>
+		
+
+	</div>
+
 </div>
+
 
 

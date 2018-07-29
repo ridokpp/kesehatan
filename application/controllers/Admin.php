@@ -21,6 +21,11 @@ class Admin extends CI_Controller {
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
 			$this->load->view('static/footer');
+		}elseif ($menu == 'verifikasi') {
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$this->load->view('admin/verifikasi');
+			$this->load->view('static/footer');
 		}else{
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
