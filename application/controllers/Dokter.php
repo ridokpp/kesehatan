@@ -18,22 +18,25 @@ class Dokter extends CI_Controller {
 	/*
 	* log pengobatan setiap pasien
 	*/
-	function log()
+	function log($nomor_pasien)
 	{
+		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
+		$data['rekam_medis'] = $this->Kesehatan_M->read('rkm_medis',array('kd_pasien'=>$nomor_pasien))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
-		$this->load->view('dokter/log');
+		$this->load->view('dokter/log',$data);
 		$this->load->view('static/footer');
 	}
 
 	/*
 	* form pemeriksaan setiap pasien
 	*/
-	function pemeriksaan()
+	function pemeriksaan($nomor_pasien)
 	{
+		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
-		$this->load->view('dokter/pemeriksaan');
+		$this->load->view('dokter/pemeriksaan',$data);
 		$this->load->view('static/footer');
 	}
 
@@ -59,9 +62,10 @@ class Dokter extends CI_Controller {
 	*/
 	function index(){
 		// baca antrian yang tersedia, tampilkan nama dan waktu datang
+		$data['proses_antrian'] = $this->Kesehatan_M->rawQuery('SELECT pasien.nama,pasien.pembayaran,pasien.nomor_pasien FROM pasien INNER JOIN proses_antrian ON pasien.nomor_pasien=proses_antrian.nomor_pasien')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
-		$this->load->view('dokter/antri');
+		$this->load->view('dokter/antri',$data);
 		$this->load->view('static/footer');
 	}
 }
