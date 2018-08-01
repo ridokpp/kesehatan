@@ -52,8 +52,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-2">
-					Nama
+				<div class="col-8">
+					<?=$pasien[0]->nama?>
 				</div>
 			</div>
 
@@ -65,7 +65,7 @@
 					:
 				</div>
 				<div class="col-1">
-					NIK
+					<?=$pasien[0]->nik?>
 				</div>
 			</div>
 
@@ -76,8 +76,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					TTL 
+				<div class="col-8">
+					<?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
 				</div>
 			</div>
 
@@ -88,8 +88,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					Alamat
+				<div class="col-8">
+					<?=$pasien[0]->alamat?>
 				</div>
 			</div>
 
@@ -100,8 +100,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-2">
-					Laki-Laki
+				<div class="col-8">
+					<?=$pasien[0]->jkelamin?>
 				</div>
 			</div>
 
@@ -112,8 +112,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					Wiraswasta
+				<div class="col-8">
+					<?=$pasien[0]->pekerjaan?>
 				</div>
 			</div>
 		</div>
