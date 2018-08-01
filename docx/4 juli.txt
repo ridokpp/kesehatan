@@ -15,7 +15,7 @@ ROMI
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\account\login.php
 		*form biasa disertai alert sweetalert
 
-	LOG PEMERIKSAAN DOKTER	
+	----LOG PEMERIKSAAN DOKTER	
 		-> localhost/kesehatan/Dokter/log	
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\log.php
 		*gunakan datatable
@@ -27,7 +27,7 @@ ROMI
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsehat.php
 		*sediakan form untuk pengisian surat sesuai docx
 
-	VERIFIKASI REGISTRASI PENGGUNA (oleh admin) untuk registrasi dokter dan petugas non admin. cantumkan daftar user yang mengajukan pendaftaran dan tombol untuk verifikasi registrasi. tampilkan pengguna yang terverifikasi. cantumkan tombol untuk reset password pengguna
+	----VERIFIKASI REGISTRASI PENGGUNA (oleh admin) untuk registrasi dokter dan petugas non admin. cantumkan daftar user yang mengajukan pendaftaran dan tombol untuk verifikasi registrasi. tampilkan pengguna yang terverifikasi. cantumkan tombol untuk reset password pengguna
 
 	CETAK SURAT RUJUKAN
 		->
