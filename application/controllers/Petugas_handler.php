@@ -123,7 +123,6 @@ class Petugas_handler extends CI_Controller {
 	*/
 	function pemeriksaan(){
 		$postedData = 	array(
-								'nomor_pasien'=>$this->input->post('nomor_pasien'),
 								'tb'	=>	$this->input->post('tinggi_badan'),
 								'bb'	=>	$this->input->post('berat_badan'),
 								'td1'	=>	$this->input->post('sistol'),
@@ -133,6 +132,9 @@ class Petugas_handler extends CI_Controller {
 								'TAx'=>$this->input->post('suhu'),
 						);
 		$this->Kesehatan_M->create('objek',$postedData);
+		$postedData['nomor_pasien'] = $this->input->post('nomor_pasien');
+
+		
 		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
 		if ($result->status) {
 			alert('alert','success','Berhasil','Data berhasil dimasukkan');
