@@ -39,13 +39,14 @@ class Petugas extends CI_Controller {
 			// checking sinkronisasi terakhir
 			$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
 			$now 					=	date("Y-m-d H:i:s");
-			// var_dump($data['last_sync']);
 			if ($data['last_sync'] == array()) {
 				$this->Kesehatan_M->create('settingan',array('id'=>1,'value'=>$now));
 			}elseif(intval(substr(date($data['last_sync'][0]->value), 8,7)) < intval(date('d'))){
 				$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
 				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
+				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
 			}
+
 			
 			$data['antrian']		=	$this->Kesehatan_M->rawQuery('
 																	SELECT 

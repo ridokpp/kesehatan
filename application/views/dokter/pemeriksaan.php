@@ -129,7 +129,7 @@
 					:
 				</div>
 				<div class="col-1">
-					cm
+					<?=$objek[0]->tb?>cm
 				</div>
 			</div>
 
@@ -141,7 +141,7 @@
 					:
 				</div>
 				<div class="col-1">
-					kg
+					<?=$objek[0]->bb?>kg
 				</div>
 			</div>
 
@@ -153,7 +153,7 @@
 					:
 				</div>
 				<div class="col-1">
-					/
+					<?=$objek[0]->td1?>/<?=$objek[0]->td2?>
 				</div>
 			</div>
 
@@ -165,7 +165,7 @@
 					:
 				</div>
 				<div class="col-1">
-					rpm
+					<?=$objek[0]->N?>rpm
 				</div>
 			</div>
 
@@ -177,7 +177,7 @@
 					:
 				</div>
 				<div class="col-1">
-					rpm
+					<?=$objek[0]->RR?>rpm
 				</div>
 			</div>
 
@@ -189,14 +189,14 @@
 					:
 				</div>
 				<div class="col-1">
-					&deg;C
+					<?=$objek[0]->TAx?>&deg;C
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label class="col-3 col-form-label">Head To Toe</label>
-				<div class="input-group col-9">
-				    <input type="text" class="form-control" id="" name="suhu" placeholder="Head To Toe" required="">
+				<label class="col-4 col-form-label">Head To Toe</label>
+				<div class="input-group col-8">
+				    <textarea class="form-control" id="" name="suhu"  required=""></textarea>
 			 	</div>
 			</div>
 		</div>

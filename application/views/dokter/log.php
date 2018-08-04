@@ -93,6 +93,11 @@ $(document).ready(function() {
     </tr>
   </thead>
   <tbody>
+    <?php
+    foreach ($rekam_medis as $key => $value) {
+      
+    }
+    ?>
     <tr>
       <th>1</th>
       <td>
