@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-08-04 12:14:01
+Date: 2018-08-08 11:32:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,7 +41,7 @@ CREATE TABLE `antrian` (
   `nomor_pasien` varchar(255) DEFAULT NULL,
   `jam_datang` datetime NOT NULL,
   PRIMARY KEY (`nomor_antrian`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of antrian

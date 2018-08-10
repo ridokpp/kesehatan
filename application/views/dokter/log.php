@@ -1,11 +1,26 @@
+<script type="text/javascript" src="<?=base_url()?>assets/DataTables/DataTables-1.10.18/js/dataTables.select.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
-            'print'
-        ]
+       buttons: [
+            {
+                extend: 'print',
+                text: 'Print all',
+                exportOptions: {
+                    modifier: {
+                        selected: null
+                    }
+                }
+            },
+            {
+                extend: 'print',
+                text: 'Print selected'
+            }
+        ],
+        select: true
     } );
+
 } );	
 </script>
 <style type="text/css">
@@ -132,7 +147,8 @@ $(document).ready(function() {
       		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
    			<li class="no-bullets">TD : .... /.... mmHg RR</li>
       		<li class="no-bullets">N  : .... rpm TAx: 36c</li>
-      		<li class="no-bullets">Head to Toe :</li>
+      		<li class="no-bullets">Head to Toe :
+          asdjaks hdkjashd kjash dkjash dkjash djaksh dkjash dkjash dkjash dkjash dkjash dkjash dkjashd kajshd kasj hdkasj daksj das dhakjs dhkajsdh kaj dhkajsd hjkas hdkjas dkajsdhakjsd aks dhaks</li>
       	</ul>	 
       </td>
       <td>raimu</td>

@@ -68,6 +68,7 @@ RIDHO
 	-setelah tampilan form cetak surat2 jadi, tambahkan JS cetak
 	----form handler pendaftaran pasien, pemeriksaan awal, login, register
 	-debug jqueryprint
+	-https://belajarphp.net/laporan-pdf-codeigniter/
 
 PUTRA 	
 	-setup sweetalert : https://sweetalert.js.org/ masukkan assets\sweetalert

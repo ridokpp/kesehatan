@@ -1,5 +1,5 @@
  <script type="text/javascript">
-    <?php date_default_timezone_set('Asia/Jakarta'); ?>
+    <?php date_default_timezone_set('Asia/Jakarta'); ?> 
     var serverTime = new Date(<?php print date('Y, m, d, H, i, s, 0'); ?>);
     var clientTime = new Date();
     var Diff = serverTime.getTime() - clientTime.getTime();    
@@ -140,8 +140,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					<?=$objek[0]->bb?>kg
+				<div class="col">
+					<?=$objek[0]->bb?> kg
 				</div>
 			</div>
 
@@ -152,8 +152,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					<?=$objek[0]->td1?>/<?=$objek[0]->td2?>
+				<div class="col">
+					<?=$objek[0]->td1?>/<?=$objek[0]->td2?> 
 				</div>
 			</div>
 
@@ -164,8 +164,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					<?=$objek[0]->N?>rpm
+				<div class="col">
+					<?=$objek[0]->N?> rpm
 				</div>
 			</div>
 
@@ -176,8 +176,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					<?=$objek[0]->RR?>rpm
+				<div class="col">
+					<?=$objek[0]->RR?> rpm
 				</div>
 			</div>
 
@@ -188,8 +188,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					<?=$objek[0]->TAx?>&deg;C
+				<div class="col">
+					<?=$objek[0]->TAx?> &deg;C
 				</div>
 			</div>
 
