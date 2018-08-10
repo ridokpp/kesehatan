@@ -27,7 +27,7 @@
 			</div>
 			<hr class="mt-0 mb-0">
 			<div>
-				<p class="text-center mb-0 font-weight-bold">SURAT KETERANGAN SAKIT</p>
+				<p class="text-center mb-0 mt-3 font-weight-bold">SURAT KETERANGAN SAKIT</p>
 				<hr class="mt-0 mb-0" width="20%">
 			</div>
 			<div>
@@ -37,43 +37,58 @@
 				Yang bertanda tangan dibawah ini dr. Muchamad Zubaid, menerangkan dengan sebenarnya bahwa;
 			</div>
 			<div class="row">
-				<div class="col"> 
+				<div class="col-2"> 
 					Nama
 				</div>
-				<div class="col-10">
+				<div class="col-0">
 					:
-				</div>			
+				</div>	
+				<div class="col-9">
+					Mochammad Fadhli Zhil Iqram
+				</div>		
 			</div>
 			<div class="row">
-				<div class="col"> 
+				<div class="col-2"> 
 					Tempat / Tgl Lahir
 				</div>
-				<div class="col-10">
+				<div class="col-0">
 					:
+				</div>
+				<div class="col-9">
+					Malang, 16 Mei 1996
 				</div>
 			</div>
 			<div class="row">
-				<div class="col"> 
+				<div class="col-2"> 
 					Jenis Kelamin		
 				</div>
-				<div class="col-10">
+				<div class="col-0">
 					:
+				</div>
+				<div class="col-9">
+					Laki - Laki
 				</div>
 			</div>
 			<div class="row">
-				<div class="col"> 	
+				<div class="col-2"> 	
 					Pekerjaan					
 				</div>
-				<div class="col-10">
+				<div class="col-0">
 					:
+				</div>
+				<div class="col-9">
+					Mahasiswa
 				</div>
 			</div>
 			<div class="row mb-4">
-				<div class="col"> 
+				<div class="col-2"> 
 					Alamat		
 				</div>
-				<div class="col-10">
+				<div class="col-0">
 					:
+				</div>
+				<div class="col-9">
+					Perumahan Griya Permata Alam Blok BA 15, Ngijo, Karangploso
 				</div>
 			</div>
 			<div class="row mb-4">
