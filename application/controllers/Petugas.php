@@ -13,6 +13,16 @@ class Petugas extends CI_Controller {
 		if ($this->session->userdata('logged_in')['akses'] != '3' ){
 			redirect(base_url()."Account/logout_handler");
 		}
+
+		$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
+		$now 					=	date("Y-m-d H:i:s");
+		if ($data['last_sync'] == array()) {
+			$this->Kesehatan_M->create('settingan',array('id'=>1,'value'=>$now));
+		}elseif(intval(substr(date($data['last_sync'][0]->value), 8,7)) < intval(date('d'))){
+			$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
+			$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
+			$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
+		}
 	}
 
 	function menu($menu,$nomor_pasien='')
@@ -37,15 +47,7 @@ class Petugas extends CI_Controller {
 			$this->load->view('petugas/cari_pasien');
 		}elseif ($menu == 'antrian') {
 			// checking sinkronisasi terakhir
-			$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
-			$now 					=	date("Y-m-d H:i:s");
-			if ($data['last_sync'] == array()) {
-				$this->Kesehatan_M->create('settingan',array('id'=>1,'value'=>$now));
-			}elseif(intval(substr(date($data['last_sync'][0]->value), 8,7)) < intval(date('d'))){
-				$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
-				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
-				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
-			}
+			
 
 			
 			$data['antrian']		=	$this->Kesehatan_M->rawQuery('
