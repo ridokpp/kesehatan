@@ -15,16 +15,36 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	function menu($menu)
-	{
+	function menu($menu){
 		if ($menu == 'dashboard') {
+			/*pasien yang datang bulan ini*/
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
+			$this->load->view('admin/dashboard');
 			$this->load->view('static/footer');
 		}elseif ($menu == 'verifikasi') {
+			/*verifikasi pendaftar*/
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
 			$this->load->view('admin/verifikasi');
+			$this->load->view('static/footer');
+		}elseif ($menu == 'daftar_pasien') {
+			/*daftar pasienr*/
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$this->load->view('admin/daftar_pasien');
+			$this->load->view('static/footer');
+		}elseif ($menu == 'daftar_dokter') {
+			/*daftar pasienr*/
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$this->load->view('admin/daftar_dokter');
+			$this->load->view('static/footer');
+		}elseif ($menu == 'insertICD') {
+			/*daftar pasienr*/
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$this->load->view('admin/insertICD');
 			$this->load->view('static/footer');
 		}else{
 			$this->load->view('static/header');
@@ -33,6 +53,20 @@ class Admin extends CI_Controller {
 			$data['message']	= "<p> Klik <a href='".base_url()."Petugas/menu/pendaftaran'>disini </a>untuk kembali ke Home </p>";
 			$this->load->view('errors/html/error_404',$data);
 		}
+		$this->load->view('static/footer');
+	}
+
+	function rekam_medis(){
+		$this->load->view('static/header');
+		$this->load->view('static/navbar');
+		$this->load->view('admin/rekam_medis',$data);
+		$this->load->view('static/footer');
+	}
+
+	function rekam_dokter(){
+		$this->load->view('static/header');
+		$this->load->view('static/navbar');
+		$this->load->view('admin/rekam_dokter');
 		$this->load->view('static/footer');
 	}
 }

@@ -18,10 +18,14 @@ class Petugas extends CI_Controller {
 		$now 					=	date("Y-m-d H:i:s");
 		if ($data['last_sync'] == array()) {
 			$this->Kesehatan_M->create('settingan',array('id'=>1,'value'=>$now));
-		}elseif(intval(substr(date($data['last_sync'][0]->value), 8,7)) < intval(date('d'))){
-			$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
-			$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
-			$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
+		}else{
+			$datetime_now = new DateTime();
+			$datetime_database = new DateTime($data['last_sync'][0]->value);
+			if ($datetime_now->format('Y-m-d') > $datetime_database->format('Y-m-d')) {
+				$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
+				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
+				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
+			}
 		}
 	}
 

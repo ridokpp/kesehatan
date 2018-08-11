@@ -22,17 +22,26 @@ ROMI
 		*tampilkan status : RF atau UMUM
 		*log beserta detilnya
 
-	CETAK SURAT SEHAT	
+	----CETAK SURAT SEHAT	
 		-> localhost/kesehatan/Dokter/cetak/suratsehat	
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsehat.php
 		*sediakan form untuk pengisian surat sesuai docx
 
 	----VERIFIKASI REGISTRASI PENGGUNA (oleh admin) untuk registrasi dokter dan petugas non admin. cantumkan daftar user yang mengajukan pendaftaran dan tombol untuk verifikasi registrasi. tampilkan pengguna yang terverifikasi. cantumkan tombol untuk reset password pengguna
 
-	CETAK SURAT RUJUKAN
-		->
-		->
-		*sesuaikan dengan form di kertas
+	DAFTAR SEMUA PASIEN TERDAFTAR (ADMIN) berupa tabel disertai tombol ke menu rekam medis setiap pasien
+		-> http://localhost/kesehatan/Admin/menu/daftar_pasien
+		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
+	
+	DAFTAR REKAM MEDIS SETIAP PASIEN (ADMIN) berupa tabel seperti log pada dokter
+		-> http://localhost/kesehatan/Admin/rekam_medis
+		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
+
+	HALAMAN INSERT ICD (ADMIN)
+		-> halaman untuk update ICD
+		-> http://localhost/kesehatan/Admin/menu/insertICD
+		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
+
 
 ALDI
 	----PENDAFTARAN PETUGAS	
@@ -50,16 +59,24 @@ ALDI
 		!!kolom assesment bukan text area, sepertinya berupa panel. didalam terdapat multiple select element kode ICD
 		!!input head to toe masih ngambang
 	
-	CETAK SURAT SAKIT	
+	----CETAK SURAT SAKIT	
 		-> localhost/kesehatan/Dokter/cetak/suratsakit	
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\suratsakit.php
 		*sediakan form untuk pengisian surat sesuai docx
 	
-	DAFTAR PASIEN YANG SEDANG ANTRI 
+	-----DAFTAR PASIEN YANG SEDANG ANTRI 
 		-> localhost/kesehatan/Dokter/antrian 
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\dokter\antri
 		*cantumkan nama, usia,  pembayaran, waktu datang, nomor pasien
 		*sertakan button dgn tulisan "Pemeriksaan"
+
+	DAFTAR SEMUA DOKTER TERDAFTAR (ADMIN) berupa tabel DISERTAI tombol untuk ke detil pelayanan
+		-> http://localhost/kesehatan/Admin/menu/daftar_dokter
+		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
+
+	DETIL PELAYANAN SETIAP DOKTER (ADMIN) berupa tabel sorting berdasarkan tanggal terbaru
+		-> http://localhost/kesehatan/Admin/rekam_dokter
+		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
 
 
 

@@ -20,11 +20,17 @@ if ($this->uri->segment(1, 0) == 'Petugas') {
       <li class="nav-item <?=($menu == 'dashboard') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Admin/menu/dashboard">Dashboard</a>
       </li>
-      <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/antrian">Antrian</a>
+      <li class="nav-item <?=($menu == 'daftar_pasien') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/daftar_pasien">Daftar Pasien</a>
       </li>
-      <li class="nav-item <?=($menu == 'pendaftaran') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/pendaftaran">Pendaftaran</a>
+      <li class="nav-item <?=($menu == 'daftar_dokter') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/daftar_dokter">Daftar Dokter</a>
+      </li>
+      <li class="nav-item <?=($menu == 'verifikasi') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/verifikasi">Verifikasi</a>
+      </li>
+      <li class="nav-item <?=($menu == 'insertICD') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/insertICD">Insert ICD</a>
       </li>
     </ul>
     <?php

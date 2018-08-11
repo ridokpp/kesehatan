@@ -17,10 +17,14 @@ class Dokter extends CI_Controller {
 		$now 					=	date("Y-m-d H:i:s");
 		if ($data['last_sync'] == array()) {
 			$this->Kesehatan_M->create('settingan',array('id'=>1,'value'=>$now));
-		}elseif(intval(substr(date($data['last_sync'][0]->value), 8,7)) < intval(date('d'))){
-			$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
-			$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
-			$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
+		}else{
+			$datetime_now = new DateTime();
+			$datetime_database = new DateTime($data['last_sync'][0]->value);
+			if ($datetime_now->format('Y-m-d') > $datetime_database->format('Y-m-d')) {
+				$this->Kesehatan_M->update('settingan',array('id'=>1),array('value'=>$now));
+				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE antrian');
+				$this->Kesehatan_M->rawQuery('TRUNCATE TABLE proses_antrian');
+			}
 		}
 	}
 
@@ -44,7 +48,7 @@ class Dokter extends CI_Controller {
 	{
 		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$nomor_pasien,'tanggal_add'=>date('Y-m-d')),'kd_objek')->result();
-		var_dump(date("Y-m-d"));
+		// var_dump(date("Y-m-d"));
 		$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[0]->kd_objek))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
@@ -73,10 +77,6 @@ class Dokter extends CI_Controller {
 	* lihat antrian yang sekarang
 	*/
 	function index(){
-		// checking sinkronisasi terakhir
-		$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
-		$now 					=	date("Y-m-d H:i:s");
-		
 		// baca antrian yang tersedia, tampilkan nama dan waktu datang
 		$data['proses_antrian'] = $this->Kesehatan_M->rawQuery('SELECT pasien.nama,pasien.pembayaran,pasien.nomor_pasien FROM pasien INNER JOIN proses_antrian ON pasien.nomor_pasien=proses_antrian.nomor_pasien')->result();
 

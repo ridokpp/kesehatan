@@ -1,8 +1,8 @@
-<script type="text/javascript" src="<?=base_url()?>assets/DataTables/DataTables-1.10.18/js/dataTables.select.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
+
        buttons: [
             {
                 extend: 'print',
@@ -10,13 +10,15 @@ $(document).ready(function() {
                 exportOptions: {
                     modifier: {
                         selected: null
-                    }
+                    },
+                    columns: [ 6, ':visible' ]
                 }
-            },
-            {
-                extend: 'print',
-                text: 'Print selected'
             }
+        ],columnDefs: [ 
+            { 
+              orderable: false, 
+              targets: [2,3,4,5,6] 
+            } 
         ],
         select: true
     } );
@@ -105,6 +107,7 @@ $(document).ready(function() {
       <th>Objektif</th>
       <th>Assement</th>
       <th>Planing</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -132,6 +135,7 @@ $(document).ready(function() {
       </td>
       <td>asu</td>
       <td>R/</td>
+      <td><button type="button" class="btn btn-primary">CETAK</button> </td>
     </tr>
     <tr>
       <th>2</th>
@@ -153,6 +157,8 @@ $(document).ready(function() {
       </td>
       <td>raimu</td>
       <td>R/</td>
+      <td><button type="button" class="btn btn-primary" >CETAK</button> </td>
+
     </tr>
     <tr>
       <th>3</th>
@@ -173,6 +179,7 @@ $(document).ready(function() {
       </td>
       <td>krepek</td>
       <td>R/</td>
+      <td><button type="button" class="btn btn-primary">CETAK</button> </td>
     </tr>
   </tbody>
 </table>
