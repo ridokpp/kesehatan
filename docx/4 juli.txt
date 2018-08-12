@@ -29,7 +29,7 @@ ROMI
 
 	----VERIFIKASI REGISTRASI PENGGUNA (oleh admin) untuk registrasi dokter dan petugas non admin. cantumkan daftar user yang mengajukan pendaftaran dan tombol untuk verifikasi registrasi. tampilkan pengguna yang terverifikasi. cantumkan tombol untuk reset password pengguna
 
-	DAFTAR SEMUA PASIEN TERDAFTAR (ADMIN) berupa tabel disertai tombol ke menu rekam medis setiap pasien
+	DAFTAR SEMUA PASIEN TERDAFTAR (ADMIN) berupa tabel menyangkut identitas pasien, jenis pembayaran, dll disertai tombol ke menu rekam medis setiap pasien
 		-> http://localhost/kesehatan/Admin/menu/daftar_pasien
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
 	
@@ -70,11 +70,12 @@ ALDI
 		*cantumkan nama, usia,  pembayaran, waktu datang, nomor pasien
 		*sertakan button dgn tulisan "Pemeriksaan"
 
-	DAFTAR SEMUA DOKTER TERDAFTAR (ADMIN) berupa tabel DISERTAI tombol untuk ke detil pelayanan
+	DAFTAR SEMUA DOKTER TERDAFTAR (ADMIN) berupa tabel DISERTAI tombol untuk ke detil pelayanan dan tombol untuk reset password
 		-> http://localhost/kesehatan/Admin/menu/daftar_dokter
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
 
 	DETIL PELAYANAN SETIAP DOKTER (ADMIN) berupa tabel sorting berdasarkan tanggal terbaru
+		-> halaman untuk melihat berapa pasien yang telah dilayani selama 1 bulan. terdapat informasi siapa saja pasien beserta jenis pembayaran(BPJS|UMUM|RF)
 		-> http://localhost/kesehatan/Admin/rekam_dokter
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
 
