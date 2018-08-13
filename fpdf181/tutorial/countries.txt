@@ -1,0 +1,15 @@
+Austria;Vienna;83859;8075 the member associations of FIFA once every four years. It took place in Russia from 14 June to 15 July 2018.[2] It was the first World Cup to be held in Eastern Europe,[3] and the 11th time that it had been held in Europe. At an estimated cost of over $14.2 billion, it was the most expensive World Cup.[4] It was also the first World Cup to use the video assistant referee (VAR) system.[5][6] The finals involved 32 teams, of which 31 came through qualifying competitions, while the host nation qualified automatically. Of the 32 teams, 20 had also appeared in the previous tournament in 2014, while both Iceland and Panama made their first appearances at a FIFA World Cup. A total of 64 matches were played in 12 venues across 11 cities.[7] The final took place on 15 July at the Luzhniki Stadium in Moscow, between France and Croatia. France won the match 4–2 to claim their second World Cup title, marking the fourth consecutive title won by a European team.
+Belgium;Brussels;30518;10192
+Denmark;Copenhagen;43094;5295
+Finland;Helsinki;304529;5147
+France;Paris;543965;58728
+Germany;Berlin;357022;82057
+Greece;Athens;131625;10511
+Ireland;Dublin;70723;3694
+Italy;Roma;301316;57563
+Luxembourg;Luxembourg;2586;424
+Netherlands;Amsterdam;41526;15654
+Portugal;Lisbon;91906;9957
+Spain;Madrid;504790;39348
+Sweden;Stockholm;410934;8839
+United Kingdom;London;243820;58862

@@ -79,6 +79,9 @@ ALDI
 		-> http://localhost/kesehatan/Admin/rekam_dokter
 		-> edit file C:\xampp\htdocs\kesehatan\application\views\admin
 
+	HALAMAN EDIT INFORMASI USER seperti ubah password, ubah foto profil
+		-> http://localhost/kesehatan/Account/my_account
+		-> edit file C:\xampp\htdocs\kesehatan\application\views\account\myaccount
 
 
 RIDHO
