@@ -14,21 +14,26 @@ class Account extends CI_Controller {
 
 	function menu($menu = 'login')
 	{
-		$this->load->view('static/header');
-		if ($menu == 'login') {
-			$sess_array = array(
-								'hak_akses'	=>	'',
-								'id_user'	=>	'',
-								'nama_user'	=>	'',
-								'foto'		=>	''
-			);
+		if ($this->session->userdata('logged_in') == array()) {
+			
+			$this->load->view('static/header');
+			if ($menu == 'login') {
+				$sess_array = array(
+									'hak_akses'	=>	'',
+									'id_user'	=>	'',
+									'nama_user'	=>	'',
+									'foto'		=>	''
+				);
 
-			$this->session->unset_userdata('logged_in', $sess_array);
-			$this->load->view('account/login');
-		}elseif ($menu == 'register') {
-			$this->load->view('account/register');
+				$this->session->unset_userdata('logged_in', $sess_array);
+				$this->load->view('account/login');
+			}elseif ($menu == 'register') {
+				$this->load->view('account/register');
+			}
+			$this->load->view('static/footer');
+		}else{
+			redirect(base_url()."Account/logout_handler");
 		}
-		$this->load->view('static/footer');
 	}
 
 

@@ -105,94 +105,100 @@ $(document).ready(function() {
 	  	
 	<div class=" row mt-5">	
 		<div class="col-12">	
-	<table class="table" id="example">
-  <thead>
-    <tr>
-      <th>No</th>
-      <th>Tanggal / Jam Periksa </th>
-      <th>Subjektif</th>
-      <th>Objektif</th>
-      <th>Assement</th>
-      <th>Planing</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    foreach ($rekam_medis as $key => $value) {
-      
-    }
-    ?>
-    <tr>
-      <th>1</th>
-      <td>
-      	<ul>
-      		<li class="no-bullets"> 10/12/2017 </li>
-      		<li class="no-bullets"> 19:00 WIB </li>
-      	</ul>
-      </td>
-      <td>Batuk</td>
-      <td>
-      	<ul>
-      		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
-   			<li class="no-bullets">TD : ..../.... mmHg RR</li>
-      		<li class="no-bullets">N  : ....rpm TAx: 36c</li>
-      		<li class="no-bullets">Head to Toe :</li>
-      	</ul>	 
-      </td>
-      <td>asu</td>
-      <td>R/</td>
-      <td><button type="button" class="btn btn-primary">CETAK</button> </td>
-    </tr>
-    <tr>
-      <th>2</th>
-       <td>
-       	<ul>
-      		<li class="no-bullets"> 10/12/2017 </li>
-      		<li class="no-bullets"> 19:00 WIB </li>
-      	</ul>
-       </td>
-      <td>Pilek</td>
-      <td>
-      	<ul>
-      		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
-   			<li class="no-bullets">TD : .... /.... mmHg RR</li>
-      		<li class="no-bullets">N  : .... rpm TAx: 36c</li>
-      		<li class="no-bullets">Head to Toe :
-          asdjaks hdkjashd kjash dkjash dkjash djaksh dkjash dkjash dkjash dkjash dkjash dkjash dkjashd kajshd kasj hdkasj daksj das dhakjs dhkajsdh kaj dhkajsd hjkas hdkjas dkajsdhakjsd aks dhaks</li>
-      	</ul>	 
-      </td>
-      <td>raimu</td>
-      <td>R/</td>
-      <td><button type="button" class="btn btn-primary" >CETAK</button> </td>
+    	<table class="table" id="example">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Tanggal / Jam Periksa </th>
+            <th>Subjektif</th>
+            <th>Objektif</th>
+            <th>Assement</th>
+            <th>Planing</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($rekam_medis as $key => $value) {
+            
+          }
+          ?>
+          <tr>
+            <th>1</th>
+            <td>
+            	<ul>
+            		<li class="no-bullets"> 10/12/2017 </li>
+            		<li class="no-bullets"> 19:00 WIB </li>
+            	</ul>
+            </td>
+            <td>Batuk</td>
+            <td>
+            	<ul>
+            		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
+         			  <li class="no-bullets">TD : ..../.... mmHg RR</li>
+            		<li class="no-bullets">N  : ....rpm TAx: 36c</li>
+            		<li class="no-bullets">Head to Toe :</li>
+            	</ul>	 
+            </td>
+            <td>asu</td>
+            <td>R/</td>
+            <td><button type="button" class="btn btn-primary">CETAK</button> </td>
+          </tr>
+          <tr>
+            <th>2</th>
+             <td>
+             	<ul>
+            		<li class="no-bullets"> 10/12/2017 </li>
+            		<li class="no-bullets"> 19:00 WIB </li>
+            	</ul>
+             </td>
+            <td>Pilek</td>
+            <td>
+            	<ul>
+            		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
+         			  <li class="no-bullets">TD : .... /.... mmHg RR</li>
+            		<li class="no-bullets">N  : .... rpm TAx: 36c</li>
+            		<li class="no-bullets">Head to Toe :
+                asdjaks hdkjashd kjash dkjash dkjash djaksh dkjash dkjash dkjash dkjash dkjash dkjash dkjashd kajshd kasj hdkasj daksj das dhakjs dhkajsdh kaj dhkajsd hjkas hdkjas dkajsdhakjsd aks dhaks</li>
+            	</ul>	 
+            </td>
+            <td>raimu</td>
+            <td>R/</td>
+            <td><button type="button" class="btn btn-primary" >CETAK</button> </td>
 
-    </tr>
-    <tr>
-      <th>3</th>
-       <td>
-       	<ul>
-      		<li class="no-bullets"> 10/12/2017 </li>
-      		<li class="no-bullets"> 19:00 WIB </li>
-      	</ul>
-       </td>
-      <td>Pusing</td>
-      <td>
-      	<ul>
-      		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
-   			<li class="no-bullets">TD : ..../.... mmHg RR</li>
-      		<li class="no-bullets">N  : ....rpm TAx: 36c</li>
-      		<li class="no-bullets">Head to Toe :</li>
-      	</ul>	 
-      </td>
-      <td>krepek</td>
-      <td>R/</td>
-      <td><button type="button" class="btn btn-primary">CETAK</button> </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+          </tr>
+          <tr>
+            <th>3</th>
+             <td>
+             	<ul>
+            		<li class="no-bullets"> 10/12/2017 </li>
+            		<li class="no-bullets"> 19:00 WIB </li>
+            	</ul>
+             </td>
+            <td>Pusing</td>
+            <td>
+            	<ul>
+            		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
+         			  <li class="no-bullets">TD : ..../.... mmHg RR</li>
+            		<li class="no-bullets">N  : ....rpm TAx: 36c</li>
+            		<li class="no-bullets">Head to Toe :</li>
+            	</ul>	 
+            </td>
+            <td>krepek</td>
+            <td>R/</td>
+            <td><button type="button" class="btn btn-primary">CETAK</button> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 	</div>
-
 </div>
+
+<form method="POST" action="<?=base_url()?>Dokter/dummyF">
+  <input type="checkbox" name="data[]" value="1">
+  <input type="checkbox" name="data[]" value="2">
+  <input type="checkbox" name="data[]" value="3">
+  <input type="checkbox" name="data[]" value="4">
+  <input type="checkbox" name="data[]" value="5">
+  <input type="submit" name="submit">
+</form>

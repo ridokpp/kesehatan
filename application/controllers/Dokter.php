@@ -34,11 +34,18 @@ class Dokter extends CI_Controller {
 	function log($nomor_pasien)
 	{
 		$data['pasien'] 		= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
+		$update_kd_dokter		= $this->Kesehatan_M->update('rkm_medis',array('kd_pasien'=>$nomor_pasien),array('kd_dokter'=>$this->session->userdata('logged_in')['id_user']));
 		$data['rekam_medis'] 	= $this->Kesehatan_M->read('rkm_medis',array('kd_pasien'=>$nomor_pasien))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/log',$data);
 		$this->load->view('static/footer');
+	}
+
+	function cetak_log()
+	{
+		$nomor_pasien = $this->input->post('nomor_pasien');
+		$data = ''; 
 	}
 
 	/*
@@ -47,8 +54,8 @@ class Dokter extends CI_Controller {
 	function pemeriksaan($nomor_pasien)
 	{
 		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
-		$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$nomor_pasien,'tanggal_add'=>date('Y-m-d')),'kd_objek')->result();
-		// var_dump(date("Y-m-d"));
+		$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$nomor_pasien,'DATE(tgl_jam)'=>date('Y-m-d')),'kd_objek')->result();
+		// var_dump($kd_objek);
 		$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[0]->kd_objek))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
@@ -84,5 +91,10 @@ class Dokter extends CI_Controller {
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/antri',$data);
 		$this->load->view('static/footer');
+	}
+
+
+	function dummyF()
+	{
 	}
 }

@@ -139,7 +139,7 @@ class Petugas_handler extends CI_Controller {
 		$insert_tabel_objek = json_decode($insert_tabel_objek,false);
 		// var_dump($insert_tabel_objek);
 		// die();
-		$this->Kesehatan_M->create('rkm_medis',array('kd_pasien'=>$postedData['nomor_pasien'],'kd_objek'=>$insert_tabel_objek->message,'tanggal_add'=>date("Y-m-d H:i:s")));
+		$this->Kesehatan_M->create('rkm_medis',array('kd_pasien'=>$postedData['nomor_pasien'],'kd_objek'=>$insert_tabel_objek->message,'tgl_jam'=>date("Y-m-d H:i:s")));
 
 		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
 		if ($result->status) {
