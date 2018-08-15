@@ -25,6 +25,8 @@ if (!isset($title) AND !isset($pasien)) {
 	<script src="<?php echo base_url()?>assets/DataTables/DataTables-1.10.18/js/dataTables.buttons.min.js"></script>
 	<script src="<?php echo base_url()?>assets/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
 	<script src="<?php echo base_url()?>assets/DataTables/DataTables-1.10.18/js/buttons.print.min.js"></script>
+	<!-- <script type="text/javascript" src="<?=base_url()?>assets/DataTables/DataTables-1.10.18/js/dataTables.select.js"></script> -->
+
 
 	<style>
 		body{padding: 20px}

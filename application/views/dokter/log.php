@@ -1,11 +1,35 @@
+<!-- 
+CATATAN :
+
+http://www.fpdf.org/en/script/script3.php
+
+
+ -->
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
-        buttons: [
-            'print'
-        ]
+
+       buttons: [
+            {
+                extend: 'print',
+                text: 'Print all',
+                exportOptions: {
+                    modifier: {
+                        selected: null
+                    },
+                    columns: [ 6, ':visible' ]
+                }
+            }
+        ],columnDefs: [ 
+            { 
+              orderable: false, 
+              targets: [2,3,4,5,6] 
+            } 
+        ],
+        select: true
     } );
+
 } );	
 </script>
 <style type="text/css">
@@ -90,9 +114,15 @@ $(document).ready(function() {
       <th>Objektif</th>
       <th>Assement</th>
       <th>Planing</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
+    <?php
+    foreach ($rekam_medis as $key => $value) {
+      
+    }
+    ?>
     <tr>
       <th>1</th>
       <td>
@@ -112,6 +142,7 @@ $(document).ready(function() {
       </td>
       <td>asu</td>
       <td>R/</td>
+      <td><button type="button" class="btn btn-primary">CETAK</button> </td>
     </tr>
     <tr>
       <th>2</th>
@@ -127,11 +158,14 @@ $(document).ready(function() {
       		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
    			<li class="no-bullets">TD : .... /.... mmHg RR</li>
       		<li class="no-bullets">N  : .... rpm TAx: 36c</li>
-      		<li class="no-bullets">Head to Toe :</li>
+      		<li class="no-bullets">Head to Toe :
+          asdjaks hdkjashd kjash dkjash dkjash djaksh dkjash dkjash dkjash dkjash dkjash dkjash dkjashd kajshd kasj hdkasj daksj das dhakjs dhkajsdh kaj dhkajsd hjkas hdkjas dkajsdhakjsd aks dhaks</li>
       	</ul>	 
       </td>
       <td>raimu</td>
       <td>R/</td>
+      <td><button type="button" class="btn btn-primary" >CETAK</button> </td>
+
     </tr>
     <tr>
       <th>3</th>
@@ -152,6 +186,7 @@ $(document).ready(function() {
       </td>
       <td>krepek</td>
       <td>R/</td>
+      <td><button type="button" class="btn btn-primary">CETAK</button> </td>
     </tr>
   </tbody>
 </table>

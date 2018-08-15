@@ -206,5 +206,16 @@ class Account extends CI_Controller {
 		redirect();
 	}
 
+	function my_account()
+	{
+		if ($this->session->userdata('logged_in') !== array()) {
+			$data['user'] = $this->Kesehatan_M->read('user',array('id_user'=>$this->session->userdata('logged_in')['id_user']))->result();
+			$this->load->view('static/header');
+			$this->load->view('account/myaccount',$data);
+			$this->load->view('static/footer');
+		}else{
+			redirect();
+		}
+	}
 
 }
