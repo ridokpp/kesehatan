@@ -52,7 +52,7 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-8">
+				<div class="col">
 					<?=$pasien[0]->nama?>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
+				<div class="col">
 					<?=$pasien[0]->nik?>
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-8">
+				<div class="col">
 					<?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-8">
+				<div class="col">
 					<?=$pasien[0]->alamat?>
 				</div>
 			</div>
@@ -100,7 +100,7 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-8">
+				<div class="col">
 					<?=$pasien[0]->jkelamin?>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-8">
+				<div class="col">
 					<?=$pasien[0]->pekerjaan?>
 				</div>
 			</div>
@@ -128,8 +128,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					cm
+				<div class="col">
+					<?=$objek[0]->tb?> cm
 				</div>
 			</div>
 
@@ -140,8 +140,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					kg
+				<div class="col">
+					<?=$objek[0]->bb?> kg
 				</div>
 			</div>
 
@@ -152,8 +152,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					/
+				<div class="col">
+					<?=$objek[0]->td1?> / <?=$objek[0]->td2?>
 				</div>
 			</div>
 
@@ -164,8 +164,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					rpm
+				<div class="col">
+					<?=$objek[0]->N?> rpm
 				</div>
 			</div>
 
@@ -176,8 +176,8 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					rpm
+				<div class="col">
+					<?=$objek[0]->RR?> rpm
 				</div>
 			</div>
 
@@ -188,15 +188,16 @@
 				<div class="col-1">
 					:
 				</div>
-				<div class="col-1">
-					&deg;C
+				<div class="col">
+					<?=$objek[0]->TAx?> &deg;C
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label class="col-3 col-form-label">Head To Toe</label>
-				<div class="input-group col-9">
-				    <input type="text" class="form-control" id="" name="suhu" placeholder="Head To Toe" required="">
+
+				<label class="col-4 col-form-label">Head To Toe</label>
+				<div class="input-group col-8">
+				    <textarea class="form-control" id="" name="text_headtotoe"></textarea>
 			 	</div>
 			</div>
 		</div>
@@ -205,31 +206,40 @@
 	<div class="row mb-3">
 		<div class="col-4">
 			<h5 class="text-center mt-3">Subjektif</h5>
-			<textarea class="form-control" aria-label="With textarea" required="">Subjektif</textarea>
+			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
 		</div>
 	
 		<div class="col-4">
 			<h5 class="text-center mt-3">Assessment</h5>
-			<textarea class="form-control" aria-label="With textarea" required="">Assessment</textarea>
+			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Assessment" name="assessment"></textarea>
 		</div>
 
 		<div class="col-4">
 			<h5 class="text-center mt-3">Planing</h5>
-			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Planing"></textarea>
+			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
 		</div>
 	</div>
-
+<style type="text/css">
+	body .modal {
+	    /* new custom width */
+	    /*width: 1300px;*/
+	    /* must be half of the width, minus scrollbar on the left (30px) */
+	    /*margin-left: -150px;*/
+	    /*overflow-y: hidden;*/
+	}
+	.modal-open .modal{
+		/*overflow-y: hidden;*/
+	}
+</style>
 	<div class="row">
-		<div class="col">
-			<button type="button" class="btn btn-primary btn-block">Submit</button>
-		</div>
 
 		<div class="col">
-			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">Surat Sakit</button>
-			<div class="modal fade modal-rujukan" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">SURAT SAKIT</button>
+			
+			<!-- SURAT SAKIT -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
-
 				      	<div class="modal-header">
 				        	<h5 class="modal-title" id="exampleModalCenterTitle">Surat Sakit</h5>
 				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -279,262 +289,296 @@
 				    </div>
 				</div>
 			</div>
+			<!-- END SURAT SAKIT -->
+
 		</div>
 
-
-
-
 		<div class="col">
-			<button type="button" class="btn btn-success btn-block">Surat Sehat</button>
-		</div>
-		<div class="col">
-			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalrujukan">Rujukan</button>
-			<div class="modal fade" id="modalrujukan" tabindex="-1" role="dialog" aria-labelledby="modalrujukanTitle" aria-hidden="true">
+			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalsuratsehat">SURAT SEHAT</button>
+			
+			<!-- SURAT SEHAT -->
+			<div class="modal fade" id="modalsuratsehat" tabindex="-1" role="dialog" aria-labelledby="modalsuratsehatTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 
 				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="modalrujukanTitle">Surat Rujukan</h5>
+				        	<h5 class="modal-title" id="modalsuratsehat">Surat Sehat</h5>
 				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
 				      	</div>
 
 				    	<div class="modal-body">
-				    		<div class="form-group row">
-						    <label class="col-sm-2 col-form-label">Nama</label>
-						    <div class="input-group-prepend col-sm-7">
-						      	<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Nama Lengkap" required="">
-						    </div>
+				    	<label class="col-6 col-form-label"><strong>Tes Buta Warna</strong></label>
+				    	<div class="custom-control custom-radio">
+	 							<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios">
+	  							<label class="custom-control-label" for="defaultGroupExample1">Ya</label>
 						</div>
 
-						<div class="form-group row">
-						    <label class="col-sm-2 col-form-label">NIK</label>
-						    <div class="input-group-prepend col-sm-7">
-						      	<input type="text" class="form-control" id="" name="nik" placeholder="Nomor Induk Kependudukan" required="">
-						    </div>
+						<!-- Group of default radios - option 2 -->
+						<div class="custom-control custom-radio">
+	  						<input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios" checked>
+	  						<label class="custom-control-label" for="defaultGroupExample2">Tidak</label>
 						</div>
 
-						<div class="form-group row">
-							<div class="col">	
-							    <label class="control-label"><strong>Tempat, Tanggal Lahir</strong></label> 
-							</div>
+						<!-- Group of default radios - option 3 -->
+						<div class="custom-control custom-radio">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="groupOfDefaultRadios">
+							  <label class="custom-control-label" for="defaultGroupExample3">Parsial</label>
 						</div>
-
-						<div class="row">
-					 		<div class="col">
-						     	<div class="form-group row">
-						   			<label for="inputEmail3" class="col-sm-3 col-form-label">Tempat</label>
-						  		  	<div class="input-group-prepend col-sm-9">
-						      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Tempat Lahir" required="">
-						    		</div>
-								</div>
-							</div>
-					    	<div class="col">
-						     	<div class="form-group row">
-						    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal</label>
-						    		<div class="input-group-prepend col-sm-8">
-						      			<input type="date" class="form-control" name="tanggal_lahir" required="">
-						   			</div>
-								</div>
-							</div>
-					    </div>
-
-					    <div class="form-group row">
-						    <label class="col-sm-2 col-form-label">Gender</label>
-						    <div class="input-group-prepend col-sm-5">
-						      	<select class="form-control" id="state_id" name="jenis_kelamin" required="">
-									<option value="Laki-laki">Laki - Laki</option>
-									<option value="Perempuan">Perempuan</option>
-								</select>	
-						    </div>
-						</div>
-					    <div class="form-group row">
-						    <label class="col-sm-2 col-form-label">Pekerjaan</label>
-						    <div class="input-group-prepend col-sm-7">
-						      	<input type="text" class="form-control" id="" name="pekerjaan" placeholder="Pekerjaan" required="">
-						    </div>
-						</div>
-
-					    <div class="form-group row">
-						    <label class="col-sm-2 col-form-label">Alamat</label>
-						    <div class="input-group-prepend col-sm-7">
-						      	<input type="text" class="form-control" id="" name="alamat" placeholder="Alamat" required="">
-						    </div>
-						</div>
-					    <div class="form-group row">
-							<label class="col-sm-2 col-form-label">Keluhan</label>
-						    <div class="input-group-prepend col-sm-7">
-							<textarea class="form-control" aria-label="With textarea" required="" placeholder="Keluhan"></textarea>
-							</div>
-						</div>
-						 <div class="form-group row">
-							<label class="col-sm-2 col-form-label">GCS</label>
-						    <div class="input-group-prepend col-sm-2">
-							<input type="text" class="form-control" id="" name="gcs" placeholder="E" required="">
-							</div>
-							<div class="input-group-prepend col-sm-2">
-							<input type="text" class="form-control" id="" name="gcs" placeholder="V" required="">
-							</div>
-							<div class="input-group-prepend col-sm-2">
-							<input type="text" class="form-control" id="" name="gcs" placeholder="M" required="">
-							</div>
-							
-						</div>
-						 <div class="form-group row">
-						 <label class="col-sm-1 col-form-label">CM</label>
-							<div class="input-group-prepend col-sm-1">
-							<input type="checkbox" class="form-control" id="" name="CM" placeholder="M" required="">
-							</div>
-						<label class="col-sm-1 col-form-label">Iteris</label>
-							<div class="input-group-prepend col-sm-1">
-							<input type="checkbox" class="form-control" id="" name="Iteris" placeholder="M" required="">
-							</div>
-						<label class="col-sm-2 col-form-label">delirium</label>
-							<div class="input-group-prepend col-sm-1">
-							<input type="checkbox" class="form-control" id="" name="delirium" placeholder="M" required="">
-							</div>
-						</div>
-						 <div class="form-group row">
-							<label class="col-sm-1 col-form-label">somnolen</label>
-							<div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="somnolen" placeholder="M" required="">
-							</div>
-							<label class="col-sm-1 col-form-label">Stupor</label>
-							<div class="input-group-prepend col-sm-2">
-							<input type="checkbox" class="form-control" id="" name="Stupor" placeholder="M" required="">
-							</div>
-							<label class="col-sm-1 col-form-label">Coma</label>
-							<div class="input-group-prepend col-sm-2">
-							<input type="checkbox" class="form-control" id="" name="Coma" placeholder="M" required="">
-							</div>
-						</div>
-
-
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">TB</label>
-						    <div class="input-group-prepend col-sm-2">
-						      	<input type="text" class="form-control" id="" name="tb" placeholder="TB" required="">cm
-						    </div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">BB</label>
-						    <div class="input-group-prepend col-sm-2">
-						      	<input type="text" class="form-control" id="" name="bb" placeholder="BB" required="">kg
-						    </div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">Tekanan Darah</label>
-						    <div class="input-group-prepend col-sm-2">
-						      	<input type="text" class="form-control" id="" name="tekanan_darah" placeholder="" required="">
-						      	&nbsp;/&nbsp;
-						      	<input type="text" class="form-control" id="" name="tekanan_darah" placeholder="" required="">mmHg
-						    </div>
-						</div>
+					</div>
+					<div class="col-10">
 						
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Nadi</label>
-						    <div class="input-group-prepend col-sm-2">
-						      	<input type="text" class="form-control" id="" name="nadi" placeholder="" required="">rpm
-						    </div>
-						</div>
+						<h5 class="col-6 col-form-label"><strong>Keperluan</strong></h5>
+						<textarea class="form-control" aria-label="With textarea" required=""></textarea>
 
-						<div class="form-group row">
-							<label class="col-sm-3 col-form-label">Respiratory R.</label>
-						    <div class="input-group-prepend col-sm-2">
-						      	<input type="text" class="form-control" id="" name="respiratory" placeholder="" required="">rpm
-						    </div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-sm-3 col-form-label">TᵒAxilla</label>
-						    <div class="input-group-prepend col-sm-2">
-						      	<input type="text" class="form-control" id="" name="respiratory" placeholder="" required="">ᵒc
-						    </div>
-						</div>
-						Head to Toe
-							<br>
-
-						Kepala
-						<div class="form-group row">
-						 	<label class="col-sm-1 col-form-label">Anemis</label>
-						 	<div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>/
-						 	 <div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						</div>
-
-						<div class="form-group row">
-						 	<label class="col-sm-1 col-form-label">Ikterik</label>
-						 	<div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>/
-						 	 <div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						</div>	
-
-						<div class="form-group row">
-						 	<label class="col-sm-1 col-form-label">Cianosis</label>
-						 	<div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>/
-						 	 <div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						</div>
-						
-						<div class="form-group row">
-						 	<label class="col-sm-1 col-form-label">Deformitas</label>
-						 	<div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>/
-						 	 <div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						</div>
-
-						<div class="form-group row">
-						 	<label class="col-sm-1 col-form-label">Refleks Cahaya</label>
-						 	<div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>/
-						 	 <div class="input-group-prepend col-sm-3">
-							<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						</div>
-
-						<div class="form-group row">
-						 	<label class="col-sm-1 col-form-label">isokor</label>
-						 	<div class="input-group-prepend col-sm-3">
-							<input type="radio" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						 	<label class="col-sm-1 col-form-label">anisokor</label>
-						 	 <div class="input-group-prepend col-sm-3">
-							<input type="radio" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
-							</div>
-						</div>
-
-						
+					</div>
 				    	<div class="modal-footer">
 				    		<button type="button" class="btn btn-primary">Cetak</button>
 				    	</div>
 
-				    	
-
 				    </div>
 				</div>
 			</div>
+			<!-- END SURAT SEHAT -->
+
 		</div>
-		
+		<div class="col">
+			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalrujukan">RUJUKAN</button>
+			
+			<!-- SURAT RUJUKAN -->
+			<div class="modal fade" id="modalrujukan" tabindex="-1" role="dialog" aria-labelledby="modalrujukanTitle" aria-hidden="true" >
+				<div class="modal-dialog modal-dialog-centered" role="document" >
+					<div class="modal-content">
+				      	<div class="modal-header">
+				        	<h5 class="modal-title" id="modalrujukanTitle">Surat Rujukan</h5>
+				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          		<span aria-hidden="true">&times;</span>
+				        	</button>
+				      	</div>
+				    	<div class="modal-body" >
+				    		<div class="form-group row">
+						    	<label class="col-sm-2 col-form-label">Nama</label>
+						    	<div class="input-group-prepend col">
+						      		<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Nama Lengkap" required="">
+						    	</div>
+							</div>
+							<div class="form-group row">
+							    <label class="col-sm-2 col-form-label">NIK</label>
+							    <div class="input-group-prepend col">
+							      	<input type="text" class="form-control" id="" name="nik" placeholder="Nomor Induk Kependudukan" required="">
+							    </div>
+							</div>
+							<div class="form-group row">
+								<div class="col">	
+								    <label class="control-label"><strong>Tempat, Tanggal Lahir</strong></label> 
+								</div>
+							</div>
+							<div class="row">
+						 		<div class="col">
+							     	<div class="form-group row">
+							   			<label for="inputEmail3" class="col-sm-2 col-form-label">Tempat</label>
+							  		  	<div class="input-group-prepend col">
+							      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Tempat Lahir" required="">
+							    		</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+						    	<div class="col">
+							     	<div class="form-group row">
+							    		<label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
+							    		<div class="input-group-prepend col">
+							      			<input type="date" class="form-control" name="tanggal_lahir" required="">
+							   			</div>
+									</div>
+								</div>
+						    </div>
+						    <div class="form-group row">
+							    <label class="col-sm-2 col-form-label">Gender</label>
+							    <div class="input-group-prepend col">
+							      	<select class="form-control" id="state_id" name="jenis_kelamin" required="">
+										<option value="Laki-laki">Laki - Laki</option>
+										<option value="Perempuan">Perempuan</option>
+									</select>	
+							    </div>
+							</div>
+						    <div class="form-group row">
+							    <label class="col-sm-2 col-form-label">Pekerjaan</label>
+							    <div class="input-group-prepend col">
+							      	<input type="text" class="form-control" id="" name="pekerjaan" placeholder="Pekerjaan" required="">
+							    </div>
+							</div>
+						    <div class="form-group row">
+							    <label class="col-sm-2 col-form-label">Alamat</label>
+							    <div class="input-group-prepend col">
+							      	<input type="text" class="form-control" id="" name="alamat" placeholder="Alamat" required="">
+							    </div>
+							</div>
+						    <div class="form-group row">
+								<label class="col-sm-2 col-form-label">Keluhan</label>
+							    <div class="input-group-prepend col">
+								<textarea class="form-control" aria-label="With textarea" required="">Keluhan</textarea>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">GCS</label>
+							    <div class="input-group-prepend col-sm-2">
+								<input type="text" class="form-control" id="" name="gcs" placeholder="E" required="">
+								</div>
+								<div class="input-group-prepend col-sm-2">
+								<input type="text" class="form-control" id="" name="gcs" placeholder="V" required="">
+								</div>
+								<div class="input-group-prepend col-sm-2">
+								<input type="text" class="form-control" id="" name="gcs" placeholder="M" required="">
+								</div>							
+							</div>
+						 	<div class="form-group row">
+						 		<label class="col-sm-1 col-form-label">CM</label>
+								<div class="input-group-prepend col-sm-1">
+									<input type="checkbox" class="form-control" id="" name="CM" placeholder="M" required="">
+								</div>
+								<label class="col-sm-1 col-form-label">Iteris</label>
+								<div class="input-group-prepend col-sm-1">
+									<input type="checkbox" class="form-control" id="" name="Iteris" placeholder="M" required="">
+								</div>
+								<label class="col-sm-2 col-form-label">delirium</label>
+								<div class="input-group-prepend col-sm-1">
+									<input type="checkbox" class="form-control" id="" name="delirium" placeholder="M" required="">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-1 col-form-label">somnolen</label>
+								<div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="somnolen" placeholder="M" required="">
+								</div>
+								<label class="col-sm-1 col-form-label">Stupor</label>
+								<div class="input-group-prepend col-sm-2">
+									<input type="checkbox" class="form-control" id="" name="Stupor" placeholder="M" required="">
+								</div>
+								<label class="col-sm-1 col-form-label">Coma</label>
+								<div class="input-group-prepend col-sm-2">
+									<input type="checkbox" class="form-control" id="" name="Coma" placeholder="M" required="">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">TB</label>
+							    <div class="input-group-prepend col-sm-2">
+							      	<input type="text" class="form-control" id="" name="tb" placeholder="TB" required="">cm
+							    </div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">BB</label>
+							    <div class="input-group-prepend col-sm-2">
+							      	<input type="text" class="form-control" id="" name="bb" placeholder="BB" required="">kg
+							    </div>
+							</div>
 
+							<div class="form-group row">
+								<label class="col-sm-4 col-form-label">Tekanan Darah</label>
+							    <div class="input-group-prepend col-sm-2">
+							      	<input type="text" class="form-control" id="" name="tekanan_darah" placeholder="" required="">
+							      	&nbsp;/&nbsp;
+							      	<input type="text" class="form-control" id="" name="tekanan_darah" placeholder="" required="">mmHg
+							    </div>
+							</div>
+							
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label">Nadi</label>
+							    <div class="input-group-prepend col-sm-2">
+							      	<input type="text" class="form-control" id="" name="nadi" placeholder="" required="">rpm
+							    </div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Respiratory R.</label>
+							    <div class="input-group-prepend col-sm-2">
+							      	<input type="text" class="form-control" id="" name="respiratory" placeholder="" required="">rpm
+							    </div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">TᵒAxilla</label>
+							    <div class="input-group-prepend col-sm-2">
+							      	<input type="text" class="form-control" id="" name="respiratory" placeholder="" required="">ᵒc
+							    </div>
+							</div>
+							Head to Toe
+							<br>
+							Kepala
+							<div class="form-group row">
+							 	<label class="col-sm-1 col-form-label">Anemis</label>
+							 	<div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>/
+							 	 <div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+							 	<label class="col-sm-1 col-form-label">Ikterik</label>
+							 	<div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>/
+							 	 <div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							</div>	
+
+							<div class="form-group row">
+							 	<label class="col-sm-1 col-form-label">Cianosis</label>
+							 	<div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>/
+							 	 <div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+							 	<label class="col-sm-1 col-form-label">Deformitas</label>
+							 	<div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>/
+							 	 <div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+							 	<label class="col-sm-1 col-form-label">Refleks Cahaya</label>
+							 	<div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>/
+							 	 <div class="input-group-prepend col-sm-3">
+								<input type="checkbox" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+							 	<label class="col-sm-1 col-form-label">isokor</label>
+							 	<div class="input-group-prepend col-sm-3">
+								<input type="radio" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							 	<label class="col-sm-1 col-form-label">anisokor</label>
+							 	 <div class="input-group-prepend col-sm-3">
+								<input type="radio" class="form-control" id="" name="anemis_kiri" placeholder="" required="">
+								</div>
+							</div>
+
+							
+					    	<div class="modal-footer">
+					    		<button type="button" class="btn btn-primary">Cetak</button>
+					    	</div>
+				    	</div>
+					</div>
+				</div>
+				<!-- SURAT RUJUKAN-->
+			</div>
+		</div>
+		<div class="col">
+			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">
+		</div>
 	</div>
-
 </div>
-
-
-
