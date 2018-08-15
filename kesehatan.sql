@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-08-08 11:32:49
+Date: 2018-08-15 23:47:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,7 +41,7 @@ CREATE TABLE `antrian` (
   `nomor_pasien` varchar(255) DEFAULT NULL,
   `jam_datang` datetime NOT NULL,
   PRIMARY KEY (`nomor_antrian`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of antrian
@@ -168,13 +168,15 @@ CREATE TABLE `objek` (
   `RR` int(11) DEFAULT NULL,
   `TAx` int(11) DEFAULT NULL,
   `kd_headtotoe` int(11) DEFAULT NULL,
+  `text_headtotoe` text,
   PRIMARY KEY (`kd_objek`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of objek
 -- ----------------------------
-INSERT INTO `objek` VALUES ('1', '123', '123', '123', '123', '123', '123', '123', null);
+INSERT INTO `objek` VALUES ('1', '123', '123', '123', '123', '123', '123', '123', null, null);
+INSERT INTO `objek` VALUES ('2', '1', '1', '1', '1', '1', '1', '1', null, null);
 
 -- ----------------------------
 -- Table structure for pasien
@@ -202,6 +204,23 @@ CREATE TABLE `pasien` (
 INSERT INTO `pasien` VALUES ('1', 'ridho pratama', '1233', 'malang', '1997-02-19', '21', 'Jalan gajayana  RT01 RW01 Kelurahan Kota Lama Kecamatan Kedungkandang Kota Malang', 'Laki-laki', 'Programmer', 'Kota Lama', 'umum', '001-006-01-02-07-2018');
 
 -- ----------------------------
+-- Table structure for print
+-- ----------------------------
+DROP TABLE IF EXISTS `print`;
+CREATE TABLE `print` (
+  `id_print` int(255) NOT NULL AUTO_INCREMENT,
+  `nomor_pasien` varchar(255) DEFAULT NULL,
+  `current_row` varchar(255) DEFAULT NULL,
+  `page` varchar(255) DEFAULT NULL,
+  `last_printed` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_print`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of print
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for proses_antrian
 -- ----------------------------
 DROP TABLE IF EXISTS `proses_antrian`;
@@ -223,19 +242,19 @@ CREATE TABLE `rkm_medis` (
   `kd_rkm` int(20) NOT NULL AUTO_INCREMENT,
   `kd_pasien` varchar(255) DEFAULT NULL,
   `tgl_jam` datetime DEFAULT NULL,
-  `subjek` varchar(600) DEFAULT NULL,
+  `subjek` text,
   `kd_objek` int(11) DEFAULT NULL,
   `kd_assesment` int(11) DEFAULT NULL,
-  `planning` varchar(600) DEFAULT NULL,
+  `planning` text,
   `kd_dokter` varchar(50) DEFAULT NULL,
-  `tanggal_add` date DEFAULT NULL,
   PRIMARY KEY (`kd_rkm`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of rkm_medis
 -- ----------------------------
-INSERT INTO `rkm_medis` VALUES ('1', '001-006-01-02-07-2018', null, null, '1', null, null, null, '2018-08-04');
+INSERT INTO `rkm_medis` VALUES ('1', '001-006-01-02-07-2018', '2018-08-14 06:24:48', null, '1', null, null, '8');
+INSERT INTO `rkm_medis` VALUES ('2', '001-006-01-02-07-2018', '2018-08-15 22:19:10', null, '2', null, null, '8');
 
 -- ----------------------------
 -- Table structure for settingan
@@ -250,7 +269,7 @@ CREATE TABLE `settingan` (
 -- ----------------------------
 -- Records of settingan
 -- ----------------------------
-INSERT INTO `settingan` VALUES ('1', '2018-07-29 09:35:58');
+INSERT INTO `settingan` VALUES ('1', '2018-08-15 22:17:53');
 
 -- ----------------------------
 -- Table structure for terapi
@@ -273,13 +292,13 @@ DROP TABLE IF EXISTS `thorak`;
 CREATE TABLE `thorak` (
   `kd_thorak` int(11) NOT NULL,
   `metris` varchar(15) NOT NULL,
-  `wg_kiri` varchar(15) NOT NULL,
-  `wg_kanan` varchar(15) NOT NULL,
-  `rk_kiri` varchar(15) NOT NULL,
-  `rk_kanan` varchar(15) NOT NULL,
-  `vk_kiri` varchar(15) NOT NULL,
-  `vk_kanan` varchar(15) NOT NULL,
-  `jtgic` varchar(15) NOT NULL,
+  `wheezing_kiri` varchar(15) NOT NULL,
+  `wheezing_kanan` varchar(30) NOT NULL,
+  `ronkhi_kiri` varchar(15) NOT NULL,
+  `ronkhi_kanan` varchar(30) NOT NULL,
+  `vesikuler_kiri` varchar(15) NOT NULL,
+  `vesikuler_kanan` varchar(30) NOT NULL,
+  `jantung_icor` varchar(15) NOT NULL,
   `s1_s2` varchar(15) NOT NULL,
   `s_tambahan` varchar(500) NOT NULL,
   `ket_tambahan` varchar(500) NOT NULL,
