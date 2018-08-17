@@ -249,8 +249,8 @@
 
 				    	<div class="modal-body">
 				    		<div class="form-group row">
-				    			<label class="col-2 col-form-label">Alasan</label>
-				    			<div class="input-group col-10">
+				    			<label class="col-4 col-form-label">Alasan</label>
+				    			<div class="input-group col-8">
 						    		<select class="custom-select">
 										<option value="1">Sakit</option>
 										<option value="2">Pelakuan Khusus</option>
@@ -258,8 +258,8 @@
 								</div>
 				    		</div>
 				    		<div class="form-group row">
-							    <label class="col-2 col-form-label">Selama</label>
-							    <div class="input-group col-10">
+							    <label class="col-4 col-form-label">Selama</label>
+							    <div class="input-group col-8">
 							      	<input type="number" class="form-control" id="" name="" placeholder="Hari" required="">
 							    	<div class="input-group-append">
 							          	<div class="input-group-text">Hari</div>
