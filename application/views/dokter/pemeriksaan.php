@@ -18,10 +18,10 @@
 <div class="container">
 	<div class="row justify-content-md-center">
 		<div class="col col-lg-1">
-	     	<h5><span class="badge badge-secondary">RF</span></h5>
+	     	<h5><span class="badge <?=($pasien[0]->pembayaran != 'rf' OR $pasien[0]->pembayaran != 'RF') ? 'badge-success' : 'badge-secondary' ?>"><?=$pasien[0]->pembayaran?></span></h5>
 	    </div>
 	    <div class="col-md-auto">
-	      	Nomor ID Pasien 
+	      	<?= $pasien[0]->nomor_pasien?>
 	    </div>
 	</div>
 
@@ -219,20 +219,7 @@
 			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
 		</div>
 	</div>
-<style type="text/css">
-	body .modal {
-	    /* new custom width */
-	    /*width: 1300px;*/
-	    /* must be half of the width, minus scrollbar on the left (30px) */
-	    /*margin-left: -150px;*/
-	    /*overflow-y: hidden;*/
-	}
-	.modal-open .modal{
-		/*overflow-y: hidden;*/
-	}
-</style>
 	<div class="row">
-
 		<div class="col">
 			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">SURAT SAKIT</button>
 			
@@ -246,49 +233,87 @@
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
 				      	</div>
-
-				    	<div class="modal-body">
-				    		<div class="form-group row">
-				    			<label class="col-4 col-form-label">Alasan</label>
-				    			<div class="input-group col-8">
-						    		<select class="custom-select">
-										<option value="1">Sakit</option>
-										<option value="2">Pelakuan Khusus</option>
-									</select>
+			    		<form id="formSuratSakit" target="_blank" method="POST" action="<?=base_url()?>Dokter_handler/cetak/suratsakit">
+					    	<div class="modal-body">
+					    		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+					    		<div class="form-group row">
+					    			<label class="col-4 col-form-label">Alasan</label>
+					    			<div class="input-group col-8">
+							    		<select class="custom-select" id="alasan" name="alasan">
+											<option value="1">Istirahat Sakit</option>
+											<option value="2">Pelakuan Khusus</option>
+										</select>
+									</div>
+					    		</div>
+								<div class="form-group row">
+						    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Awal</label>
+						    		<div class="input-group-prepend col-sm-8">
+						      			<input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" required="" value="<?=date("Y-m-d")?>" readonly="">
+						   			</div>
 								</div>
-				    		</div>
-				    		<div class="form-group row">
-							    <label class="col-4 col-form-label">Selama</label>
-							    <div class="input-group col-8">
-							      	<input type="number" class="form-control" id="" name="" placeholder="Hari" required="">
-							    	<div class="input-group-append">
-							          	<div class="input-group-text">Hari</div>
-						    		</div>
-							    </div>
-							</div>
-
-							<div class="form-group row">
-					    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Awal</label>
-					    		<div class="input-group-prepend col-sm-8">
-					      			<input type="date" class="form-control" name="tanggal_lahir" required="">
-					   			</div>
-							</div>
-
-							<div class="form-group row">
-					    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Akhir</label>
-					    		<div class="input-group-prepend col-sm-8">
-					      			<input type="date" class="form-control" name="tanggal_lahir" required="">
-					   			</div>
-							</div>
-					    </div>
-
-				    	<div class="modal-footer">
-				    		<button type="button" class="btn btn-primary">Cetak</button>
-				    	</div>
-
+					    		<div class="form-group row">
+								    <label class="col-4 col-form-label">Selama</label>
+								    <div class="input-group col-8">
+								      	<input type="number" class="form-control" id="selama" name="selama" placeholder="Angka" >
+								    	<div class="input-group-append">
+								          	<!-- <div class="input-group-text"> -->
+								          		<select class="custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()">
+								          			<option selected="" disabled="">Satuan</option>
+								          			<option value="hari">Hari</option>
+								          			<option value="minggu">Minggu</option>
+								          			<option value="bulan">Bulan</option>
+								          		</select>
+								          	<!-- </div> -->
+								          	<!-- <div class="input-group-text">Hari</div> -->
+							    		</div>
+								    </div>
+								</div>
+								<div class="form-group row">
+						    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Akhir</label>
+						    		<div class="input-group-prepend col-sm-8">
+						      			<input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" required="" readonly="">
+						   			</div>
+								</div>
+						    </div>
+					    	<div class="modal-footer">
+					    		<button type="submit" class="btn btn-primary btn-sm">CETAK</button>
+					    	</div>
+				    	</form>
 				    </div>
 				</div>
 			</div>
+			<script type="text/javascript">
+
+				function updateTglAkhir() {
+					// function untuk update tanggal akhir
+					var tanggal_awal 	= document.getElementById("tanggal_awal").value;
+					var jumlah			= document.getElementById("selama").value;
+					var date 			= new Date(tanggal_awal);
+					var newdate			= new Date(date);
+					var selama_satuan 	= document.getElementById("selama_satuan").value;
+					
+					// bagian yang ngeset tanggal terakhir berdsarkan satuan HARI|MINGGU|BULAN yang dipilih
+					if (selama_satuan == 'hari') {
+						newdate.setDate(newdate.getDate() + parseInt(jumlah));
+					}else if (selama_satuan == 'minggu') {
+						newdate.setDate(newdate.getDate() + (parseInt(jumlah) * 7));
+					}else if (selama_satuan == 'bulan') {
+						newdate.setMonth(newdate.getMonth() + parseInt(jumlah));
+					}
+
+					// finishing set tanggal terakhir untuk ditampilkan
+					var dd 	= newdate.getDate();
+					var mm 	= newdate.getMonth() + 1;
+					var y 	= newdate.getFullYear();
+					if(dd<10){
+				        dd='0'+dd
+				    } 
+				    if(mm<10){
+				        mm='0'+mm
+				    }
+					document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
+				}
+			</script>
 			<!-- END SURAT SAKIT -->
 
 		</div>
@@ -300,7 +325,6 @@
 			<div class="modal fade" id="modalsuratsehat" tabindex="-1" role="dialog" aria-labelledby="modalsuratsehatTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
-
 				      	<div class="modal-header">
 				        	<h5 class="modal-title" id="modalsuratsehat">Surat Sehat</h5>
 				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -308,36 +332,35 @@
 				        	</button>
 				      	</div>
 
-				    	<div class="modal-body">
-				    	<label class="col-6 col-form-label"><strong>Tes Buta Warna</strong></label>
-				    	<div class="custom-control custom-radio">
-	 							<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios">
-	  							<label class="custom-control-label" for="defaultGroupExample1">Ya</label>
-						</div>
+				    	<form action="<?=base_url()?>Dokter_handler/cetak/suratsehat" target="_blank" method= "POST">
+					    	<div class="modal-body">
+								<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+						    	<label class="col-6 col-form-label"><strong>Tes Buta Warna</strong></label>
+						    	<div class="custom-control custom-radio">
+		 							<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="tes_buta_warna" value="Ya">
+		  							<label class="custom-control-label" for="defaultGroupExample1">Ya</label>
+								</div>
 
-						<!-- Group of default radios - option 2 -->
-						<div class="custom-control custom-radio">
-	  						<input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios" checked>
-	  						<label class="custom-control-label" for="defaultGroupExample2">Tidak</label>
-						</div>
+								<!-- Group of default radios - option 2 -->
+								<div class="custom-control custom-radio">
+			  						<input type="radio" class="custom-control-input" id="defaultGroupExample2" name="tes_buta_warna" value="Tidak" checked>
+			  						<label class="custom-control-label" for="defaultGroupExample2">Tidak</label>
+								</div>
 
-						<!-- Group of default radios - option 3 -->
-						<div class="custom-control custom-radio">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="groupOfDefaultRadios">
-							  <label class="custom-control-label" for="defaultGroupExample3">Parsial</label>
-						</div>
+								<!-- Group of default radios - option 3 -->
+								<div class="custom-control custom-radio">
+									  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="tes_buta_warna" value="Parsial">
+									  <label class="custom-control-label" for="defaultGroupExample3">Parsial</label>
+								</div>
+								<h5 class="col-6 col-form-label"><strong>Keperluan</strong></h5>
+								<textarea class="form-control" aria-label="With textarea" name="keperluan" required=""></textarea>
+
+							</div>
+					    	<div class="modal-footer">
+					    		<button type="submit" class="btn btn-primary">Cetak</button>
+					    	</div>
+			    		</form>
 					</div>
-					<div class="col-10">
-						
-						<h5 class="col-6 col-form-label"><strong>Keperluan</strong></h5>
-						<textarea class="form-control" aria-label="With textarea" required=""></textarea>
-
-					</div>
-				    	<div class="modal-footer">
-				    		<button type="button" class="btn btn-primary">Cetak</button>
-				    	</div>
-
-				    </div>
 				</div>
 			</div>
 			<!-- END SURAT SEHAT -->
@@ -389,7 +412,7 @@
 							     	<div class="form-group row">
 							    		<label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
 							    		<div class="input-group-prepend col">
-							      			<input type="date" class="form-control" name="tanggal_lahir" required="">
+							      			<input type="date" class="form-control" name="tanggal" required="">
 							   			</div>
 									</div>
 								</div>
@@ -738,6 +761,8 @@
 				</div>
 				<!-- SURAT RUJUKAN-->
 			</div>
+			<!-- SURAT RUJUKAN -->
+
 		</div>
 		<div class="col">
 			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">

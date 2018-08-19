@@ -138,3 +138,37 @@ if ( ! function_exists('hitung_mundur'))
 		return $hasil;
 	}
 }
+if ( ! function_exists('int_to_word'))
+{
+	function int_to_words($x) {
+		$nwords = array( "nol", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh",
+		                   "delaan", "sembilan", "sepuluh", "sebelas", "dua belas", "tiga belas",
+		                   "empat belas", "lima belas", "enam belas", "tujuh belas", "delapan belas",
+		                   "sembilan belas", "dua puluh", 30 => "tiga puluh", 40 => "empat puluh",
+		                   50 => "lima puluh", 60 => "enam puluh", 70 => "tujuh puluh", 80 => "delapan puluh",
+		                   90 => "sembilan puluh" );
+
+	   if(!is_numeric($x))
+	      $w = '#';
+	   else if(fmod($x, 1) != 0)
+	      $w = '#';
+	   else {
+	      if($x < 0) {
+	         $w = 'minus ';
+	         $x = -$x;
+	      } else
+	         $w = '';
+	      // ... now $x is a non-negative integer.
+
+	      if($x < 21)   // 0 to 20
+	         $w .= $nwords[$x];
+	      else if($x < 100) {   // 21 to 99
+	         $w .= $nwords[10 * floor($x/10)];
+	         $r = fmod($x, 10);
+	         if($r > 0)
+	            $w .= '-'. $nwords[$r];
+	      }
+	   }
+	   return $w;
+	}
+}

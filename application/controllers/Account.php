@@ -126,6 +126,7 @@ class Account extends CI_Controller {
 											'akses'		=>	$record->hak_akses,
 											'nama_user'	=>	$record->nama,
 											'foto'		=>	$record->foto,
+											'sip'		=>	$record->sip,
 				);
 				// var_dump($session_data);
 				// die();

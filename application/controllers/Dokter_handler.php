@@ -12,6 +12,40 @@ class Dokter_handler extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
+	/*
+	* cetak surat sakit,sehat dan rujukan
+	*/
+	function cetak($surat)
+	{
+		$this->load->view('static/header');
+		$this->load->view('static/navbar');
+		if ($surat == 'suratsehat') {
+			$data['nomor_pasien']	= $this->input->post('nomor_pasien');
+			$data['tes_buta_warna']	= $this->input->post('tes_buta_warna');
+			$data['keperluan']	= $this->input->post('keperluan');
+			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
+			$data['sip']			= $this->session->userdata('logged_in')['sip'];
+			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
+			$data['rkm_medis']		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$data['nomor_pasien'],'DATE(tgl_jam)'=>date('Y-m-d')),array('kd_objek'))->result();
+			$data['objek']			= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rkm_medis'][0]->kd_objek))->result();
+			$this->load->view('dokter/suratsehat',$data);
+		}elseif ($surat == 'suratsakit') {
+			$data['alasan']		 	= $this->input->post('alasan');
+			$data['tanggal_awal'] 	= $this->input->post('tanggal_awal');
+			$data['tanggal_akhir'] 	= $this->input->post('tanggal_akhir');
+			$data['selama'] 		= $this->input->post('selama');
+			$data['selama_satuan'] 	= $this->input->post('selama_satuan');
+			$data['nomor_pasien']	= $this->input->post('nomor_pasien');
+			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
+			$data['sip']			= $this->session->userdata('logged_in')['sip'];
+			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
+			$this->load->view('dokter/suratsakit',$data);
+		}elseif ($surat == 'suratrujukan') {
+			$this->load->view('dokter/suratrujukan');
+		}
+		$this->load->view('static/footer');
+	}
+
 
 	// function headtotoe(){
 	// 	$dataCondition = array('kd_headtotoe' =>$this->input->post('kd_headtotoe'),
@@ -28,8 +62,7 @@ class Dokter_handler extends CI_Controller {
 	// 	}else{
 	// 		echo json_encode(array('status'=>'gagal'));
 	// 	}
-
-	}
+	// }
 	function kepala(){
 		$dataCondition = array('kd_kepala' =>$this->input->post('kd_kepala'),
 							   'animes_kiri' =>$this->input->post('animes_kiri'),

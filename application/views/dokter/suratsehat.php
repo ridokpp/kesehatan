@@ -34,61 +34,46 @@
 				<p class="text-center mb-4 font-weight-bold">No. ......... / 001 / ......... / 2018</p>
 			</div>
 			<div class="row mb-4">
-				Yang bertanda tangan dibawah ini dr. Muchamad Zubaid, menerangkan dengan sebenarnya bahwa;
+				Yang bertanda tangan dibawah ini <?=$nama_user?>, menerangkan dengan sebenarnya bahwa;
 			</div>
 			<div class="row">
 				<div class="col-2"> 
 					Nama
 				</div>
-				<div class="col-0">
-					:
-				</div>	
-				<div class="col-9">
-					Mochammad Fadhli Zhil Iqram
+				<div class="col">
+					: <?=$pasien[0]->nama?>
 				</div>		
 			</div>
 			<div class="row">
 				<div class="col-2"> 
 					Tempat / Tgl Lahir
 				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-9">
-					Malang, 16 Mei 1996
+				<div class="col">
+					: <?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-2"> 
 					Jenis Kelamin		
 				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-9">
-					Laki - Laki
+				<div class="col">
+					: <?=$pasien[0]->jkelamin ?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-2"> 	
 					Pekerjaan					
 				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-9">
-					Mahasiswa
+				<div class="col">
+					: <?=$pasien[0]->pekerjaan ?>
 				</div>
 			</div>
 			<div class="row mb-4">
 				<div class="col-2"> 
 					Alamat		
 				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-9">
-					Perumahan Griya Permata Alam Blok BA 15, Ngijo, Karangploso
+				<div class="col">
+					: <?=$pasien[0]->alamat ?>
 				</div>
 			</div>
 
@@ -100,51 +85,44 @@
 				<div class="col-2"> 
 					TB / BB
 				</div>
-				<div class="col-0">
-					:
-				</div>	
-				<div class="col-9">
-					.... cm / .... kg.
+				<div class="col">
+					: <?=$objek[0]->tb?> cm / <?=$objek[0]->bb?> kg.
 				</div>		
 			</div>
 			<div class="row">
 				<div class="col-2"> 
 					Tekanan darah
 				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-9">
-					.... / .... mmHg.
+				<div class="col">
+					: <?=$objek[0]->td1?> / <?=$objek[0]->td2?> mmHg.
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-2"> 
 					Nadi		
 				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-9">
-					.... rpm
+				<div class="col">
+					: <?=$objek[0]->N?> rpm
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-2"> 	
 					Tes Buta Warna					
 				</div>
-				<div class="col-0">
-					:
+				<div class="col">
+					: <?php
+						if ($tes_buta_warna == 'Ya') {
+							echo "Ya";
+						}elseif ($tes_buta_warna == 'Tidak') {
+							echo "Tidak";
+						}else{
+							echo "Parsial";
+						}
+					?> ..............................................................................................................................................................................................................................................................
 				</div>
-				<div class="col-9">
-					Tidak / Parsial / Ya *) ..............................................................................................................................................................................................................................................................
-				</div>
-			</div>
-			<div class="row mb-2">
-				Pada pemeriksaan ini dalam keadaan SEHAT.  Surat keterangan ini diberikan untuk keperluan;..............................................................................................................................
 			</div>
 			<div class="row mb-4">
-				.......................................................................................................................................................................................................................................................................................................................... 
+				Pada pemeriksaan ini dalam keadaan SEHAT.  Surat keterangan ini diberikan untuk keperluan; <?=$keperluan?>
 			</div>			
 
 			<div class="row">
@@ -161,16 +139,16 @@
 				</div>
 				<div class="col-4">
 					<div class="row">
-						Malang, ........................... 2018
+						Malang, <?=tgl_indo(date("Y-m-d"))?>
 					</div>
 					<div class="row" style="margin-bottom: 100px">
 						Pemeriksa,
 					</div>
 					<div class="row mt-5">
-						dr. Muchamad Zubaid**
+						<?=$nama_user?>
 					</div>
 					<div class="row">
-						SIP : 446.DU / 1616.1 / 35.73.302 / 2018
+						SIP : <?=$sip?>
 					</div>
 				</div>	
 			</div>
