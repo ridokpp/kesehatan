@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2018 at 05:34 PM
+-- Generation Time: Aug 20, 2018 at 06:00 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -148,7 +148,7 @@ CREATE TABLE `kepala` (
   `refchy_kiri` varchar(30) NOT NULL,
   `refchy_kanan` varchar(30) NOT NULL,
   `refchy_opsi` varchar(30) NOT NULL,
-  `ket_tambahankpl` varchar(150) NOT NULL
+  `ket_tambahankpl` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
