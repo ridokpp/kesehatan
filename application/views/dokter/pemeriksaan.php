@@ -555,7 +555,7 @@
 								    </div>
 								</div>
 								<hr></hr>
-								<h4>Head to Toe</h4>
+								<center><h4>Head to Toe</h4></center>
 								<hr></hr>
 								<strong>Kepala :</strong>
 								<div class="form-group row">
