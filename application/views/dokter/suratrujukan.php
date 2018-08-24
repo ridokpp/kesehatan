@@ -57,7 +57,7 @@
 						Kepada YTH.
 					</div>
 					<div class="row"">
-						Dr.
+						Dr. <?=$nama_user?>
 					</div>
 					<div class="row">
 						di RS
@@ -79,7 +79,7 @@
 					:
 				</div>	
 				<div class="col-9">
-					..............................................................................................
+					<?=$pasien[0]->nama?>
 				</div>		
 			</div>
 			<div class="row">
@@ -90,7 +90,7 @@
 					:
 				</div>	
 				<div class="col-9">
-					..............................................................................................
+					<?=$pasien[0]->nik?>
 				</div>		
 			</div>
 			<div class="row">
@@ -101,7 +101,7 @@
 					:
 				</div>
 				<div class="col-9">
-					........................./...................................................................
+					<?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
 				</div>	
 			</div>
 			<div class="row">
@@ -112,7 +112,7 @@
 					:
 				</div>
 				<div class="col-9">
-					Laki - Laki / Perempuan * )
+					<?=$pasien[0]->jkelamin?>
 				</div>
 			</div>
 			<div class="row">
@@ -123,7 +123,7 @@
 					:
 				</div>
 				<div class="col-9">
-					...............................................................................................
+					<?=$pasien[0]->pekerjaan?>
 				</div>
 			</div>
 			<div class="row mb-4">
@@ -134,7 +134,7 @@
 					:
 				</div>
 				<div class="col-9">
-					...............................................................................................
+					<?=$pasien[0]->alamat?>
 				</div>
 			</div>
 			<div class="row mb-4">
@@ -173,7 +173,7 @@
 					:
 				</div>
 				<div class="col-9">
-					............. cm / ............. kg
+					<?=$objek[0]->tb?> cm / <?=$objek[0]->bb?> kg
 				</div>	
 			</div>
 			<div class="row">
@@ -184,7 +184,7 @@
 					:
 				</div>
 				<div class="col-9">
-					............. / ............. mmHg
+					<?=$objek[0]->td1?> / <?=$objek[0]->td2?> mmHg
 				</div>
 			</div>
 			<div class="row">
@@ -195,7 +195,7 @@
 					:
 				</div>
 				<div class="col-9">
-					............ rpm.
+					<?=$objek[0]->N?> rpm.
 				</div>
 			</div>
 			<div class="row">
@@ -261,10 +261,25 @@
 			</div>
 			<div class="row">
 				&nbsp;
-				<div class="col-2 offset-2">
+				<div class="col-1 offset-2">
 				Nyeri Tekan
 				</div>
-				
+				<div class="col-1">
+				<table border="1">
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				</table>
+				</div>
+
+
 				<div class="col-4">
 				Hepatomegali(.........), Spleenomegali(.........)
 				</div>
@@ -281,14 +296,47 @@
 				<div class="col-2">
 				: Akral Hangat
 				</div>
+				
+				<table border="1">
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				</table>
 				;
+
 				<div class="col-1">
 				CRT
 				</div>
+				<table border="1">
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				</table>
 				2 detik;
+
 				<div class="col-1">
 				Edema
 				</div>
+				<table border="1">
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td>&nbsp;</td>
+				  </tr>
+				</table>
 				<div class="col-3">
 				non-pitting/pitting.*)
 				</div>
@@ -343,21 +391,25 @@
 			<div class="row">
 				Wassalamu'allaikum Wr. Wb.
 			</div>
+			
 			<div class="row">
 				<div class="col mt-4">
+				<div class="row"  style="margin-top: 100px">
+						NB : .*) Coret yang tidak perlu.
+					</div>
 				</div>
 				<div class="col-4">
 					<div class="row">
-						Malang, ........................... 2018
+						Malang, <?=tgl_indo(date("Y-m-d"))?>
 					</div>
 					<div class="row" style="margin-bottom: 100px">
 						Pemeriksa,
 					</div>
 					<div class="row mt-5">
-						dr. Muchamad Zubaid
+						<?=$nama_user?>
 					</div>
 					<div class="row">
-						SIP : 446.DU / 1616.1 / 35.73.302 / 2018
+						SIP : <?=$sip?>
 					</div>
 				</div>	
 			</div>
