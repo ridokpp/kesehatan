@@ -41,46 +41,57 @@ class Dokter_handler extends CI_Controller {
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
 			$this->load->view('dokter/suratsakit',$data);
 		}elseif ($surat == 'suratrujukan') {
-			$data['anemis_kiri'] = $this->input->post('anemis_kiri');
-			$data['anemis_kanan'] = $this->input->post('anemis_kanan');
-			$data['ikterik_kiri'] = $this->input->post('ikterik_kiri');
-			$data['ikterik_kanan'] = $this->input->post('ikterik_kanan');
-			$data['cianosis_kiri'] = $this->input->post('cianosis_kiri');
-			$data['cianosis_kanan'] = $this->input->post('cianosis_kanan');
-			$data['deformitas_kiri'] = $this->input->post('deformitas_kiri');
-			$data['refchy_kiri'] = $this->input->post('refchy_kiri');
-			$data['refchy_kanan'] = $this->input->post('refchy_kanan');
-			$data['deformitas_kiri'] = $this->input->post('deformitas_kirir');
-			$data['deformitas_kiri'] = $this->input->post('deformitas_kirir');
-			$data['refchy_opsi'] = $this->input->post('refchy_opsi');
-			$data['ket_tambahankpl'] = $this->input->post('ket_tambahankpl');
-			$this->Kesehatan_M->create('kepala',$data);
-			$data['metris'] = $this->input->post('metris');
-			$data['wheezing_kiri'] = $this->input->post('wheezing_kiri');
-			$data['wheezing_kanan'] = $this->input->post('wheezing_kanan');
-			$data['ronkhi_kiri'] = $this->input->post('ronkhi_kiri');
-			$data['ronkhi_kanan'] = $this->input->post('ronkhi_kanan');
-			$data['vesikuler_kiri'] = $this->input->post('vesikuler_kanan');
-			$data['vesikuler_kanan'] = $this->input->post('vesikuler_kanan');
-			$data['jantung_icor'] = $this->input->post('jantung_icor');
-			$data['s1_s2'] = $this->input->post('s1_s2');
-			$data['s_tambahan'] = $this->input->post('s_tambahan');
-			$data['ket_tambahantr'] = $this->input->post('ket_tambahantr');
-			$this->Kesehatan_M->create('thorak',$data);
-			$data['BU'] = $this->input->post('BU');
-			$data['nyeri_tekan'] = $this->input->post('nyeri_tekan');
-			$data['hpmgl'] = $this->input->post('hpmgl');
-			$data['spmgl'] = $this->input->post('spmgl');
+			$dataKepala['anemis_kiri'] 	= $this->input->post('anemis_kiri');
+			$dataKepala['anemis_kanan'] 	= $this->input->post('anemis_kanan');
+			$dataKepala['ikterik_kiri'] 	= $this->input->post('ikterik_kiri');
+			$dataKepala['ikterik_kanan'] 	= $this->input->post('ikterik_kanan');
+			$dataKepala['cianosis_kiri'] 	= $this->input->post('cianosis_kiri');
+			$dataKepala['cianosis_kanan'] = $this->input->post('cianosis_kanan');
+			$dataKepala['deformitas_kiri']= $this->input->post('deformitas_kiri');
+			$dataKepala['refchy_kiri'] 	= $this->input->post('refchy_kiri');
+			$dataKepala['refchy_kanan'] 	= $this->input->post('refchy_kanan');
+			$dataKepala['deformitas_kiri']= $this->input->post('deformitas_kirir');
+			$dataKepala['deformitas_kiri']= $this->input->post('deformitas_kirir');
+			$dataKepala['refchyopsi'] 	= $this->input->post('refchy_opsi');
+			$dataKepala['ket_tambahankpl']= $this->input->post('ket_tambahankpl');
+			$data['kd_kepala']		= json_decode($this->Kesehatan_M->create_id('kepala',$dataKepala));
+			$data['kd_kepala']		= $data['kd_kepala']->message;
+			
+
+
+
+			$dataThorak['metris'] 		= $this->input->post('metris');
+			$dataThorak['wheezing_kiri'] 	= $this->input->post('wheezing_kiri');
+			$dataThorak['wheezing_kanan'] = $this->input->post('wheezing_kanan');
+			$dataThorak['ronkhi_kiri'] 	= $this->input->post('ronkhi_kiri');
+			$dataThorak['ronkhi_kanan'] 	= $this->input->post('ronkhi_kanan');
+			$dataThorak['vesikuler_kiri'] = $this->input->post('vesikuler_kanan');
+			$dataThorak['vesikuler_kanan']= $this->input->post('vesikuler_kanan');
+			$dataThorak['jantung_icor'] 	= $this->input->post('jantung_icor');
+			$dataThorak['s1_s2']			= $this->input->post('s1_s2');
+			$dataThorak['s_tambahan'] 	= $this->input->post('s_tambahan');
+			$dataThorak['ket_tambahantr'] = $this->input->post('ket_tambahantr');
+			$data['kd_thorak']		= json_decode($this->Kesehatan_M->create_id('thorak',$dataThorak));
+			$data['kd_thorak']		= $data['kd_thorak']->message;
+			echo "<pre>";
+			var_dump($data);
+
+			$data['BU'] 			= $this->input->post('BU');
+			$data['nyeri_tekan'] 	= $this->input->post('nyeri_tekan');
+			$data['hpmgl'] 			= $this->input->post('hpmgl');
+			$data['spmgl'] 			= $this->input->post('spmgl');
 			$data['ket_tambahanab'] = $this->input->post('ket_tambahanab');
-			$data['lain_lain'] = $this->input->post('lain_lain');
-			$data['diagnosa'] = $this->input->post('diagnosa');
-			$data['terapi'] = $this->input->post('terapi');
-			$this->Kesehatan_M->create('abdomen',$data);
+			$data['lain_lain'] 		= $this->input->post('lain_lain');
+			$data['diagnosa'] 		= $this->input->post('diagnosa');
+			$data['terapi'] 		= $this->input->post('terapi');
+			$data['kd_abdomen']		= $this->Kesehatan_M->create('abdomen',$data);
+
 			$data['keluhan'] = $this->input->post('keluhan');
 			$data['GCS_E'] = $this->input->post('GCS_E');
 			$data['GCS_V'] = $this->input->post('GCS_V');
 			$data['GCS_M'] = $this->input->post('GCS_M');
 			$data['GCS_opsi'] = $this->input->post('GCS_opsi');
+
 			$this->load->view('dokter/suratrujukan');
 		}
 		$this->load->view('static/footer');
