@@ -560,61 +560,104 @@
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">Anemis</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 										<input type="checkbox" class="form-control" id="" name="anemis_kiri" value="1">
 									</div>/
 								 		<div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="anemis_kanan" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="anemis_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="anemis_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">Ikterik</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 										<input type="checkbox" class="form-control" id="" name="ikterik_kiri" value="1">
 									</div>/
 								 	<div class="input-group-prepend col-sm-3">
 										<input type="checkbox" class="form-control" id="" name="ikterik_kanan" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="ikterik_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="ikterik_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>	
 
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">Cianosis</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="checkbox" class="form-control" id="" name="cianosis_kiri" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="cianosis_kanan" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="cianosis_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="cianosis_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 								
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">Deformitas</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="checkbox" class="form-control" id="" name="deformitas_kiri" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="deformitas_kanan" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="deformitas_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="deformitas_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">Refleks Cahaya</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="checkbox" class="form-control" id="" name="refchy_kiri" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="refchy_kanan" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="refchy_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="refchy_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">isokor</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="radio" class="form-control" id="" name="refchy_opsi" value="1">
 									</div>
 								 	<label class="col-sm-1 col-form-label">anisokor</label>
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="radio" class="form-control" id="" name="refchy_opsi" value="1">
+=======
+									<input type="radio" class="form-control" id="" name="refchy_opsi" required="">
+									</div>
+								 	<label class="col-sm-1 col-form-label">anisokor</label>
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 								<div class="form-group row">
@@ -631,21 +674,36 @@
 									<label class="col-sm-1 col-form-label">:</label>
 								 	<label class="col-sm-1 col-form-label">Simetris</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="0">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Asimetris</label>
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="1">
+=======
+									<input type="radio" class="form-control" id="" name="metris" required="">
+									</div>
+								 	<label class="col-sm-1 col-form-label">Asimetris</label>
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="radio" class="form-control" id="" name="metris" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 								<div class="form-group row">
 								<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Wheezing</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="checkbox" class="form-control" id="" name="wheezing_kiri" placeholder="" value="0">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="wheezing_kanan" placeholder="" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="wheezing_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="wheezing_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>						
 								</div>
 
@@ -653,10 +711,17 @@
 								<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Ronkhi</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" placeholder="" value="0">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" placeholder="" value="1">
+=======
+									<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" required="">
+									</div>/
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>						
 								</div>
 
@@ -703,6 +768,10 @@
 								          </label>
 								        </div>
 								  </fieldset>
+<<<<<<< HEAD
+=======
+							
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Suara Tambahan</label>
 									<div class="input-group-prepend col">
@@ -721,22 +790,38 @@
 									<label class="col-sm-2 col-form-label">BU </label>
 								 	<label class="col-sm-1 col-form-label">Normal</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="0">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Meningkat</label>
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="1">
+=======
+									<input type="radio" class="form-control" id="" name="BU" required="">
+									</div>
+								 	<label class="col-sm-1 col-form-label">Meningkat</label>
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="radio" class="form-control" id="" name="BU" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 								<div class="form-group row">
 								<label class="col-sm-2 col-form-label"></label>
 									<label class="col-sm-1 col-form-label">Menurun</label>
 								 	<div class="input-group-prepend col-sm-3">
+<<<<<<< HEAD
 									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="0">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Negatif</label>
 								 	 <div class="input-group-prepend col-sm-3">
 									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="1">
+=======
+									<input type="radio" class="form-control" id="" name="BU" required="">
+									</div>
+								 	<label class="col-sm-1 col-form-label">Negatif</label>
+								 	 <div class="input-group-prepend col-sm-3">
+									<input type="radio" class="form-control" id="" name="BU" required="">
+>>>>>>> 76500611697a8299a70d122ac1aa674896a9efc1
 									</div>
 								</div>
 								<div class="form-group row">
