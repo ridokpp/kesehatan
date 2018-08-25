@@ -31,7 +31,7 @@
 				<hr class="mt-0 mb-0" width="20%">
 			</div>
 			<div>
-				<p class="text-center mb-4 font-weight-bold">No. ......... / 002 / ......... / 2018</p>
+				<p class="text-center mb-4 font-weight-bold">No. <?=($nomor_surat < 10 ) ? "00".$nomor_surat : "0".$nomor_surat ?> / 002 / <?=date('0m / Y')?></p>
 			</div>
 			<div class="row mb-4">
 				Yang bertanda tangan dibawah ini <?=$nama_user?>, menerangkan dengan sebenarnya bahwa;

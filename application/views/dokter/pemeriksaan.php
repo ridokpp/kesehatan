@@ -216,7 +216,7 @@
 
 		<div class="col-4">
 			<h5 class="text-center mt-3">Planing</h5>
-			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
+			<textarea class="form-control" id="planning" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
 		</div>
 	</div>
 	<div class="row">
@@ -239,7 +239,7 @@
 					    		<div class="form-group row">
 					    			<label class="col-4 col-form-label">Alasan</label>
 					    			<div class="input-group col-8">
-							    		<select class="custom-select" id="alasan" name="alasan">
+							    		<select class="custom-select" id="alasan" name="alasan" required="">
 											<option value="1">Istirahat Sakit</option>
 											<option value="2">Pelakuan Khusus</option>
 										</select>
@@ -257,7 +257,7 @@
 								      	<input type="number" class="form-control" id="selama" name="selama" placeholder="Angka" >
 								    	<div class="input-group-append">
 								          	<!-- <div class="input-group-text"> -->
-								          		<select class="custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()">
+								          		<select class="custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()" required="">
 								          			<option selected="" disabled="">Satuan</option>
 								          			<option value="hari">Hari</option>
 								          			<option value="minggu">Minggu</option>
@@ -276,7 +276,7 @@
 								</div>
 						    </div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary btn-sm">CETAK</button>
+					    		<button type="submit" class="btn btn-primary btn-sm" onclick="cetakSuratSakit()">CETAK</button>
 					    	</div>
 				    	</form>
 				    </div>
@@ -313,13 +313,17 @@
 				    }
 					document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
 				}
+
+				function cetakSuratSakit(){
+					document.getElementById('planning').innerHTML='Surat Sakit, ';
+				}
 			</script>
 			<!-- END SURAT SAKIT -->
 
 		</div>
 
 		<div class="col">
-			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalsuratsehat">SURAT SEHAT</button>
+			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modalsuratsehat">SURAT SEHAT</button>
 			
 			<!-- SURAT SEHAT -->
 			<div class="modal fade" id="modalsuratsehat" tabindex="-1" role="dialog" aria-labelledby="modalsuratsehatTitle" aria-hidden="true">
@@ -357,12 +361,17 @@
 
 							</div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary">Cetak</button>
+					    		<button type="submit" class="btn btn-primary" onclick="cetakSuratSehat()">Cetak</button>
 					    	</div>
 			    		</form>
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+				function cetakSuratSehat(){
+					document.getElementById('planning').innerHTML='Surat Sehat, ';
+				}
+			</script>
 			<!-- END SURAT SEHAT -->
 
 		</div>
@@ -439,12 +448,8 @@
 								      	<input type="text" class="form-control" id="" name="alamat" placeholder="Alamat" required="">
 								    </div>
 								</div> -->
-								<div class="form-group row">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
-								</div>
-								<div class="form-group row">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
-								</div>
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
 								    <div class="input-group-prepend col">

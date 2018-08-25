@@ -28,7 +28,23 @@ class Dokter_handler extends CI_Controller {
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
 			$data['rkm_medis']		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$data['nomor_pasien'],'DATE(tgl_jam)'=>date('Y-m-d')),array('kd_objek'))->result();
 			$data['objek']			= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rkm_medis'][0]->kd_objek))->result();
+
+			$nomor_surat 			= $this->Kesehatan_M->readCol('suratsehat',array('MONTH(tanggal_terbit)'=>date('m'),'YEAR(tanggal_terbit)'=>date('Y')),array('MAX(nomor_surat) AS nomor_surat'))->result();
+			$insertSuratSehat['nomor_pasien']		= $data['nomor_pasien'];
+			$insertSuratSehat['keperluan']			= $data['keperluan'];
+			$insertSuratSehat['tes_buta_warna']		= $data['tes_buta_warna'];
+			$insertSuratSehat['tanggal_terbit']		= date('Y-m-d');
+			
+			if ($nomor_surat == array()) {
+				$insertSuratSehat['nomor_surat']	= 1;
+				$data['nomor_surat'] 				= 1;
+			}else{
+				$insertSuratSehat['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
+				$data['nomor_surat']				= $insertSuratSehat['nomor_surat'];
+			}
+			$this->Kesehatan_M->create('suratsehat',$insertSuratSehat);
 			$this->load->view('dokter/suratsehat',$data);
+			
 		}elseif ($surat == 'suratsakit') {
 			$data['alasan']		 	= $this->input->post('alasan');
 			$data['tanggal_awal'] 	= $this->input->post('tanggal_awal');
@@ -39,7 +55,22 @@ class Dokter_handler extends CI_Controller {
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
 			$data['sip']			= $this->session->userdata('logged_in')['sip'];
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
+			
+			$nomor_surat = $this->Kesehatan_M->readCol('suratsakit',array('MONTH(tanggal_awal)'=>date('m'),'YEAR(tanggal_awal)'=>date('Y')),array('MAX(nomor_surat) AS nomor_surat'))->result();
+			$insertSuratSakit['nomor_pasien']	= $data['nomor_pasien'];
+			$insertSuratSakit['alasan']			= $data['alasan'];
+			$insertSuratSakit['tanggal_awal']	= $data['tanggal_awal'];
+			$insertSuratSakit['tanggal_akhir'] 	= $data['tanggal_akhir'];
+			if ($nomor_surat == array()) {
+				$insertSuratSakit['nomor_surat']	= 1;
+				$data['nomor_surat'] 				= 1;
+			}else{
+				$insertSuratSakit['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
+				$data['nomor_surat']				= $insertSuratSakit['nomor_surat'];
+			}
+			$this->Kesehatan_M->create('suratsakit',$insertSuratSakit);
 			$this->load->view('dokter/suratsakit',$data);
+
 		}elseif ($surat == 'suratrujukan') {
 			$dataKepala['anemis_kiri'] 	= $this->input->post('anemis_kiri');
 			$dataKepala['anemis_kanan'] 	= $this->input->post('anemis_kanan');
