@@ -324,5 +324,22 @@ class Dokter_handler extends CI_Controller {
 
 	}
 
+	// Fungsi ini digunakan untuk mencari data pada tabel ICD 10
+	function cari_icd()
+	{
+		if ($this->input->get() != NULL) {
+			$dataForm = $this->input->get();
+			$dataReturn = $this->Kesehatan_M->orLike('icd10',array('Diagnosa'=>$dataForm['term']['term'],'Diskripsi'=>$dataForm['term']['term']))->result();
+			$data = array();
+			foreach ($dataReturn as $key => $value) {
+				$data[$key]['id'] = $value->Kode_ICD;
+				$data[$key]['text'] = $value->Kode_ICD." / ".$value->Diagnosa." / ".$value->Diskripsi;
+			}
+			echo json_encode($data);
+		}else{
+			redirect(base_url());
+		}
+	}
+
 
 }

@@ -10,7 +10,36 @@
         var sm = time.getMinutes().toString();
         var ss = time.getSeconds().toString();
         document.getElementById("clock").innerHTML = (sh.length==1?"0"+sh:sh) + ":" + (sm.length==1?"0"+sm:sm) + ":" + (ss.length==1?"0"+ss:ss);
-    }	
+    }
+
+    $(document).ready(function() {
+
+    $('.js-data-example-ajax').select2({
+    		placeholder: "Pilih Sesuai ICD 10",
+		ajax: {
+			url: '<?=base_url()?>Dokter_handler/cari_icd/',
+		    dataType: 'json',
+		    delay: 250,
+			data: function (term, page) {
+				return {
+					term: term, // search term
+					page: 10
+				};
+			},
+			processResults: function (data, page) {
+				console.log(data);
+				return {
+					results: data
+				};
+			},
+			cache: true
+		},
+		escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+		minimumInputLength: 1,
+		});
+	});	
+
+
 </script>
 
 <h3 class="text-center mt-3">Pemeriksaan Dokter</h3>
@@ -204,21 +233,64 @@
 	</div>
 
 	<div class="row mb-3">
-		<div class="col-4">
+		<div class="col">
 			<h5 class="text-center mt-3">Subjektif</h5>
 			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
 		</div>
-	
-		<div class="col-4">
-			<h5 class="text-center mt-3">Assessment</h5>
-			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Assessment" name="assessment"></textarea>
-		</div>
 
-		<div class="col-4">
+		<div class="col">
 			<h5 class="text-center mt-3">Planing</h5>
 			<textarea class="form-control" id="planning" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
 		</div>
 	</div>
+
+	<div class="row"><div class="col"><h5 class="text-center mt-3">Assesment</h5></div></div>
+
+	<div class="row mb-3">	
+		<div class="col-4">
+			<h6 class="text-center">Primary</h6>
+			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+			 	<div class="form-group row">
+			      	<select class="js-data-example-ajax" name="states[]" multiple="multiple" style="width: 99%">
+						<option value="A00.0">A00.0 \ Cholera due to Vibrio cholerae 01, biovar cholerae \ Kolera disebabkan Vibrio cholerae 01, biovar cholerae</option>
+						<option value="A00.1">A00.1 \ Cholera due to Vibrio cholerae 01, biovar eltor \ Kolera disebabkan Vibrio cholerae 01, biovar eltor</option>
+						<option value="A00.9">A00.9 \ Cholera, unspecified \ Kolera, yang tidak spesifik</option>
+						<option value="A01.0">A01.0 \ Typhoid fever \ Demam tifoid</option>
+						<option value="A01.1">A01.1 \ Paratyphoid fever A \ Demam paratifoid</option>
+					</select>
+				</div> 
+			</form>
+		</div>
+		<div class="col-4">
+			<h6 class="text-center">Sekunder</h6>
+			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+			 	<div class="form-group row">
+			      	<select class="js-data-example-ajax" name="states[]" multiple="multiple" style="width: 99%">
+						<option value="A00.0">A00.0 \ Cholera due to Vibrio cholerae 01, biovar cholerae \ Kolera disebabkan Vibrio cholerae 01, biovar cholerae</option>
+						<option value="A00.1">A00.1 \ Cholera due to Vibrio cholerae 01, biovar eltor \ Kolera disebabkan Vibrio cholerae 01, biovar eltor</option>
+						<option value="A00.9">A00.9 \ Cholera, unspecified \ Kolera, yang tidak spesifik</option>
+						<option value="A01.0">A01.0 \ Typhoid fever \ Demam tifoid</option>
+						<option value="A01.1">A01.1 \ Paratyphoid fever A \ Demam paratifoid</option>
+					</select>
+				</div> 
+			</form>
+		</div>
+		<div class="col-4">
+			<h6 class="text-center">Lain-lain</h6>
+			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+			 	<div class="form-group row">
+			      	<select class="js-data-example-ajax" name="states[]" multiple="multiple" style="width: 99%">
+						<option value="A00.0">A00.0 \ Cholera due to Vibrio cholerae 01, biovar cholerae \ Kolera disebabkan Vibrio cholerae 01, biovar cholerae</option>
+						<option value="A00.1">A00.1 \ Cholera due to Vibrio cholerae 01, biovar eltor \ Kolera disebabkan Vibrio cholerae 01, biovar eltor</option>
+						<option value="A00.9">A00.9 \ Cholera, unspecified \ Kolera, yang tidak spesifik</option>
+						<option value="A01.0">A01.0 \ Typhoid fever \ Demam tifoid</option>
+						<option value="A01.1">A01.1 \ Paratyphoid fever A \ Demam paratifoid</option>
+					</select>
+				</div> 
+			</form>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col">
 			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">SURAT SAKIT</button>
