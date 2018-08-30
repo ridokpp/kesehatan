@@ -40,45 +40,404 @@
 			<table id="example" class="display">
 				<thead>
 					<tr>
-						<th>No.</th>
-						<th>Foto</th>
-						<th>
-						</th>							
-						<th>Keterangan</th>
+						<th><div class="text-center">No.</div></th>
+						<th><div class="text-center">Foto</div></th>
+						<th><div class="text-center">Biodata</div></th>							
+						<th><div class="text-center">Keterangan</div></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>1.</td>
-						<td>Foto</td>
-						<td>Biodata</td>
+						<td>	
+							<div class="text-center">1.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Mochammad Fadhli Zhil Iqram</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
 						<td>
 							<button type="button" class="btn btn-danger">Reset</button>
 							<button type="button" class="btn btn-primary">Detail</button>
 						</td>
 					</tr>
 					<tr>
-						<td>2.</td>
-						<td>Foto</td>
-						<td>Biodata</td>
+						<td>	
+							<div class="text-center">1.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Mochammad Fadhli Zhil Iqram</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
 						<td>
 							<button type="button" class="btn btn-danger">Reset</button>
 							<button type="button" class="btn btn-primary">Detail</button>
 						</td>
 					</tr>
 					<tr>
-						<td>5.</td>
-						<td>Foto</td>
-						<td>Biodata</td>
+						<td>	
+							<div class="text-center">1.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Mochammad Fadhli Zhil Iqram</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
 						<td>
 							<button type="button" class="btn btn-danger">Reset</button>
 							<button type="button" class="btn btn-primary">Detail</button>
 						</td>
 					</tr>
 					<tr>
-						<td>4.</td>
-						<td>Foto</td>
-						<td>Biodata</td>
+						<td>	
+							<div class="text-center">1.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Mochammad Fadhli Zhil Iqram</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger">Reset</button>
+							<button type="button" class="btn btn-primary">Detail</button>
+						</td>
+					</tr>
+					<tr>
+						<td>	
+							<div class="text-center">2.</div>
+						</td>
+						<td>
+							<div class="text-center">
+							 	<img src="<?php echo base_url()?>assets/images/users_photo/juragan2.jpg" class="rounded">
+							</div>
+						</td>
+						<td>
+							<div class="row">
+								<div class="col-2">Nama</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Ridho Pratama Putra</div>
+							</div>
+							<div class="row">
+								<div class="col-2">SIP</div>
+								<div class="col-0">:</div>
+								<div class="col-9">112131314124</div>
+							</div>
+							<div class="row">
+								<div class="col-2">Alamat</div>
+								<div class="col-0">:</div>
+								<div class="col-9">Jl. Tata Surya 1 No 21</div>
+							</div>
+							<div class="row">
+								<div class="col-2">No. Tlpn</div>
+								<div class="col-0">:</div>
+								<div class="col-9">08123456789</div>
+							</div>
+						</td>
 						<td>
 							<button type="button" class="btn btn-danger">Reset</button>
 							<button type="button" class="btn btn-primary">Detail</button>
@@ -87,10 +446,10 @@
 				</tbody>
 				<tfoot>
 		            <tr>
-		                <th>No.</th>
-		                <th>Foto</th>
-		                <th>Biodata</th>
-		                <th>Keterangan</th>
+		                <th></th>
+		                <th></th>
+		                <th></th>
+		                <th></th>
 		            </tr>
 		        </tfoot>
 			</table>
