@@ -453,20 +453,20 @@
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
 								    <div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="keluhan" >Keluhan</textarea>
+									<textarea class="form-control" aria-label="With textarea" name="keluhan" required="">Keluhan</textarea>
 									</div>
 								</div>
 
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">GCS</label>
 								    <div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_E" placeholder="E" >
+									<input type="text" class="form-control" id="" name="GCS_E" placeholder="E" required="">
 									</div>
 									<div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_V" placeholder="V" >
+									<input type="text" class="form-control" id="" name="GCS_V" placeholder="V" required="">
 									</div>
 									<div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_M" placeholder="M" >
+									<input type="text" class="form-control" id="" name="GCS_M" placeholder="M" required="">
 									</div>							
 								</div>
 								<fieldset class="form-group">
@@ -615,17 +615,17 @@
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">isokor</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="refchy_opsi" value="1">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" value="1" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">anisokor</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="refchy_opsi" value="1">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" value="0" required="">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan Tambahan</label>
 									<div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="ket_tambahankpl" placeholder="Keterangan Tambahan" ></textarea>
+									<textarea class="form-control" aria-label="With textarea" name="ket_tambahankpl" placeholder="Keterangan Tambahan"></textarea>
 									</div>
 								</div>
 								<hr></hr>
@@ -636,21 +636,21 @@
 									<label class="col-sm-1 col-form-label">:</label>
 								 	<label class="col-sm-1 col-form-label">Simetris</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="0">
+									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="1" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Asimetris</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="1">
+									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="0" required="">
 									</div>
 								</div>
 								<div class="form-group row">
 								<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Wheezing</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="wheezing_kiri" placeholder="" value="0">
+									<input type="checkbox" class="form-control" id="" name="wheezing_kiri" placeholder="" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="wheezing_kanan" placeholder="" value="1">
+									<input type="checkbox" class="form-control" id="" name="wheezing_kanan" placeholder="" value="0">
 									</div>						
 								</div>
 
@@ -658,10 +658,10 @@
 								<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Ronkhi</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" placeholder="" value="0">
+									<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" placeholder="" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" placeholder="" value="1">
+									<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" placeholder="" value="0">
 									</div>						
 								</div>
 
@@ -669,10 +669,10 @@
 								<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Vesikuler</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri" required="">
+									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan" required="">
+									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan">
 									</div>						
 								</div>
 								 <fieldset class="form-group">
@@ -681,13 +681,13 @@
 									  <legend class="col-form-label col-sm-1 pt-0">:</legend>
 								      <div class="col-sm-5">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="jantung_icor" value="tampak">
+								          <input class="form-check-input" type="radio" name="jantung_icor" value="1" required="">
 								          <label class="form-check-label">
 								            Tampak
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="jantung_icor" value="tak tampak">
+								          <input class="form-check-input" type="radio" name="jantung_icor" value="0" required="">
 								          <label class="form-check-label">
 								            Tak Tampak
 								          </label>
@@ -696,13 +696,13 @@
 								      <legend class="col-form-label col-sm-5 pt-0">S1 / S2</legend>
 								      <div class="col-sm-5">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="s1_s2" value="option1" checked>
+								          <input class="form-check-input" type="radio" name="s1_s2" value="1" required="">
 								          <label class="form-check-label">
 								            Reguler
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="s1_s2" value="Irreguler">
+								          <input class="form-check-input" type="radio" name="s1_s2" value="0" required="">
 								          <label class="form-check-label">
 								            Irreguler
 								          </label>
@@ -711,13 +711,13 @@
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Suara Tambahan</label>
 									<div class="input-group-prepend col">
-									<input type="text" class="form-control" id="" name="s_tambahan" placeholder="Suara Tambahan" >
+									<input type="text" class="form-control" id="" name="s_tambahan" placeholder="Suara Tambahan">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan Tambahan</label>
 									<div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="ket_tambahantr" placeholder="Keterangan Tambahan" ></textarea>
+									<textarea class="form-control" aria-label="With textarea" name="ket_tambahantr" placeholder="Keterangan Tambahan"></textarea>
 									</div>
 								</div>	
 								<hr></hr>
@@ -726,22 +726,22 @@
 									<label class="col-sm-2 col-form-label">BU </label>
 								 	<label class="col-sm-1 col-form-label">Normal</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="0">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="0" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Meningkat</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="1">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="1" required="">
 									</div>
 								</div>
 								<div class="form-group row">
 								<label class="col-sm-2 col-form-label"></label>
 									<label class="col-sm-1 col-form-label">Menurun</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="0">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="2" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Negatif</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="1">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="3" required="">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -788,13 +788,13 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Hepatomegali</label>
 								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" id="" name="hpmgl" placeholder="" value="1">
+								      	<input type="text" class="form-control" id="" name="hpmgl" placeholder="" value="1" required="">
 								    </div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Spleenomegali</label>
 								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" id="" name="spmgl" placeholder="" value="1">
+								      	<input type="text" class="form-control" id="" name="spmgl" placeholder="" value="1" required="">
 								    </div>
 								</div>
 								<div class="form-group row">
@@ -809,19 +809,19 @@
 									<label class="col-sm-3 col-form-label">Akral Hangat</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak1" value="1">
+									  <input class="form-check-input" type="checkbox" name="ah1" value="1">
 									  <label class="form-check-label" >1</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak2" value="2">
+									  <input class="form-check-input" type="checkbox" name="ah2" value="2">
 									  <label class="form-check-label" >2</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak3" value="3">
+									  <input class="form-check-input" type="checkbox" name="ah3" value="3">
 									  <label class="form-check-label" >3</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak4" value="4">
+									  <input class="form-check-input" type="checkbox" name="ah4" value="4">
 									  <label class="form-check-label" >4</label>
 									</div>
 									</div>
@@ -830,19 +830,19 @@
 									<label class="col-sm-3 col-form-label">CRT</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak1" value="1">
+									  <input class="form-check-input" type="checkbox" name="crt1" value="1">
 									  <label class="form-check-label" >1</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak2" value="2">
+									  <input class="form-check-input" type="checkbox" name="crt2" value="2">
 									  <label class="form-check-label" >2</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak3" value="3">
+									  <input class="form-check-input" type="checkbox" name="crt3" value="3">
 									  <label class="form-check-label" >3</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak4" value="4">
+									  <input class="form-check-input" type="checkbox" name="crt4" value="4">
 									  <label class="form-check-label" >4</label>
 									</div>
 									<label class="col-sm-3 col-form-label">/2Detik</label>
@@ -852,19 +852,19 @@
 									<label class="col-sm-3 col-form-label">Edema</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak1" value="1">
+									  <input class="form-check-input" type="checkbox" name="edm1" value="1">
 									  <label class="form-check-label" >1</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak2" value="2">
+									  <input class="form-check-input" type="checkbox" name="edm2" value="2">
 									  <label class="form-check-label" >2</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak3" value="3">
+									  <input class="form-check-input" type="checkbox" name="edm3" value="3">
 									  <label class="form-check-label" >3</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ak4" value="4">
+									  <input class="form-check-input" type="checkbox" name="edm4" value="4">
 									  <label class="form-check-label" >4</label>
 									</div>
 									</div>
@@ -874,7 +874,7 @@
 								      <legend class="col-form-label col-sm-2 pt-0"></legend>
 								      <div class="col-sm-4">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="pitting" value="non-pitting">
+								          <input class="form-check-input" type="radio" name="pitting" value="1" required="">
 								          <label class="form-check-label">
 								            non-pitting
 								          </label>
@@ -882,7 +882,7 @@
 								        </div>
 								         <div class="col-sm-4">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="pitting" value="pitting">
+								          <input class="form-check-input" type="radio" name="pitting" value="0" required="">
 								          <label class="form-check-label">
 								            pitting
 								          </label>
@@ -891,7 +891,7 @@
 								   <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan Tambahan</label>
 									<div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="ket_tambahaneks" placeholder="Keterangan Tambahaneks" required=""></textarea>
+									<textarea class="form-control" aria-label="With textarea" name="ket_tambahaneks" placeholder="Keterangan Tambahaneks"></textarea>
 									</div>
 								</div>	
 								<hr></hr>
@@ -910,19 +910,19 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Terapi</label>
 									<div class="input-group-prepend col">/R
-									<input type="text" class="form-control" id="" name="terapi" placeholder="..." >
+									<input type="text" class="form-control" id="" name="terapi1" placeholder="..." >
 									</div>
 								</div>	
 								<div class="form-group row">
 								<label class="col-sm-3 col-form-label"></label>
 									<div class="input-group-prepend col">/R
-									<input type="text" class="form-control" id="" name="terapi" placeholder="..." >
+									<input type="text" class="form-control" id="" name="terapi2" placeholder="..." >
 									</div>
 								</div>	
 								<div class="form-group row">
 								<label class="col-sm-3 col-form-label"></label>
 									<div class="input-group-prepend col">/R
-									<input type="text" class="form-control" id="" name="terapi" placeholder="..." >
+									<input type="text" class="form-control" id="" name="terapi3" placeholder="..." >
 									</div>
 								</div>
 							</div>

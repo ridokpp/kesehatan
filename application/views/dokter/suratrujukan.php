@@ -69,7 +69,7 @@
 			</div>
 			<div class="row mb-4">
 				Assalamu'allaikum Wr. Wb.<br>
-				Mohon konsul dan penatalaksanaan lebih lanjut pada penderita;
+				Mohon konsul dan penata laksanaan lebih lanjut pada penderita;
 			</div>
 			<div class="row">
 				<div class="col-2"> 
@@ -151,7 +151,7 @@
 					:
 				</div>	
 				<div class="col-9">
-					..............................................................................................
+					<?=$keluhan?>
 				</div>		
 			</div>
 			<div class="row">
@@ -162,7 +162,7 @@
 					:
 				</div>	
 				<div class="col-9">
-					E ...  V ...  M ... ( CM, Apatis, delirium, somnolen, stupor, coma).*)
+					E <?=$GCS_E?>  V <?=$GCS_V?>   M <?=$GCS_M?>  ( CM, Apatis, delirium, somnolen, stupor, coma).*)
 				</div>		
 			</div>
 			<div class="row">
@@ -214,7 +214,11 @@
 					:
 				</div>
 				<div class="col-9">
-				Anemis .... / .... Ikterik .... / .... Cianosis .... / .... Deformitas .... / .... Refkejs cahaya .... / .... isokor/anisokor.*)
+				
+				Anemis <?=($kepala['anemis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['anemis_kanan'] == '1') ? '+' : '-'?> Ikterik <?=($kepala['ikterik_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['ikterik_kanan'] == '1') ? '+' : '-'?> Cianosis <?=($kepala['cianosis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['cianosis_kanan'] == '1') ? '+' : '-'?> Deformitas <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> Refleksi cahaya <?=($kepala['refchy_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['refchy_kanan'] == '1') ? '+' : '-'?> <?=($kepala['refchyopsi'] == '1') ? 'Isokor' : 'Anisokor'?>.*)
+				</div>
+				<div class="col-5 offset-2">
+				Keterangan tambahan :  <?=$kepala['ket_tambahankpl']?>
 				</div>
 			</div>
 			<div class="row">
@@ -227,7 +231,7 @@
 				</div>
 				:
 				<div class="col-3">
-				Simetris/Asimetris.*)
+				<?=($thorak['metris'] == '1') ? 'Simetris' : 'Asimetris'?>.*)
 				</div>
 			</div>
 			<div class="row">
@@ -237,17 +241,17 @@
 				</div>
 				:
 				<div class="col-4">
-				Ictus cordis Tak Tampak / Tampak.*)
+				Ictus cordis <?=($thorak['jantung_icor'] == '1') ? 'Tampak' : 'Tak Tampak'?>.*)
 				</div>
 			</div>
 			<div class="row-2">
 				<div class="col-5 offset-3">
-				S1-S2 Reguler/Irreguler.*), Suara tambahan ...................
+				S1-S2 <?=($thorak['s1_s2'] == '1') ? 'Reguler' : 'Irreguler'?>.*), Suara tambahan <?=$thorak['s_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-5 offset-1">
-				Keterangan tambahan : .............................
+				<div class="col-5 offset-2">
+				Keterangan tambahan :  <?=$thorak['ket_tambahantr']?>
 				</div>
 			</div>
 			<div class="row">
@@ -256,7 +260,16 @@
 				</div>
 					:
 				<div class="col-4">
-				BU Normal/Meningkat/Menurun/Negatif.*)
+				BU <?php if($abdomen['BU'] == '0'){ 
+						echo "Normal"; 
+					} elseif ($abdomen['BU'] == '1') {
+						echo "Meningkat";
+					} elseif ($abdomen['BU'] == '2') {
+						echo "Menurun"; 
+					} elseif ($abdomen['BU'] == '3') { 
+						echo "Negatif";
+					}
+					?>.*
 				</div>
 			</div>
 			<div class="row">
@@ -266,27 +279,32 @@
 				</div>
 				<div class="col-1">
 				<table border="1">
-				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				  <tr width="90px">
+				    <td ><?=($abdomen['ny1'] == '1') ?  '✔': ' ' ?></td>
+				    <td ><?=($abdomen['ny2'] == '2') ?  '✔': '  '?></td>
+				    <td><?=($abdomen['ny3'] == '3') ?  '✔': '  '?></td>
 				  </tr>
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$abdomen['ny4']?></td>
+				    <td><?=$abdomen['ny5']?></td>
+				    <td><?=$abdomen['ny6']?></td>
+				  </tr>
+				   <tr>
+				    <td><?=$abdomen['ny7']?></td>
+				    <td><?=$abdomen['ny8']?></td>
+				    <td><?=$abdomen['ny9']?></td>
 				  </tr>
 				</table>
 				</div>
 
 
 				<div class="col-4">
-				Hepatomegali(.........), Spleenomegali(.........)
+				Hepatomegali(<?=$abdomen['hpmgl']?>), Spleenomegali(<?=$abdomen['spmgl']?>)
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-5 offset-1">
-				Keterangan tambahan : .............................
+				<div class="col-5 offset-2">
+				Keterangan tambahan : <?=$abdomen['ket_tambahanab']?>
 				</div>
 			</div>
 			<div class="row">
@@ -299,12 +317,12 @@
 				
 				<table border="1">
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$ekstermitas['ah1']?></td>
+				    <td><?=$ekstermitas['ah2']?></td>
 				  </tr>
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$ekstermitas['ah3']?></td>
+				    <td><?=$ekstermitas['ah4']?></td>
 				  </tr>
 				</table>
 				;
@@ -314,12 +332,12 @@
 				</div>
 				<table border="1">
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$ekstermitas['crt1']?></td>
+				    <td><?=$ekstermitas['crt2']?></td>
 				  </tr>
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$ekstermitas['crt3']?></td>
+				    <td><?=$ekstermitas['crt4']?></td>
 				  </tr>
 				</table>
 				2 detik;
@@ -329,16 +347,16 @@
 				</div>
 				<table border="1">
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$ekstermitas['edm1']?></td>
+				    <td><?=$ekstermitas['edm2']?></td>
 				  </tr>
 				  <tr>
-				    <td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				    <td><?=$ekstermitas['edm3']?></td>
+				    <td><?=$ekstermitas['edm4']?></td>
 				  </tr>
 				</table>
 				<div class="col-3">
-				non-pitting/pitting.*)
+				<?=($ekstermitas['pitting'] ? 'Non-Pitting' : 'Pitting')?>.*
 				</div>
 			</div>
 			<div class="row">
@@ -347,7 +365,7 @@
 				</div>
 					:
 				<div class="col-4">
-				...................................................
+				<?=$lain_lain?>
 				</div>
 			</div>
 			<div class="row">
@@ -358,7 +376,7 @@
 					:
 				</div>
 				<div class="col-7">
-				...................................................
+				<!-- <?=$data['diagnosa']?> -->
 				</div>
 			</div>
 			<div class="row">
@@ -369,19 +387,19 @@
 					:
 				</div>
 				<div class="col-7">
-				R/...................................................
+				R/ <?=$terapi1?>
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-7 offset-2">
-				R/...................................................
+				R/ <?=$terapi2?>
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-7 offset-2">
-				R/...................................................
+				R/ <?=$terapi3?>
 				</div>
 			</div>
 

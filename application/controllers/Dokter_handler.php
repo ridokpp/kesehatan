@@ -72,6 +72,14 @@ class Dokter_handler extends CI_Controller {
 			$this->load->view('dokter/suratsakit',$data);
 
 		}elseif ($surat == 'suratrujukan') {
+
+			$data['nomor_pasien']	= $this->input->post('kd_pasien');
+			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
+			$data['sip']			= $this->session->userdata('logged_in')['sip'];
+			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
+			$data['rkm_medis']		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$data['nomor_pasien'],'DATE(tgl_jam)'=>date('Y-m-d')),array('kd_objek'))->result();
+			$data['objek']			= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rkm_medis'][0]->kd_objek))->result();
+
 			$dataKepala['anemis_kiri'] 	= $this->input->post('anemis_kiri');
 			$dataKepala['anemis_kanan'] 	= $this->input->post('anemis_kanan');
 			$dataKepala['ikterik_kiri'] 	= $this->input->post('ikterik_kiri');
@@ -86,6 +94,7 @@ class Dokter_handler extends CI_Controller {
 			$dataKepala['refchyopsi'] 	= $this->input->post('refchy_opsi');
 			$dataKepala['ket_tambahankpl']= $this->input->post('ket_tambahankpl');
 			$data['kd_kepala']		= json_decode($this->Kesehatan_M->create_id('kepala',$dataKepala));
+			// var_dump($data);
 			$data['kd_kepala']		= $data['kd_kepala']->message;
 			
 
@@ -104,18 +113,40 @@ class Dokter_handler extends CI_Controller {
 			$dataThorak['ket_tambahantr'] = $this->input->post('ket_tambahantr');
 			$data['kd_thorak']		= json_decode($this->Kesehatan_M->create_id('thorak',$dataThorak));
 			$data['kd_thorak']		= $data['kd_thorak']->message;
-			echo "<pre>";
-			var_dump($data);
 
-			$data['BU'] 			= $this->input->post('BU');
-			$data['nyeri_tekan'] 	= $this->input->post('nyeri_tekan');
-			$data['hpmgl'] 			= $this->input->post('hpmgl');
-			$data['spmgl'] 			= $this->input->post('spmgl');
-			$data['ket_tambahanab'] = $this->input->post('ket_tambahanab');
-			$data['lain_lain'] 		= $this->input->post('lain_lain');
-			$data['diagnosa'] 		= $this->input->post('diagnosa');
-			$data['terapi'] 		= $this->input->post('terapi');
-			$data['kd_abdomen']		= $this->Kesehatan_M->create('abdomen',$data);
+			$dataAbdomen['BU'] 			= $this->input->post('BU');
+			$dataAbdomen['ny1'] 	= $this->input->post('ny1');
+			$dataAbdomen['ny2'] 	= $this->input->post('ny2');
+			$dataAbdomen['ny3'] 	= $this->input->post('ny3');
+			$dataAbdomen['ny4'] 	= $this->input->post('ny4');
+			$dataAbdomen['ny5'] 	= $this->input->post('ny5');
+			$dataAbdomen['ny6'] 	= $this->input->post('ny6');
+			$dataAbdomen['ny7'] 	= $this->input->post('ny7');
+			$dataAbdomen['ny8'] 	= $this->input->post('ny8');
+			$dataAbdomen['ny9'] 	= $this->input->post('ny9');
+			$dataAbdomen['hpmgl'] 			= $this->input->post('hpmgl');
+			$dataAbdomen['spmgl'] 			= $this->input->post('spmgl');
+			$dataAbdomen['ket_tambahanab'] = $this->input->post('ket_tambahanab');
+			$dataAbdomen['lain_lain'] 		= $this->input->post('lain_lain');
+			$dataAbdomen['diagnosa'] 		= $this->input->post('diagnosa');
+			$dataAbdomen['terapi'] 		= $this->input->post('terapi');
+			$dataAbdomen['kd_abdomen']		= $this->Kesehatan_M->create('abdomen',$dataAbdomen);
+
+			$dataEkstermitas['ah1'] = $this->input->post('ah1');
+			$dataEkstermitas['ah2'] = $this->input->post('ah2');
+			$dataEkstermitas['ah3'] = $this->input->post('ah3');
+			$dataEkstermitas['ah4'] = $this->input->post('ah4');
+			$dataEkstermitas['crt1'] = $this->input->post('crt1');
+			$dataEkstermitas['crt2'] = $this->input->post('crt2');
+			$dataEkstermitas['crt3'] = $this->input->post('crt3');
+			$dataEkstermitas['crt4'] = $this->input->post('crt4');
+			$dataEkstermitas['edm1'] = $this->input->post('edm1');
+			$dataEkstermitas['edm2'] = $this->input->post('edm2');
+			$dataEkstermitas['edm3'] = $this->input->post('edm3');
+			$dataEkstermitas['edm4'] = $this->input->post('edm4');
+			$dataEkstermitas['pitting'] = $this->input->post('pitting');
+			$dataEkstermitas['ket_tambahan'] = $this->input->post('ket_tambahaneks');
+
 
 			$data['keluhan'] = $this->input->post('keluhan');
 			$data['GCS_E'] = $this->input->post('GCS_E');
@@ -123,7 +154,20 @@ class Dokter_handler extends CI_Controller {
 			$data['GCS_M'] = $this->input->post('GCS_M');
 			$data['GCS_opsi'] = $this->input->post('GCS_opsi');
 
-			$this->load->view('dokter/suratrujukan');
+			$data['lain_lain'] = $this->input->post('lain_lain');
+			$data['terapi1'] = $this->input->post('terapi1');
+			$data['terapi2'] = $this->input->post('terapi2');
+			$data['terapi3'] = $this->input->post('terapi3');
+
+
+			$data['kepala'] = $dataKepala;
+			$data['thorak'] = $dataThorak;
+			$data['abdomen'] = $dataAbdomen;
+			$data['ekstermitas'] = $dataEkstermitas;
+
+			// echo "<pre>";
+			// var_dump($data);
+			$this->load->view('dokter/suratrujukan',$data);
 		}
 		$this->load->view('static/footer');
 	}

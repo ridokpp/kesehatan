@@ -55,7 +55,7 @@ class Dokter extends CI_Controller {
 	{
 		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$nomor_pasien,'DATE(tgl_jam)'=>date('Y-m-d')),'kd_objek')->result();
-		// var_dump($kd_objek);
+		//var_dump($kd_objek);
 		$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[0]->kd_objek))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
