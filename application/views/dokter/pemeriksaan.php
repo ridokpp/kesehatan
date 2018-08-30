@@ -251,12 +251,7 @@
 			<h6 class="text-center">Primary</h6>
 			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" name="states[]" multiple="multiple" style="width: 99%">
-						<option value="A00.0">A00.0 \ Cholera due to Vibrio cholerae 01, biovar cholerae \ Kolera disebabkan Vibrio cholerae 01, biovar cholerae</option>
-						<option value="A00.1">A00.1 \ Cholera due to Vibrio cholerae 01, biovar eltor \ Kolera disebabkan Vibrio cholerae 01, biovar eltor</option>
-						<option value="A00.9">A00.9 \ Cholera, unspecified \ Kolera, yang tidak spesifik</option>
-						<option value="A01.0">A01.0 \ Typhoid fever \ Demam tifoid</option>
-						<option value="A01.1">A01.1 \ Paratyphoid fever A \ Demam paratifoid</option>
+			      	<select class="js-data-example-ajax" id="primary" name="states[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
 			</form>
@@ -265,12 +260,7 @@
 			<h6 class="text-center">Sekunder</h6>
 			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" name="states[]" multiple="multiple" style="width: 99%">
-						<option value="A00.0">A00.0 \ Cholera due to Vibrio cholerae 01, biovar cholerae \ Kolera disebabkan Vibrio cholerae 01, biovar cholerae</option>
-						<option value="A00.1">A00.1 \ Cholera due to Vibrio cholerae 01, biovar eltor \ Kolera disebabkan Vibrio cholerae 01, biovar eltor</option>
-						<option value="A00.9">A00.9 \ Cholera, unspecified \ Kolera, yang tidak spesifik</option>
-						<option value="A01.0">A01.0 \ Typhoid fever \ Demam tifoid</option>
-						<option value="A01.1">A01.1 \ Paratyphoid fever A \ Demam paratifoid</option>
+			      	<select class="js-data-example-ajax" id="sekunder" name="states[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
 			</form>
@@ -279,12 +269,7 @@
 			<h6 class="text-center">Lain-lain</h6>
 			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" name="states[]" multiple="multiple" style="width: 99%">
-						<option value="A00.0">A00.0 \ Cholera due to Vibrio cholerae 01, biovar cholerae \ Kolera disebabkan Vibrio cholerae 01, biovar cholerae</option>
-						<option value="A00.1">A00.1 \ Cholera due to Vibrio cholerae 01, biovar eltor \ Kolera disebabkan Vibrio cholerae 01, biovar eltor</option>
-						<option value="A00.9">A00.9 \ Cholera, unspecified \ Kolera, yang tidak spesifik</option>
-						<option value="A01.0">A01.0 \ Typhoid fever \ Demam tifoid</option>
-						<option value="A01.1">A01.1 \ Paratyphoid fever A \ Demam paratifoid</option>
+			      	<select class="js-data-example-ajax" id="lain" name="states[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
 			</form>
@@ -448,7 +433,7 @@
 
 		</div>
 		<div class="col">
-			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalrujukan">RUJUKAN</button>
+			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalrujukan" onclick="getassesment()">RUJUKAN</button>
 			
 			<!-- SURAT RUJUKAN -->
 			<div class="modal fade" id="modalrujukan" tabindex="-1" role="dialog" aria-labelledby="modalrujukanTitle" aria-hidden="true" >
@@ -872,7 +857,7 @@
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan Tambahan</label>
 									<div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="ket_tambahanab" placeholder="Keterangan Tambahanab" ></textarea>
+									<textarea class="form-control" aria-label="With textarea" name="ket_tambahanab" placeholder="Keterangan Tambahan" ></textarea>
 									</div>
 								</div>	
 								<hr></hr>
@@ -963,7 +948,7 @@
 								   <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan Tambahan</label>
 									<div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="ket_tambahaneks" placeholder="Keterangan Tambahaneks"></textarea>
+									<textarea class="form-control" aria-label="With textarea" name="ket_tambahaneks" placeholder="Keterangan Tambahan"></textarea>
 									</div>
 								</div>	
 								<hr></hr>
@@ -1004,6 +989,13 @@
 					    	</form>
 						</div>
 					</div>
+					<script type="text/javascript">
+						function getassesment(){
+							console.log($("#primary").select2('data'));
+
+						}
+
+					</script>
 					<!-- SURAT RUJUKAN-->
 				</div>
 				<!-- SURAT RUJUKAN -->
