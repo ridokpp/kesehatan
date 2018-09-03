@@ -37,7 +37,7 @@ $(document).ready(function() {
 					<div class="row">
 						<div class="col">
 						 	<div class="form-group row">
-							    <div class="input-group-prepend col-8 offset-2">
+							    <div class="input-group col-8 offset-2">
 							      	<select class="js-data-example-ajax form-control" name="nama_or_nomor" id="nama_or_nomor">
 							      		<option value="" selected="selected"></option>
 							      	</select>

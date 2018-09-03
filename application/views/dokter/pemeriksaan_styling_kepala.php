@@ -1,32 +1,4 @@
  <script type="text/javascript">
- 	$(document).ready(function() {
-		$('#diagnosaPrimaryId').select2();
-    	$('#diagnosaSecondaryId').select2();
-    	$('#diagnosaLainId').select2();
-
-    	$('.js-data-example-ajax').select2({
-    		placeholder: "Pilih Sesuai ICD 10",
-			ajax: {
-				url: '<?=base_url()?>Dokter_handler/cari_icd/',
-			    dataType: 'json',
-			    delay: 250,
-				data: function (term, page) {
-					return {
-						term: term, // search term
-						page: 10
-					};
-				},
-				processResults: function (data, page) {
-					return {
-						results: data
-					};
-				},
-				cache: true
-			},
-			escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-			minimumInputLength: 1,
-		});
-	});	
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
     var serverTime = new Date(<?php print date('Y, m, d, H, i, s, 0'); ?>);
     var clientTime = new Date();
@@ -40,71 +12,32 @@
         document.getElementById("clock").innerHTML = (sh.length==1?"0"+sh:sh) + ":" + (sm.length==1?"0"+sm:sm) + ":" + (ss.length==1?"0"+ss:ss);
     }
 
-	function updateTglAkhir() {
-		// function untuk update tanggal akhir
-		var tanggal_awal 	= document.getElementById("tanggal_awal").value;
-		var jumlah			= document.getElementById("selama").value;
-		var date 			= new Date(tanggal_awal);
-		var newdate			= new Date(date);
-		var selama_satuan 	= document.getElementById("selama_satuan").value;
-		
-		// bagian yang ngeset tanggal terakhir berdsarkan satuan HARI|MINGGU|BULAN yang dipilih
-		if (selama_satuan == 'hari') {
-			newdate.setDate(newdate.getDate() + parseInt(jumlah));
-		}else if (selama_satuan == 'minggu') {
-			newdate.setDate(newdate.getDate() + (parseInt(jumlah) * 7));
-		}else if (selama_satuan == 'bulan') {
-			newdate.setMonth(newdate.getMonth() + parseInt(jumlah));
-		}
+    $(document).ready(function() {
 
-		// finishing set tanggal terakhir untuk ditampilkan
-		var dd 	= newdate.getDate();
-		var mm 	= newdate.getMonth() + 1;
-		var y 	= newdate.getFullYear();
-		if(dd<10){
-	        dd='0'+dd
-	    } 
-	    if(mm<10){
-	        mm='0'+mm
-	    }
-		document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
-	}
-
-	function cetakSuratSakit(){
-		document.getElementById('planning').innerHTML='Surat Sakit, ';
-	}
-
-	function cetakSuratSehat(){
-		document.getElementById('planning').innerHTML='Surat Sehat, ';
-	}
-
-	function getassesment(){
-		$('#diagnosaPrimaryId').val(null).trigger('change');
-		$('#diagnosaSecondaryId').val(null).trigger('change');
-		$('#diagnosaLainId').val(null).trigger('change');
-
-		// CREATE PRIMARY SELECT ELEMENT
-		var primarySelected = $("#primary").select2('data');
-		for (i in primarySelected){
-			var newOption = new Option(primarySelected[i].text, primarySelected[i].id, true, true);
-			$('#diagnosaPrimaryId').append(newOption).trigger('change');
-		}
-
-		// CREATE SECONDARY SELECT ELEMENT
-		var secondarySelected = $("#secondary").select2('data');
-		for (i in secondarySelected){
-			var newOption = new Option(secondarySelected[i].text, secondarySelected[i].id, true, true);
-			$('#diagnosaSecondaryId').append(newOption).trigger('change');
-		}
-
-		// CREATE LAINLAIN SELECT ELEMENT
-		var lainlainSelected = $("#lain").select2('data');
-		for (i in lainlainSelected){
-			var newOption = new Option(lainlainSelected[i].text, lainlainSelected[i].id, true, true);
-			$('#diagnosaLainId').append(newOption).trigger('change');
-		}
-	}
-
+    $('.js-data-example-ajax').select2({
+    		placeholder: "Pilih Sesuai ICD 10",
+		ajax: {
+			url: '<?=base_url()?>Dokter_handler/cari_icd/',
+		    dataType: 'json',
+		    delay: 250,
+			data: function (term, page) {
+				return {
+					term: term, // search term
+					page: 10
+				};
+			},
+			processResults: function (data, page) {
+				console.log(data);
+				return {
+					results: data
+				};
+			},
+			cache: true
+		},
+		escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+		minimumInputLength: 1,
+		});
+	});	
 
 
 </script>
@@ -327,7 +260,7 @@
 			<h6 class="text-center">Sekunder</h6>
 			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="secondary" name="states[]" multiple="multiple" style="width: 99%">
+			      	<select class="js-data-example-ajax" id="sekunder" name="states[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
 			</form>
@@ -406,6 +339,42 @@
 				    </div>
 				</div>
 			</div>
+			<script type="text/javascript">
+
+				function updateTglAkhir() {
+					// function untuk update tanggal akhir
+					var tanggal_awal 	= document.getElementById("tanggal_awal").value;
+					var jumlah			= document.getElementById("selama").value;
+					var date 			= new Date(tanggal_awal);
+					var newdate			= new Date(date);
+					var selama_satuan 	= document.getElementById("selama_satuan").value;
+					
+					// bagian yang ngeset tanggal terakhir berdsarkan satuan HARI|MINGGU|BULAN yang dipilih
+					if (selama_satuan == 'hari') {
+						newdate.setDate(newdate.getDate() + parseInt(jumlah));
+					}else if (selama_satuan == 'minggu') {
+						newdate.setDate(newdate.getDate() + (parseInt(jumlah) * 7));
+					}else if (selama_satuan == 'bulan') {
+						newdate.setMonth(newdate.getMonth() + parseInt(jumlah));
+					}
+
+					// finishing set tanggal terakhir untuk ditampilkan
+					var dd 	= newdate.getDate();
+					var mm 	= newdate.getMonth() + 1;
+					var y 	= newdate.getFullYear();
+					if(dd<10){
+				        dd='0'+dd
+				    } 
+				    if(mm<10){
+				        mm='0'+mm
+				    }
+					document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
+				}
+
+				function cetakSuratSakit(){
+					document.getElementById('planning').innerHTML='Surat Sakit, ';
+				}
+			</script>
 			<!-- END SURAT SAKIT -->
 
 		</div>
@@ -455,6 +424,11 @@
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+				function cetakSuratSehat(){
+					document.getElementById('planning').innerHTML='Surat Sehat, ';
+				}
+			</script>
 			<!-- END SURAT SEHAT -->
 
 		</div>
@@ -531,8 +505,8 @@
 								      	<input type="text" class="form-control" id="" name="alamat" placeholder="Alamat" required="">
 								    </div>
 								</div> -->
-								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
-								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
+								<input type="hidden" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
+								<input type="hidden" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
 								    <div class="input-group-prepend col">
@@ -600,44 +574,67 @@
 								    </div>
 								</fieldset>
 								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">TB</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->tb?>" id="" name="tb" placeholder="TB"  readonly="">cm
-								    </div>
+									<div class="input-group">
+										<label class="col-sm-4 col-form-label">Tinggi Badan</label>
+									    <div class="input-group col">
+									      	<input type="text" class="form-control" value="<?=$objek[0]->tb?>" id="" name="tb" placeholder="TB"  readonly="">
+									      	<div class="input-group-append">
+											    <span class="input-group-text">Cm</span>
+											</div>
+									    </div>
+									</div>
+								      	
 								</div>
 								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">BB</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->bb?>" id="" name="bb" placeholder="BB"  readonly="">kg
-								    </div>
+									<div class="input-group">
+										<label class="col-sm-4 col-form-label">Berat Badan</label>
+									    <div class="input-group col">
+									      	<input type="text" class="form-control" value="<?=$objek[0]->bb?>" id="" name="bb" placeholder="BB"  readonly="">
+									      	<div class="input-group-append">
+											    <span class="input-group-text">Kg</span>
+											</div>
+									    </div>
+									</div>
 								</div>
 
 								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">Tekanan Darah</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->td1?>" id="" name="tekanan_darah" placeholder=""  readonly="">
-								      	&nbsp;/&nbsp;
-								      	<input type="text" class="form-control" value="<?=$objek[0]->td2?>" id="" name="tekanan_darah" placeholder=""  readonly="">mmHg
-								    </div>
+									<div class="input-group">
+										<label class="col-sm-4 col-form-label">Tekanan Darah</label>
+									    <div class="input-group col">
+									      	<input type="text" class="form-control" value="<?=$objek[0]->td1?>" id="" name="tekanan_darah" placeholder=""  readonly="">
+									      	<div class="input-group-append">
+											    <span class="input-group-text">/</span>
+											</div>
+											<input type="text" class="form-control" value="<?=$objek[0]->td2?>" id="" name="tekanan_darah" placeholder=""  readonly="">
+											<div class="input-group-append">
+											    <span class="input-group-text">mmHg</span>
+											</div>
+									    </div>
+									</div>
 								</div>
 								
 								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">Nadi</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->N?>" id="" name="nadi" placeholder=""  readonly="">rpm
-								    </div>
+									<div class="input-group">
+										<label class="col-sm-4 col-form-label">Nadi</label>
+									    <div class="input-group col">
+									      	<input type="text" class="form-control" value="<?=$objek[0]->N?>" id="" name="nadi" placeholder=""  readonly="">
+									      	<div class="input-group-append">
+											    <span class="input-group-text">RPM</span>
+											</div>
+									    </div>
+									</div>
 								</div>
 
 								<div class="form-group row">
 									<label class="col-sm-4 col-form-label">Respiratory R.</label>
-								    <div class="input-group-prepend col-sm-2">
+								    <div class="input-group-prepend col">
 								      	<input type="text" class="form-control" value="<?=$objek[0]->RR?>" id="" name="respiratory" placeholder=""  readonly="">rpm
 								    </div>
 								</div>
 
 								<div class="form-group row">
 									<label class="col-sm-4 col-form-label">TᵒAxilla</label>
-								    <div class="input-group-prepend col-sm-2">
+								    <div class="input-group-prepend col">
 								      	<input type="text" class="form-control" value="<?=$objek[0]->TAx?>" id="" name="respiratory" placeholder=""  readonly="">ᵒc
 								    </div>
 								</div>
@@ -987,16 +984,7 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Diagnosa</label>
 									<div class="input-group-prepend col">
-										<select id="diagnosaPrimaryId" name="diagnosaPrimary[]" multiple="multiple" style="width: 100%">
-										</select>
-									</div>
-									<div class="input-group-prepend col">
-										<select id="diagnosaSecondaryId" name="diagnosaSecondary[]" multiple="multiple" style="width: 100%">
-										</select>
-									</div>
-									<div class="input-group-prepend col">
-										<select id="diagnosaLainId" name="diagnosaLain[]" multiple="multiple" style="width: 100%">
-										</select>
+									<input type="text" class="form-control" id="" name="diagnosa" placeholder="Diagnosa" >
 									</div>
 								</div>	
 								<div class="form-group row">
@@ -1024,6 +1012,13 @@
 					    	</form>
 						</div>
 					</div>
+					<script type="text/javascript">
+						function getassesment(){
+							console.log($("#primary").select2('data'));
+
+						}
+
+					</script>
 					<!-- SURAT RUJUKAN-->
 				</div>
 				<!-- SURAT RUJUKAN -->
