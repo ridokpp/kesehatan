@@ -151,7 +151,7 @@
 					:
 				</div>	
 				<div class="col-9">
-					<?=$keluhan?>
+					<?=$headtotoe['keluhan'];?>
 				</div>		
 			</div>
 			<div class="row">
@@ -162,7 +162,7 @@
 					:
 				</div>	
 				<div class="col-9">
-					E <?=$GCS_E?>  V <?=$GCS_V?>   M <?=$GCS_M?>  ( CM, Apatis, delirium, somnolen, stupor, coma).*)
+					E <?=$headtotoe['GCS_E']?>  V <?=$headtotoe['GCS_V']?>   M <?=$headtotoe['GCS_M']?>  ( CM, Apatis, delirium, somnolen, stupor, coma).*)
 				</div>		
 			</div>
 			<div class="row">
@@ -218,7 +218,7 @@
 				Anemis <?=($kepala['anemis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['anemis_kanan'] == '1') ? '+' : '-'?> Ikterik <?=($kepala['ikterik_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['ikterik_kanan'] == '1') ? '+' : '-'?> Cianosis <?=($kepala['cianosis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['cianosis_kanan'] == '1') ? '+' : '-'?> Deformitas <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> Refleksi cahaya <?=($kepala['refchy_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['refchy_kanan'] == '1') ? '+' : '-'?> <?=($kepala['refchyopsi'] == '1') ? 'Isokor' : 'Anisokor'?>.*)
 				</div>
 				<div class="col-5 offset-2">
-				Keterangan tambahan :  <?=$kepala['ket_tambahankpl']?>
+				Keterangan tambahan :  <?=$kepala['ket_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -251,7 +251,7 @@
 			</div>
 			<div class="row">
 				<div class="col-5 offset-2">
-				Keterangan tambahan :  <?=$thorak['ket_tambahantr']?>
+				Keterangan tambahan :  <?=$thorak['ket_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -304,7 +304,7 @@
 			</div>
 			<div class="row">
 				<div class="col-5 offset-2">
-				Keterangan tambahan : <?=$abdomen['ket_tambahanab']?>
+				Keterangan tambahan : <?=$abdomen['ket_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -365,7 +365,7 @@
 				</div>
 					:
 				<div class="col-4">
-				<?=$lain_lain?>
+				<?=$headtotoe['lain_lain']?>
 				</div>
 			</div>
 			<div class="row">
@@ -387,19 +387,19 @@
 					:
 				</div>
 				<div class="col-7">
-				R/ <?=$terapi1?>
+				R/ <?=$terapi['terapi1']?>
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-7 offset-2">
-				R/ <?=$terapi2?>
+				R/ <?=$terapi['terapi2']?>
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-7 offset-2">
-				R/ <?=$terapi3?>
+				R/ <?=$terapi['terapi3']?>
 				</div>
 			</div>
 

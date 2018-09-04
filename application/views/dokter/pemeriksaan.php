@@ -753,11 +753,11 @@
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">isokor</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="refchy_opsi" value="1" required="">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" value="Isokor" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">anisokor</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="refchy_opsi" value="0" required="">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" value="Anisokor" required="">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -774,11 +774,11 @@
 									<label class="col-sm-1 col-form-label">:</label>
 								 	<label class="col-sm-1 col-form-label">Simetris</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="1" required="">
+									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="Simetris" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Asimetris</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="0" required="">
+									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="Asimetris" required="">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -807,10 +807,10 @@
 								<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Vesikuler</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri">
+									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri" placeholder="" value="Tampak">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan">
+									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan" placeholder="" value="Tak Tampak">
 									</div>						
 								</div>
 								 <fieldset class="form-group">
@@ -819,13 +819,13 @@
 									  <legend class="col-form-label col-sm-1 pt-0">:</legend>
 								      <div class="col-sm-5">
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="jantung_icor" value="1" required="">
+								          <input class="form-check-input" type="radio" name="jantung_icor" value="Reguler" required="">
 								          <label class="form-check-label">
 								            Tampak
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="jantung_icor" value="0" required="">
+								          <input class="form-check-input" type="radio" name="jantung_icor" value="Irreguler" required="">
 								          <label class="form-check-label">
 								            Tak Tampak
 								          </label>
@@ -864,22 +864,22 @@
 									<label class="col-sm-2 col-form-label">BU </label>
 								 	<label class="col-sm-1 col-form-label">Normal</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="0" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Meningkat</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="1" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Meningkat" required="">
 									</div>
 								</div>
 								<div class="form-group row">
 								<label class="col-sm-2 col-form-label"></label>
 									<label class="col-sm-1 col-form-label">Menurun</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="2" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Menurun" required="">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Negatif</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="3" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Negatif" required="">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -926,13 +926,13 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Hepatomegali</label>
 								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" id="" name="hpmgl" placeholder="" value="1" required="">
+								      	<input type="text" class="form-control" id="" name="hpmgl" placeholder="" value="" required="">
 								    </div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Spleenomegali</label>
 								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" id="" name="spmgl" placeholder="" value="1" required="">
+								      	<input type="text" class="form-control" id="" name="spmgl" placeholder="" value="" required="">
 								    </div>
 								</div>
 								<div class="form-group row">
