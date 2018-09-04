@@ -3,18 +3,76 @@
 	.my-valid-class {color:#00CC00;}
 </style>
 <script type="text/javascript">
-$(function () {$('[data-toggle="tooltip"]').tooltip()})
-$( document ).ready(function() {$("#register").validate({rules:{nama:{required:true,minlength:2},nik:{required:true,minlength:16,maxlength:16,number:true},no_sip:{required:true,minlength:28},alamat:{required:true,minlength:10},email:{required:true,email:true},password:{required:true,minlength:6},password2:{required:true,minlength:6,equalTo:"#password"}},messages:{nama:{required:"Mohon isi nama Anda",minlength:"Mohon isi lebih dari 2 karakter"},nik:{required:"Mohon isi nomor NIK",minlength:"NIK anda kurang dari 16 karakter. Mohon isi NIK sebanyak 16 karakter",maxlength:"NIK anda lebih dari 16 karakter. Mohon isi NIK sebanyak 16 karakter",number:"Harus angka"},no_sip:{required:"Mohon isi nomor SIP anda",minlength:"Nomor SIP anda kurang dari 28 karakter"},alamat:{required:"Mohon isi alamat anda",minlength:"Alamat anda kurang dari 10 karakter"},email:{required:"Mohon isi alamat email valid anda",email:"alamat email tidak valid"},password:{required:"Mohon isi password untuk akun anda",minlength:"Password anda kurang dari 6 karakter. Mohon isi password anda minimal 6 karakter"},password2:{required:"Mohon isi password verifikasi untuk akun anda",minlength:"Password anda kurang dari 6 karakter. Mohon isi password anda minimal 6 karakter",equalTo:"Password verifikasi anda tidak sesuai dengan password awal"}},errorClass: "my-error-class",validClass: "my-valid-class"});});
-function deleteSip(){
-	var hak_akses = document.getElementById('hak_akses').value;
-	if (hak_akses == '3') {
-		document.getElementById('sip').innerHTML = '';
-	}else{
-		document.getElementById('sip').innerHTML = '<div class="form-group">'+
-								'<input class="form-control" placeholder="No SIP" name="no_sip" type="text" required="">'+
-								'</div>';
+	$(function () {$('[data-toggle="tooltip"]').tooltip()})
+	$( document ).ready(function() {
+		$("#register").validate({
+			rules:{
+				nama:{
+					required:true,
+					minlength:2
+				},nik:{
+					required:true,
+					minlength:16,
+					maxlength:16,
+					number:true
+				},no_sip:{
+					required:true,
+					minlength:28
+				},alamat:{
+					required:true,
+					minlength:10
+				},email:{
+					required:true,
+					email:true
+				},password:{
+					required:true,
+					minlength:6
+				},password2:{
+					required:true,
+					minlength:6,
+					equalTo:"#password"
+				}
+			},messages:{
+				nama:{
+					required:"Mohon isi nama Anda",
+					minlength:"Mohon isi lebih dari 2 karakter"
+				},nik:{
+					required:"Mohon isi nomor NIK",
+					minlength:"NIK anda kurang dari 16 karakter. Mohon isi NIK sebanyak 16 karakter",
+					maxlength:"NIK anda lebih dari 16 karakter. Mohon isi NIK sebanyak 16 karakter",
+					number:"Harus angka"
+				},no_sip:{
+					required:"Mohon isi nomor SIP anda",
+					minlength:"Nomor SIP anda kurang dari 28 karakter"
+				},alamat:{
+					required:"Mohon isi alamat anda",
+					minlength:"Alamat anda kurang dari 10 karakter"
+				},email:{
+					required:"Mohon isi alamat email valid anda",
+					email:"alamat email tidak valid"
+				},password:{
+					required:"Mohon isi password untuk akun anda",
+					minlength:"Password anda kurang dari 6 karakter. Mohon isi password anda minimal 6 karakter"
+				},password2:{
+					required:"Mohon isi password verifikasi untuk akun anda",
+					minlength:"Password anda kurang dari 6 karakter. Mohon isi password anda minimal 6 karakter",
+					equalTo:"Password verifikasi anda tidak sesuai dengan password awal"
+				}
+			},
+			errorClass: "my-error-class",
+			validClass: "my-valid-class"
+		});
+	});
+	function deleteSip(){
+		var hak_akses = document.getElementById('hak_akses').value;
+		if (hak_akses == '3') {
+			document.getElementById('sip').innerHTML = '';
+		}else{
+			document.getElementById('sip').innerHTML = '<div class="form-group">'+
+									'<input class="form-control" placeholder="No SIP" name="no_sip" type="text" required="">'+
+									'</div>';
+		}
 	}
-}
 </script>
 <div class="container-fluid">
 	<div class="row mt-1">	

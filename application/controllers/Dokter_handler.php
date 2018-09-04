@@ -42,7 +42,7 @@ class Dokter_handler extends CI_Controller {
 				$insertSuratSehat['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
 				$data['nomor_surat']				= $insertSuratSehat['nomor_surat'];
 			}
-			$this->Kesehatan_M->create('suratsehat',$insertSuratSehat);
+			var_dump($this->Kesehatan_M->create('suratsehat',$insertSuratSehat));
 			$this->load->view('dokter/suratsehat',$data);
 			
 		}elseif ($surat == 'suratsakit') {

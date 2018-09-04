@@ -1,9 +1,16 @@
- <script type="text/javascript">
+<style type="text/css">
+	.my-error-class {color:#FF0000;}
+	.my-valid-class {color:#00CC00;}
+</style>
+<script type="text/javascript">
  	$(document).ready(function() {
+
+ 		// inisialisasi dengan select2
 		$('#diagnosaPrimaryId').select2();
     	$('#diagnosaSecondaryId').select2();
     	$('#diagnosaLainId').select2();
 
+    	// inisialisasi dengan ajax 
     	$('.js-data-example-ajax').select2({
     		placeholder: "Pilih Sesuai ICD 10",
 			ajax: {
@@ -26,7 +33,55 @@
 			escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
 			minimumInputLength: 1,
 		});
+
+		// inisialisasi dan set alert form surat sakit
+		$("#formSuratSakit").validate({
+			rules:{
+				alasan:{
+					required:true,
+				},selama:{
+					required:true,
+				},selama_satuan:{
+					required:true,
+				}
+			},messages:{
+				alasan:{
+					required:"Mohon isi alasan",
+				},selama:{
+					required:"Mohon isi data yang dibutuhkan",
+				},selama_satuan:{
+					required:"Mohon isi data yang dibutuhkan",
+				}
+			},
+			errorClass: "my-error-class",
+			validClass: "my-valid-class"
+		});
+
+		// inisialisasi dan set alert form surat sehat
+		$("#formSuratSakit").validate({
+			rules:{
+				alasan:{
+					required:true,
+				},selama:{
+					required:true,
+				},selama_satuan:{
+					required:true,
+				}
+			},messages:{
+				alasan:{
+					required:"Mohon isi alasan",
+				},selama:{
+					required:"Mohon isi data yang dibutuhkan",
+				},selama_satuan:{
+					required:"Mohon isi data yang dibutuhkan",
+				}
+			},
+			errorClass: "my-error-class",
+			validClass: "my-valid-class"
+		});
 	});	
+
+	// setting tampilan live clock
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
     var serverTime = new Date(<?php print date('Y, m, d, H, i, s, 0'); ?>);
     var clientTime = new Date();
@@ -40,7 +95,8 @@
         document.getElementById("clock").innerHTML = (sh.length==1?"0"+sh:sh) + ":" + (sm.length==1?"0"+sm:sm) + ":" + (ss.length==1?"0"+ss:ss);
     }
 
-	function updateTglAkhir() {
+    // set nilai tanggal terakhir setelah pengesetan durasi pada form surat sakit
+ 	function updateTglAkhir() {
 		// function untuk update tanggal akhir
 		var tanggal_awal 	= document.getElementById("tanggal_awal").value;
 		var jumlah			= document.getElementById("selama").value;
@@ -70,15 +126,19 @@
 		document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
 	}
 
+	// tambahkan string surat sakit. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
 	function cetakSuratSakit(){
 		document.getElementById('planning').innerHTML='Surat Sakit, ';
 	}
 
+	// tambahkan string surat sehat. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
 	function cetakSuratSehat(){
 		document.getElementById('planning').innerHTML='Surat Sehat, ';
 	}
 
 	function getassesment(){
+
+		// set select2 untuk clear all option yang ada. (restart). defaultya kosong
 		$('#diagnosaPrimaryId').val(null).trigger('change');
 		$('#diagnosaSecondaryId').val(null).trigger('change');
 		$('#diagnosaLainId').val(null).trigger('change');
@@ -104,8 +164,6 @@
 			$('#diagnosaLainId').append(newOption).trigger('change');
 		}
 	}
-
-
 
 </script>
 
@@ -357,7 +415,7 @@
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
 				      	</div>
-			    		<form id="formSuratSakit" target="_blank" method="POST" action="<?=base_url()?>Dokter_handler/cetak/suratsakit">
+			    		<form id="formSuratSakit" action="<?=base_url()?>Dokter_handler/cetak/suratsakit" target="_blank" method="POST">
 					    	<div class="modal-body">
 					    		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
 					    		<div class="form-group row">
@@ -381,7 +439,7 @@
 								      	<input type="number" class="form-control" id="selama" name="selama" placeholder="Angka" >
 								    	<div class="input-group-append">
 								          	<!-- <div class="input-group-text"> -->
-								          		<select class="custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()" required="">
+								          		<select class="input-group-text custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()" required="">
 								          			<option selected="" disabled="">Satuan</option>
 								          			<option value="hari">Hari</option>
 								          			<option value="minggu">Minggu</option>
@@ -395,7 +453,7 @@
 								<div class="form-group row">
 						    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Akhir</label>
 						    		<div class="input-group-prepend col-sm-8">
-						      			<input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" required="" readonly="">
+						      			<input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" required="" readonly="" formart>
 						   			</div>
 								</div>
 						    </div>
@@ -424,29 +482,26 @@
 				        	</button>
 				      	</div>
 
-				    	<form action="<?=base_url()?>Dokter_handler/cetak/suratsehat" target="_blank" method= "POST">
+				    	<form action="<?=base_url()?>Dokter_handler/cetak/suratsehat" target="_blank" method="POST" id="formSuratSehat" >
 					    	<div class="modal-body">
 								<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
 						    	<label class="col-6 col-form-label"><strong>Tes Buta Warna</strong></label>
-						    	<div class="custom-control custom-radio">
-		 							<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="tes_buta_warna" value="Ya">
-		  							<label class="custom-control-label" for="defaultGroupExample1">Ya</label>
-								</div>
-
-								<!-- Group of default radios - option 2 -->
-								<div class="custom-control custom-radio">
-			  						<input type="radio" class="custom-control-input" id="defaultGroupExample2" name="tes_buta_warna" value="Tidak" checked>
-			  						<label class="custom-control-label" for="defaultGroupExample2">Tidak</label>
-								</div>
-
-								<!-- Group of default radios - option 3 -->
-								<div class="custom-control custom-radio">
-									  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="tes_buta_warna" value="Parsial">
-									  <label class="custom-control-label" for="defaultGroupExample3">Parsial</label>
-								</div>
+						    	<div class="custom-control custom-radio ml-5">
+						    		<div class="row">
+			 							<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya">
+			  							<label class="custom-control-label" for="tesButaWarna1">Ya</label>
+						    		</div>
+						    		<div class="row">
+				  						<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak">
+				  						<label class="custom-control-label" for="tesButaWarna2">Tidak</label>
+						    		</div>
+						    		<div class="row">
+										<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial">
+										<label class="custom-control-label" for="tesButaWarna3">Parsial</label>
+						    		</div>
+						    	</div>
 								<h5 class="col-6 col-form-label"><strong>Keperluan</strong></h5>
 								<textarea class="form-control" aria-label="With textarea" name="keperluan" required=""></textarea>
-
 							</div>
 					    	<div class="modal-footer">
 					    		<button type="submit" class="btn btn-primary" onclick="cetakSuratSehat()">Cetak</button>
