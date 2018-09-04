@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-09-04 18:59:41
+Date: 2018-09-04 20:04:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,30 +61,15 @@ CREATE TABLE `antrian` (
 -- ----------------------------
 DROP TABLE IF EXISTS `assesment`;
 CREATE TABLE `assesment` (
-  `kd_assesment` varchar(20) NOT NULL,
-  `primary` varchar(50) NOT NULL,
-  `secondary` varchar(50) NOT NULL,
-  `lain_lain` varchar(50) NOT NULL,
-  PRIMARY KEY (`kd_assesment`)
+  `id_assessment` int(255) NOT NULL AUTO_INCREMENT,
+  `kd_assesment` varchar(20) DEFAULT NULL,
+  `tipe` varchar(255) DEFAULT NULL,
+  `detil` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_assessment`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of assesment
--- ----------------------------
-
--- ----------------------------
--- Table structure for diagnosa
--- ----------------------------
-DROP TABLE IF EXISTS `diagnosa`;
-CREATE TABLE `diagnosa` (
-  `id` int(11) NOT NULL,
-  `diagnosa` varchar(255) DEFAULT NULL,
-  `kd_headtotoe` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of diagnosa
 -- ----------------------------
 
 -- ----------------------------
@@ -10653,7 +10638,7 @@ CREATE TABLE `kepala` (
   `refchy_kiri` varchar(30) DEFAULT NULL,
   `refchy_kanan` varchar(30) DEFAULT NULL,
   `refchyopsi` varchar(30) DEFAULT NULL,
-  `ket_tambahankpl` text,
+  `ket_tambahan` text,
   PRIMARY KEY (`kd_kepala`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
@@ -10702,7 +10687,7 @@ CREATE TABLE `objek` (
   `kd_headtotoe` int(11) DEFAULT NULL,
   `text_headtotoe` text,
   PRIMARY KEY (`kd_objek`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of objek
@@ -10716,6 +10701,7 @@ INSERT INTO `objek` VALUES ('6', '1', '1', '1', '1', '1', '1', '1', null, null);
 INSERT INTO `objek` VALUES ('7', '12', '12', '12', '12', '12', '21', '12', null, null);
 INSERT INTO `objek` VALUES ('8', '12', '123', '12', '12', '12', '12', '12', null, null);
 INSERT INTO `objek` VALUES ('9', '1', '1', '1', '1', '1', '1', '1', null, null);
+INSERT INTO `objek` VALUES ('10', '3', null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for pasien
@@ -10786,21 +10772,23 @@ CREATE TABLE `rkm_medis` (
   `kd_assesment` int(11) DEFAULT NULL,
   `planning` text,
   `kd_dokter` varchar(50) DEFAULT NULL,
+  `kd_headtotoe` varchar(255) DEFAULT NULL,
+  `headtotoe` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`kd_rkm`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of rkm_medis
 -- ----------------------------
-INSERT INTO `rkm_medis` VALUES ('1', '001-006-01-02-07-2018', '2018-08-20 00:38:31', null, '1', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('2', '001-006-01-02-07-2018', '2018-08-24 18:49:30', null, '2', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('3', '001-006-01-02-07-2018', '2018-08-24 23:33:45', null, '3', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('4', '001-006-01-02-07-2018', '2018-08-25 00:20:25', null, '4', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('5', '001-006-01-02-07-2018', '2018-08-26 20:25:02', null, '5', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('6', '001-006-01-02-07-2018', '2018-08-31 09:04:12', null, '6', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('7', '001-006-01-02-07-2018', '2018-09-02 16:55:45', null, '7', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('8', '001-006-01-02-07-2018', '2018-09-03 00:03:32', null, '8', null, null, '8');
-INSERT INTO `rkm_medis` VALUES ('9', '001-006-01-02-07-2018', '2018-09-04 11:27:35', null, '9', null, null, '8');
+INSERT INTO `rkm_medis` VALUES ('1', '001-006-01-02-07-2018', '2018-08-20 00:38:31', null, '1', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('2', '001-006-01-02-07-2018', '2018-08-24 18:49:30', null, '2', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('3', '001-006-01-02-07-2018', '2018-08-24 23:33:45', null, '3', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('4', '001-006-01-02-07-2018', '2018-08-25 00:20:25', null, '4', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('5', '001-006-01-02-07-2018', '2018-08-26 20:25:02', null, '5', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('6', '001-006-01-02-07-2018', '2018-08-31 09:04:12', null, '6', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('7', '001-006-01-02-07-2018', '2018-09-02 16:55:45', null, '7', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('8', '001-006-01-02-07-2018', '2018-09-03 00:03:32', null, '8', null, null, '8', null, null);
+INSERT INTO `rkm_medis` VALUES ('9', '001-006-01-02-07-2018', '2018-09-04 11:27:35', null, '9', null, null, '8', null, null);
 
 -- ----------------------------
 -- Table structure for settingan
@@ -10816,6 +10804,24 @@ CREATE TABLE `settingan` (
 -- Records of settingan
 -- ----------------------------
 INSERT INTO `settingan` VALUES ('1', '2018-09-04 11:27:22');
+
+-- ----------------------------
+-- Table structure for suratrujukan
+-- ----------------------------
+DROP TABLE IF EXISTS `suratrujukan`;
+CREATE TABLE `suratrujukan` (
+  `id` int(11) NOT NULL,
+  `nomor_pasien` varchar(225) NOT NULL,
+  `tgl_jam` datetime NOT NULL,
+  `kd_objek` int(11) NOT NULL,
+  `kd_headtotoe` int(11) NOT NULL,
+  `nomor_surat` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of suratrujukan
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for suratsakit
@@ -10876,7 +10882,9 @@ INSERT INTO `suratsehat` VALUES ('5', '001-006-01-02-07-2018', null, 'ad', '2', 
 DROP TABLE IF EXISTS `terapi`;
 CREATE TABLE `terapi` (
   `kd_terapi` int(11) NOT NULL,
-  `terapi` varchar(250) NOT NULL,
+  `terapi1` varchar(250) NOT NULL,
+  `terapi2` varchar(255) DEFAULT NULL,
+  `terapi3` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`kd_terapi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -10900,7 +10908,7 @@ CREATE TABLE `thorak` (
   `jantung_icor` varchar(15) DEFAULT NULL,
   `s1_s2` varchar(15) DEFAULT NULL,
   `s_tambahan` varchar(500) DEFAULT NULL,
-  `ket_tambahantr` varchar(500) DEFAULT NULL,
+  `ket_tambahan` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`kd_thorak`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -10940,13 +10948,20 @@ INSERT INTO `user` VALUES ('1', 'admin', 'd12254da81c0b155767984b3c0e721129b320e
 INSERT INTO `user` VALUES ('8', 'dokter', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', '2', '123123123123123123123123123123312', 'Laki - Laki ', 'Gajayana', '1405356066621233', 'assets/images/users_photo/recomfarmhouse_ascher-41.jpg', 'sudah', 'dr. dokter');
 INSERT INTO `user` VALUES ('9', 'petugas', '96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', '3', null, 'Laki - Laki ', 'Gajayana', '1405356066621234', 'assets/images/users_photo/recomfarmhouse_ascher-41.jpg', 'sudah', 'petugas');
 
-
-CREATE TABLE `suratrujukan` (
-  `id` int(11) NOT NULL,
-  `nomor_pasien` varchar(225) NOT NULL,
-  `tgl_jam` datetime NOT NULL,
-  `kd_objek` int(11) NOT NULL,
-  `kd_headtotoe` int(11) NOT NULL,
-  `nomor_surat` int(11) NOT NULL,
-  PRIMARY KEY (`id`);
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- ----------------------------
+-- View structure for draw
+-- ----------------------------
+DROP VIEW IF EXISTS `draw`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `draw` AS SELECT
+headtotoe.keluhan
+FROM
+pasien ,
+abdomen ,
+headtotoe ,
+kepala ,
+ekstermitas ,
+objek ,
+thorak ,
+rkm_medis ,
+assesment ,
+terapi ;
