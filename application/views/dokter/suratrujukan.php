@@ -1,3 +1,25 @@
+<style type="text/css">
+	table {
+  border-collapse: collapse;
+}
+table td, table th {
+  border: 1px solid black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+</style>
 <br>
 
 <div class="container">
@@ -278,21 +300,21 @@
 				Nyeri Tekan
 				</div>
 				<div class="col-1">
-				<table border="1">
-				  <tr width="90px">
-				    <td ><?=($abdomen['ny1'] == '1') ?  '✓': ' ' ?></td>
-				    <td ><?=($abdomen['ny2'] == '2') ?  '✓': '  '?></td>
-				    <td><?=($abdomen['ny3'] == '3') ?  '✓': '  '?></td>
+				<table >
+				  <tr>
+				    <td width="20" height="20"><?=($abdomen['ny1'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny2'] == '2') ?  '✓': '  '?></td>
+				    <td width="20" height="20"><?=($abdomen['ny3'] == '3') ?  '✓': '  '?></td>
 				  </tr>
 				  <tr>
-				    <td><?=($abdomen['ny4'] == '4') ?  '✓': ' ' ?></td>
-				    <td><?=($abdomen['ny5'] == '5') ?  '✓': ' ' ?></td>
-				    <td><?=($abdomen['ny6'] == '6') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny4'] == '4') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny5'] == '5') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny6'] == '6') ?  '✓': ' ' ?></td>
 				  </tr>
 				   <tr>
-				    <td><?=($abdomen['ny7'] == '7') ?  '✓': ' ' ?></td>
-				    <td><?=($abdomen['ny8'] == '8') ?  '✓': ' ' ?></td>
-				    <td><?=($abdomen['ny9'] == '9') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny7'] == '7') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny8'] == '8') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($abdomen['ny9'] == '9') ?  '✓': ' ' ?></td>
 				  </tr>
 				</table>
 				</div>
@@ -315,29 +337,29 @@
 				: Akral Hangat
 				</div>
 				
-				<table border="1">
-				  <tr>
-				    <td><?=($ekstermitas['ah1'] == '1') ?  '✓': ' ' ?></td>
-				    <td><?=($ekstermitas['ah2'] == '2') ?  '✓': ' ' ?></td>
-				  </tr>
-				  <tr>
-				    <td><?=($ekstermitas['ah3'] == '3') ?  '✓': ' ' ?></td>
-				    <td><?=($ekstermitas['ah4'] == '4') ?  '✓': ' ' ?></td>
-				  </tr>
+				<table>
+					<tr>
+						<td width="20" height="20"><?=($ekstermitas['ah1'] == '1') ?  '✓': ' ' ?></td>
+						<td width="20" height="20"><?=($ekstermitas['ah2'] == '2') ?  '✓': ' ' ?></td>
+					</tr>
+					<tr>
+						<td width="20" height="20"><?=($ekstermitas['ah3'] == '3') ?  '✓': ' ' ?></td>
+						<td width="20" height="20"><?=($ekstermitas['ah4'] == '4') ?  '✓': ' ' ?></td>
+					</tr>
 				</table>
 				;
 
 				<div class="col-1">
 				CRT
 				</div>
-				<table border="1">
+				<table >
 				  <tr>
-				    <td><?=($ekstermitas['crt1'] == '1') ?  '✓': ' ' ?></td>
-				    <td><?=($ekstermitas['crt2'] == '2') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['crt1'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['crt2'] == '2') ?  '✓': ' ' ?></td>
 				  </tr>
 				  <tr>
-				    <td><?=($ekstermitas['crt3'] == '3') ?  '✓': ' ' ?></td>
-				    <td><?=($ekstermitas['crt4'] == '4') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['crt3'] == '3') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['crt4'] == '4') ?  '✓': ' ' ?></td>
 				  </tr>
 				</table>
 				2 detik;
@@ -345,14 +367,14 @@
 				<div class="col-1">
 				Edema
 				</div>
-				<table border="1">
+				<table >
 				  <tr>
-				    <td><?=($ekstermitas['edm1'] == '1') ?  '✓': ' ' ?></td>
-				    <td><?=($ekstermitas['edm2'] == '2') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['edm1'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['edm2'] == '2') ?  '✓': ' ' ?></td>
 				  </tr>
 				  <tr>
-				    <td><?=($ekstermitas['edm3'] == '3') ?  '✓': ' ' ?></td>
-				    <td><?=($ekstermitas['edm4'] == '4') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['edm3'] == '3') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($ekstermitas['edm4'] == '4') ?  '✓': ' ' ?></td>
 				  </tr>
 				</table>
 				<div class="col-3">
