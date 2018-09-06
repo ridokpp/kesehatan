@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
-* controller untuk bagian petugas depan
+* controller untuk bagian Dokter
 */
 class Dokter_handler extends CI_Controller {
 	
@@ -252,6 +252,10 @@ class Dokter_handler extends CI_Controller {
 		}
 		$this->load->view('static/footer');
 	}
+
+	/*
+	* get nomor surat untuk disalurkan ke 
+	*/
 
 
 	// function headtotoe(){

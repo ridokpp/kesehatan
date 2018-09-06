@@ -130,6 +130,23 @@
 	function cetakSuratSakit(){
 		document.getElementById('planning').innerHTML='Surat Sakit, ';
 		// tambahkan ajax untuk get nomor surat
+		var jqxhr = $.get( "<?=base_url()?>Dokter_handler/", function(data) {
+			alert( "success" );
+		})
+			  .done(function() {
+			    alert( "second success" );
+			  })
+			  .fail(function() {
+			    alert( "error" );
+			  })
+			  .always(function() {
+			    alert( "finished" );
+			  });
+		 
+		// Set another completion function for the request above
+		jqxhr.always(function() {
+		  alert( "second finished" );
+		});		
 	}
 
 	// tambahkan string surat sehat. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
@@ -176,7 +193,6 @@
 		var pemeriksaanLab = $("#pemeriksaanLab").val();
 		$("#diagnosaPemeriksaanLab").val(pemeriksaanLab);
 	}
-
 </script>
 
 <h3 class="text-center mt-3">Pemeriksaan Dokter</h3>
@@ -190,7 +206,6 @@
 	      	<?= $pasien[0]->nomor_pasien?>
 	    </div>
 	</div>
-
 	<div class="row">
 		<div class="col" >
 			<h5><?php
@@ -198,14 +213,12 @@
 				$bulan = array("","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
 				echo $hari[date("w")].", ".date("j")." ".$bulan[date("n")]." ".date("Y"); ?></h5>	
 		</div>
-
 		<div class="col-1">
 			<body onload="setInterval('displayServerTime()', 1000);">
 				<h5><span id="clock"><?php echo date('H:i:s'); ?></span></h5>
 			</body>
 		</div>
 	</div>
-
 	<div class="row">
 		<div class="col border rounded">
 
@@ -360,10 +373,9 @@
 			</div>
 
 			<div class="form-group row">
-
 				<label class="col-4 col-form-label">Head To Toe</label>
 				<div class="input-group col-8">
-				    <textarea class="form-control" id="" name="text_headtotoe"></textarea>
+				    <textarea class="form-control" id="textareaHeadToToe" name="text_headtotoe"></textarea>
 			 	</div>
 			</div>
 		</div>
@@ -541,64 +553,6 @@
 				      	</div>
 				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST">
 					    	<div class="modal-body" >
-					    		<!-- <div class="form-group row">
-							    	<label class="col-sm-2 col-form-label">Nama</label>
-							    	<div class="input-group-prepend col">
-							      		<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Nama Lengkap" required="" >
-							    	</div>
-								</div>
-								<div class="form-group row">
-								    <label class="col-sm-2 col-form-label">NIK</label>
-								    <div class="input-group-prepend col">
-								      	<input type="text" class="form-control" id="" name="nik" placeholder="Nomor Induk Kependudukan" required="">
-								    </div>
-								</div>
-								<div class="form-group row">
-									<div class="col">	
-									    <label class="control-label"><strong>Tempat, Tanggal Lahir</strong></label> 
-									</div>
-								</div>
-								<div class="row">
-							 		<div class="col">
-								     	<div class="form-group row">
-								   			<label for="inputEmail3" class="col-sm-2 col-form-label">Tempat</label>
-								  		  	<div class="input-group-prepend col">
-								      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Tempat Lahir" required="">
-								    		</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-							    	<div class="col">
-								     	<div class="form-group row">
-								    		<label for="inputEmail3" class="col-sm-2 col-form-label">Tanggal</label>
-								    		<div class="input-group-prepend col">
-								      			<input type="date" class="form-control" name="tanggal" required="">
-								   			</div>
-										</div>
-									</div>
-							    </div>
-							    <div class="form-group row">
-								    <label class="col-sm-2 col-form-label">Gender</label>
-								    <div class="input-group-prepend col">
-								      	<select class="form-control" id="state_id" name="jenis_kelamin" required="">
-											<option value="Laki-laki">Laki - Laki</option>
-											<option value="Perempuan">Perempuan</option>
-										</select>	
-								    </div>
-								</div>
-							    <div class="form-group row">
-								    <label class="col-sm-2 col-form-label">Pekerjaan</label>
-								    <div class="input-group-prepend col">
-								      	<input type="text" class="form-control" id="" name="pekerjaan" placeholder="Pekerjaan" required="">
-								    </div>
-								</div>
-							    <div class="form-group row">
-								    <label class="col-sm-2 col-form-label">Alamat</label>
-								    <div class="input-group-prepend col">
-								      	<input type="text" class="form-control" id="" name="alamat" placeholder="Alamat" required="">
-								    </div>
-								</div> -->
 								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
 							    <div class="form-group row">
@@ -795,7 +749,7 @@
 									</div>
 								</div>
 								<div class="form-group row">
-								<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Wheezing</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="wheezing_kiri" placeholder="" value="1">
@@ -806,7 +760,7 @@
 								</div>
 
 								<div class="form-group row">
-								<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Ronkhi</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" placeholder="" value="1">
@@ -817,7 +771,7 @@
 								</div>
 
 								<div class="form-group row">
-								<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Vesikuler</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri" placeholder="" value="Tampak">
@@ -826,39 +780,43 @@
 									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan" placeholder="" value="Tak Tampak">
 									</div>						
 								</div>
-								 <fieldset class="form-group">
+								<fieldset class="form-group">
 								    <div class="row">
-								      <legend class="col-form-label col-sm-2 pt-0">Jantung</legend>
-									  <legend class="col-form-label col-sm-1 pt-0">:</legend>
-								      <div class="col-sm-5">
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="jantung_icor" value="Reguler" required="">
-								          <label class="form-check-label">
-								            Tampak
-								          </label>
+								      	<legend class="col-form-label col-sm-2 pt-0">Jantung</legend>
+									  	<legend class="col-form-label col-sm-1 pt-0">:</legend>
+								      	<div class="col-sm-5">
+								        	<div class="form-check">
+								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Reguler" required="">
+								          		<label class="form-check-label">
+								            		Tampak
+								          		</label>
+								        	</div>
+								       		<div class="form-check">
+								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Irreguler" required="">
+								          		<label class="form-check-label">
+								            		Tak Tampak
+								          		</label>
+								        	</div>
+								    		<div class="row">
+								      			<legend class="col-form-label col-sm-5 pt-0">S1 / S2</legend>
+								      			<div class="col-sm-5">
+								        			<div class="form-check">
+								          				<input class="form-check-input" type="radio" name="s1_s2" value="1" required="">
+								          				<label class="form-check-label">
+								            				Reguler
+								          				</label>
+								        			</div>
+								        			<div class="form-check">
+								          				<input class="form-check-input" type="radio" name="s1_s2" value="0" required="">
+								          				<label class="form-check-label">
+								            				Irreguler
+								          				</label>
+								        			</div>
+								        		</div>
+								        	</div>
 								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="jantung_icor" value="Irreguler" required="">
-								          <label class="form-check-label">
-								            Tak Tampak
-								          </label>
-								        </div>
-								    <div class="row">
-								      <legend class="col-form-label col-sm-5 pt-0">S1 / S2</legend>
-								      <div class="col-sm-5">
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="s1_s2" value="1" required="">
-								          <label class="form-check-label">
-								            Reguler
-								          </label>
-								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="s1_s2" value="0" required="">
-								          <label class="form-check-label">
-								            Irreguler
-								          </label>
-								        </div>
-								  </fieldset>
+								    </div>
+								</fieldset>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Suara Tambahan</label>
 									<div class="input-group-prepend col">
@@ -885,7 +843,7 @@
 									</div>
 								</div>
 								<div class="form-group row">
-								<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label"></label>
 									<label class="col-sm-1 col-form-label">Menurun</label>
 								 	<div class="input-group-prepend col-sm-3">
 									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Menurun" required="">
@@ -959,44 +917,44 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Akral Hangat</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ah1" value="1">
-									  <label class="form-check-label" >1</label>
-									</div>
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ah2" value="2">
-									  <label class="form-check-label" >2</label>
-									</div>
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ah3" value="3">
-									  <label class="form-check-label" >3</label>
-									</div>
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="ah4" value="4">
-									  <label class="form-check-label" >4</label>
-									</div>
+										<div class="form-check form-check-inline">
+									  		<input class="form-check-input" type="checkbox" name="ah1" value="1">
+									  		<label class="form-check-label" >1</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="ah2" value="2">
+										  <label class="form-check-label" >2</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="ah3" value="3">
+										  <label class="form-check-label" >3</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="ah4" value="4">
+										  <label class="form-check-label" >4</label>
+										</div>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">CRT</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="crt1" value="1">
-									  <label class="form-check-label" >1</label>
-									</div>
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="crt2" value="2">
-									  <label class="form-check-label" >2</label>
-									</div>
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="crt3" value="3">
-									  <label class="form-check-label" >3</label>
-									</div>
-									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="checkbox" name="crt4" value="4">
-									  <label class="form-check-label" >4</label>
-									</div>
-									<label class="col-sm-3 col-form-label">/2Detik</label>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="crt1" value="1">
+										  <label class="form-check-label" >1</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="crt2" value="2">
+										  <label class="form-check-label" >2</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="crt3" value="3">
+										  <label class="form-check-label" >3</label>
+										</div>
+										<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="crt4" value="4">
+										  <label class="form-check-label" >4</label>
+										</div>
+										<label class="col-sm-3 col-form-label">/2Detik</label>
 									</div>
 								</div>
 								<div class="form-group row">
@@ -1020,29 +978,31 @@
 									</div>
 									</div>
 								</div>
-								 <fieldset class="form-group">
+								<fieldset class="form-group">
 								    <div class="row">
-								      <legend class="col-form-label col-sm-2 pt-0"></legend>
-								      <div class="col-sm-4">
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="pitting" value="1" required="">
-								          <label class="form-check-label">
-								            non-pitting
-								          </label>
+										<legend class="col-form-label col-sm-2 pt-0"></legend>
+										<div class="col-sm-4">
+									        <div class="form-check">
+									        	<input class="form-check-input" type="radio" name="pitting" value="1" required="">
+									        	<label class="form-check-label">
+									            	non-pitting
+									          	</label>
+									        </div>
 								        </div>
+								        <div class="col-sm-4">
+								        	<div class="form-check">
+								          		<input class="form-check-input" type="radio" name="pitting" value="0" required="">
+								          		<label class="form-check-label">
+								            		pitting
+								          		</label>
+								        	</div>
 								        </div>
-								         <div class="col-sm-4">
-								        <div class="form-check">
-								          <input class="form-check-input" type="radio" name="pitting" value="0" required="">
-								          <label class="form-check-label">
-								            pitting
-								          </label>
-								        </div>
-								   </fieldset>
-								   <div class="form-group row">
+								    </div>
+								</fieldset>
+								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan Tambahan</label>
 									<div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="ket_tambahaneks" placeholder="Keterangan Tambahan"></textarea>
+										<textarea class="form-control" aria-label="With textarea" name="ket_tambahaneks" placeholder="Keterangan Tambahan"></textarea>
 									</div>
 								</div>	
 								<hr></hr>
@@ -1076,13 +1036,13 @@
 									</div>
 								</div>	
 								<div class="form-group row">
-								<label class="col-sm-3 col-form-label"></label>
+									<label class="col-sm-3 col-form-label"></label>
 									<div class="input-group-prepend col">/R
 									<input type="text" class="form-control" id="" name="terapi2" placeholder="..." >
 									</div>
 								</div>	
 								<div class="form-group row">
-								<label class="col-sm-3 col-form-label"></label>
+									<label class="col-sm-3 col-form-label"></label>
 									<div class="input-group-prepend col">/R
 									<input type="text" class="form-control" id="" name="terapi3" placeholder="..." >
 									</div>
@@ -1091,17 +1051,14 @@
 					    	<div class="modal-footer">
 					    		<button type="submit" class="btn btn-primary">Cetak</button>
 					    	</div>
-					    	</form>
-						</div>
+						</form>
 					</div>
-					<!-- SURAT RUJUKAN-->
 				</div>
-				<!-- SURAT RUJUKAN -->
+			</div>
+		</div>
 
-			</div>
-			<div class="col">
-				<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">
-			</div>
-		</form>
+		<div class="col">
+			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">
+		</div>
 	</div>
 </div>
