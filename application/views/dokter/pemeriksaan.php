@@ -129,11 +129,19 @@
 	// tambahkan string surat sakit. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
 	function cetakSuratSakit(){
 		document.getElementById('planning').innerHTML='Surat Sakit, ';
+		// tambahkan ajax untuk get nomor surat
 	}
 
 	// tambahkan string surat sehat. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
 	function cetakSuratSehat(){
 		document.getElementById('planning').innerHTML='Surat Sehat, ';
+		// tambahkan ajax untuk get nomor surat
+	}
+
+	// tambahkan string surat sehat. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
+	function cetakSuratRujukan(){
+		document.getElementById('planning').innerHTML='Surat Rujukan, ';
+		// tambahkan ajax untuk get nomor surat
 	}
 
 	function getassesment(){
@@ -146,23 +154,27 @@
 		// CREATE PRIMARY SELECT ELEMENT
 		var primarySelected = $("#primary").select2('data');
 		for (i in primarySelected){
-			var newOption = new Option(primarySelected[i].text, primarySelected[i].id, true, true);
+			var newOption = new Option(primarySelected[i].text, primarySelected[i].text, true, true);
 			$('#diagnosaPrimaryId').append(newOption).trigger('change');
 		}
 
 		// CREATE SECONDARY SELECT ELEMENT
 		var secondarySelected = $("#secondary").select2('data');
 		for (i in secondarySelected){
-			var newOption = new Option(secondarySelected[i].text, secondarySelected[i].id, true, true);
+			var newOption = new Option(secondarySelected[i].text, secondarySelected[i].text, true, true);
 			$('#diagnosaSecondaryId').append(newOption).trigger('change');
 		}
 
 		// CREATE LAINLAIN SELECT ELEMENT
 		var lainlainSelected = $("#lain").select2('data');
 		for (i in lainlainSelected){
-			var newOption = new Option(lainlainSelected[i].text, lainlainSelected[i].id, true, true);
+			var newOption = new Option(lainlainSelected[i].text, lainlainSelected[i].text, true, true);
 			$('#diagnosaLainId').append(newOption).trigger('change');
 		}
+
+		// get and set element text area
+		var pemeriksaanLab = $("#pemeriksaanLab").val();
+		$("#diagnosaPemeriksaanLab").val(pemeriksaanLab);
 	}
 
 </script>
@@ -399,6 +411,7 @@
 				</div> 
 			</form>
 		</div>
+		<textarea name="pemeriksaanLab" placeholder="pemeriksaan laboratorium" id="pemeriksaanLab"></textarea>
 	</div>
 
 	<div class="row">
@@ -612,27 +625,27 @@
 								    <label class="col-sm-2"></label>
 								      <div class="col-sm-3">
 								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi" value="CM">
+								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="CM">
 								          <label class="form-check-label">
 								            CM
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi" value="Iteris">
+								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Apatis">
 								          <label class="form-check-label">
-								            Iteris
+								            Apatis
 								          </label>
 								        </div>
 								       </div>
 								       <div class="col-sm-3">
 								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi" value="Delirium">
+								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Delirium">
 								          <label class="form-check-label">
 								            Delirium
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi" value="Somnolen">
+								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Somnolen">
 								          <label class="form-check-label">
 								            Somnolen
 								          </label>
@@ -640,13 +653,13 @@
 								       </div>
 								       <div class="col-sm-3">
 								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi" value="Stupor">
+								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Stupor">
 								          <label class="form-check-label">
 								            Stupor
 								          </label>
 								        </div>
 								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi" value="Coma">
+								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Coma">
 								          <label class="form-check-label">
 								            Coma
 								          </label>
@@ -1053,6 +1066,8 @@
 										<select id="diagnosaLainId" name="diagnosaLain[]" multiple="multiple" style="width: 100%">
 										</select>
 									</div>
+
+									<textarea id="diagnosaPemeriksaanLab" name="diagnosaPemeriksaanLab"></textarea>
 								</div>	
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Terapi</label>

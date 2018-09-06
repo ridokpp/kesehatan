@@ -1,22 +1,23 @@
+<?php
+?>
 <style type="text/css">
-	table {
+table {
   border-collapse: collapse;
+  margin: 0 auto;
 }
-table td, table th {
-  border: 1px solid black;
+table td {
+  border: 1px solid black; 
 }
-table tr:first-child th {
+table tr:first-child td {
   border-top: 0;
+}
+table tr td:first-child {
+  border-left: 0;
 }
 table tr:last-child td {
   border-bottom: 0;
 }
-table tr td:first-child,
-table tr th:first-child {
-  border-left: 0;
-}
-table tr td:last-child,
-table tr th:last-child {
+table tr td:last-child {
   border-right: 0;
 }
 </style>
@@ -53,25 +54,37 @@ table tr th:last-child {
 			<div class="row">
 				<div class="col mt-4">
 					<div class="row">
-						Perihal
-					<div class= offset-1>
-					:
-					</div>	
-					<div class="col-9">
-					Rujukan Pasien
+						<div class="row col-2 ">
+							Perihal
+						</div>
+						<div class= "offset-1">
+						:
+						</div>	
+						<div class="col-9">
+							Rujukan Pasien
+						</div>
 					</div>
-				</div>
-				<div class="row">
-						No. Surat
-						<div class= offset-1>
-					:
-					</div>	
-					<div class="col-9">
-					......... / 003 / .......... / 2018
-					</div>
-				</div>
 					<div class="row">
+						<div class="row col-2 ">
+							No. Surat
+						</div>
+						<div class= "offset-1">
+						:
+						</div>	
+						<div class="col-9">
+							<?=($nomor_surat < 10 ) ? "00".$nomor_surat : "0".$nomor_surat ?> / 003 / <?=date('0m / Y')?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="row col-2 ">
 						Lampiran
+						</div>
+						<div class= "offset-1">
+						:
+						</div>	
+						<div class="col-9">
+							..............................................................
+						</div>
 					</div>
 				</div>
 				<div class="col-4">
@@ -79,13 +92,13 @@ table tr th:last-child {
 						Kepada YTH.
 					</div>
 					<div class="row"">
-						Dr. <?=$nama_user?>
+						Dr.	________________________________________
 					</div>
 					<div class="row">
-						di RS
+						di RS ______________________________________
 					</div>
 					<div class="row">
-						Kota
+						Kota ______________________________________
 					</div>
 				</div>	
 			</div>
@@ -101,7 +114,7 @@ table tr th:last-child {
 					:
 				</div>	
 				<div class="col-9">
-					<?=$pasien[0]->nama?>
+					<?=ucwords($pasien[0]->nama)?>
 				</div>		
 			</div>
 			<div class="row">
@@ -123,7 +136,7 @@ table tr th:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
+					<?=ucwords($pasien[0]->tmp_lahir).", ".tgl_indo($pasien[0]->tgl_lahir)?>
 				</div>	
 			</div>
 			<div class="row">
@@ -134,7 +147,7 @@ table tr th:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$pasien[0]->jkelamin?>
+					<?=ucwords($pasien[0]->jkelamin)?>
 				</div>
 			</div>
 			<div class="row">
@@ -145,7 +158,7 @@ table tr th:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$pasien[0]->pekerjaan?>
+					<?=ucwords($pasien[0]->pekerjaan)?>
 				</div>
 			</div>
 			<div class="row mb-4">
@@ -156,7 +169,7 @@ table tr th:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$pasien[0]->alamat?>
+					<?=ucwords($pasien[0]->alamat)?>
 				</div>
 			</div>
 			<div class="row mb-4">
@@ -173,7 +186,7 @@ table tr th:last-child {
 					:
 				</div>	
 				<div class="col-9">
-					<?=$headtotoe['keluhan'];?>
+					<?=ucwords($headtotoe['keluhan'])?>
 				</div>		
 			</div>
 			<div class="row">
@@ -184,7 +197,8 @@ table tr th:last-child {
 					:
 				</div>	
 				<div class="col-9">
-					E <?=$headtotoe['GCS_E']?>  V <?=$headtotoe['GCS_V']?>   M <?=$headtotoe['GCS_M']?>  ( CM, Apatis, delirium, somnolen, stupor, coma).*)
+					E <?=$headtotoe['GCS_E']?> &nbsp;&nbsp;  V <?=$headtotoe['GCS_V']?> &nbsp;&nbsp;  M <?=$headtotoe['GCS_M']?> &nbsp;&nbsp; 
+					( <?= (in_array("CM", $GCS_opsi)) ? "CM" : "<strike>CM</strike>"?>, <?= (in_array("Apatis", $GCS_opsi)) ? "Apatis" : "<strike>Apatis</strike>"?>, <?= (in_array("Delirium", $GCS_opsi)) ? "Delirium" : "<strike>Delirium</strike>"?>, <?= (in_array("Somnolen", $GCS_opsi)) ? "Somnolen" : "<strike>Somnolen</strike>"?>, <?= (in_array("Stupor", $GCS_opsi)) ? "Stupor" : "<strike>Stupor</strike>"?>, <?= (in_array("Coma", $GCS_opsi)) ? "Coma" : "<strike>Coma</strike>"?>).*)
 				</div>		
 			</div>
 			<div class="row">
@@ -237,7 +251,7 @@ table tr th:last-child {
 				</div>
 				<div class="col-9">
 				
-				Anemis <?=($kepala['anemis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['anemis_kanan'] == '1') ? '+' : '-'?> Ikterik <?=($kepala['ikterik_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['ikterik_kanan'] == '1') ? '+' : '-'?> Cianosis <?=($kepala['cianosis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['cianosis_kanan'] == '1') ? '+' : '-'?> Deformitas <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> Refleksi cahaya <?=($kepala['refchy_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['refchy_kanan'] == '1') ? '+' : '-'?> <?=($kepala['refchyopsi'] == '1') ? 'Isokor' : 'Anisokor'?>.*)
+				Anemis <?=($kepala['anemis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['anemis_kanan'] == '1') ? '+' : '-'?> Ikterik <?=($kepala['ikterik_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['ikterik_kanan'] == '1') ? '+' : '-'?> Cianosis <?=($kepala['cianosis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['cianosis_kanan'] == '1') ? '+' : '-'?> Deformitas <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> Refleksi cahaya <?=($kepala['refchy_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['refchy_kanan'] == '1') ? '+' : '-'?> <?=($kepala['refchyopsi'] == '1') ? 'Isokor / <strike>Anisokor</strike>' : '<strike>Isokor</strike> / Anisokor'?>.*)
 				</div>
 				<div class="col-5 offset-2">
 				Keterangan tambahan :  <?=$kepala['ket_tambahan']?>
@@ -253,26 +267,26 @@ table tr th:last-child {
 				</div>
 				:
 				<div class="col-3">
-				<?=($thorak['metris'] == '1') ? 'Simetris' : 'Asimetris'?>.*)
+					<?=($thorak['metris'] == '1') ? 'Simetris / <strike>Asimetris</strike>' : '<strike>Simetris</strike> / Asimetris'?>.*)
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-1 offset-2">
-				Jantung
+					Jantung
 				</div>
 				:
 				<div class="col-4">
-				Ictus cordis <?=($thorak['jantung_icor'] == '1') ? 'Tampak' : 'Tak Tampak'?>.*)
-				</div>
-			</div>
-			<div class="row-2">
-				<div class="col-5 offset-3">
-				S1-S2 <?=($thorak['s1_s2'] == '1') ? 'Reguler' : 'Irreguler'?>.*), Suara tambahan <?=$thorak['s_tambahan']?>
+					Ictus cordis <?=($thorak['jantung_icor'] == '1') ? 'Tampak / <strike>Tak Tampak</strike>' : '<strike>Tampak</strike> / Tak Tampak'?>.*)
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-5 offset-2">
+				<div class="col offset-3">
+				S1-S2 <?=($thorak['s1_s2'] == '1') ? 'Reguler / <strike>Irreguler</strike>' : '<strike>Reguler</strike> / Irreguler'?>.*), Suara tambahan <?=$thorak['s_tambahan']?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col offset-2">
 				Keterangan tambahan :  <?=$thorak['ket_tambahan']?>
 				</div>
 			</div>
@@ -282,16 +296,29 @@ table tr th:last-child {
 				</div>
 					:
 				<div class="col-4">
-				BU <?php if($abdomen['BU'] == '0'){ 
-						echo "Normal"; 
-					} elseif ($abdomen['BU'] == '1') {
-						echo "Meningkat";
-					} elseif ($abdomen['BU'] == '2') {
-						echo "Menurun"; 
-					} elseif ($abdomen['BU'] == '3') { 
+				BU <?php
+				if($abdomen['BU'] == 'Normal'){ 
+						echo "Normal / "; 
+						echo "<strike>Meningkat</strike> / ";
+						echo "<strike>Menurun</strike> / ";
+						echo "<strike>Negatif</strike>";
+					} elseif ($abdomen['BU'] == 'Meningkat') {
+						echo "<strike>Normal</strike> / ";
+						echo "Meningkat / ";
+						echo "<strike>Menurun</strike> / ";
+						echo "<strike>Negatif</strike>";
+					} elseif ($abdomen['BU'] == 'Menurun') {
+						echo "<strike>Normal</strike> / ";
+						echo "<strike>Meningkat<strike> / ";
+						echo "Menurun / ";
+						echo "<strike>Negatif</strike>";
+					} elseif ($abdomen['BU'] == 'Negatif') { 
+						echo "<strike>Normal</strike> / ";
+						echo "<strike>Meningkat<strike> / ";
+						echo "<strike>Menurun</strike> / ";
 						echo "Negatif";
 					}
-					?>.*
+					?>.*)
 				</div>
 			</div>
 			<div class="row">
@@ -393,11 +420,64 @@ table tr th:last-child {
 			<div class="row">
 				<div class="col-2"> 
 					Diagnosa		
-				</div>
-				<div class="col-0">
-					:
-				</div>
-				<div class="col-7">
+				</div>:
+				<div class="col">
+					<div class="row mb-2">
+						<div class="col-2">
+							Primer
+						</div>:
+						<div class="col">
+							<?php 
+							echo "<ol>";
+							foreach ($diagnosaPrimer as $key => $value) {
+								echo "<li>";
+								echo $value;
+								echo "</li>";
+							}
+							echo "</ol>";
+							?>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-2">
+							Sekunder 
+						</div>:
+						<div class="col">
+							<?php 
+							echo "<ol>";
+							foreach ($diagnosaSekunder as $key => $value) {
+								echo "<li>";
+								echo $value;
+								echo "</li>";
+							}
+							echo "</ol>";
+							?>
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="col-2">
+							Lain-lain 
+						</div>:
+						<div class="col">
+							<?php 
+							echo "<ol>";
+							foreach ($diagnosaLain as $key => $value) {
+								echo "<li>";
+								echo $value;
+								echo "</li>";
+							}
+							echo "</ol>";
+							?>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2">
+							Pemeriksaan Lab 
+						</div>:
+						<div class="col">
+							<?="<ol><li>".$diagnosaPemeriksaanLab."</li></ol>"?>
+						</div>
+					</div>
 				<!-- <?=$diagnosa?> -->
 				</div>
 			</div>
@@ -446,7 +526,7 @@ table tr th:last-child {
 						Pemeriksa,
 					</div>
 					<div class="row mt-5">
-						<?=$nama_user?>
+						<?=ucwords($nama_user)?>
 					</div>
 					<div class="row">
 						SIP : <?=$sip?>

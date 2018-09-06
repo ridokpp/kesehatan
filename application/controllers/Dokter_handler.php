@@ -42,7 +42,7 @@ class Dokter_handler extends CI_Controller {
 				$insertSuratSehat['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
 				$data['nomor_surat']				= $insertSuratSehat['nomor_surat'];
 			}
-			var_dump($this->Kesehatan_M->create('suratsehat',$insertSuratSehat));
+			$this->Kesehatan_M->create('suratsehat',$insertSuratSehat);
 			$this->load->view('dokter/suratsehat',$data);
 			
 		}elseif ($surat == 'suratsakit') {
@@ -110,16 +110,16 @@ class Dokter_handler extends CI_Controller {
 			$data['kd_thorak']				= $data['kd_thorak']->message;
 
 
-			$dataAbdomen['BU'] 			= $this->input->post('BU');
-			$dataAbdomen['ny1'] 		= $this->input->post('ny1');
-			$dataAbdomen['ny2'] 		= $this->input->post('ny2');
-			$dataAbdomen['ny3'] 		= $this->input->post('ny3');
-			$dataAbdomen['ny4'] 		= $this->input->post('ny4');
-			$dataAbdomen['ny5'] 		= $this->input->post('ny5');
-			$dataAbdomen['ny6'] 		= $this->input->post('ny6');
-			$dataAbdomen['ny7'] 		= $this->input->post('ny7');
-			$dataAbdomen['ny8'] 		= $this->input->post('ny8');
-			$dataAbdomen['ny9'] 		= $this->input->post('ny9');
+			$dataAbdomen['BU'] 				= $this->input->post('BU');
+			$dataAbdomen['ny1'] 			= $this->input->post('ny1');
+			$dataAbdomen['ny2'] 			= $this->input->post('ny2');
+			$dataAbdomen['ny3'] 			= $this->input->post('ny3');
+			$dataAbdomen['ny4'] 			= $this->input->post('ny4');
+			$dataAbdomen['ny5'] 			= $this->input->post('ny5');
+			$dataAbdomen['ny6'] 			= $this->input->post('ny6');
+			$dataAbdomen['ny7'] 			= $this->input->post('ny7');
+			$dataAbdomen['ny8'] 			= $this->input->post('ny8');
+			$dataAbdomen['ny9'] 			= $this->input->post('ny9');
 			$dataAbdomen['hpmgl'] 			= $this->input->post('hpmgl');
 			$dataAbdomen['spmgl'] 			= $this->input->post('spmgl');
 			$dataAbdomen['ket_tambahan']	= $this->input->post('ket_tambahanab');
@@ -127,56 +127,66 @@ class Dokter_handler extends CI_Controller {
 			$data['kd_abdomen']				= $data['kd_abdomen']->message;
 			
 
-			$dataEkstermitas['ah1'] = $this->input->post('ah1');
-			$dataEkstermitas['ah2'] = $this->input->post('ah2');
-			$dataEkstermitas['ah3'] = $this->input->post('ah3');
-			$dataEkstermitas['ah4'] = $this->input->post('ah4');
-			$dataEkstermitas['crt1'] = $this->input->post('crt1');
-			$dataEkstermitas['crt2'] = $this->input->post('crt2');
-			$dataEkstermitas['crt3'] = $this->input->post('crt3');
-			$dataEkstermitas['crt4'] = $this->input->post('crt4');
-			$dataEkstermitas['edm1'] = $this->input->post('edm1');
-			$dataEkstermitas['edm2'] = $this->input->post('edm2');
-			$dataEkstermitas['edm3'] = $this->input->post('edm3');
-			$dataEkstermitas['edm4'] = $this->input->post('edm4');
-			$dataEkstermitas['pitting'] = $this->input->post('pitting');
-			$dataEkstermitas['ket_tambahan'] = $this->input->post('ket_tambahaneks');
-			$data['kd_ekstermitas'] = json_decode($this->Kesehatan_M->create_id('ekstermitas',$dataEkstermitas));
-			$data['kd_ekstermitas'] = $data['kd_ekstermitas']->message;
+			$dataEkstermitas['ah1']			= $this->input->post('ah1');
+			$dataEkstermitas['ah2']			= $this->input->post('ah2');
+			$dataEkstermitas['ah3']			= $this->input->post('ah3');
+			$dataEkstermitas['ah4']			= $this->input->post('ah4');
+			$dataEkstermitas['crt1']		= $this->input->post('crt1');
+			$dataEkstermitas['crt2']		= $this->input->post('crt2');
+			$dataEkstermitas['crt3']		= $this->input->post('crt3');
+			$dataEkstermitas['crt4']		= $this->input->post('crt4');
+			$dataEkstermitas['edm1']		= $this->input->post('edm1');
+			$dataEkstermitas['edm2']		= $this->input->post('edm2');
+			$dataEkstermitas['edm3']		= $this->input->post('edm3');
+			$dataEkstermitas['edm4']		= $this->input->post('edm4');
+			$dataEkstermitas['pitting'] 	= $this->input->post('pitting');
+			$dataEkstermitas['ket_tambahan']= $this->input->post('ket_tambahaneks');
+			$data['kd_ekstermitas'] 		= json_decode($this->Kesehatan_M->create_id('ekstermitas',$dataEkstermitas));
+			$data['kd_ekstermitas'] 		= $data['kd_ekstermitas']->message;
 			
 
-			$dataTerapi['terapi1'] = $this->input->post('terapi1');
-			$dataTerapi['terapi2'] = $this->input->post('terapi2');
-			$dataTerapi['terapi3'] = $this->input->post('terapi3');
-			$data['kd_terapi'] = json_decode($this->Kesehatan_M->create_id('terapi',$dataTerapi));
-			$data['kd_terapi'] = $data['kd_terapi']->message;
+			$dataTerapi['terapi1'] 			= $this->input->post('terapi1');
+			$dataTerapi['terapi2'] 			= $this->input->post('terapi2');
+			$dataTerapi['terapi3'] 			= $this->input->post('terapi3');
+			$data['kd_terapi'] 				= json_decode($this->Kesehatan_M->create_id('terapi',$dataTerapi));
+			$data['kd_terapi'] 				= $data['kd_terapi']->message;
 
 
-			$dataHeadtotoe['keluhan'] = $this->input->post('keluhan');
-			$dataHeadtotoe['GCS_E'] = $this->input->post('GCS_E');
-			$dataHeadtotoe['GCS_V'] = $this->input->post('GCS_V');
-			$dataHeadtotoe['GCS_M'] = $this->input->post('GCS_M');
-			$dataHeadtotoe['GCS_opsi'] = $this->input->post('GCS_opsi');
-			$dataHeadtotoe['kd_kepala'] = $data['kd_kepala'];
-			$dataHeadtotoe['kd_thorak'] = $data['kd_thorak'];
-			$dataHeadtotoe['kd_abdomen'] = $data['kd_abdomen'];
-			$dataHeadtotoe['kd_ekstermitas'] = $data['kd_ekstermitas'];
-			$dataHeadtotoe['lain_lain'] = $this->input->post('lain_lain');
-			$dataHeadtotoe['kd_terapi'] = $data['kd_terapi'];
-			// var_dump($dataHeadtotoe);
-			$data['kd_headtotoe'] = json_decode($this->Kesehatan_M->create_id('headtotoe',$dataHeadtotoe));
+			$dataHeadtotoe['keluhan'] 		= $this->input->post('keluhan');
+			$dataHeadtotoe['GCS_E'] 		= $this->input->post('GCS_E');
+			$dataHeadtotoe['GCS_V'] 		= $this->input->post('GCS_V');
+			$dataHeadtotoe['GCS_M'] 		= $this->input->post('GCS_M');
+			
+			$GCS_opsi				 		= $this->input->post('GCS_opsi[]');
+			$dataHeadtotoe['GCS_opsi'] = '';
+			foreach ($GCS_opsi as $key => $value) {
+				$dataHeadtotoe['GCS_opsi'] .= $value." ";
+			}
+
+			$dataHeadtotoe['kd_kepala'] 	= $data['kd_kepala'];
+			$dataHeadtotoe['kd_thorak'] 	= $data['kd_thorak'];
+			$dataHeadtotoe['kd_abdomen']	= $data['kd_abdomen'];
+			$dataHeadtotoe['kd_ekstermitas']= $data['kd_ekstermitas'];
+			$dataHeadtotoe['lain_lain']		= $this->input->post('lain_lain');
+			$dataHeadtotoe['kd_terapi'] 	= $data['kd_terapi'];
+			$data['kd_headtotoe'] 			= json_decode($this->Kesehatan_M->create_id('headtotoe',$dataHeadtotoe));
 
 
+			$data['kepala'] 				= $dataKepala;
+			$data['thorak'] 				= $dataThorak;
+			$data['abdomen'] 				= $dataAbdomen;
+			$data['ekstermitas'] 			= $dataEkstermitas;
+			$data['headtotoe'] 				= $dataHeadtotoe;
+			$data['terapi'] 				= $dataTerapi;
 
-			$data['kepala'] = $dataKepala;
-			$data['thorak'] = $dataThorak;
-			$data['abdomen'] = $dataAbdomen;
-			$data['ekstermitas'] = $dataEkstermitas;
-			$data['headtotoe'] = $dataHeadtotoe;
-			$data['terapi'] = $dataTerapi;
 
-
-			$nomor_surat 			= $this->Kesehatan_M->readCol('suratrujukan',array('MONTH(tanggal)'=>date('m'),'YEAR(tanggal)'=>date('Y')),array('MAX(nomor_surat) AS nomor_surat'))->result();
+			$nomor_surat 							= $this->Kesehatan_M->readCol('suratrujukan',array(
+																										'MONTH(tanggal)'	=>date('m'),
+																										'YEAR(tanggal)'		=>date('Y')
+																								),array(
+																										'MAX(nomor_surat) AS nomor_surat'
+																								)
+																				)->result();
 			$insertSuratRujukan['nomor_pasien']		= $data['nomor_pasien'];
 
 			$insertSuratRujukan['kd_objek']			= $data['objek'][0]->kd_objek;
@@ -190,11 +200,54 @@ class Dokter_handler extends CI_Controller {
 				$insertSuratRujukan['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
 				$data['nomor_surat']				= $insertSuratRujukan['nomor_surat'];
 			}
-			// var_dump($insertSuratRujukan);
-			$this->Kesehatan_M->create('suratrujukan',$insertSuratRujukan);
 
-			// echo "<pre>";
-			// var_dump($data);
+			// masukkan data ke surat rujukan
+			$data['nomor_surat'] 	= json_decode($this->Kesehatan_M->create_id('suratrujukan',$insertSuratRujukan));
+			$data['nomor_surat'] 	= $data['nomor_surat']->message;
+			$data['GCS_opsi'] 		= $this->input->post('GCS_opsi');
+
+
+
+			// baca kd_assessment paling maksimal pada tabel clone_diagnosa
+			$kd_assessmentMax = $this->Kesehatan_M->rawQuery("SELECT MAX(kd_assessment) AS kd_assessment FROM clone_diagnosa")->result();
+
+			// set nilai kd_assessment yang akan masuk ke tabel assessment
+			if($kd_assessmentMax[0]->kd_assessment == NULL){
+				$kd_assessment = 1;
+			}else{
+				$kd_assessment = $kd_assessmentMax[0]->kd_assessment + 1;
+			}
+
+			// ambil value bagian diagnosa dari modal form. masing masing variabel berupa array
+			$data['diagnosaPrimer'] 			= $this->input->post('diagnosaPrimary[]');
+			$data['diagnosaSekunder'] 			= $this->input->post('diagnosaSecondary[]');
+			$data['diagnosaLain'] 				= $this->input->post('diagnosaLain[]');
+			$data['diagnosaPemeriksaanLab'] 	= $this->input->post('diagnosaPemeriksaanLab');
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya primer
+			$stringDiagnosa 			= "INSERT INTO clone_diagnosa VALUES";
+			foreach ($data['diagnosaPrimer'] as $key => $value) {
+				$stringDiagnosa		 	.= "(NULL,'$kd_assessment','primer','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya sekunder
+			foreach ($data['diagnosaSekunder'] as $key => $value) {
+				$stringDiagnosa 		.= "(NULL,'$kd_assessment','sekunder','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya lainlain
+			foreach ($data['diagnosaLain'] as $key => $value) {
+				$stringDiagnosa 	 	.= "(NULL,'$kd_assessment','lainlain','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya adalah pemeriksaan lab
+			$stringDiagnosa				.= "(NULL,'$kd_assessment','pemeriksaanLab','".$data['diagnosaPemeriksaanLab']."')";
+
+			$stringDiagnosa				= rtrim($stringDiagnosa,", ");
+
+			// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel clone_diagnosa ** untuk assessment non-form masuk ke tabel assessment
+			$this->Kesehatan_M->rawQuery($stringDiagnosa);
+
 			$this->load->view('dokter/suratrujukan',$data);
 		}
 		$this->load->view('static/footer');
@@ -361,7 +414,7 @@ class Dokter_handler extends CI_Controller {
 			$data = array();
 			foreach ($dataReturn as $key => $value) {
 				$data[$key]['id'] = $value->Kode_ICD;
-				$data[$key]['text'] = $value->Kode_ICD." / ".$value->Diskripsi." / ".$value->Diagnosa;
+				$data[$key]['text'] = $value->Kode_ICD." / ".$value->Diskripsi;
 			}
 			echo json_encode($data);
 		}else{

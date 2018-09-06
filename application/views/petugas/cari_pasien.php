@@ -23,6 +23,7 @@ $(document).ready(function() {
 		escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
 		minimumInputLength: 1,
 	});
+	$('#nama_or_nomor').select2('open');
 });
 </script>
 <div class="container mt-5">
@@ -38,7 +39,7 @@ $(document).ready(function() {
 						<div class="col">
 						 	<div class="form-group row">
 							    <div class="input-group col-8 offset-2">
-							      	<select class="js-data-example-ajax form-control" name="nama_or_nomor" id="nama_or_nomor">
+							      	<select autofocus="autofocus" class="js-data-example-ajax form-control" name="nama_or_nomor" id="nama_or_nomor">
 							      		<option value="" selected="selected"></option>
 							      	</select>
 							    </div>
