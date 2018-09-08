@@ -309,12 +309,12 @@ table tr td:last-child {
 						echo "<strike>Negatif</strike>";
 					} elseif ($abdomen['BU'] == 'Menurun') {
 						echo "<strike>Normal</strike> / ";
-						echo "<strike>Meningkat<strike> / ";
+						echo "<strike>Meningkat</strike> / ";
 						echo "Menurun / ";
 						echo "<strike>Negatif</strike>";
 					} elseif ($abdomen['BU'] == 'Negatif') { 
 						echo "<strike>Normal</strike> / ";
-						echo "<strike>Meningkat<strike> / ";
+						echo "<strike>Meningkat</strike> / ";
 						echo "<strike>Menurun</strike> / ";
 						echo "Negatif";
 					}

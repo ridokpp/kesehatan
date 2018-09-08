@@ -79,6 +79,55 @@
 			errorClass: "my-error-class",
 			validClass: "my-valid-class"
 		});
+
+		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+		$('#modalSuratSakit').on('hidden.bs.modal', function () {
+			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sakit/<?=$pasien[0]->nomor_pasien?>", function(data) {
+				data = JSON.parse(data);
+				if (data[0].nomor_surat < 10 ) {
+					data[0].nomor_surat = "00"+data[0].nomor_surat;
+				}else{
+					data[0].nomor_surat = "0"+data[0].nomor_surat;
+				}
+				document.getElementById('planning').innerHTML +='Surat Sakit : '+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ";
+			})
+			.fail(function() {
+			alert( "error" );
+			})
+		});
+
+		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+		$('#modalSuratSehat').on('hidden.bs.modal', function () {
+			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sehat/<?=$pasien[0]->nomor_pasien?>", function(data) {
+				data = JSON.parse(data);
+				if (data[0].nomor_surat < 10 ) {
+					data[0].nomor_surat = "00"+data[0].nomor_surat;
+				}else{
+					data[0].nomor_surat = "0"+data[0].nomor_surat;
+				}
+				document.getElementById('planning').innerHTML +='Surat Sehat : '+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ";
+			})
+			.fail(function() {
+			alert( "error" );
+			})
+		});
+
+		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+		$('#modalSuratRujukan').on('hidden.bs.modal', function () {
+			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/rujukan/<?=$pasien[0]->nomor_pasien?>", function(data) {
+				data = JSON.parse(data);
+				if (data[0].nomor_surat < 10 ) {
+					data[0].nomor_surat = "00"+data[0].nomor_surat;
+				}else{
+					data[0].nomor_surat = "0"+data[0].nomor_surat;
+				}
+				document.getElementById('planning').innerHTML +='Surat Sakit : '+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ";
+			})
+			.fail(function() {
+			alert( "error" );
+			})
+		});
+
 	});	
 
 	// setting tampilan live clock
@@ -126,41 +175,7 @@
 		document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
 	}
 
-	// tambahkan string surat sakit. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
-	function cetakSuratSakit(){
-		document.getElementById('planning').innerHTML='Surat Sakit, ';
-		// tambahkan ajax untuk get nomor surat
-		var jqxhr = $.get( "<?=base_url()?>Dokter_handler/", function(data) {
-			alert( "success" );
-		})
-			  .done(function() {
-			    alert( "second success" );
-			  })
-			  .fail(function() {
-			    alert( "error" );
-			  })
-			  .always(function() {
-			    alert( "finished" );
-			  });
-		 
-		// Set another completion function for the request above
-		jqxhr.always(function() {
-		  alert( "second finished" );
-		});		
-	}
-
-	// tambahkan string surat sehat. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
-	function cetakSuratSehat(){
-		document.getElementById('planning').innerHTML='Surat Sehat, ';
-		// tambahkan ajax untuk get nomor surat
-	}
-
-	// tambahkan string surat sehat. KURANG NOMOR SURAT SAKIT. HARUS DISERTAI NOMOR SURAT
-	function cetakSuratRujukan(){
-		document.getElementById('planning').innerHTML='Surat Rujukan, ';
-		// tambahkan ajax untuk get nomor surat
-	}
-
+	// untuk menyalurkan kolom assessment pada halaman pemeriksaan ke modal untuk masuk ke headtotoe
 	function getassesment(){
 
 		// set select2 untuk clear all option yang ada. (restart). defaultya kosong
@@ -193,6 +208,11 @@
 		var pemeriksaanLab = $("#pemeriksaanLab").val();
 		$("#diagnosaPemeriksaanLab").val(pemeriksaanLab);
 	}
+
+	// meneruskan textarea headtotoe ke form pemeriksaan karena diluar tag form. disebabkan struktur desain dan real condition
+	function headtotoeToPemeriksaan(){
+		$('#textareaHeadToToePemeriksaan').val($('#textareaHeadToToe').val());
+	} 
 </script>
 
 <h3 class="text-center mt-3">Pemeriksaan Dokter</h3>
@@ -371,71 +391,74 @@
 					<?=$objek[0]->TAx?> &deg;C
 				</div>
 			</div>
-
 			<div class="form-group row">
 				<label class="col-4 col-form-label">Head To Toe</label>
 				<div class="input-group col-8">
-				    <textarea class="form-control" id="textareaHeadToToe" name="text_headtotoe"></textarea>
+				    <textarea class="form-control" id="textareaHeadToToe" name="text_headtotoe" onchange="headtotoeToPemeriksaan()"></textarea>
 			 	</div>
 			</div>
 		</div>
 	</div>
+	<!-- FORM UNTUK SUBMIT PEMERIKSAAN -->
+	<form action="" method="POST">
+		<!-- khusus text area dibawah ini nggk perlu styling-->
+		<textarea id="textareaHeadToToePemeriksaan" name="headtotoeText" style="display: none;"></textarea>
+		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
 
-	<div class="row mb-3">
-		<div class="col">
-			<h5 class="text-center mt-3">Subjektif</h5>
-			<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
+		<div class="row mb-3">
+			<div class="col">
+				<h5 class="text-center mt-3">Subjektif</h5>
+				<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
+			</div>
+
+			<div class="col">
+				<h5 class="text-center mt-3">Planing</h5>
+				<textarea class="form-control" id="planning" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
+			</div>
 		</div>
 
-		<div class="col">
-			<h5 class="text-center mt-3">Planing</h5>
-			<textarea class="form-control" id="planning" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
+		<div class="row">
+			<div class="col">
+				<h5 class="text-center mt-3">Assesment</h5>
+			</div>
 		</div>
-	</div>
 
-	<div class="row"><div class="col"><h5 class="text-center mt-3">Assesment</h5></div></div>
-
-	<div class="row mb-3">	
-		<div class="col-4">
-			<h6 class="text-center">Primary</h6>
-			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+		<div class="row mb-3">	
+			<div class="col-4">
+				<h6 class="text-center">Primary</h6>
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="primary" name="states[]" multiple="multiple" style="width: 99%">
+			      	<select class="js-data-example-ajax" id="primary" name="assessmentPrimary[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
-			</form>
-		</div>
-		<div class="col-4">
-			<h6 class="text-center">Sekunder</h6>
-			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+			</div>
+			<div class="col-4">
+				<h6 class="text-center">Sekunder</h6>
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="secondary" name="states[]" multiple="multiple" style="width: 99%">
+			      	<select class="js-data-example-ajax" id="secondary" name="assessmentSecondary[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
-			</form>
-		</div>
-		<div class="col-4">
-			<h6 class="text-center">Lain-lain</h6>
-			<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+			</div>
+			<div class="col-4">
+				<h6 class="text-center">Lain-lain</h6>
 			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="lain" name="states[]" multiple="multiple" style="width: 99%">
+			      	<select class="js-data-example-ajax" id="lain" name="assessmentLain[]" multiple="multiple" style="width: 99%">
 					</select>
 				</div> 
-			</form>
+			</div>
+			<textarea name="assessmentPemeriksaanLab" placeholder="pemeriksaan laboratorium" id="pemeriksaanLab"></textarea>
 		</div>
-		<textarea name="pemeriksaanLab" placeholder="pemeriksaan laboratorium" id="pemeriksaanLab"></textarea>
-	</div>
+	</form>
 
 	<div class="row">
 		<div class="col">
-			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModalCenter">SURAT SAKIT</button>
+			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalSuratSakit">SURAT SAKIT</button>
 			
 			<!-- SURAT SAKIT -->
-			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal fade" id="modalSuratSakit" tabindex="-1" role="dialog" aria-labelledby="modalSuratSakitTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="exampleModalCenterTitle">Surat Sakit</h5>
+				        	<h5 class="modal-title" id="modalSuratSakitTitle">Surat Sakit</h5>
 				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
@@ -483,7 +506,7 @@
 								</div>
 						    </div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary btn-sm" onclick="cetakSuratSakit()">CETAK</button>
+					    		<button type="submit" class="btn btn-primary btn-sm">CETAK</button>
 					    	</div>
 				    	</form>
 				    </div>
@@ -494,14 +517,14 @@
 		</div>
 
 		<div class="col">
-			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modalsuratsehat">SURAT SEHAT</button>
+			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modalSuratSehat">SURAT SEHAT</button>
 			
 			<!-- SURAT SEHAT -->
-			<div class="modal fade" id="modalsuratsehat" tabindex="-1" role="dialog" aria-labelledby="modalsuratsehatTitle" aria-hidden="true">
+			<div class="modal fade" id="modalSuratSehat" tabindex="-1" role="dialog" aria-labelledby="modalSuratSehatTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="modalsuratsehat">Surat Sehat</h5>
+				        	<h5 class="modal-title" id="modalSuratSehat">Surat Sehat</h5>
 				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
@@ -529,7 +552,7 @@
 								<textarea class="form-control" aria-label="With textarea" name="keperluan" required=""></textarea>
 							</div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary" onclick="cetakSuratSehat()">Cetak</button>
+					    		<button type="submit" class="btn btn-primary">Cetak</button>
 					    	</div>
 			    		</form>
 					</div>
@@ -539,14 +562,14 @@
 
 		</div>
 		<div class="col">
-			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalrujukan" onclick="getassesment()">RUJUKAN</button>
+			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalSuratRujukan" onclick="getassesment()">RUJUKAN</button>
 			
 			<!-- SURAT RUJUKAN -->
-			<div class="modal fade" id="modalrujukan" tabindex="-1" role="dialog" aria-labelledby="modalrujukanTitle" aria-hidden="true" >
+			<div class="modal fade" id="modalSuratRujukan" tabindex="-1" role="dialog" aria-labelledby="modalSuratRujukanTitle" aria-hidden="true" >
 				<div class="modal-dialog modal-dialog-centered" role="document" >
 					<div class="modal-content">
 				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="modalrujukanTitle">Surat Rujukan</h5>
+				        	<h5 class="modal-title" id="modalSuratRujukanTitle">Surat Rujukan</h5>
 				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
@@ -1055,10 +1078,11 @@
 					</div>
 				</div>
 			</div>
+			<!-- SURAT RUJUKAN END -->
 		</div>
 
 		<div class="col">
-			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">
+			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT" onclick="SubmitPemeriksaan()">
 		</div>
 	</div>
 </div>

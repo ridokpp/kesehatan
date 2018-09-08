@@ -135,7 +135,7 @@ class Kesehatan_M extends CI_Model {
 		}
 	}
 
-	/*update from table values.... where ...*/
+	/*update from table set.... where ...*/
 	public function update($table,$dataCondition,$dataUpdate){
 		$this->db->where($dataCondition);
 		$result = $this->db->update($table,$dataUpdate);

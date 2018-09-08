@@ -41,7 +41,7 @@
 					Nama
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->nama?>
+					: <?=ucwords($pasien[0]->nama)?>
 				</div>		
 			</div>
 			<div class="row">
@@ -49,7 +49,7 @@
 					Tempat / Tgl Lahir
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
+					: <?=ucwords($pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir))?>
 				</div>
 			</div>
 			<div class="row">
@@ -57,7 +57,13 @@
 					Jenis Kelamin		
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->jkelamin ?>
+					: <?php
+					if ($pasien[0]->jkelamin == 'Laki-laki') {
+						echo ucwords($pasien[0]->jkelamin)." / <strike>Perempuan</strike>";
+					}elseif($pasien[0]->jkelamin == 'Perempuan'){
+						echo "<strike>Laki-laki</strike>".ucwords($pasien[0]->jkelamin);
+					}
+					?>
 				</div>
 			</div>
 			<div class="row">
@@ -65,7 +71,7 @@
 					Pekerjaan					
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->pekerjaan ?>
+					: <?=ucwords($pasien[0]->pekerjaan )?>
 				</div>
 			</div>
 			<div class="row mb-4">
@@ -73,7 +79,7 @@
 					Alamat		
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->alamat ?>
+					: <?=ucwords($pasien[0]->alamat )?>
 				</div>
 			</div>
 
@@ -105,20 +111,21 @@
 					: <?=$objek[0]->N?> rpm
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" >
 				<div class="col-2"> 	
 					Tes Buta Warna					
 				</div>
 				<div class="col">
 					: <?php
 						if ($tes_buta_warna == 'Ya') {
-							echo "Ya";
+							echo "<strike>Tidak</strike> / <strike>Parsial</strike> / Ya";
 						}elseif ($tes_buta_warna == 'Tidak') {
-							echo "Tidak";
+							echo "Tidak / <strike>Parsial</strike> / <strike>Ya</strike>";
 						}else{
-							echo "Parsial";
+							echo "<strike>Tidak</strike> / Parsial / <strike>Ya</strike>";
 						}
-					?> ..............................................................................................................................................................................................................................................................
+					?> *) ...........................................................................................................................................................................................................................
+					........................................................................................................................................................................................................................................................................					
 				</div>
 			</div>
 			<div class="row mb-4">

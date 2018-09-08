@@ -13,7 +13,7 @@ $(document).ready(function() {
 				};
 			},
 			processResults: function (data, page) {
-				console.log(data);
+				// console.log(data);
 				return {
 					results: data
 				};
