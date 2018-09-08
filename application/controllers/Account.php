@@ -48,6 +48,10 @@ class Account extends CI_Controller {
 			}else{
 				if ($hak_akses != '3') {
 					$sip	= $this->input->post('no_sip');
+					$nama 	= "dr. ".$this->input->post('nama');
+				}else{
+					$sip 	= '';
+					$nama 	= $this->input->post('nama');
 				}
 				if ($hak_akses == '1') {
 					$verified = "sudah";
@@ -72,7 +76,7 @@ class Account extends CI_Controller {
 											'jenis_kelamin'	=> $this->input->post('jenis_kelamin'),
 											'alamat'		=> $this->input->post('alamat'),
 											'nik'			=> $this->input->post('nik'),
-											'nama'		 	=> "dr. ".$this->input->post('nama'),
+											'nama'		 	=> $nama,
 											'foto'			=> "assets/images/users_photo/".$datax['file_name'],
 											'verified'		=> $verified
 									);
@@ -80,12 +84,15 @@ class Account extends CI_Controller {
 					$query = $this->Kesehatan_M->create('user',$data);
 					$result	=	json_decode($query,true);
 					if ($result['status']) {
-						alert('alert_','success','Berhasil','Registrasi berhasil. Silahkan hubungi admin untuk verifikasi pendaftaran');
+						if ($hak_akses != 1) {
+							alert('alert_','success','Berhasil','Registrasi berhasil. Silahkan hubungi admin untuk verifikasi pendaftaran');
+						}else{
+							alert('alert_','success','Berhasil','Registrasi admin berhasil.');
+						}
 					}else{
-						var_dump($result);die();
 						alert('alert','warning','Peringatan','Foto profil urung terkirim');
 						// alert('alert_','danger','Gagal',"Kegagalan database <br><strong> CODE: </strong>".$result['error_message']['code']." <br><strong>Message: </strong>".$result['error_message']['message']);
-						alert('alert_','danger','Gagal',"Kegagalan database".($result['error_message']['code'] == '1062')." <br><strong>Message: </strong>".substr($result['error_message']['message'], -4,3));
+						alert('alert_','danger','Gagal',"Kegagalan database ".$result['error_message']['code']." <br><strong>Message: </strong>".substr($result['error_message']['message'], -4,3). " Sudah ada");
 
 						unlink(FCPATH."assets/images/users_photo/".$datax['file_name']);
 					}

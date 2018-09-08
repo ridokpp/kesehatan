@@ -193,7 +193,7 @@ class Dokter_handler extends CI_Controller {
 			$insertSuratRujukan['kd_headtotoe']		= $data['kd_headtotoe']->message;
 			$insertSuratRujukan['tanggal']			= date('Y-m-d');
 
-			// update tabel rekam medis where tgl_jam == now
+			// update tabel rekam medis where tgl_jam == now untuk ngeset kd headtotoe
 			$this->Kesehatan_M->update('rkm_medis',array('YEAR(tgl_jam)' => date('Y'), 'MONTH(tgl_jam)' => date('m'), 'DAY(tgl_jam)'=>date('d'),'kd_pasien'=>$data['nomor_pasien']), array('kd_headtotoe' => $data['kd_headtotoe']->message));
 			
 			if ($nomor_surat == array()) {
@@ -209,48 +209,13 @@ class Dokter_handler extends CI_Controller {
 			$data['nomor_surat'] 	= $data['nomor_surat']->message;
 			$data['GCS_opsi'] 		= $this->input->post('GCS_opsi');
 
-			// baca kd_assessment paling maksimal pada tabel clone_diagnosa
-			$kd_assessmentMax = $this->Kesehatan_M->rawQuery("SELECT MAX(kd_assessment) AS kd_assessment FROM clone_diagnosa")->result();
 
-			// set nilai kd_assessment yang akan masuk ke tabel assessment
-			if($kd_assessmentMax[0]->kd_assessment == NULL){
-				$kd_assessment = 1;
-			}else{
-				$kd_assessment = $kd_assessmentMax[0]->kd_assessment + 1;
-			}
-
-			// ambil value bagian diagnosa dari modal form. masing masing variabel berupa array
-			$data['diagnosaPrimer'] 			= $this->input->post('diagnosaPrimary[]');
+			// ambil value bagian diagnosa dari modal form. masing masing variabel berupa array. diagnosa yang diambiil hanya digunaknan untuk pencetakan semata. tidak masuk ke database
+			$data['diagnosaPrimer']				= $this->input->post('diagnosaPrimary[]');
 			$data['diagnosaSekunder'] 			= $this->input->post('diagnosaSecondary[]');
 			$data['diagnosaLain'] 				= $this->input->post('diagnosaLain[]');
 			$data['diagnosaPemeriksaanLab'] 	= $this->input->post('diagnosaPemeriksaanLab');
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya primer
-			$stringDiagnosa 			= "INSERT INTO clone_diagnosa VALUES";
-			foreach ($data['diagnosaPrimer'] as $key => $value) {
-				$stringDiagnosa		 	.= "(NULL,'$kd_assessment','primer','$value'),";
-			}
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya sekunder
-			foreach ($data['diagnosaSekunder'] as $key => $value) {
-				$stringDiagnosa 		.= "(NULL,'$kd_assessment','sekunder','$value'),";
-			}
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya lainlain
-			foreach ($data['diagnosaLain'] as $key => $value) {
-				$stringDiagnosa 	 	.= "(NULL,'$kd_assessment','lainlain','$value'),";
-			}
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya adalah pemeriksaan lab
-			$stringDiagnosa				.= "(NULL,'$kd_assessment','pemeriksaanLab','".$data['diagnosaPemeriksaanLab']."')";
-
-			$stringDiagnosa				= rtrim($stringDiagnosa,", ");
-
-			// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel clone_diagnosa ** untuk assessment non-form masuk ke tabel assessment
-			$this->Kesehatan_M->rawQuery($stringDiagnosa);
-
-			// masukkan kdheadtotoe ke tabel rkm medis
-
+			
 			$this->load->view('dokter/suratrujukan',$data);
 		}
 		$this->load->view('static/footer');
@@ -292,12 +257,44 @@ class Dokter_handler extends CI_Controller {
 			$subjektif 					= $this->input->post('subjektif');
 			$planning  					= $this->input->post('planning');
 			$assessmentPrimer 			= $this->input->post('assessmentPrimary[]');
-			$assessmentSekunder 		= $this->input->post('assessmentsecondary[]');
+			$assessmentSekunder 		= $this->input->post('assessmentSecondary[]');
 			$assessmentLain 			= $this->input->post('assessmentLain[]');
 			$assessmentPemeriksaanLab 	= $this->input->post('assessmentPemeriksaanLab');
 
-			// masukkan assessment ke tabel assessment
+			
+			// masukkan input form assessment ke tabel assessment. baca kd_assessment paling maksimal pada tabel assessment
+			$kd_assessmentMax = $this->Kesehatan_M->rawQuery("SELECT MAX(kd_assessment) AS kd_assessment FROM assessment")->result();
 
+			// set nilai kd_assessment yang akan masuk ke tabel assessment
+			if($kd_assessmentMax[0]->kd_assessment == NULL){
+				$kd_assessment = 1;
+			}else{
+				$kd_assessment = $kd_assessmentMax[0]->kd_assessment + 1;
+			}
+
+			// manipulasi string untuk masuk ke assessment. tipenya primer
+			$stringDiagnosa 			= "INSERT INTO assessment VALUES";
+			foreach ($assessmentPrimer as $key => $value) {
+				$stringDiagnosa		 	.= "(NULL,'$kd_assessment','primer','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya sekunder
+			foreach ($assessmentSekunder as $key => $value) {
+				$stringDiagnosa 		.= "(NULL,'$kd_assessment','sekunder','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya lainlain
+			foreach ($assessmentLain as $key => $value) {
+				$stringDiagnosa 	 	.= "(NULL,'$kd_assessment','lainlain','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya adalah pemeriksaan lab
+			$stringDiagnosa				.= "(NULL,'$kd_assessment','pemeriksaanLab','".$assessmentPemeriksaanLab."')";
+
+			$stringDiagnosa				= rtrim($stringDiagnosa,", ");
+
+			// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel assessment
+			$this->Kesehatan_M->rawQuery($stringDiagnosa);
 
 			// masukkan ke tabel rekam medis beserta id return dari tabel assesment
 			$update = $this->Kesehatan_M->update('rkm_medis',
@@ -305,15 +302,16 @@ class Dokter_handler extends CI_Controller {
 																	'kd_pasien'		=>$this->input->post('nomor_pasien'),
 																	'YEAR(tgl_jam)'	=>date('Y'),
 																	'MONTH(tgl_jam)'=>date('m'),
-																	'DAY(tgl_jam)'	=>$date('d')
+																	'DAY(tgl_jam)'	=>date('d')
 																),
 																array(
 																	'subjek'		=>$subjektif,
 																	'planning'		=>$planning,
-																	'headtotoe'		=>$headtotoe
+																	'headtotoe'		=>$headtotoe,
+																	'kd_assessment'	=>$kd_assessment
 																)
 												);
-
+			var_dump($update);
 		}else{
 			redirect(base_url());
 		}

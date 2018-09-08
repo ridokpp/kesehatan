@@ -24,9 +24,11 @@ class Admin extends CI_Controller {
 			$this->load->view('static/footer');
 		}elseif ($menu == 'verifikasi') {
 			/*verifikasi pendaftar*/
+			$data['belum_terverifikasi'] = $this->Kesehatan_M->read('user',array('verified'=>'belum'))->result();
+			$data['sudah_terverifikasi'] = $this->Kesehatan_M->read('user',array('verified'=>'sudah','hak_akses !='=>'1'))->result();
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
-			$this->load->view('admin/verifikasi');
+			$this->load->view('admin/verifikasi',$data);
 			$this->load->view('static/footer');
 		}elseif ($menu == 'daftar_pasien') {
 			/*daftar pasienr*/
@@ -39,12 +41,6 @@ class Admin extends CI_Controller {
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
 			$this->load->view('admin/daftar_dokter');
-			$this->load->view('static/footer');
-		}elseif ($menu == 'insertICD') {
-			/*daftar pasienr*/
-			$this->load->view('static/header');
-			$this->load->view('static/navbar');
-			$this->load->view('admin/insertICD');
 			$this->load->view('static/footer');
 		}else{
 			$this->load->view('static/header');

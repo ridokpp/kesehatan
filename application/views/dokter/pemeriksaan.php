@@ -16,7 +16,7 @@
 			ajax: {
 				url: '<?=base_url()?>Dokter_handler/cari_icd/',
 			    dataType: 'json',
-			    delay: 250,
+			    delay: 1000,
 				data: function (term, page) {
 					return {
 						term: term, // search term
@@ -89,7 +89,7 @@
 				}else{
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
-				document.getElementById('planning').innerHTML +='Surat Sakit : '+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ";
+				document.getElementById('planning').append("Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ");
 			})
 			.fail(function() {
 			alert( "error" );
@@ -105,7 +105,7 @@
 				}else{
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
-				document.getElementById('planning').innerHTML +='Surat Sehat : '+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ";
+				document.getElementById('planning').append("Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ");
 			})
 			.fail(function() {
 			alert( "error" );
@@ -121,7 +121,9 @@
 				}else{
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
-				document.getElementById('planning').innerHTML +='Surat Sakit : '+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ";
+			
+				document.getElementById('planning').append("Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ");
+
 			})
 			.fail(function() {
 			alert( "error" );
@@ -400,7 +402,7 @@
 		</div>
 	</div>
 	<!-- FORM UNTUK SUBMIT PEMERIKSAAN -->
-	<form action="" method="POST">
+	<form action="<?=base_url()?>Dokter_handler/update_rm" method="POST">
 		<!-- khusus text area dibawah ini nggk perlu styling-->
 		<textarea id="textareaHeadToToePemeriksaan" name="headtotoeText" style="display: none;"></textarea>
 		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
@@ -447,9 +449,13 @@
 			</div>
 			<textarea name="assessmentPemeriksaanLab" placeholder="pemeriksaan laboratorium" id="pemeriksaanLab"></textarea>
 		</div>
-	</form>
 
 	<div class="row">
+		<div class="col">
+			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">
+		</div>
+	<!-- form e nyalipbos -->
+	</form>
 		<div class="col">
 			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalSuratSakit">SURAT SAKIT</button>
 			
@@ -513,9 +519,7 @@
 				</div>
 			</div>
 			<!-- END SURAT SAKIT -->
-
 		</div>
-
 		<div class="col">
 			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modalSuratSehat">SURAT SEHAT</button>
 			
@@ -559,7 +563,6 @@
 				</div>
 			</div>
 			<!-- END SURAT SEHAT -->
-
 		</div>
 		<div class="col">
 			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalSuratRujukan" onclick="getassesment()">RUJUKAN</button>
@@ -1079,10 +1082,6 @@
 				</div>
 			</div>
 			<!-- SURAT RUJUKAN END -->
-		</div>
-
-		<div class="col">
-			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT" onclick="SubmitPemeriksaan()">
 		</div>
 	</div>
 </div>

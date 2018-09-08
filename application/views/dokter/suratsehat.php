@@ -34,7 +34,7 @@
 				<p class="text-center mb-4 font-weight-bold">No. <?=($nomor_surat < 10 ) ? "00".$nomor_surat : "0".$nomor_surat ?> / 001 / <?=date('0m / Y')?></p>
 			</div>
 			<div class="row mb-4">
-				Yang bertanda tangan dibawah ini <?=$nama_user?>, menerangkan dengan sebenarnya bahwa;
+				Yang bertanda tangan dibawah ini <?=ucwords($nama_user)?>, menerangkan dengan sebenarnya bahwa;
 			</div>
 			<div class="row">
 				<div class="col-2"> 
