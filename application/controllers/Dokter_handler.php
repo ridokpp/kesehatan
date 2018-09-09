@@ -193,8 +193,9 @@ class Dokter_handler extends CI_Controller {
 			$insertSuratRujukan['kd_headtotoe']		= $data['kd_headtotoe']->message;
 			$insertSuratRujukan['tanggal']			= date('Y-m-d');
 
-			// update tabel rekam medis where tgl_jam == now untuk ngeset kd headtotoe
-			$this->Kesehatan_M->update('rkm_medis',array('YEAR(tgl_jam)' => date('Y'), 'MONTH(tgl_jam)' => date('m'), 'DAY(tgl_jam)'=>date('d'),'kd_pasien'=>$data['nomor_pasien']), array('kd_headtotoe' => $data['kd_headtotoe']->message));
+			// update ke tabel objek untuk set kd_headtotoe karena headtotoe buan lagi text, lebih detil.
+			$this->Kesehatan_M->update('objek',array('kd_objek'=>$insertSuratRujukan['kd_objek']),array('kd_headtotoe' => $data['kd_headtotoe']->message));
+
 			
 			if ($nomor_surat == array()) {
 				$insertSuratRujukan['nomor_surat']	= 1;
@@ -253,6 +254,7 @@ class Dokter_handler extends CI_Controller {
 	*/
 	function update_rm(){
 		if ($this->input->post() !== NULL) {
+			$kd_objek 				= $this->input->post('kd_objek');
 			$headtotoe 					= $this->input->post('headtotoeText');
 			$subjektif 					= $this->input->post('subjektif');
 			$planning  					= $this->input->post('planning');
@@ -297,7 +299,7 @@ class Dokter_handler extends CI_Controller {
 			$this->Kesehatan_M->rawQuery($stringDiagnosa);
 
 			// masukkan ke tabel rekam medis beserta id return dari tabel assesment
-			$update = $this->Kesehatan_M->update('rkm_medis',
+			$updateRM = $this->Kesehatan_M->update('rkm_medis',
 																array(
 																	'kd_pasien'		=>$this->input->post('nomor_pasien'),
 																	'YEAR(tgl_jam)'	=>date('Y'),
@@ -307,11 +309,14 @@ class Dokter_handler extends CI_Controller {
 																array(
 																	'subjek'		=>$subjektif,
 																	'planning'		=>$planning,
-																	'headtotoe'		=>$headtotoe,
 																	'kd_assessment'	=>$kd_assessment
 																)
 												);
-			var_dump($update);
+
+			$updateObj = $this->Kesehatan_M->update('objek',array('kd_objek'=>$kd_objek),array('text_headtotoe'=>$headtotoe));
+			echo "<pre>";
+			var_dump($updateRM);
+			var_dump($updateObj);
 		}else{
 			redirect(base_url());
 		}

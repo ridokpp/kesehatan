@@ -112,35 +112,67 @@ $(document).ready(function() {
             <th>Tanggal / Jam Periksa </th>
             <th>Subjektif</th>
             <th>Objektif</th>
-            <th>Assement</th>
+            <th>Assessment</th>
             <th>Planing</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <?php
+          // echo "<pre>";
+          // var_dump($assessment);
+          // echo "</pre>";
+          $i = 1;
           foreach ($rekam_medis as $key => $value) {
-            
-          }
+          ?>
+            <tr>
+              <td>
+                <?=$i?>
+              </td>
+              <td>
+                <ul>
+                  <li class="no-bullets">
+                    <?=tgl_indo(substr($value->tgl_jam,0,10))?>
+                  </li>
+                  <li class="no-bullets">
+                    <?=substr($value->tgl_jam,10,6)?>;
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <?=$value->subjek?>
+              </td>
+              <td>
+                <ul>
+                  <li class="no-bullets">TB/BB : <?=$objektif[$key]->tb?> cm/ <?=$objektif[$key]->bb?> Kg</li>
+                  <li class="no-bullets">TD : <?=$objektif[$key]->td1?>/<?=$objektif[$key]->td2?> mmHg</li>
+                  <li class="no-bullets">RR : <?=$objektif[$key]->RR?></li>
+                  <li class="no-bullets">N  : <?=$objektif[$key]->N?> rpm</li>
+                  <li class="no-bullets">TAx: <?=$objektif[$key]->TAx?> &deg;C</li>
+                  <li class="no-bullets">Head to Toe : <?=$objektif[$key]->text_headtotoe?></li>
+                </ul>
+              </td>
+              <td><?=$assessment[$key]->kd_assessment?></td>
+            </tr>
+          <?php }
           ?>
           <tr>
             <th>1</th>
             <td>
-            	<ul>
-            		<li class="no-bullets"> 10/12/2017 </li>
-            		<li class="no-bullets"> 19:00 WIB </li>
-            	</ul>
+              <ul>
+                <li class="no-bullets"> 10/12/2017 </li>
+                <li class="no-bullets"> 19:00 WIB </li>
+              </ul>
             </td>
             <td>Batuk</td>
             <td>
-            	<ul>
-            		<li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
-         			  <li class="no-bullets">TD : ..../.... mmHg RR</li>
-            		<li class="no-bullets">N  : ....rpm TAx: 36c</li>
-            		<li class="no-bullets">Head to Toe :</li>
-            	</ul>	 
+              <ul>
+                <li class="no-bullets">TB/BB : 70 cm/ 46 Kg</li>
+                <li class="no-bullets">TD : ..../.... mmHg RR</li>
+                <li class="no-bullets">N  : ....rpm TAx: 36c</li>
+                <li class="no-bullets">Head to Toe :</li>
+              </ul>  
             </td>
-            <td>asu</td>
             <td>R/</td>
             <td><button type="button" class="btn btn-primary">CETAK</button> </td>
           </tr>

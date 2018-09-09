@@ -83,13 +83,14 @@
 		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
 		$('#modalSuratSakit').on('hidden.bs.modal', function () {
 			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sakit/<?=$pasien[0]->nomor_pasien?>", function(data) {
+			console.log(data);
 				data = JSON.parse(data);
 				if (data[0].nomor_surat < 10 ) {
 					data[0].nomor_surat = "00"+data[0].nomor_surat;
 				}else{
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
-				document.getElementById('planning').append("Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ");
+				document.getElementById('planning').value += "Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ";
 			})
 			.fail(function() {
 			alert( "error" );
@@ -105,7 +106,7 @@
 				}else{
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
-				document.getElementById('planning').append("Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ");
+				document.getElementById('planning').value += "Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ";
 			})
 			.fail(function() {
 			alert( "error" );
@@ -122,7 +123,7 @@
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
 			
-				document.getElementById('planning').append("Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ");
+				document.getElementById('planning').value += "Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ";
 
 			})
 			.fail(function() {
@@ -406,6 +407,7 @@
 		<!-- khusus text area dibawah ini nggk perlu styling-->
 		<textarea id="textareaHeadToToePemeriksaan" name="headtotoeText" style="display: none;"></textarea>
 		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+		<input type="hidden" name="kd_objek" value="<?=$objek[0]->kd_objek?>">
 
 		<div class="row mb-3">
 			<div class="col">
