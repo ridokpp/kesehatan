@@ -152,7 +152,7 @@ $(document).ready(function() {
                   <li class="no-bullets">Head to Toe : <?=$objektif[$key]->text_headtotoe?></li>
                 </ul>
               </td>
-              <td><?=$assessment[$key]->kd_assessment?></td>
+              <td></td>
             </tr>
           <?php }
           ?>

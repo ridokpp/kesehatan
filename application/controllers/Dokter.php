@@ -38,8 +38,9 @@ class Dokter extends CI_Controller {
 
 		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery('SELECT 
 																		rkm_medis.kd_rkm,
+																		rkm_medis.kd_objek,
 																		rkm_medis.kd_pasien,
-																		rkm_medis.tanggal_jam,
+																		rkm_medis.tgl_jam,
 																		rkm_medis.subjek,
 																		objek.tb,
 																		objek.bb,
@@ -55,14 +56,15 @@ class Dokter extends CI_Controller {
 																		headtotoe.GCS_M,
 																		headtotoe.GCS_opsi,
 																		headtotoe.lain_lain,
-
+																		
 																		FROM rkm_medis 
-																		INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek
-																');
-
+																		INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek 
+																		INNER JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe
+																')->result();
+		echo "<pre>";
+		var_dump($data);
+		echo "</pre>";
 		$data['objektif']		= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rekam_medis'][0]->kd_objek))->result();
-		 
-		$data['assessment']		= $this->Kesehatan_M->read('assessment',array('kd_assessment'=>$data['rekam_medis'][0]->kd_assessment))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/log',$data);

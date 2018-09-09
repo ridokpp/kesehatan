@@ -167,7 +167,11 @@ class Kesehatan_M extends CI_Model {
 	/*raw query. query as strings*/
 	public function rawQuery($query){
 		$result = $this->db->query($query);
-		return $result;
+		if ($result) {
+			return $result;
+		}else{
+			return $this->db->error();
+		}
 	}
 
 	public function truncateTable($tabel)
