@@ -61,7 +61,7 @@ class Dokter extends CI_Controller {
 																');
 
 		$data['objektif']		= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rekam_medis'][0]->kd_objek))->result();
-		 
+
 		$data['assessment']		= $this->Kesehatan_M->read('assessment',array('kd_assessment'=>$data['rekam_medis'][0]->kd_assessment))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
