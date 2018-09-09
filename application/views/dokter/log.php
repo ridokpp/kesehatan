@@ -123,7 +123,7 @@ $(document).ready(function() {
           // var_dump($assessment);
           // echo "</pre>";
           $i = 1;
-          foreach ($rekam_medis as $key => $value) {
+          foreach($rekam_medis as $key => $value) {
           ?>
             <tr>
               <td>
