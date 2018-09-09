@@ -83,7 +83,10 @@
 				<div class="card-body">
 					<form role="form" method="POST" action="<?=base_url().'Account/register_handler'?>" id="register" enctype="multipart/form-data">
 						<fieldset>
-							<div class="form-group">
+							<div class="form-group input-group">
+								<div class="input-group-prepend">
+							    	<span class="input-group-text" id="basic-addon1">dr.</span>
+							  	</div>
 								<input class="form-control" name="nama" type="text" id="nama" placeholder="Nama" required="" minlength="2" autofocus="" data-toggle="tooltip" data-placement="auto" title="Nama Harus lebih dari 2 karakter">
 							</div>
 							<div class="form-group">

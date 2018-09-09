@@ -1,39 +1,46 @@
-<h3 class="text mt-3" style="margin-left: 65px">Verifikasi Akun</h3>
-	<div class="container">
-		<div class="row mt-4 mb-5">	
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th scope="col">Nama</th>
-			      <th scope="col">SIP</th>
-			      <th scope="col">Proses</th>
-			    </tr>
-			  </thead>
+<div class="container">
+<?php
+if ($belum_terverifikasi != array()) {
+?>
+	<h3 class="text mt-3" style="margin-left: 65px">Verifikasi Akun</h3>
+	<div class="row mt-4 mb-5">	
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">Nama</th>
+		      <th scope="col">SIP</th>
+		      <th scope="col">Proses</th>
+		    </tr>
+		  </thead>
 
-			  <tbody>
-			    <tr>
-			      <th scope="row">Romi Azzam</th>
-			      <td>11111</td>
-			      <td><button type="button" class="btn btn-primary btn-block btn-sm">Validasi</button></td>
+		  <tbody>
+		  	<?php
+		  	foreach ($belum_terverifikasi as $key => $value) {
+			  	echo "<tr>";
+			  	echo "<td>";
+			  	echo $value->nama;
+			  	echo "</td>";
+			  	echo "<td>";
+			  	echo $value->sip;
+			  	echo "</td>";
+			  	echo "<td>";
+			  	echo "<a href=".base_url()."Admin_handler/verifikasi_user/$value->id_user class='btn btn-primary btn-block btn-sm'>Validasi</a>";
+			  	echo "</td>";
+			  	echo "</tr>";
+		  	}
+		  	?>
+		  </tbody>
+		</table>
+	</div>
+<?php
+}
+?>
 
-			    </tr>
-			    <tr>
-			       <th scope="row">Aldi Nugroho</th>
-			      <td>222222</td>
-			      <td><button type="button" class="btn btn-primary btn-block btn-sm">Validasi</button></td>
+<?php
+if ($sudah_terverifikasi != array()) {
+?>
 
-			    </tr>
-			    <tr>
-			      <th scope="row">Ridodo</th>
-			      <td>333333</td>
-			      <td><button type="button" class="btn btn-primary btn-block btn-sm">Validasi</button></td>
-
-			    </tr>
-			  </tbody>
-			</table>
-		</div>
-
-<h3 class="text mt-3">Reset Password</h3>
+	<h3 class="text mt-3">Reset Password</h3>
 	<div class="row mt-5">
 		<table class="table">
   		<thead>
@@ -45,26 +52,25 @@
   		</thead>
 
 		  <tbody>
-		    <tr>
-		       <th scope="row">Romi Azzam</th>
-			      <td>11111</td>
-			      <td><button type="button" class="btn btn-danger btn-block btn-sm">Reset</button></td>
-		    </tr>
-		    
-		    <tr>
-		       <th scope="row">Aldi Nugroho</th>
-			      <td>22222</td>
-			      <td><button type="button" class="btn btn-danger btn-block btn-sm">Reset</button></td>
-		    </tr>
-		    
-		    <tr>
-		      <th scope="row">Ridodo</th>
-			      <td>33333</td>
-			      <td><button type="button" class="btn btn-danger btn-block btn-sm">Reset</button></td>
-		    </tr>
+		  	<?php
+		  	foreach ($sudah_terverifikasi as $key => $value) {
+		  		echo "<tr>";
+		  		echo "<td>";
+		  		echo $value->nama;
+		  		echo "</td>";
+		  		echo "<td>";
+		  		echo $value->sip;
+		  		echo "</td>";
+		  		echo "<td>";
+			  	echo "<button type='button' class='btn btn-danger btn-block btn-sm'>Reset</button>";
+			  	echo "</td>";
+		  		echo "</tr>";
+		  	}
+		  	?>
 		  </tbody>
 		</table>
-		</div>
-		</div>			
 	</div>
+<?php
+}
+?>
 </div>

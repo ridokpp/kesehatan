@@ -34,14 +34,14 @@
 				<p class="text-center mb-4 font-weight-bold">No. <?=($nomor_surat < 10 ) ? "00".$nomor_surat : "0".$nomor_surat ?> / 002 / <?=date('0m / Y')?></p>
 			</div>
 			<div class="row mb-4">
-				Yang bertanda tangan dibawah ini <?=$nama_user?>, menerangkan dengan sebenarnya bahwa;
+				Yang bertanda tangan dibawah ini <?=ucwords($nama_user)?>, menerangkan dengan sebenarnya bahwa;
 			</div>
 			<div class="row">
 				<div class="col-2"> 
 					Nama
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->nama ?>
+					: <?=ucwords($pasien[0]->nama )?>
 				</div>		
 			</div>
 			<div class="row">
@@ -49,7 +49,7 @@
 					Tempat / Tgl Lahir
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
+					: <?=ucwords($pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir))?>
 				</div>
 			</div>
 			<div class="row">
@@ -57,7 +57,7 @@
 					Jenis Kelamin		
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->jkelamin ?>
+					: <?=ucwords($pasien[0]->jkelamin )?>
 				</div>
 			</div>
 			<div class="row">
@@ -65,7 +65,7 @@
 					Pekerjaan					
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->pekerjaan ?>
+					: <?=ucwords($pasien[0]->pekerjaan )?>
 				</div>
 			</div>
 			<div class="row mb-4">
@@ -73,7 +73,7 @@
 					Alamat		
 				</div>
 				<div class="col">
-					: <?=$pasien[0]->alamat ?>
+					: <?=ucwords($pasien[0]->alamat )?>
 				</div>
 			</div>
 			<div class="row mb-4">

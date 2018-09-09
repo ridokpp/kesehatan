@@ -35,7 +35,12 @@ class Dokter extends CI_Controller {
 	{
 		$data['pasien'] 		= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		$update_kd_dokter		= $this->Kesehatan_M->update('rkm_medis',array('kd_pasien'=>$nomor_pasien),array('kd_dokter'=>$this->session->userdata('logged_in')['id_user']));
-		$data['rekam_medis'] 	= $this->Kesehatan_M->read('rkm_medis',array('kd_pasien'=>$nomor_pasien))->result();
+
+		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery('SELECT rkm_medis.kd_rkm, rkm_medis.kd_pasien, rkm_medis.tanggal_jam, rkm_medis.subjek, objek.tbobjek.bb,objek.td1,objek.td2, objek.N, objek.RR,objek.TAx,objek.text_headtotoe FROM rkm_medis INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek;');
+
+		$data['objektif']		= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rekam_medis'][0]->kd_objek))->result();
+		 
+		$data['assessment']		= $this->Kesehatan_M->read('assessment',array('kd_assessment'=>$data['rekam_medis'][0]->kd_assessment))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/log',$data);
@@ -54,13 +59,28 @@ class Dokter extends CI_Controller {
 	function pemeriksaan($nomor_pasien)
 	{
 		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
-		$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$nomor_pasien,'DATE(tgl_jam)'=>date('Y-m-d')),'kd_objek')->result();
-		//var_dump($kd_objek);
-		$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[0]->kd_objek))->result();
-		$this->load->view('static/header');
-		$this->load->view('static/navbar');
-		$this->load->view('dokter/pemeriksaan',$data);
-		$this->load->view('static/footer');
+		if ($data['pasien'] != array()) {
+			$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$nomor_pasien,'DATE(tgl_jam)'=>date('Y-m-d')),'kd_objek')->result();
+			if ($kd_objek != array()) {
+				$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[0]->kd_objek))->result();
+				$this->load->view('static/header');
+				$this->load->view('static/navbar');
+				$this->load->view('dokter/pemeriksaan',$data);
+				$this->load->view('static/footer');
+			}else{
+				$this->load->view('static/header');
+				$this->load->view('static/navbar');
+				$data['heading']	= "Halaman tidak ditemukan";
+				$data['message']	= "<p> Klik <a href='".base_url()."Dokter'>disini </a>untuk kembali melihat daftar pasien yang sedang antri</p>";
+				$this->load->view('errors/html/error_404',$data);
+			}
+		}else{
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$data['heading']	= "Halaman tidak ditemukan";
+			$data['message']	= "<p> Klik <a href='".base_url()."Dokter'>disini </a>untuk kembali melihat daftar pasien yang sedang antri</p>";
+			$this->load->view('errors/html/error_404',$data);
+		}
 	}
 
 	/*

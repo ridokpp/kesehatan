@@ -14,7 +14,7 @@
 				<div class="form-group row">
 				    <label class="col-2 col-form-label">Tinggi Badan</label>
 				    <div class="input-group col-10">
-				      	<input type="number" class="form-control" id="" name="tinggi_badan" placeholder="Tinggi Badan" required="">
+				      	<input type="number" class="form-control" id="" name="tinggi_badan" placeholder="Tinggi Badan" required="" autofocus="">
 				    	<div class="input-group-append">
 				          	<div class="input-group-text">Cm</div>
 			    		</div>

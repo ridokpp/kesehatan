@@ -29,9 +29,6 @@ if ($this->uri->segment(1, 0) == 'Petugas') {
       <li class="nav-item <?=($menu == 'verifikasi') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Admin/menu/verifikasi">Verifikasi</a>
       </li>
-      <li class="nav-item <?=($menu == 'insertICD') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Admin/menu/insertICD">Insert ICD</a>
-      </li>
     </ul>
     <?php
     }elseif ($this->session->userdata('logged_in')['akses'] == '2') { ?>

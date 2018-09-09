@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
-* controller untuk bagian petugas depan
+* controller untuk bagian Dokter
 */
 class Dokter_handler extends CI_Controller {
 	
@@ -42,7 +42,7 @@ class Dokter_handler extends CI_Controller {
 				$insertSuratSehat['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
 				$data['nomor_surat']				= $insertSuratSehat['nomor_surat'];
 			}
-			var_dump($this->Kesehatan_M->create('suratsehat',$insertSuratSehat));
+			$this->Kesehatan_M->create('suratsehat',$insertSuratSehat);
 			$this->load->view('dokter/suratsehat',$data);
 			
 		}elseif ($surat == 'suratsakit') {
@@ -110,16 +110,16 @@ class Dokter_handler extends CI_Controller {
 			$data['kd_thorak']				= $data['kd_thorak']->message;
 
 
-			$dataAbdomen['BU'] 			= $this->input->post('BU');
-			$dataAbdomen['ny1'] 		= $this->input->post('ny1');
-			$dataAbdomen['ny2'] 		= $this->input->post('ny2');
-			$dataAbdomen['ny3'] 		= $this->input->post('ny3');
-			$dataAbdomen['ny4'] 		= $this->input->post('ny4');
-			$dataAbdomen['ny5'] 		= $this->input->post('ny5');
-			$dataAbdomen['ny6'] 		= $this->input->post('ny6');
-			$dataAbdomen['ny7'] 		= $this->input->post('ny7');
-			$dataAbdomen['ny8'] 		= $this->input->post('ny8');
-			$dataAbdomen['ny9'] 		= $this->input->post('ny9');
+			$dataAbdomen['BU'] 				= $this->input->post('BU');
+			$dataAbdomen['ny1'] 			= $this->input->post('ny1');
+			$dataAbdomen['ny2'] 			= $this->input->post('ny2');
+			$dataAbdomen['ny3'] 			= $this->input->post('ny3');
+			$dataAbdomen['ny4'] 			= $this->input->post('ny4');
+			$dataAbdomen['ny5'] 			= $this->input->post('ny5');
+			$dataAbdomen['ny6'] 			= $this->input->post('ny6');
+			$dataAbdomen['ny7'] 			= $this->input->post('ny7');
+			$dataAbdomen['ny8'] 			= $this->input->post('ny8');
+			$dataAbdomen['ny9'] 			= $this->input->post('ny9');
 			$dataAbdomen['hpmgl'] 			= $this->input->post('hpmgl');
 			$dataAbdomen['spmgl'] 			= $this->input->post('spmgl');
 			$dataAbdomen['ket_tambahan']	= $this->input->post('ket_tambahanab');
@@ -127,61 +127,75 @@ class Dokter_handler extends CI_Controller {
 			$data['kd_abdomen']				= $data['kd_abdomen']->message;
 			
 
-			$dataEkstermitas['ah1'] = $this->input->post('ah1');
-			$dataEkstermitas['ah2'] = $this->input->post('ah2');
-			$dataEkstermitas['ah3'] = $this->input->post('ah3');
-			$dataEkstermitas['ah4'] = $this->input->post('ah4');
-			$dataEkstermitas['crt1'] = $this->input->post('crt1');
-			$dataEkstermitas['crt2'] = $this->input->post('crt2');
-			$dataEkstermitas['crt3'] = $this->input->post('crt3');
-			$dataEkstermitas['crt4'] = $this->input->post('crt4');
-			$dataEkstermitas['edm1'] = $this->input->post('edm1');
-			$dataEkstermitas['edm2'] = $this->input->post('edm2');
-			$dataEkstermitas['edm3'] = $this->input->post('edm3');
-			$dataEkstermitas['edm4'] = $this->input->post('edm4');
-			$dataEkstermitas['pitting'] = $this->input->post('pitting');
-			$dataEkstermitas['ket_tambahan'] = $this->input->post('ket_tambahaneks');
-			$data['kd_ekstermitas'] = json_decode($this->Kesehatan_M->create_id('ekstermitas',$dataEkstermitas));
-			$data['kd_ekstermitas'] = $data['kd_ekstermitas']->message;
+			$dataEkstermitas['ah1']			= $this->input->post('ah1');
+			$dataEkstermitas['ah2']			= $this->input->post('ah2');
+			$dataEkstermitas['ah3']			= $this->input->post('ah3');
+			$dataEkstermitas['ah4']			= $this->input->post('ah4');
+			$dataEkstermitas['crt1']		= $this->input->post('crt1');
+			$dataEkstermitas['crt2']		= $this->input->post('crt2');
+			$dataEkstermitas['crt3']		= $this->input->post('crt3');
+			$dataEkstermitas['crt4']		= $this->input->post('crt4');
+			$dataEkstermitas['edm1']		= $this->input->post('edm1');
+			$dataEkstermitas['edm2']		= $this->input->post('edm2');
+			$dataEkstermitas['edm3']		= $this->input->post('edm3');
+			$dataEkstermitas['edm4']		= $this->input->post('edm4');
+			$dataEkstermitas['pitting'] 	= $this->input->post('pitting');
+			$dataEkstermitas['ket_tambahan']= $this->input->post('ket_tambahaneks');
+			$data['kd_ekstermitas'] 		= json_decode($this->Kesehatan_M->create_id('ekstermitas',$dataEkstermitas));
+			$data['kd_ekstermitas'] 		= $data['kd_ekstermitas']->message;
 			
 
-			$dataTerapi['terapi1'] = $this->input->post('terapi1');
-			$dataTerapi['terapi2'] = $this->input->post('terapi2');
-			$dataTerapi['terapi3'] = $this->input->post('terapi3');
-			$data['kd_terapi'] = json_decode($this->Kesehatan_M->create_id('terapi',$dataTerapi));
-			$data['kd_terapi'] = $data['kd_terapi']->message;
+			$dataTerapi['terapi1'] 			= $this->input->post('terapi1');
+			$dataTerapi['terapi2'] 			= $this->input->post('terapi2');
+			$dataTerapi['terapi3'] 			= $this->input->post('terapi3');
+			$data['kd_terapi'] 				= json_decode($this->Kesehatan_M->create_id('terapi',$dataTerapi));
+			$data['kd_terapi'] 				= $data['kd_terapi']->message;
 
 
-			$dataHeadtotoe['keluhan'] = $this->input->post('keluhan');
-			$dataHeadtotoe['GCS_E'] = $this->input->post('GCS_E');
-			$dataHeadtotoe['GCS_V'] = $this->input->post('GCS_V');
-			$dataHeadtotoe['GCS_M'] = $this->input->post('GCS_M');
-			$dataHeadtotoe['GCS_opsi'] = $this->input->post('GCS_opsi');
-			$dataHeadtotoe['kd_kepala'] = $data['kd_kepala'];
-			$dataHeadtotoe['kd_thorak'] = $data['kd_thorak'];
-			$dataHeadtotoe['kd_abdomen'] = $data['kd_abdomen'];
-			$dataHeadtotoe['kd_ekstermitas'] = $data['kd_ekstermitas'];
-			$dataHeadtotoe['lain_lain'] = $this->input->post('lain_lain');
-			$dataHeadtotoe['kd_terapi'] = $data['kd_terapi'];
-			// var_dump($dataHeadtotoe);
-			$data['kd_headtotoe'] = json_decode($this->Kesehatan_M->create_id('headtotoe',$dataHeadtotoe));
+			$dataHeadtotoe['keluhan'] 		= $this->input->post('keluhan');
+			$dataHeadtotoe['GCS_E'] 		= $this->input->post('GCS_E');
+			$dataHeadtotoe['GCS_V'] 		= $this->input->post('GCS_V');
+			$dataHeadtotoe['GCS_M'] 		= $this->input->post('GCS_M');
+			
+			$GCS_opsi				 		= $this->input->post('GCS_opsi[]');
+			$dataHeadtotoe['GCS_opsi'] = '';
+			foreach ($GCS_opsi as $key => $value) {
+				$dataHeadtotoe['GCS_opsi'] .= $value." ";
+			}
+
+			$dataHeadtotoe['kd_kepala'] 	= $data['kd_kepala'];
+			$dataHeadtotoe['kd_thorak'] 	= $data['kd_thorak'];
+			$dataHeadtotoe['kd_abdomen']	= $data['kd_abdomen'];
+			$dataHeadtotoe['kd_ekstermitas']= $data['kd_ekstermitas'];
+			$dataHeadtotoe['lain_lain']		= $this->input->post('lain_lain');
+			$dataHeadtotoe['kd_terapi'] 	= $data['kd_terapi'];
+			$data['kd_headtotoe'] 			= json_decode($this->Kesehatan_M->create_id('headtotoe',$dataHeadtotoe));
 
 
+			$data['kepala'] 				= $dataKepala;
+			$data['thorak'] 				= $dataThorak;
+			$data['abdomen'] 				= $dataAbdomen;
+			$data['ekstermitas'] 			= $dataEkstermitas;
+			$data['headtotoe'] 				= $dataHeadtotoe;
+			$data['terapi'] 				= $dataTerapi;
 
-			$data['kepala'] = $dataKepala;
-			$data['thorak'] = $dataThorak;
-			$data['abdomen'] = $dataAbdomen;
-			$data['ekstermitas'] = $dataEkstermitas;
-			$data['headtotoe'] = $dataHeadtotoe;
-			$data['terapi'] = $dataTerapi;
 
-
-			$nomor_surat 			= $this->Kesehatan_M->readCol('suratrujukan',array('MONTH(tanggal)'=>date('m'),'YEAR(tanggal)'=>date('Y')),array('MAX(nomor_surat) AS nomor_surat'))->result();
+			$nomor_surat 							= $this->Kesehatan_M->readCol('suratrujukan',array(
+																										'MONTH(tanggal)'	=>date('m'),
+																										'YEAR(tanggal)'		=>date('Y')
+																								),array(
+																										'MAX(nomor_surat) AS nomor_surat'
+																								)
+																				)->result();
 			$insertSuratRujukan['nomor_pasien']		= $data['nomor_pasien'];
 
 			$insertSuratRujukan['kd_objek']			= $data['objek'][0]->kd_objek;
 			$insertSuratRujukan['kd_headtotoe']		= $data['kd_headtotoe']->message;
 			$insertSuratRujukan['tanggal']			= date('Y-m-d');
+
+			// update ke tabel objek untuk set kd_headtotoe karena headtotoe buan lagi text, lebih detil.
+			$this->Kesehatan_M->update('objek',array('kd_objek'=>$insertSuratRujukan['kd_objek']),array('kd_headtotoe' => $data['kd_headtotoe']->message));
+
 			
 			if ($nomor_surat == array()) {
 				$insertSuratRujukan['nomor_surat']	= 1;
@@ -190,166 +204,31 @@ class Dokter_handler extends CI_Controller {
 				$insertSuratRujukan['nomor_surat'] 	= intval($nomor_surat[0]->nomor_surat) + 1;
 				$data['nomor_surat']				= $insertSuratRujukan['nomor_surat'];
 			}
-			// var_dump($insertSuratRujukan);
-			$this->Kesehatan_M->create('suratrujukan',$insertSuratRujukan);
 
-			// echo "<pre>";
-			// var_dump($data);
+			// masukkan data ke surat rujukan
+			$data['nomor_surat'] 	= json_decode($this->Kesehatan_M->create_id('suratrujukan',$insertSuratRujukan));
+			$data['nomor_surat'] 	= $data['nomor_surat']->message;
+			$data['GCS_opsi'] 		= $this->input->post('GCS_opsi');
+
+
+			// ambil value bagian diagnosa dari modal form. masing masing variabel berupa array. diagnosa yang diambiil hanya digunaknan untuk pencetakan semata. tidak masuk ke database
+			$data['diagnosaPrimer']				= $this->input->post('diagnosaPrimary[]');
+			$data['diagnosaSekunder'] 			= $this->input->post('diagnosaSecondary[]');
+			$data['diagnosaLain'] 				= $this->input->post('diagnosaLain[]');
+			$data['diagnosaPemeriksaanLab'] 	= $this->input->post('diagnosaPemeriksaanLab');
+			
 			$this->load->view('dokter/suratrujukan',$data);
 		}
 		$this->load->view('static/footer');
 	}
-
-
-	// function headtotoe(){
-	// 	$dataCondition = array('kd_headtotoe' =>$this->input->post('kd_headtotoe'),
-	// 						   'kd_kepala' =>$this->input->post('kd_kepala'),
-	// 						   'kd_thorak' =>$this->input->post('kd_thorak'),
-	// 						   'kd_abdomen' =>$this->input->post('kd_abdomen'),
-	// 						   'kd_ekstermitas' =>$this->input->post('kd_ekstermitas'),
-	// 						   'lain_lain' =>$this->input->post('lain_lain'),
-	// 						   'diagnosa' =>$this->input->post('diagnosa'),
-	// 						   'kd_terapi' =>$this->input->post('kd_terapi'));
-	// 	$proses_insert = $this->Kesehatan_M->create('headtotoe',$dataCondition);
-	// 	if ($proses_insert->num_rows() == 0) {
-	// 		echo json_encode(array('status'=>'sukses'));
-	// 	}else{
-	// 		echo json_encode(array('status'=>'gagal'));
-	// 	}
-	// }
-
-		public function headtotoe()
-	{
-		$dataCondition = array('keluhan' =>$this->input->post('keluhan'),
-							   'GCS_E' =>$this->input->post('GCS_E'),
-							   'GCS_V' =>$this->input->post('GCS_V'),
-							   'GCS_M' =>$this->input->post('GCS_M'),
-							   'GCS_opsi' =>$this->input->post('GCS_opsi'),
-							   'kd_kepala' =>$this->input->post('kd_kepala'),
-							   'kd_thorak' =>$this->input->post('kd_thorak'),
-							   'kd_abdomen' =>$this->input->post('kd_abdomen'),
-							   'kd_ekstermitas' =>$this->input->post('kd_ekstermitas'),
-							   'lain_lain' =>$this->input->post('lain_lain'),
-							   'diagnosa' =>$this->input->post('diagnosa'),
-							   'kd_terapi' =>$this->input->post('kd_terapi'));
-		$proses_insert = $this->Kesehatan_M->create('headtotoe',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
-	}
-
-
-	public function kepala()
-	{
-		$dataCondition = array('kd_kepala' =>$this->input->post('kd_kepala'),
-							   'anemis_kiri' =>$this->input->post('anemis_kiri'),
-							   'anemis_kanan' =>$this->input->post('anemis_kanan'),
-							   'ikterik_kiri' =>$this->input->post('ikterik_kiri'),
-							   'ikterik_kanan' =>$this->input->post('ikterik_kanan'),
-							   'cianosis_kiri' =>$this->input->post('cianosis_kiri'),
-							   'cianosis_kanan' =>$this->input->post('cianosis_kanan'),
-							   'deformitas_kiri' =>$this->input->post('deformitas_kiri'),
-							   'deformitas_kanan' =>$this->input->post('deformitas_kanan'),
-							   'refchy_kiri' =>$this->input->post('refchy_kiri'),
-							   'refchy_kanan' =>$this->input->post('refchy_kanan'),
-							   'refchyopsi' =>$this->input->post('refchyopsi'));
-		$proses_insert = $this->Kesehatan_M->create('kepala',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
-	}
-
-	public function thorak()
-	{
-		$dataCondition = array('kd_thorak' =>$this->input->post('kd_thorak'),
-							   'metris' =>$this->input->post('metris'),
-							   'wg_kiri' =>$this->input->post('wg_kiri'),
-							   'wg_kanan' =>$this->input->post('wg_kanan'),
-							   'rk_kiri' =>$this->input->post('rk_kiri'),
-							   'rk_kanan' =>$this->input->post('rk_kanan'),
-							   'vk_kiri' =>$this->input->post('vk_kiri'),
-							   'vk_kanan' =>$this->input->post('vk_kanan'),
-							   'jtgic' =>$this->input->post('jtgic'),
-							   's1_s2' =>$this->input->post('s1_s2'),
-							   's_tambahan' =>$this->input->post('s_tambahan'),
-							   'ket_tambahan' =>$this->input->post('ket_tambahan'));
-		$proses_insert = $this->Kesehatan_M->create('thorak',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
-	}
-
-	public function abdomen()
-	{
-		$dataCondition = array('kd_abdomen' =>$this->input->post('kd_abdomen'),
-							   'nyeri_tekan' =>$this->input->post('nyeri_tekan'),
-							   'hpmgl' =>$this->input->post('hpmgl'),
-							   'spmgl' =>$this->input->post('spmgl'),
-							   'ket_tambahan' =>$this->input->post('ket_tambahan'));
-		$proses_insert = $this->Kesehatan_M->create('abdomen',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
-	}
-
-	public function ekstermitas()
-	{
-		$dataCondition = array('kd_ekstermitas' =>$this->input->post('kd_ekstermitas'),
-							   'ah' =>$this->input->post('ah'),
-							   'crt' =>$this->input->post('crt'),
-							   'edm' =>$this->input->post('edm'),
-							   'pitting' =>$this->input->post('pitting'),
-							   'ket_tambahan' =>$this->input->post('ket_tambahan'));
-		$proses_insert = $this->Kesehatan_M->read('ekstermitas',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
-	}
-
-	public function terapi()
-	{
-		$dataCondition = array('kd_terapi' =>$this->input->post('kd_terapi'),
-							   'terapi' =>$this->input->post('terapi'));
-		$proses_insert = $this->Kesehatan_M->read('terapi',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
-	}
-
-	public function c_rkm()
-	{
-		$dataCondition = array('kd_rkm' =>$this->input->post('kd_rkm'),
-							   'kd_pasien' =>$this->input->post('kd_pasien'),
-							   'tgl_jam' =>$this->input->post('tgl_jam'),
-							   'subjek' =>$this->input->post('subjek'),
-							   'kd_objek' =>$this->input->post('kd_objek'),
-							   'planning' =>$this->input->post('planning'),
-							   'kd_user' =>$this->input->post('kd_user'));
-		$proses_insert = $this->Kesehatan_M->create('rkm_medis',$dataCondition);
-		if ($proses_insert->num_rows() == 0) {
-			echo json_encode(array('status'=>'sukses'));
-		}else{
-			echo json_encode(array('status'=>'gagal'));
-		}
-
+	/*
+	* get nomor surat untuk disalurkan ke kolom planning
+	*/
+	function getTabelSurat($surat,$nomor_pasien){
+		// select * from suratrujukan WHERE nomor_pasien='001-006-01-02-07-2018' ORDER BY id DESC limit 1 ;
+		// sebelumnya telah dibuatkan data pada tabel surat rujukan, actionnya saat klink tombol surat rujukan pada pemeriksaan
+		$data = json_encode($this->Kesehatan_M->rawQuery("SELECT * FROM surat".$surat." WHERE nomor_pasien='".$nomor_pasien."' ORDER BY id DESC limit 1 ")->result());
+		echo $data;
 	}
 
 	// Fungsi ini digunakan untuk mencari data pada tabel ICD 10
@@ -361,9 +240,83 @@ class Dokter_handler extends CI_Controller {
 			$data = array();
 			foreach ($dataReturn as $key => $value) {
 				$data[$key]['id'] = $value->Kode_ICD;
-				$data[$key]['text'] = $value->Kode_ICD." / ".$value->Diskripsi." / ".$value->Diagnosa;
+				$data[$key]['text'] = $value->Kode_ICD." / ".$value->Diskripsi;
 			}
 			echo json_encode($data);
+		}else{
+			redirect(base_url());
+		}
+	}
+
+	/*
+	* function untuk memasukkan form halaman pemeriksaan ke tabel rekam medis dan related.
+	* update karena telah ada pemasukan data pada pemeriksaan awal oleh petugas
+	*/
+	function update_rm(){
+		if ($this->input->post() !== NULL) {
+			$kd_objek 				= $this->input->post('kd_objek');
+			$headtotoe 					= $this->input->post('headtotoeText');
+			$subjektif 					= $this->input->post('subjektif');
+			$planning  					= $this->input->post('planning');
+			$assessmentPrimer 			= $this->input->post('assessmentPrimary[]');
+			$assessmentSekunder 		= $this->input->post('assessmentSecondary[]');
+			$assessmentLain 			= $this->input->post('assessmentLain[]');
+			$assessmentPemeriksaanLab 	= $this->input->post('assessmentPemeriksaanLab');
+
+			
+			// masukkan input form assessment ke tabel assessment. baca kd_assessment paling maksimal pada tabel assessment
+			$kd_assessmentMax = $this->Kesehatan_M->rawQuery("SELECT MAX(kd_assessment) AS kd_assessment FROM assessment")->result();
+
+			// set nilai kd_assessment yang akan masuk ke tabel assessment
+			if($kd_assessmentMax[0]->kd_assessment == NULL){
+				$kd_assessment = 1;
+			}else{
+				$kd_assessment = $kd_assessmentMax[0]->kd_assessment + 1;
+			}
+
+			// manipulasi string untuk masuk ke assessment. tipenya primer
+			$stringDiagnosa 			= "INSERT INTO assessment VALUES";
+			foreach ($assessmentPrimer as $key => $value) {
+				$stringDiagnosa		 	.= "(NULL,'$kd_assessment','primer','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya sekunder
+			foreach ($assessmentSekunder as $key => $value) {
+				$stringDiagnosa 		.= "(NULL,'$kd_assessment','sekunder','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya lainlain
+			foreach ($assessmentLain as $key => $value) {
+				$stringDiagnosa 	 	.= "(NULL,'$kd_assessment','lainlain','$value'),";
+			}
+
+			// manipulasi string untuk masuk ke clone_diagnosa. tipenya adalah pemeriksaan lab
+			$stringDiagnosa				.= "(NULL,'$kd_assessment','pemeriksaanLab','".$assessmentPemeriksaanLab."')";
+
+			$stringDiagnosa				= rtrim($stringDiagnosa,", ");
+
+			// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel assessment
+			$this->Kesehatan_M->rawQuery($stringDiagnosa);
+
+			// masukkan ke tabel rekam medis beserta id return dari tabel assesment
+			$updateRM = $this->Kesehatan_M->update('rkm_medis',
+																array(
+																	'kd_pasien'		=>$this->input->post('nomor_pasien'),
+																	'YEAR(tgl_jam)'	=>date('Y'),
+																	'MONTH(tgl_jam)'=>date('m'),
+																	'DAY(tgl_jam)'	=>date('d')
+																),
+																array(
+																	'subjek'		=>$subjektif,
+																	'planning'		=>$planning,
+																	'kd_assessment'	=>$kd_assessment
+																)
+												);
+
+			$updateObj = $this->Kesehatan_M->update('objek',array('kd_objek'=>$kd_objek),array('text_headtotoe'=>$headtotoe));
+			echo "<pre>";
+			var_dump($updateRM);
+			var_dump($updateObj);
 		}else{
 			redirect(base_url());
 		}
