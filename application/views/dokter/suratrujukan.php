@@ -65,6 +65,7 @@ table tr td:last-child {
 						</div>
 					</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				</div>
 				<div class="row">
 						No. Surat
@@ -74,6 +75,8 @@ table tr td:last-child {
 					<div class="col-9">
 					<?=($nomor_surat < 10 ) ? "00".$nomor_surat : "0".$nomor_surat ?> / 001 / <?=date('0m / Y')?>
 =======
+=======
+>>>>>>> bab5bae754f2d9db624c7c98a52aa477cdd11607
 					<div class="row">
 						<div class="row col-2 ">
 							No. Surat
@@ -84,6 +87,9 @@ table tr td:last-child {
 						<div class="col-9">
 							<?=($nomor_surat < 10 ) ? "00".$nomor_surat : "0".$nomor_surat ?> / 003 / <?=date('0m / Y')?>
 						</div>
+<<<<<<< HEAD
+>>>>>>> bab5bae754f2d9db624c7c98a52aa477cdd11607
+=======
 >>>>>>> bab5bae754f2d9db624c7c98a52aa477cdd11607
 					</div>
 					<div class="row">
@@ -107,10 +113,17 @@ table tr td:last-child {
 					</div>
 					<div class="row">
 <<<<<<< HEAD
+<<<<<<< HEAD
 						di RS Yayasan Darul Ulum Agung
 					</div>
 					<div class="row">
 						Kota Malang
+=======
+						di RS ______________________________________
+					</div>
+					<div class="row">
+						Kota ______________________________________
+>>>>>>> bab5bae754f2d9db624c7c98a52aa477cdd11607
 =======
 						di RS ______________________________________
 					</div>
