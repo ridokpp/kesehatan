@@ -190,21 +190,24 @@
 		// CREATE PRIMARY SELECT ELEMENT
 		var primarySelected = $("#primary").select2('data');
 		for (i in primarySelected){
-			var newOption = new Option(primarySelected[i].text, primarySelected[i].text, true, true);
+			var primaryDescOnly = primarySelected[i].text.split(" / ");
+			var newOption = new Option(primaryDescOnly[1], primaryDescOnly[1], true, true);
 			$('#diagnosaPrimaryId').append(newOption).trigger('change');
 		}
 
 		// CREATE SECONDARY SELECT ELEMENT
 		var secondarySelected = $("#secondary").select2('data');
 		for (i in secondarySelected){
-			var newOption = new Option(secondarySelected[i].text, secondarySelected[i].text, true, true);
+			var secondaryDescOnly = secondarySelected[i].text.split(" / ");
+			var newOption = new Option(secondaryDescOnly[1], secondaryDescOnly[1], true, true);
 			$('#diagnosaSecondaryId').append(newOption).trigger('change');
 		}
 
 		// CREATE LAINLAIN SELECT ELEMENT
 		var lainlainSelected = $("#lain").select2('data');
 		for (i in lainlainSelected){
-			var newOption = new Option(lainlainSelected[i].text, lainlainSelected[i].text, true, true);
+			lainlainDescOnly = lainlainSelected[i].text.split(" / ");
+			var newOption = new Option(lainlainDescOnly[1], lainlainDescOnly[1], true, true);
 			$('#diagnosaLainId').append(newOption).trigger('change');
 		}
 

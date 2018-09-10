@@ -422,63 +422,18 @@ table tr td:last-child {
 					Diagnosa		
 				</div>:
 				<div class="col">
-					<div class="row mb-2">
-						<div class="col-2">
-							Primer
-						</div>:
-						<div class="col">
 							<?php 
-							echo "<ol>";
-							foreach ($diagnosaPrimer as $key => $value) {
-								echo "<li>";
-								echo $value;
-								echo "</li>";
+							foreach ($diagnosaPrimer as $key => $value ) {
+								echo $value." ; ";
 							}
-							echo "</ol>";
-							?>
-						</div>
-					</div>
-					<div class="row mb-2">
-						<div class="col-2">
-							Sekunder 
-						</div>:
-						<div class="col">
-							<?php 
-							echo "<ol>";
 							foreach ($diagnosaSekunder as $key => $value) {
-								echo "<li>";
-								echo $value;
-								echo "</li>";
+								echo $value." ; ";
 							}
-							echo "</ol>";
-							?>
-						</div>
-					</div>
-					<div class="row mb-2">
-						<div class="col-2">
-							Lain-lain 
-						</div>:
-						<div class="col">
-							<?php 
-							echo "<ol>";
 							foreach ($diagnosaLain as $key => $value) {
-								echo "<li>";
 								echo $value;
-								echo "</li>";
 							}
-							echo "</ol>";
+							echo $diagnosaPemeriksaanLab;
 							?>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-2">
-							Pemeriksaan Lab 
-						</div>:
-						<div class="col">
-							<?="<ol><li>".$diagnosaPemeriksaanLab."</li></ol>"?>
-						</div>
-					</div>
-				<!-- <?=$diagnosa?> -->
 				</div>
 			</div>
 			<div class="row">

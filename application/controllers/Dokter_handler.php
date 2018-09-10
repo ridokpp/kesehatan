@@ -239,7 +239,7 @@ class Dokter_handler extends CI_Controller {
 			$dataReturn = $this->Kesehatan_M->orLike('icd10',array('Diagnosa'=>$dataForm['term']['term'],'Diskripsi'=>$dataForm['term']['term']))->result();
 			$data = array();
 			foreach ($dataReturn as $key => $value) {
-				$data[$key]['id'] = $value->Kode_ICD;
+				$data[$key]['id'] = $value->Kode_ICD. " / ".$value->Diskripsi;
 				$data[$key]['text'] = $value->Kode_ICD." / ".$value->Diskripsi;
 			}
 			echo json_encode($data);
