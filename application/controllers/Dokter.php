@@ -36,35 +36,35 @@ class Dokter extends CI_Controller {
 		$data['pasien'] 		= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		$update_kd_dokter		= $this->Kesehatan_M->update('rkm_medis',array('kd_pasien'=>$nomor_pasien),array('kd_dokter'=>$this->session->userdata('logged_in')['id_user']));
 
-		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery('SELECT 
-																		rkm_medis.kd_rkm,
-																		rkm_medis.kd_objek,
-																		rkm_medis.kd_pasien,
-																		rkm_medis.tgl_jam,
-																		rkm_medis.subjek,
-																		objek.tb,
-																		objek.bb,
-																		objek.td1,
-																		objek.td2,
-																		objek.N,
-																		objek.RR,
-																		objek.TAx,
-																		objek.text_headtotoe,
-																		headtotoe.keluhan,
-																		headtotoe.GCS_E,
-																		headtotoe.GCS_V,
-																		headtotoe.GCS_M,
-																		headtotoe.GCS_opsi,
-																		headtotoe.lain_lain,
+		// $data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery('SELECT 
+		// 																rkm_medis.kd_rkm,
+		// 																rkm_medis.kd_objek,
+		// 																rkm_medis.kd_pasien,
+		// 																rkm_medis.tgl_jam,
+		// 																rkm_medis.subjek,
+		// 																objek.tb,
+		// 																objek.bb,
+		// 																objek.td1,
+		// 																objek.td2,
+		// 																objek.N,
+		// 																objek.RR,
+		// 																objek.TAx,
+		// 																objek.text_headtotoe,
+		// 																headtotoe.keluhan,
+		// 																headtotoe.GCS_E,
+		// 																headtotoe.GCS_V,
+		// 																headtotoe.GCS_M,
+		// 																headtotoe.GCS_opsi,
+		// 																headtotoe.lain_lain,
 																		
-																		FROM rkm_medis 
-																		INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek 
-																		INNER JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe
-																')->result();
-		echo "<pre>";
-		var_dump($data);
-		echo "</pre>";
-		$data['objektif']		= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rekam_medis'][0]->kd_objek))->result();
+		// 																FROM rkm_medis 
+		// 																INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek 
+		// 																INNER JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe
+		// 														')->result();
+		// echo "<pre>";
+		// var_dump($data);
+		// echo "</pre>";
+		// $data['objektif']		= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rekam_medis'][0]->kd_objek))->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/log',$data);
