@@ -135,7 +135,7 @@ $(document).ready(function() {
                     <?=tgl_indo(substr($value->tgl_jam,0,10))?>
                   </li>
                   <li class="no-bullets">
-                    <?=substr($value->tgl_jam,10,6)?>;
+                    <?=substr($value->tgl_jam,10,6)?>
                   </li>
                 </ul>
               </td>
@@ -152,7 +152,9 @@ $(document).ready(function() {
                   <li class="no-bullets">Head to Toe : <?=$objektif[$key]->text_headtotoe?></li>
                 </ul>
               </td>
-              <td></td>
+              <td><?=$value->kelompok?></td>
+              <td><?=$value->planning?></td>
+              <td><button type="button" class="btn btn-primary" >CETAK</button> </td>
             </tr>
           <?php }
           ?>

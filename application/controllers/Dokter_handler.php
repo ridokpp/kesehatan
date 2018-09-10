@@ -314,6 +314,7 @@ class Dokter_handler extends CI_Controller {
 												);
 
 			$updateObj = $this->Kesehatan_M->update('objek',array('kd_objek'=>$kd_objek),array('text_headtotoe'=>$headtotoe));
+			
 			echo "<pre>";
 			var_dump($updateRM);
 			var_dump($updateObj);

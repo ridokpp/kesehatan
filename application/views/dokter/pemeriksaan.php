@@ -1,3 +1,4 @@
+<!-- https://pdfcrowd.com/i/how-to-export-html-to-pdf-with-php.html -->
 <style type="text/css">
 	.my-error-class {color:#FF0000;}
 	.my-valid-class {color:#00CC00;}
@@ -178,7 +179,7 @@
 		document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
 	}
 
-	// untuk menyalurkan kolom assessment pada halaman pemeriksaan ke modal untuk masuk ke headtotoe
+	// untuk menyalurkan kolom assessment pada halaman pemeriksaan ke modal rujukan untuk masuk ke headtotoe
 	function getassesment(){
 
 		// set select2 untuk clear all option yang ada. (restart). defaultya kosong
@@ -210,6 +211,9 @@
 		// get and set element text area
 		var pemeriksaanLab = $("#pemeriksaanLab").val();
 		$("#diagnosaPemeriksaanLab").val(pemeriksaanLab);
+
+		// get and set element text area planning pada halaman pemeriksaan ke textarea di 
+		$("#terapi1").val($("#planning").val());
 	}
 
 	// meneruskan textarea headtotoe ke form pemeriksaan karena diluar tag form. disebabkan struktur desain dan real condition
@@ -1060,19 +1064,19 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Terapi</label>
 									<div class="input-group-prepend col">/R
-									<input type="text" class="form-control" id="" name="terapi1" placeholder="..." >
+									<input type="text" class="form-control" id="terapi1" name="terapi1" placeholder="..." >
 									</div>
 								</div>	
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label"></label>
 									<div class="input-group-prepend col">/R
-									<input type="text" class="form-control" id="" name="terapi2" placeholder="..." >
+									<input type="text" class="form-control" id="terapi2" name="terapi2" placeholder="..." >
 									</div>
 								</div>	
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label"></label>
 									<div class="input-group-prepend col">/R
-									<input type="text" class="form-control" id="" name="terapi3" placeholder="..." >
+									<input type="text" class="form-control" id="terapi3" name="terapi3" placeholder="..." >
 									</div>
 								</div>
 							</div>

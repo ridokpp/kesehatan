@@ -5,7 +5,7 @@ $(document).ready(function() {
 		ajax: {
 			url: '<?=base_url()?>Petugas_handler/cari_nama/',
 			dataType: 'json',
-			delay: 250,
+			delay: 1000,
 			data: function (term, page) {
 				return {
 					term: term, // search term
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			cache: true
 		},
 		escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-		minimumInputLength: 1,
+		minimumInputLength: 1
 	});
 	$('#nama_or_nomor').select2('open');
 });
@@ -49,7 +49,7 @@ $(document).ready(function() {
 					<div class="row">
 						<div class="col-8 offset-2">
 						    <div class="form-group">
-								<button type="submit" class="btn btn-primary btn-block">Submit</button>
+								<button type="submit" class="btn btn-primary btn-block" autofocus="autofocus">Submit</button>
 							</div>
 						</div>
 					</div>
