@@ -59,11 +59,14 @@ class Dokter extends CI_Controller {
 																				headtotoe.lain_lain,
 																				(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok
 																				FROM rkm_medis
-																				WHERE rkm_medis.kd_pasien = ".$nomor_pasien."
+																				
 
 																				INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek  
 																				INNER JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
-																				INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment GROUP BY kd_rkm")->result();
+																				INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
+
+																				WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
+																				GROUP BY kd_rkm")->result();
 		$data['objektif']		= $this->Kesehatan_M->readS('objek')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');

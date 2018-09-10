@@ -254,7 +254,8 @@ class Dokter_handler extends CI_Controller {
 	*/
 	function update_rm(){
 		if ($this->input->post() !== NULL) {
-			$kd_objek 				= $this->input->post('kd_objek');
+			$kd_objek 					= $this->input->post('kd_objek');
+			$nomor_pasien 					= $this->input->post('nomor_pasien');
 			$headtotoe 					= $this->input->post('headtotoeText');
 			$subjektif 					= $this->input->post('subjektif');
 			$planning  					= $this->input->post('planning');
@@ -314,7 +315,7 @@ class Dokter_handler extends CI_Controller {
 												);
 
 			$updateObj = $this->Kesehatan_M->update('objek',array('kd_objek'=>$kd_objek),array('text_headtotoe'=>$headtotoe));
-			
+			$this->Kesehatan_M->delete('proses_antrian',array('nomor_pasien'=>$nomor_pasien));
 			echo "<pre>";
 			var_dump($updateRM);
 			var_dump($updateObj);

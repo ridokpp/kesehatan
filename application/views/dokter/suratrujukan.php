@@ -432,7 +432,7 @@ table tr td:last-child {
 							foreach ($diagnosaLain as $key => $value) {
 								echo $value;
 							}
-							echo $diagnosaPemeriksaanLab;
+							echo ", ".$diagnosaPemeriksaanLab;
 							?>
 				</div>
 			</div>
