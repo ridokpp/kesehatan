@@ -164,11 +164,14 @@ $(document).ready(function() {
 	</div>
 </div>
 
-<form method="POST" action="<?=base_url()?>Dokter/dummyF">
-  <input type="checkbox" name="data[]" value="1">
-  <input type="checkbox" name="data[]" value="2">
-  <input type="checkbox" name="data[]" value="3">
-  <input type="checkbox" name="data[]" value="4">
-  <input type="checkbox" name="data[]" value="5">
+<form method="POST" action="<?=base_url()?>Dokter_handler/cetak_RM" target="_blank">
+  <input type="text" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+  <input type="radio" name="bool_halaman_awal" value="1">
+  <input type="radio" name="bool_halaman_awal" value="0">
+  <input type="checkbox" name="idS_rekam_medis[]" value="1">
+  <input type="checkbox" name="idS_rekam_medis[]" value="2">
+  <input type="checkbox" name="idS_rekam_medis[]" value="3">
+  <input type="checkbox" name="idS_rekam_medis[]" value="4">
+  <input type="checkbox" name="idS_rekam_medis[]" value="5">
   <input type="submit" name="submit">
 </form>

@@ -85,20 +85,20 @@ class Petugas_handler extends CI_Controller {
 			// tahun datang
 			$tahun_datang = $now->format('Y');
 			
-			$dataForm = array(	'nama'			=>$this->input->post('nama_lengkap'),
+			$dataForm = array(	'nama'			=>ucwords($this->input->post('nama_lengkap')),
 								'nik' 			=>$nik,
-								'tmp_lahir'		=>$this->input->post('tempat_lahir'),
+								'tmp_lahir'		=>ucwords($this->input->post('tempat_lahir')),
 								'tgl_lahir'		=>$tgl_lahir->format('Y-m-d'),
 								'usia'			=>$usia,
-								'alamat'		=>	"Jalan ".$this->input->post('jalan').
+								'alamat'		=>	"Jalan ".ucwords($this->input->post('jalan')).
 													" RT".$this->input->post('RT').
 													" RW".$this->input->post('RW').
-													" Kelurahan ".$kelurahan.
-													" Kecamatan ".$kecamatan.
-													" Kota ".$kota,
+													" Kelurahan ".ucwords($kelurahan).
+													" Kecamatan ".ucwords($kecamatan).
+													" Kota ".ucwords($kota),
 								'jkelamin'		=>$this->input->post('jenis_kelamin'),
-								'pekerjaan'		=>$this->input->post('pekerjaan'),
-								'kelurahan'		=>$kelurahan,
+								'pekerjaan'		=>ucwords($this->input->post('pekerjaan')),
+								'kelurahan'		=>ucwords($kelurahan),
 								'pembayaran'	=>$this->input->post('pembayaran'),
 								'nomor_pasien'	=>$no_urut."-".$kd_kelurahan."-".$kode_jenis_kelamin."-".$kode_usia."-".$bulan_datang."-".$tahun_datang
 							);
