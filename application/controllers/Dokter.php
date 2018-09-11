@@ -138,6 +138,21 @@ class Dokter extends CI_Controller {
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/antri',$data);
 		$this->load->view('static/footer');
+
+
+		// $content  = '';
+		// $content .= $this->load->view('static/header','',TRUE);
+		// $content .= $this->load->view('dokter/antri',$data,TRUE);
+		// $content .= $this->load->view('static/footer','',TRUE);
+		// $file 	= FCPATH."/suratrujukan/";
+		// if (!file_exists($file)) {
+		// 	mkdir($file, 0777, true);
+		// 	$myfile = fopen($file."/testfile.html", "w");
+		// 	fwrite($myfile, $content);
+		// 	fclose($myfile);
+		// }else{
+		// 	echo "sudah";
+		// }
 	}
 
 

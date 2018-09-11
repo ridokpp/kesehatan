@@ -19,8 +19,8 @@ class Dokter_handler extends CI_Controller {
 	{
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
+		$data['nomor_pasien']	= $this->input->post('nomor_pasien');
 		if ($surat == 'suratsehat') {
-			$data['nomor_pasien']	= $this->input->post('nomor_pasien');
 			$data['tes_buta_warna']	= $this->input->post('tes_buta_warna');
 			$data['keperluan']	= $this->input->post('keperluan');
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
@@ -43,15 +43,14 @@ class Dokter_handler extends CI_Controller {
 				$data['nomor_surat']				= $insertSuratSehat['nomor_surat'];
 			}
 			$this->Kesehatan_M->create('suratsehat',$insertSuratSehat);
-			$this->load->view('dokter/suratsehat',$data);
-			
+			// $this->load->view('dokter/suratsehat',$data);
+			$kode_surat = "001";
 		}elseif ($surat == 'suratsakit') {
 			$data['alasan']		 	= $this->input->post('alasan');
 			$data['tanggal_awal'] 	= $this->input->post('tanggal_awal');
 			$data['tanggal_akhir'] 	= $this->input->post('tanggal_akhir');
 			$data['selama'] 		= $this->input->post('selama');
 			$data['selama_satuan'] 	= $this->input->post('selama_satuan');
-			$data['nomor_pasien']	= $this->input->post('nomor_pasien');
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
 			$data['sip']			= $this->session->userdata('logged_in')['sip'];
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
@@ -69,11 +68,10 @@ class Dokter_handler extends CI_Controller {
 				$data['nomor_surat']				= $insertSuratSakit['nomor_surat'];
 			}
 			$this->Kesehatan_M->create('suratsakit',$insertSuratSakit);
-			$this->load->view('dokter/suratsakit',$data);
-
+			// $this->load->view('dokter/suratsakit',$data);
+			$kode_surat = "002";
 		}elseif ($surat == 'suratrujukan') {
 
-			$data['nomor_pasien']	= $this->input->post('kd_pasien');
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
 			$data['sip']			= $this->session->userdata('logged_in')['sip'];
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
@@ -217,9 +215,24 @@ class Dokter_handler extends CI_Controller {
 			$data['diagnosaLain'] 				= $this->input->post('diagnosaLain[]');
 			$data['diagnosaPemeriksaanLab'] 	= $this->input->post('diagnosaPemeriksaanLab');
 			
-			$this->load->view('dokter/suratrujukan',$data);
+			// $this->load->view('dokter/suratrujukan',$data);
+			$kode_surat = "003";
 		}
+		$this->load->view('dokter/'.$surat,$data);
 		$this->load->view('static/footer');
+		$content = '';
+		$content .= $this->load->view('static/header','',TRUE);
+		$content .= $this->load->view('static/navbar','',TRUE);
+		$content .= $this->load->view('dokter/'.$surat,$data,TRUE);
+		$content .= $this->load->view('static/footer','',TRUE);
+
+		$folder 	= FCPATH."/surat pasien/".$data['nomor_pasien']."/".$surat."/";
+		if (!file_exists($folder)) {
+			mkdir($folder, 0777, true);
+		}
+		$myfolder = fopen($folder."0".$data['nomor_surat']."-".$kode_surat."-0".date('m')."-2018.html", "w");
+		fwrite($myfolder, $content);
+		fclose($myfolder);
 	}
 	/*
 	* get nomor surat untuk disalurkan ke kolom planning

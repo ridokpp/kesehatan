@@ -599,7 +599,7 @@
 				      	</div>
 				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST">
 					    	<div class="modal-body" >
-								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
+								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="nomor_pasien" readonly="">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
