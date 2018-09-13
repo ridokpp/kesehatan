@@ -7,9 +7,7 @@
 			}
 </style>
 <script type="text/javascript">
-	hiddden(){
-		document.getElementById("tkn").style.display = "none";
-	}
+
  	$(document).ready(function() {
  		
 		// inisialisasi dengan select2

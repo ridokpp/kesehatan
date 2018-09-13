@@ -36,37 +36,13 @@ class Dokter extends CI_Controller {
 		$data['pasien'] 		= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		$update_kd_dokter		= $this->Kesehatan_M->update('rkm_medis',array('kd_pasien'=>$nomor_pasien),array('kd_dokter'=>$this->session->userdata('logged_in')['id_user']));
 
-		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery("SELECT 
-																				rkm_medis.kd_rkm,
-																				rkm_medis.kd_objek,
-																				rkm_medis.kd_pasien,
-																				rkm_medis.tgl_jam,
-																				rkm_medis.subjek,
-																				rkm_medis.planning,
-																				objek.tb,
-																				objek.bb,
-																				objek.td1,
-																				objek.td2,
-																				objek.N,
-																				objek.RR,
-																				objek.TAx,
-																				objek.text_headtotoe,
-																				headtotoe.keluhan,
-																				headtotoe.GCS_E,
-																				headtotoe.GCS_V,
-																				headtotoe.GCS_M, 
-																				headtotoe.GCS_opsi,
-																				headtotoe.lain_lain,
-																				(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok
-																				FROM rkm_medis
-																				
-
-																				INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek  
-																				INNER JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
-																				INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
+		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery("SELECT rkm_medis.kd_rkm, rkm_medis.kd_objek, rkm_medis.kd_pasien, rkm_medis.tgl_jam, rkm_medis.subjek, rkm_medis.planning, objek.tb, objek.bb, objek.td1, objek.td2, objek.N, objek.RR, objek.TAx, objek.text_headtotoe, headtotoe.keluhan, headtotoe.GCS_E, headtotoe.GCS_V, headtotoe.GCS_M,  headtotoe.GCS_opsi, headtotoe.lain_lain, kepala.anemis_kiri, kepala.anemis_kanan, kepala.ikterik_kiri, kepala.ikterik_kanan, kepala.cianosis_kiri, kepala.cianosis_kanan, kepala.deformitas_kiri, kepala.deformitas_kanan, kepala.refchy_kiri, kepala.refchy_kanan, kepala.refchyopsi, kepala.ket_tambahan, thorak.metris, thorak.wheezing_kiri, thorak.wheezing_kanan, thorak.ronkhi_kiri, thorak.ronkhi_kanan, thorak.vesikuler_kiri, thorak.vesikuler_kanan, thorak.jantung_icor, thorak.s1_s2, thorak.s_tambahan, thorak.ket_tambahan, abdomen.BU, abdomen.ny1, abdomen.ny2, abdomen.ny3, abdomen.ny4, abdomen.ny5, abdomen.ny6, abdomen.ny7, abdomen.ny8, abdomen.ny9, abdomen.hpmgl, abdomen.spmgl, ekstermitas.ah1, ekstermitas.ah2, ekstermitas.ah3, ekstermitas.ah4, ekstermitas.crt1, ekstermitas.crt2, ekstermitas.crt3, ekstermitas.crt4, ekstermitas.edm1, ekstermitas.edm2, ekstermitas.edm3, ekstermitas.edm4, ekstermitas.pitting, ekstermitas.ket_tambahan, terapi.terapi1, terapi.terapi2, terapi.terapi3, (SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok FROM rkm_medis INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe LEFT JOIN kepala ON headtotoe.kd_kepala = kepala.kd_kepala LEFT JOIN thorak ON headtotoe.kd_thorak = thorak.kd_thorak LEFT JOIN abdomen ON headtotoe.kd_abdomen = abdomen.kd_abdomen LEFT JOIN ekstermitas ON headtotoe.kd_ekstermitas = ekstermitas.kd_ekstermitas LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
 
 																				WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
 																				GROUP BY kd_rkm")->result();
+echo "<pre>";
+		var_dump($data['rekam_medis']);
+echo "</pre>";
 		$data['objektif']		= $this->Kesehatan_M->readS('objek')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');

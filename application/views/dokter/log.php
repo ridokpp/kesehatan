@@ -150,6 +150,13 @@ $(document).ready(function() {
                   <li class="no-bullets">N  : <?=$objektif[$key]->N?> rpm</li>
                   <li class="no-bullets">TAx: <?=$objektif[$key]->TAx?> &deg;C</li>
                   <li class="no-bullets">Head to Toe : <?=$objektif[$key]->text_headtotoe?></li>
+                  <?php
+                  if ($objektif[$key]->kd_headtotoe) { ?>
+                    <li class="no-bullets">keluhan: <?=$value->keluhan?></li>
+                    <li class="no-bullets">GCS E : <?=$value->GCS_E?>; V: <?=$value->GCS_V?>; M:<?=$value->GCS_M?> (<?=$value->GCS_opsi?>)</li>
+                    <li class="no-bullets">TB/BB: <?=$value->tb?> cm / <?=$value->bb?> kg</li>
+                    <?php
+                  }?>
                 </ul>
               </td>
               <td><?=$value->kelompok?></td>

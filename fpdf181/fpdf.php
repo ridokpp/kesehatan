@@ -288,7 +288,8 @@ function Close()
 	$this->_enddoc();
 }
 
-function AddPage($orientation='', $size='', $rotation=0)
+function AddPage($orientation='L', $size=array(100,100), $rotation=0)
+// function AddPage($orientation='', $size='', $rotation=0)
 {
 	// Start a new page
 	if($this->state==3)
