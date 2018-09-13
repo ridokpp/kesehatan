@@ -2,11 +2,17 @@
 <style type="text/css">
 	.my-error-class {color:#FF0000;}
 	.my-valid-class {color:#00CC00;}
+	.tkn{
+		display:none;
+			}
 </style>
 <script type="text/javascript">
+	hiddden(){
+		document.getElementById("tkn").style.display = "none";
+	}
  	$(document).ready(function() {
-
- 		// inisialisasi dengan select2
+ 		
+		// inisialisasi dengan select2
 		$('#diagnosaPrimaryId').select2();
     	$('#diagnosaSecondaryId').select2();
     	$('#diagnosaLainId').select2();
@@ -243,6 +249,16 @@
 		<div class="col col-lg-1">
 	     	<h5><span class="badge <?=($pasien[0]->pembayaran != 'rf' OR $pasien[0]->pembayaran != 'RF') ? 'badge-success' : 'badge-secondary' ?>"><?=$pasien[0]->pembayaran?></span></h5>
 	    </div>
+	    <?php
+	    $pembayaran =  $pasien[0]->pembayaran;
+	    
+ 		if ($pembayaran == 'rf' OR $pembayaran == 'RF'){?>
+ 		<style type="text/css">.tkn{
+		display:block;
+			}</style>
+			<?php
+ 		}
+ 		?>
 	    <div class="col-md-auto">
 	      	<?= $pasien[0]->nomor_pasien?>
 	    </div>
@@ -364,7 +380,8 @@
 					<?=$objek[0]->bb?> kg
 				</div>
 			</div>
-
+			
+			<div class="tkn">
 			<div class="row mt-2">
 				<div class="col-4">
 					Tekanan Darah
@@ -375,6 +392,7 @@
 				<div class="col">
 					<?=$objek[0]->td1?> / <?=$objek[0]->td2?>
 				</div>
+			</div>
 			</div>
 
 			<div class="row mt-2">
@@ -599,7 +617,7 @@
 				      	</div>
 				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST">
 					    	<div class="modal-body" >
-								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="nomor_pasien" readonly="">
+								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
