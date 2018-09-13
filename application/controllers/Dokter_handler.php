@@ -346,13 +346,35 @@ class Dokter_handler extends CI_Controller {
 		$bool_halaman_awal 	= $this->input->post('bool_halaman_awal');
 
 		$query = "
-			SELECT rkm_medis.kd_rkm, rkm_medis.kd_objek, rkm_medis.kd_pasien, rkm_medis.tgl_jam, rkm_medis.subjek, rkm_medis.planning, objek.tb, objek.bb, objek.td1, objek.td2, objek.N, objek.RR, objek.TAx, objek.text_headtotoe, headtotoe.keluhan, headtotoe.GCS_E, headtotoe.GCS_V, headtotoe.GCS_M,  headtotoe.GCS_opsi, headtotoe.lain_lain, (SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok 
+			SELECT 	rkm_medis.kd_rkm, 
+					rkm_medis.kd_objek, 
+					rkm_medis.kd_pasien, 
+					rkm_medis.tgl_jam, 
+					rkm_medis.subjek, 
+					rkm_medis.planning, 
+					objek.tb, 
+					objek.bb, 
+					objek.td1, 
+					objek.td2, 
+					objek.N, 
+					objek.RR, 
+					objek.TAx, 
+					objek.text_headtotoe, 
+					headtotoe.keluhan, 
+					headtotoe.GCS_E, 
+					headtotoe.GCS_V, 
+					headtotoe.GCS_M, 
+					 headtotoe.GCS_opsi, 
+			 		headtotoe.lain_lain, 
+					(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok 
 			FROM rkm_medis 
 			INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek 
 			LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
 			INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
 
 			WHERE rkm_medis.kd_pasien = '$nomor_pasien'";
+		
+		// perulangan untuk set string where
 		for ($i=0; $i <sizeof($idS_rekam_medis) ; $i++) { 
 			if ($i == 0) {
 				$query .= " AND (rkm_medis.kd_rkm = $idS_rekam_medis[$i]";
@@ -360,6 +382,7 @@ class Dokter_handler extends CI_Controller {
 				$query .= " OR rkm_medis.kd_rkm = $idS_rekam_medis[$i]";
 			}
 		}
+		// finalisasi string query;
 		$query .= ") GROUP BY rkm_medis.kd_rkm";
 
 		// $rekam medis adalah string untuk menyimpan rekam medis yang akan dicetak. variabel telah memuat data yang diambil dari database
@@ -370,7 +393,8 @@ class Dokter_handler extends CI_Controller {
 		$this->load->library('pdf');
 		$this->load->helper('kesehatan_fpdf');
 		$pdf_mc = new PDF_MC_TABLE();
-		$pdf_mc->AddPage('L',array(330,215));
+		// $pdf_mc->AddPage('L',array(330,215));
+		$pdf_mc->AddPage();
 		
 		$pdf_mc->SetFont('Arial','',20);
 	    $pdf_mc->Cell(0,15,strtoupper($pasien[0]->pembayaran),0,0,'L');
@@ -380,9 +404,9 @@ class Dokter_handler extends CI_Controller {
 		$pdf_mc->SetFont('Arial','',11);
 		
 		$pdf_mc->SetWidths(array(40,5,105,40,5,110));
-		$pdf_mc->Row(array('Nama',':',$pasien[0]->nama,'Alamat',':',$pasien[0]->alamat),FALSE);
-		$pdf_mc->Row(array('NIK',':',$pasien[0]->nik,'Jenis Kelamin',':',$pasien[0]->jkelamin),FALSE);
-		$pdf_mc->Row(array('Tempat / Tgl Lahir',':',$pasien[0]->tmp_lahir." / ".$pasien[0]->tgl_lahir,'Pekerjaan',':',$pasien[0]->pekerjaan),FALSE);
+		$pdf_mc->Row(array('Nama',':',ucwords($pasien[0]->nama),'Alamat',':',ucwords($pasien[0]->alamat)),FALSE);
+		$pdf_mc->Row(array('NIK',':',ucwords($pasien[0]->nik),'Jenis Kelamin',':',ucwords($pasien[0]->jkelamin)),FALSE);
+		$pdf_mc->Row(array('Tempat / Tgl Lahir',':',ucwords($pasien[0]->tmp_lahir)." / ".ucwords($pasien[0]->tgl_lahir),'Pekerjaan',':',ucwords($pasien[0]->pekerjaan)),FALSE);
 	    $pdf_mc->Ln(10);
 		
 		$pdf_mc->SetWidths(array(40,50,60,90,70));
@@ -391,7 +415,19 @@ class Dokter_handler extends CI_Controller {
 			$pdf_mc->Row(array(
 					tgl_indo(substr($value->tgl_jam,0,10))." ".substr($value->tgl_jam,10,6)." WIB",
 					$value->subjek,
-						"TB/BB : ".$objektif[$key]->tb."cm / ".$objektif[$key]->bb."Kg \nTD : ".$objektif[$key]->td1." / ".$objektif[$key]->td2." mmHg\nRR : ".$objektif[$key]->RR."rpm \nN : ".$objektif[$key]->N."     T".utf8_decode("°")."Ax : ".$objektif[$key]->TAx.utf8_decode("°C")." \nHeadToToe : ".$objektif[$key]->text_headtotoe,
+						chr(127)."TB/BB : ".$objektif[$key]->tb."cm / ".$objektif[$key]->bb."Kg \n".
+						chr(127)."TD : ".$objektif[$key]->td1." / ".$objektif[$key]->td2." mmHg\n".
+						chr(127)."RR : ".$objektif[$key]->RR."rpm \n".
+						chr(127)."N : ".$objektif[$key]->N."     T".utf8_decode("°")."Ax : ".$objektif[$key]->TAx.utf8_decode("°C")." \n".
+						chr(127)."Head To Toe : ".$objektif[$key]->text_headtotoe.
+								($value->keluhan != NULL ? 	"\n".chr(127)."Keluhan : ".$value->keluhan.
+															"\n".chr(127)."GCS E : ".$value->GCS_E.
+															"; V : ".$value->GCS_V.
+															"; M : ".$value->GCS_M.
+															($value->GCS_opsi != NULL ? "(".$value->GCS_opsi.")" : "").
+															"\n".chr(127)."Lain-lain : ".$value->lain_lain.
+															"\n".chr(127)."Kepala"
+								: ""),
 					$value->kelompok,
 					$value->planning
 				)
