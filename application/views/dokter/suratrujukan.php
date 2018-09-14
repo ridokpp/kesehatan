@@ -271,6 +271,11 @@ table tr td:last-child {
 				</div>
 			</div>
 			<div class="row">
+				<div class="col offset-3">
+				Wheezing <?=($thorak['wheezing_kiri'] == '1') ? '+' : '-'?> / <?=($thorak['wheezing_kanan'] == '1') ? '+' : '-'?> Ronkhi <?=($thorak['ronkhi_kiri'] == '1') ? '+' : '-'?> / <?=($thorak['ronkhi_kanan'] == '1') ? '+' : '-'?> Vesikuler <?=($thorak['vesikuler_kiri'] == '1') ? '+' : '-'?> / <?=($thorak['vesikuler_kanan'] == '1') ? '+' : '-'?>
+				</div>
+			</div>
+			<div class="row">
 				&nbsp;
 				<div class="col-1 offset-2">
 					Jantung
@@ -425,12 +430,15 @@ table tr td:last-child {
 							<?php 
 							foreach ($diagnosaPrimer as $key => $value ) {
 								echo $value." ; ";
+								error_reporting(0);
 							}
 							foreach ($diagnosaSekunder as $key => $value) {
 								echo $value." ; ";
+								error_reporting(0);
 							}
 							foreach ($diagnosaLain as $key => $value) {
 								echo $value;
+								error_reporting(0);
 							}
 							echo ", ".$diagnosaPemeriksaanLab;
 							?>
