@@ -1,3 +1,8 @@
+<style type="text/css">
+	.tkn{
+		display:none;
+			}
+</style>
 <h3 class="text-center mt-3">Pemeriksaan Awal Pasien</h3>
 
 <form action="<?=base_url()."Petugas_handler/pemeriksaan"?>" method="POST">
@@ -34,31 +39,35 @@
 		 		<?php
 		 		$pembayaran =  $pasien[0]->pembayaran;
 		 		if ($pembayaran == 'rf' OR $pembayaran == 'RF'){?>
-			 		<div class="tkn">
-				 	<div class="row">
-				 		<div class="col">
-					     	<div class="form-group row">
-					   			<label class="col-2 col-form-label">Sistol/Diastol</label>
-								<div class="input-group col">
-					      			<input type="number" class="form-control" id="" name="sistol" placeholder="Sistol" required="">
-									<div class="input-group-append">
-										<div class="input-group-text">mmHg</div>
-									</div>
+
+		 		<style type="text/css">.tkn{
+					display:block;
+				} </style>
+				<?php
+	 			}
+	 		 	?>
+		 		<div class="tkn">
+			 	<div class="row">
+			 		<div class="col">
+				     	<div class="form-group row">
+				   			<label class="col-2 col-form-label">Sistol/Diastol</label>
+							<div class="input-group col">
+				      			<input type="number" class="form-control" id="" name="sistol" placeholder="Sistol" >
+								<div class="input-group-append">
+									<div class="input-group-text">mmHg</div>
 								</div>
-								<div class="input-group col">
-					      			<input type="number" class="form-control" id="" name="diastol" placeholder="Diastol" required="">
-									<div class="input-group-append">
-										<div class="input-group-text">mmHg</div>
-									</div>
+							</div>
+							<div class="input-group col">
+				      			<input type="number" class="form-control" id="" name="diastol" placeholder="Diastol">
+								<div class="input-group-append">
+									<div class="input-group-text">mmHg</div>
+
 								</div>
 							</div>
 						</div>
 				 	</div>
 				 	</div>
-		 		
-				<?php
-	 			}
-	 		 	?>
+		 
 
 			 	<div class="form-group row">
 				    <label class="col-2 col-form-label">Denyut Nadi</label>

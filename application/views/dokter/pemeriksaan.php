@@ -249,7 +249,6 @@
 	    </div>
 	    <?php
 	    $pembayaran =  $pasien[0]->pembayaran;
-	    
  		if ($pembayaran == 'rf' OR $pembayaran == 'RF'){?>
  		<style type="text/css">.tkn{
 		display:block;
@@ -817,7 +816,7 @@
 									<input type="checkbox" class="form-control" id="" name="wheezing_kiri" placeholder="" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="wheezing_kanan" placeholder="" value="0">
+									<input type="checkbox" class="form-control" id="" name="wheezing_kanan" placeholder="" value="1">
 									</div>						
 								</div>
 
@@ -828,7 +827,7 @@
 									<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" placeholder="" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" placeholder="" value="0">
+									<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" placeholder="" value="1">
 									</div>						
 								</div>
 
@@ -836,10 +835,10 @@
 									<label class="col-sm-2 col-form-label"></label>
 								 	<label class="col-sm-1 col-form-label">Vesikuler</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri" placeholder="" value="Tampak">
+									<input type="checkbox" class="form-control" id="" name="vesikuler_kiri" placeholder="" value="1">
 									</div>/
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan" placeholder="" value="Tak Tampak">
+									<input type="checkbox" class="form-control" id="" name="vesikuler_kanan" placeholder="" value="1">
 									</div>						
 								</div>
 								<fieldset class="form-group">
@@ -848,13 +847,13 @@
 									  	<legend class="col-form-label col-sm-1 pt-0">:</legend>
 								      	<div class="col-sm-5">
 								        	<div class="form-check">
-								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Reguler" required="">
+								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Tampak" required="">
 								          		<label class="form-check-label">
 								            		Tampak
 								          		</label>
 								        	</div>
 								       		<div class="form-check">
-								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Irreguler" required="">
+								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Tak Tampak" required="">
 								          		<label class="form-check-label">
 								            		Tak Tampak
 								          		</label>
@@ -863,13 +862,13 @@
 								      			<legend class="col-form-label col-sm-5 pt-0">S1 / S2</legend>
 								      			<div class="col-sm-5">
 								        			<div class="form-check">
-								          				<input class="form-check-input" type="radio" name="s1_s2" value="1" required="">
+								          				<input class="form-check-input" type="radio" name="s1_s2" value="Reguler" required="">
 								          				<label class="form-check-label">
 								            				Reguler
 								          				</label>
 								        			</div>
 								        			<div class="form-check">
-								          				<input class="form-check-input" type="radio" name="s1_s2" value="0" required="">
+								          				<input class="form-check-input" type="radio" name="s1_s2" value="Irreguler" required="">
 								          				<label class="form-check-label">
 								            				Irreguler
 								          				</label>
