@@ -303,6 +303,7 @@ class Dokter_handler extends CI_Controller {
 			$updateRM = $this->Kesehatan_M->update('rkm_medis',
 																array(
 																	'kd_pasien'		=>$this->input->post('nomor_pasien'),
+																	'kd_objek'		=>$kd_objek,
 																	'YEAR(tgl_jam)'	=>date('Y'),
 																	'MONTH(tgl_jam)'=>date('m'),
 																	'DAY(tgl_jam)'	=>date('d')
@@ -334,33 +335,82 @@ class Dokter_handler extends CI_Controller {
 		$bool_halaman_awal 	= $this->input->post('bool_halaman_awal');
 
 		$query = "
-			SELECT 	rkm_medis.kd_rkm, 
-					rkm_medis.kd_objek, 
-					rkm_medis.kd_pasien, 
-					rkm_medis.tgl_jam, 
-					rkm_medis.subjek, 
-					rkm_medis.planning, 
-					objek.tb, 
-					objek.bb, 
-					objek.td1, 
-					objek.td2, 
-					objek.N, 
-					objek.RR, 
-					objek.TAx, 
-					objek.text_headtotoe, 
-					headtotoe.keluhan, 
-					headtotoe.GCS_E, 
-					headtotoe.GCS_V, 
-					headtotoe.GCS_M, 
-					 headtotoe.GCS_opsi, 
-			 		headtotoe.lain_lain, 
-					(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok 
-			FROM rkm_medis 
-			INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek 
-			LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
-			INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
+			SELECT rkm_medis.kd_rkm, 
+			rkm_medis.kd_objek, 
+			rkm_medis.kd_pasien, 
+			rkm_medis.tgl_jam, 
+			rkm_medis.subjek, 
+			rkm_medis.planning, 
+			objek.tb, 
+			objek.bb, 
+			objek.td1, 
+			objek.td2, 
+			objek.N, 
+			objek.RR, 
+			objek.TAx, 
+			objek.text_headtotoe, 
+			headtotoe.keluhan, 
+			headtotoe.GCS_E, 
+			headtotoe.GCS_V, 
+			headtotoe.GCS_M, 
+			headtotoe.GCS_opsi, 
+			headtotoe.lain_lain, 
+			kepala.anemis_kiri, 
+			kepala.anemis_kanan, 
+			kepala.ikterik_kiri, 
+			kepala.ikterik_kanan, 
+			kepala.cianosis_kiri, 
+			kepala.cianosis_kanan, 
+			kepala.deformitas_kiri, 
+			kepala.deformitas_kanan, 
+			kepala.refchy_kiri, 
+			kepala.refchy_kanan, 
+			kepala.refchyopsi, 
+			kepala.ket_tambahan AS ket_tambahan_kepala, 
+			thorak.metris, 
+			thorak.wheezing_kiri, 
+			thorak.wheezing_kanan, 
+			thorak.ronkhi_kiri, 
+			thorak.ronkhi_kanan, 
+			thorak.vesikuler_kiri, 
+			thorak.vesikuler_kanan, 
+			thorak.jantung_icor, 
+			thorak.s1_s2, 
+			thorak.s_tambahan, 
+			thorak.ket_tambahan AS ket_tambahan_thorak, 
+			abdomen.BU, 
+			abdomen.ny1, 
+			abdomen.ny2, 
+			abdomen.ny3, 
+			abdomen.ny4, 
+			abdomen.ny5, 
+			abdomen.ny6, 
+			abdomen.ny7, 
+			abdomen.ny8, 
+			abdomen.ny9, 
+			abdomen.hpmgl, 
+			abdomen.spmgl,
+			abdomen.ket_tambahan AS ket_tambahan_abdomen, 
+			ekstermitas.ah1, 
+			ekstermitas.ah2, 
+			ekstermitas.ah3, 
+			ekstermitas.ah4, 
+			ekstermitas.crt1, 
+			ekstermitas.crt2, 
+			ekstermitas.crt3, 
+			ekstermitas.crt4, 
+			ekstermitas.edm1, 
+			ekstermitas.edm2, 
+			ekstermitas.edm3, 
+			ekstermitas.edm4, 
+			ekstermitas.pitting, 
+			ekstermitas.ket_tambahan AS ket_tambahan_ekstermitas, 
+			terapi.terapi1, 
+			terapi.terapi2, 
+			terapi.terapi3, 
+			(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok FROM rkm_medis INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe LEFT JOIN kepala ON headtotoe.kd_kepala = kepala.kd_kepala LEFT JOIN thorak ON headtotoe.kd_thorak = thorak.kd_thorak LEFT JOIN abdomen ON headtotoe.kd_abdomen = abdomen.kd_abdomen LEFT JOIN ekstermitas ON headtotoe.kd_ekstermitas = ekstermitas.kd_ekstermitas LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
 
-			WHERE rkm_medis.kd_pasien = '$nomor_pasien'";
+																				WHERE rkm_medis.kd_pasien = '$nomor_pasien'";
 		
 		// perulangan untuk set string where
 		for ($i=0; $i <sizeof($idS_rekam_medis) ; $i++) { 
@@ -389,12 +439,12 @@ class Dokter_handler extends CI_Controller {
 	    $pdf_mc->Cell(0,15,"No. ".strtoupper($nomor_pasien),0,0,'R');
 	    $pdf_mc->Ln(15);
 
-		$pdf_mc->SetFont('Arial','',11);
+		$pdf_mc->SetFont('Arial','',7);
 		
 		$pdf_mc->SetWidths(array(40,5,105,40,5,110));
 		$pdf_mc->Row(array('Nama',':',ucwords($pasien[0]->nama),'Alamat',':',ucwords($pasien[0]->alamat)),FALSE);
 		$pdf_mc->Row(array('NIK',':',ucwords($pasien[0]->nik),'Jenis Kelamin',':',ucwords($pasien[0]->jkelamin)),FALSE);
-		$pdf_mc->Row(array('Tempat / Tgl Lahir',':',ucwords($pasien[0]->tmp_lahir)." / ".ucwords($pasien[0]->tgl_lahir),'Pekerjaan',':',ucwords($pasien[0]->pekerjaan)),FALSE);
+		$pdf_mc->Row(array('Tempat / Tgl Lahir',':',ucwords($pasien[0]->tmp_lahir)." / ".tgl_indo($pasien[0]->tgl_lahir),'Pekerjaan',':',ucwords($pasien[0]->pekerjaan)),FALSE);
 	    $pdf_mc->Ln(10);
 		
 		$pdf_mc->SetWidths(array(40,50,60,90,70));
@@ -414,7 +464,13 @@ class Dokter_handler extends CI_Controller {
 															"; M : ".$value->GCS_M.
 															($value->GCS_opsi != NULL ? "(".$value->GCS_opsi.")" : "").
 															"\n".chr(127)."Lain-lain : ".$value->lain_lain.
-															"\n".chr(127)."Kepala"
+															"\n".chr(127)."Kepala : Anemis ".($value->anemis_kiri == '1' ? "+" : "-")." / ".($value->anemis_kanan == '1' ? "+" : "-")." Ikterik ".($value->ikterik_kiri == '1' ? "+" : "-")." / ".($value->ikterik_kanan == '1' ? "+" : "-")." Cianosis ".($value->cianosis_kiri == '1' ? "+" : "-")." / ".($value->cianosis_kanan == '1' ? "+" : "-")." Deformitas ".($value->deformitas_kiri == '1' ? "+" : "-")." / ".($value->deformitas_kanan == '1' ? "+" : "-")." Refleks Cahaya ".($value->refchy_kiri == '1' ? "+" : "-")." / ".($value->refchy_kanan == '1' ? "+" : "-")." ".$value->refchyopsi." Keterangan Tambahan :".$value->ket_tambahan_kepala.
+															"\n".chr(127)."Thorak : ".chr(123)."Paru :".$value->metris."\nWheezing ".($value->wheezing_kiri == '1' ? "+" : "-")." / ".($value->wheezing_kanan == '1' ? "+" : "-")." Ronkhi ".($value->ronkhi_kiri == '1' ? "+" : "-")." / ".($value->ronkhi_kanan == '1' ? "+" : "-")." Vesikuler ".($value->vesikuler_kiri == '1' ? "+" : "-")." / ".($value->vesikuler_kanan == '1' ? "+" : "- ")."}, {Jantung : Ictus cordis ".($value->vesikuler_kanan == '1' ? "+" : "- ")." / ".($value->vesikuler_kanan == '1' ? "+" : "- ")."S1-S2 ".($value->s1_s2 == 1 ? 'Reguler' : 'Irreguler').", Suara Tambahan ".$value->s_tambahan." }, {Keterangan Tambahan : ".$value->ket_tambahan_thorak."}".
+															"\n".chr(127)."Abdomen : BU ".$value->BU." \nNyeri Tekan ".($value->ny1 !== NULL ? $value->ny1." " : '').($value->ny2 !== NULL ? $value->ny2." " : '').($value->ny3 !== NULL ? $value->ny3." " : '').($value->ny4 !== NULL ? $value->ny4." " : '').($value->ny5 !== NULL ? $value->ny5." " : '').($value->ny6 !== NULL ? $value->ny6." " : '').($value->ny7 !== NULL ? $value->ny7." " : '').($value->ny8 !== NULL ? $value->ny8." " : '').($value->ny9 !== NULL ? $value->ny9." " : '')." Hepatomegali (".$value->hpmgl.") Spleenomegali (".$value->spmgl.") Keterangan Tambahan : ".$value->ket_tambahan_abdomen.
+															"\n".chr(127)."Ekstermitas : Akral Hangat ".($value->ah1 !== NULL ? $value->ah1." " : '').($value->ah2 !== NULL ? $value->ah2." " : '').($value->ah3 !==NULL ? $value->ah3." " : '').($value->ah4 !== NULL ? $value->ah4." " : '')." CRT ".($value->crt1 !== NULL ? $value->crt1." " : '').($value->crt2 !== NULL ? $value->crt2." " : '').($value->crt3 !==NULL ? $value->crt3." " : '').($value->crt4 !== NULL ? $value->crt4." " : '')." 2 Detik Edema ".($value->edm1 !== NULL ? $value->edm1." " : '').($value->edm2 !== NULL ? $value->edm2." " : '').($value->edm3 !==NULL ? $value->edm3." " : '').($value->edm4 !== NULL ? $value->edm4." " : '')." ".($value->pitting == 1 ? "pitting" : "non-pitting")." Keterangan Tambahan : ".$value->ket_tambahan_ekstermitas.
+															"\n".chr(127)."Lain-lain : ".$value->lain_lain.
+															"\n".chr(127)."Diagnosa : ".$value->kelompok.
+															" \n".chr(127)."Terapi :". $value->terapi1.($value->terapi2 !== NULL ? ", ".$value->terapi2 : '').($value->terapi3 !== NULL ? ", ".$value->terapi3:'')
 								: ""),
 					$value->kelompok,
 					$value->planning
@@ -423,3 +479,13 @@ class Dokter_handler extends CI_Controller {
 		}
 		$pdf_mc->Output();
 	}
+}
+
+
+
+/*
+GORONG COCOK
+	JANTUNG ICTUs CORDIS
+	VESIKULER
+
+*/
