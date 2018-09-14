@@ -33,9 +33,9 @@ if ($this->uri->segment(1, 0) == 'Petugas') {
     <?php
     }elseif ($this->session->userdata('logged_in')['akses'] == '2') { ?>
     <ul class="navbar-nav mr-auto">
-      <!-- <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Dokter/antrian">Antrian</a>
-      </li> -->
+      <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Dokter/">Antrian</a>
+      </li>
       <!-- <li class="nav-item <?=($menu == 'pemeriksaan') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Dokter/pemeriksaan">Pemeriksaan</a>
       </li> -->

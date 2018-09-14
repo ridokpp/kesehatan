@@ -68,6 +68,7 @@ class Petugas extends CI_Controller {
 			
 			$data['proses_antrian']	=	$this->Kesehatan_M->rawQuery('
 																	SELECT 
+																		proses_antrian.nomor_pasien,
 																		pasien.nama, 
 																		pasien.pembayaran 
 																	FROM proses_antrian 

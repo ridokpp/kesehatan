@@ -40,9 +40,9 @@ class Dokter extends CI_Controller {
 
 																				WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
 																				GROUP BY kd_rkm")->result();
-echo "<pre>";
-		var_dump($data['rekam_medis']);
-echo "</pre>";
+// echo "<pre>";
+// 		var_dump($data['rekam_medis']);
+// echo "</pre>";
 		$data['objektif']		= $this->Kesehatan_M->readS('objek')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
@@ -109,10 +109,23 @@ echo "</pre>";
 	function index(){
 		// baca antrian yang tersedia, tampilkan nama dan waktu datang
 		$data['proses_antrian'] = $this->Kesehatan_M->rawQuery('SELECT pasien.nama,pasien.pembayaran,pasien.nomor_pasien FROM pasien INNER JOIN proses_antrian ON pasien.nomor_pasien=proses_antrian.nomor_pasien')->result();
+		$data['antrian']		=	$this->Kesehatan_M->rawQuery('
+																	SELECT 
+																		pasien.nama, 
+																		antrian.jam_datang, 
+																		antrian.nomor_antrian, 
+																		pasien.pembayaran, 
+																		pasien.nomor_pasien 
+																	FROM antrian 
+																	INNER JOIN pasien on antrian.nomor_pasien=pasien.nomor_pasien
+																	WHERE DATE(jam_datang) = DATE(CURRENT_DATE())
+																')->result();
 
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/antri',$data);
 		$this->load->view('static/footer');
 	}
+
+
 }

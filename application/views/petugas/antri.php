@@ -31,11 +31,10 @@
                     <td><?=substr($value->jam_datang, 11)?></td>
                     <td><?=$value->pembayaran?></td>
                     <td>
-                        <form method="POST" action="<?= base_url()?>Petugas_handler/proses_antrian">
-                            <input type="hidden" name="nomor_antrian" value="<?=$value->nomor_antrian?>">
-                            <input type="hidden" name="nomor_pasien" value="<?=$value->nomor_pasien?>">
-                            <button type="submit" class="btn btn-success btn-sm btn-block tombol-proses">Proses</button>
-                        </form>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="<?=base_url()?>Petugas_handler/antrian/proses/<?=$value->nomor_pasien?>?>" class="btn btn-success btn-sm tombol-proses">Proses</a>
+                            <a href="<?=base_url()?>Petugas_handler/antrian/hapus/<?=$value->nomor_pasien?>?>" class="btn btn-danger btn-sm tombol-proses">Hapus</a>
+                        </div>
                     </td>
                 </tr>
 
@@ -68,6 +67,7 @@
                     <th scope="col">No.</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Pembayaran</th>
+                    <th scope="col">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,6 +79,9 @@
                     <th><?=$i?></th>
                     <td><?=$value->nama?></td>
                     <td><?=$value->pembayaran?></td>
+                    <td>
+                        <a href="<?=base_url()?>Petugas_handler/antrian/hapus/<?=$value->nomor_pasien?>" class="btn btn-danger btn-sm tombol-proses">Hapus</a>
+                    </td>
                 </tr>
                 <?php $i++;} ?>
             </tbody>
