@@ -39,6 +39,7 @@
 		 		<?php
 		 		$pembayaran =  $pasien[0]->pembayaran;
 		 		if ($pembayaran == 'rf' OR $pembayaran == 'RF'){?>
+
 		 		<style type="text/css">.tkn{
 					display:block;
 				} </style>
@@ -60,12 +61,13 @@
 				      			<input type="number" class="form-control" id="" name="diastol" placeholder="Diastol">
 								<div class="input-group-append">
 									<div class="input-group-text">mmHg</div>
+
 								</div>
 							</div>
 						</div>
-					</div>
-			 	</div>
-			 	</div>
+				 	</div>
+				 	</div>
+		 
 
 			 	<div class="form-group row">
 				    <label class="col-2 col-form-label">Denyut Nadi</label>

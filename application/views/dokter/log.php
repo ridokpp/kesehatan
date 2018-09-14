@@ -8,27 +8,26 @@ http://www.fpdf.org/en/script/script3.php
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
-        dom: 'Bfrtip',
-
-       buttons: [
-            {
-                extend: 'print',
-                text: 'Print all',
-                exportOptions: {
-                    modifier: {
-                        selected: null
-                    },
-                    columns: [ 6, ':visible' ]
-                }
+      dom: 'Bfrtip',
+      buttons: [
+        {
+            extend: 'print',
+            text: 'Print all',
+            exportOptions: {
+                modifier: {
+                    selected: null
+                },
+                columns: [ 6, ':visible' ]
             }
-        ],columnDefs: [ 
-            { 
-              orderable: false, 
-              targets: [2,3,4,5,6] 
-            } 
-        ],
-        select: true
-    } );
+        }
+      ],columnDefs: [ 
+        { 
+          orderable: false, 
+          targets: [2,3,4,5,6] 
+        } 
+      ],
+      select: true
+    });
 
 } );	
 </script>
