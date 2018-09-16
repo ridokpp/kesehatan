@@ -5,7 +5,7 @@
 </style>
 <h3 class="text-center mt-3">Pemeriksaan Awal Pasien</h3>
 
-<form action="<?=base_url()."Petugas_handler/pemeriksaan"?>" method="POST">
+<form action="<?=base_url()."Dokter_handler/pemeriksaan"?>" method="POST">
 	<div class="container">
 		<?=$this->session->flashdata("alert");?>
 		<div class="row">

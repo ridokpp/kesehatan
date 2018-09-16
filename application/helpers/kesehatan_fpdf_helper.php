@@ -1,6 +1,4 @@
 <?php
-// require(APPPATH.'third_party/fpdf181/fpdf.php');
-
 class PDF_MC_Table extends FPDF
 {
 var $widths;
@@ -25,8 +23,9 @@ function Row($data,$RowBorder = TRUE)
     for($i=0;$i<count($data);$i++)
         $nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
     $h=5*$nb;
+    // $h=3*$nb;
     //Issue a page break first if needed
-    $this->CheckPageBreak($h);
+    // $this->CheckPageBreak($h);
     //Draw the cells of the row
     for($i=0;$i<count($data);$i++)
     {
@@ -41,9 +40,12 @@ function Row($data,$RowBorder = TRUE)
         }
         //Print the text
         $this->MultiCell($w,5,$data[$i],0,$a);
+        // $this->MultiCell($w,3,$data[$i],0,$a);
         //Put the position to the right of the cell
         $this->SetXY($x+$w,$y);
     }
+    $this->CheckPageBreak($h);
+
     //Go to the next line
     $this->Ln($h);
 }

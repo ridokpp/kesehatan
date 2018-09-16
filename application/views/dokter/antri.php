@@ -5,6 +5,7 @@
     }
 </style>
     <div class="container">
+            <?=$this->session->flashdata("alert");?>
         <div class="row">
             <div class="col">
                 <h5 class="text-center mt-3">Pasien Dalam Antrian</h5>

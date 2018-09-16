@@ -10,9 +10,9 @@ class Petugas extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Kesehatan_M');
 		date_default_timezone_set("Asia/Jakarta");
-		if ($this->session->userdata('logged_in')['akses'] != '3' ){
-			redirect(base_url()."Account/logout_handler");
-		}
+		// if ($this->session->userdata('logged_in')['akses'] != '3' ){
+		// 	redirect(base_url()."Account/logout_handler");
+		// }
 
 		$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
 		$now 					=	date("Y-m-d H:i:s");

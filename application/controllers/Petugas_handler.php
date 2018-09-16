@@ -191,7 +191,6 @@ class Petugas_handler extends CI_Controller {
 										)
 									);
 		}elseif ($aksi == 'hapus') {
-
 			$ambil_rkm_obj = $this->Kesehatan_M->rawQuery("SELECT kd_objek,kd_rkm FROM rkm_medis WHERE kd_pasien='$nomor_pasien' AND YEAR(tgl_jam)='".date('Y')."' AND MONTH(tgl_jam)='".date('m')."' AND DAY(tgl_jam)='".date('d')."' ORDER BY kd_rkm DESC LIMIT 1")->result();
 			
 			$this->Kesehatan_M->delete(

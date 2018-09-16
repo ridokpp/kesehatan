@@ -8,6 +8,7 @@
 <h3 class="text-center mt-3">Antrian Pasien</h3>
 <div class="row">
     <div class="<?=($proses_antrian != array())? 'col-8':'col'?>">
+    <?=$this->session->flashdata("alert");?>
         <h5 class="text-center mt-3">Pasien Antri</h5>
         <table class="table table-striped">
             <thead>

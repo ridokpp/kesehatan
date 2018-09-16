@@ -95,9 +95,9 @@
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
 				if(document.getElementById('planning').value == ''){
-					document.getElementById('planning').value += "Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ";
+					document.getElementById('planning').value += "Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
 				}else{
-					document.getElementById('planning').value += ", Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" , ";
+					document.getElementById('planning').value += ", Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
 				}
 			})
 			.fail(function() {
@@ -115,9 +115,9 @@
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
 				if(document.getElementById('planning').value == ''){
-					document.getElementById('planning').value += "Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ";
+					document.getElementById('planning').value += "Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
 				}else{
-					document.getElementById('planning').value += ", Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" , ";
+					document.getElementById('planning').value += ", Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
 				}
 			})
 			.fail(function() {
@@ -134,12 +134,13 @@
 				}else{
 					data[0].nomor_surat = "0"+data[0].nomor_surat;
 				}
-				console.log(document.getElementById('planning').value);
+				// console.log(document.getElementById('planning').value);
 				if(document.getElementById('planning').value == ''){
-					document.getElementById('planning').value += "Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ";
+					document.getElementById('planning').value += "Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
 				}else{
-					document.getElementById('planning').value += ", Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" , ";
+					document.getElementById('planning').value += ", Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
 				}
+				document.getElementById('planning').value += ", Terapi : " + document.getElementById('terapi1').value + ", Perencanaan Lab : " + document.getElementById('terapi2').value + ", Perencanaan Rujuk : " + document.getElementById('terapi3').value;
 
 			})
 			.fail(function() {
@@ -230,11 +231,9 @@
 		var pemeriksaanLab = $("#pemeriksaanLab").val();
 		$("#diagnosaPemeriksaanLab").val(pemeriksaanLab);
 
-		// get and set element text area planning pada halaman pemeriksaan ke textarea di 
-		$("#terapi1").val($("#planning").val());
 	}
 
-	// meneruskan textarea headtotoe ke form pemeriksaan karena diluar tag form. disebabkan struktur desain dan real condition
+	// meneruskan textarea headtotoe ke form pemeriksaan karena diluar tag form. disebabkan struktur desain
 	function headtotoeToPemeriksaan(){
 		$('#textareaHeadToToePemeriksaan').val($('#textareaHeadToToe').val());
 	} 
@@ -614,12 +613,12 @@
 				      	</div>
 				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST">
 					    	<div class="modal-body" >
-								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="kd_pasien" readonly="">
+								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="nomor_pasien" readonly="">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
 								    <div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="keluhan" required="">Keluhan</textarea>
+									<textarea class="form-control" aria-label="With textarea" name="keluhan" required=""></textarea>
 									</div>
 								</div>
 
@@ -682,7 +681,7 @@
 								       </div>
 								    </div>
 								</fieldset>
-								<div class="form-group row">
+<!-- 								<div class="form-group row">
 									<label class="col-sm-4 col-form-label">TB</label>
 								    <div class="input-group-prepend col-sm-2">
 								      	<input type="text" class="form-control" value="<?=$objek[0]->tb?>" id="" name="tb" placeholder="TB"  readonly="">cm
@@ -723,7 +722,7 @@
 								    <div class="input-group-prepend col-sm-2">
 								      	<input type="text" class="form-control" value="<?=$objek[0]->TAx?>" id="" name="respiratory" placeholder=""  readonly="">ᵒc
 								    </div>
-								</div>
+								</div> -->
 								<hr></hr>
 								<center><h4>Head to Toe</h4></center>
 								<hr></hr>
