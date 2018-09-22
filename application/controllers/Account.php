@@ -143,7 +143,7 @@ class Account extends CI_Controller {
 				if ($record->hak_akses == '1') {
 					redirect(base_url().'Admin/menu/dashboard');
 				}elseif ($record->hak_akses == '2') {
-					redirect(base_url().'Dokter/');
+					redirect(base_url().'Dokter/index');
 				}elseif ($record->hak_akses == '3') {
 					redirect(base_url().'Petugas/menu/cari');
 				}

@@ -10,6 +10,9 @@ class Dokter_handler extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Kesehatan_M');
 		date_default_timezone_set("Asia/Jakarta");
+		if ($this->session->userdata('logged_in')['akses'] != '2' ){
+			redirect(base_url()."Account/logout_handler");
+		}
 	}
 
 	/*
@@ -19,8 +22,8 @@ class Dokter_handler extends CI_Controller {
 	{
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
+		$data['nomor_pasien']	= $this->input->post('nomor_pasien');
 		if ($surat == 'suratsehat') {
-			$data['nomor_pasien']	= $this->input->post('nomor_pasien');
 			$data['tes_buta_warna']	= $this->input->post('tes_buta_warna');
 			$data['keperluan']	= $this->input->post('keperluan');
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
@@ -43,7 +46,8 @@ class Dokter_handler extends CI_Controller {
 				$data['nomor_surat']				= $insertSuratSehat['nomor_surat'];
 			}
 			$this->Kesehatan_M->create('suratsehat',$insertSuratSehat);
-			$this->load->view('dokter/suratsehat',$data);
+			$kode_surat = "001";
+			
 			
 		}elseif ($surat == 'suratsakit') {
 			$data['alasan']		 	= $this->input->post('alasan');
@@ -51,7 +55,6 @@ class Dokter_handler extends CI_Controller {
 			$data['tanggal_akhir'] 	= $this->input->post('tanggal_akhir');
 			$data['selama'] 		= $this->input->post('selama');
 			$data['selama_satuan'] 	= $this->input->post('selama_satuan');
-			$data['nomor_pasien']	= $this->input->post('nomor_pasien');
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
 			$data['sip']			= $this->session->userdata('logged_in')['sip'];
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
@@ -69,11 +72,12 @@ class Dokter_handler extends CI_Controller {
 				$data['nomor_surat']				= $insertSuratSakit['nomor_surat'];
 			}
 			$this->Kesehatan_M->create('suratsakit',$insertSuratSakit);
-			$this->load->view('dokter/suratsakit',$data);
+			$kode_surat = "002";
+			
 
 		}elseif ($surat == 'suratrujukan') {
 
-			$data['nomor_pasien']	= $this->input->post('kd_pasien');
+			
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
 			$data['sip']			= $this->session->userdata('logged_in')['sip'];
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
@@ -216,11 +220,26 @@ class Dokter_handler extends CI_Controller {
 			$data['diagnosaSekunder'] 			= $this->input->post('diagnosaSecondary[]');
 			$data['diagnosaLain'] 				= $this->input->post('diagnosaLain[]');
 			$data['diagnosaPemeriksaanLab'] 	= $this->input->post('diagnosaPemeriksaanLab');
+			$kode_surat = "003";
 			
-			$this->load->view('dokter/suratrujukan',$data);
 		}
+		$this->load->view('dokter/'.$surat,$data);
 		$this->load->view('static/footer');
+		$content = '';
+		$content .= $this->load->view('static/header','',TRUE);
+		$content .= $this->load->view('static/navbar','',TRUE);
+		$content .= $this->load->view('dokter/'.$surat,$data,TRUE);
+		$content .= $this->load->view('static/footer','',TRUE);
+
+		$folder 	= FCPATH."/surat pasien/".$data['nomor_pasien']."/".$surat."/";
+		if (!file_exists($folder)) {
+			mkdir($folder, 0777, true);
+		}
+		$myfolder = fopen($folder."0".$data['nomor_surat']."-".$kode_surat."-0".date('m')."-2018.html", "w");
+		fwrite($myfolder, $content);
+		fclose($myfolder);
 	}
+
 	/*
 	* get nomor surat untuk disalurkan ke kolom planning
 	*/
@@ -263,43 +282,53 @@ class Dokter_handler extends CI_Controller {
 			$assessmentLain 			= $this->input->post('assessmentLain[]');
 			$assessmentPemeriksaanLab 	= $this->input->post('assessmentPemeriksaanLab');
 
-			
-			// masukkan input form assessment ke tabel assessment. baca kd_assessment paling maksimal pada tabel assessment
-			$kd_assessmentMax = $this->Kesehatan_M->rawQuery("SELECT MAX(kd_assessment) AS kd_assessment FROM assessment")->result();
-
-			// set nilai kd_assessment yang akan masuk ke tabel assessment
-			if($kd_assessmentMax[0]->kd_assessment == NULL){
-				$kd_assessment = 1;
-			}else{
-				$kd_assessment = $kd_assessmentMax[0]->kd_assessment + 1;
-			}
+			$kd_assessment = NULL;
 
 			// manipulasi string untuk masuk ke assessment. tipenya primer
-			$stringDiagnosa 			= "INSERT INTO assessment VALUES";
-			foreach ($assessmentPrimer as $key => $value) {
-				$stringDiagnosa		 	= "(NULL,'$kd_assessment','primer','$value')";
-				error_reporting(0);
+			if ($assessmentPrimer != array() OR $assessmentSekunder != array() OR $assessmentLain != array() OR $assessmentPemeriksaanLab != '') {
+				
+				// masukkan input form assessment ke tabel assessment. baca kd_assessment paling maksimal pada tabel assessment
+				$kd_assessmentMax = $this->Kesehatan_M->rawQuery("SELECT MAX(kd_assessment) AS kd_assessment FROM assessment")->result();
+				
+				// set nilai kd_assessment yang akan masuk ke tabel assessment
+				if($kd_assessmentMax[0]->kd_assessment == NULL){
+					$kd_assessment = 1;
+				}else{
+					$kd_assessment = $kd_assessmentMax[0]->kd_assessment + 1;
+				}
+				$stringDiagnosa 			= "INSERT INTO assessment VALUES ";
+
+				if ($assessmentPrimer != array()) {
+					foreach ($assessmentPrimer as $key => $value) {
+						$stringDiagnosa		 	.= "(NULL,'$kd_assessment','primer','$value'),";
+					}
+				}
+
+				// manipulasi string untuk masuk ke assessment. tipenya sekunder
+				if ($assessmentSekunder != array()) {
+					foreach ($assessmentSekunder as $key => $value) {
+						$stringDiagnosa 		.= "(NULL,'$kd_assessment','sekunder','$value'),";
+					}
+				}
+
+				// manipulasi string untuk masuk ke assessment. tipenya lainlain
+				if ($assessmentLain != array()) {
+					foreach ($assessmentLain as $key => $value) {
+						$stringDiagnosa 	 	.= "(NULL,'$kd_assessment','lainlain','$value'),";
+					}
+				}
+
+				// manipulasi string untuk masuk ke assessment. tipenya adalah pemeriksaan lab
+				if ($assessmentPemeriksaanLab != '') {
+					$stringDiagnosa				.= "(NULL,'$kd_assessment','pemeriksaanLab','".$assessmentPemeriksaanLab."'),";
+				}
+
+				$stringDiagnosa				= rtrim($stringDiagnosa,",");
+				var_dump($stringDiagnosa);
+
+				// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel assessment
+				$this->Kesehatan_M->rawQuery($stringDiagnosa);
 			}
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya sekunder
-			foreach ($assessmentSekunder as $key => $value) {
-				$stringDiagnosa 		= "(NULL,'$kd_assessment','sekunder','$value')";
-				error_reporting(0);
-			}
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya lainlain
-			foreach ($assessmentLain as $key => $value) {
-				$stringDiagnosa 	 	= "(NULL,'$kd_assessment','lainlain','$value')";
-				error_reporting(0);
-			}
-
-			// manipulasi string untuk masuk ke clone_diagnosa. tipenya adalah pemeriksaan lab
-			$stringDiagnosa				= "(NULL,'$kd_assessment','pemeriksaanLab','".$assessmentPemeriksaanLab."')";
-
-			$stringDiagnosa				= rtrim($stringDiagnosa,", ");
-
-			// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel assessment
-			$this->Kesehatan_M->rawQuery($stringDiagnosa);
 
 			// masukkan ke tabel rekam medis beserta id return dari tabel assesment
 			$updateRM = $this->Kesehatan_M->update('rkm_medis',
@@ -308,7 +337,7 @@ class Dokter_handler extends CI_Controller {
 																	'kd_objek'		=>$kd_objek,
 																	'YEAR(tgl_jam)'	=>date('Y'),
 																	'MONTH(tgl_jam)'=>date('m'),
-																	'DAY(tgl_jam)'	=>date('d')
+																	'DAY(tgl_jam)'	=>date('d'),
 																),
 																array(
 																	'subjek'		=>$subjektif,
@@ -319,9 +348,7 @@ class Dokter_handler extends CI_Controller {
 
 			$updateObj = $this->Kesehatan_M->update('objek',array('kd_objek'=>$kd_objek),array('text_headtotoe'=>$headtotoe));
 			$this->Kesehatan_M->delete('proses_antrian',array('nomor_pasien'=>$nomor_pasien));
-			echo "<pre>";
-			var_dump($updateRM);
-			var_dump($updateObj);
+			redirect(base_url()."Dokter/index");
 		}else{
 			redirect(base_url());
 		}
@@ -329,13 +356,12 @@ class Dokter_handler extends CI_Controller {
 
 
 	function cetak_RM(){
-
 		$nomor_pasien		= $this->input->post('nomor_pasien');
 		$idS_rekam_medis 	= $this->input->post('idS_rekam_medis[]');
 		$bool_halaman_awal 	= $this->input->post('bool_halaman_awal');
 
-		$query = "
-			SELECT rkm_medis.kd_rkm, 
+		$query = " SELECT 
+			rkm_medis.kd_rkm, 
 			rkm_medis.kd_objek, 
 			rkm_medis.kd_pasien, 
 			rkm_medis.tgl_jam, 
@@ -408,7 +434,15 @@ class Dokter_handler extends CI_Controller {
 			terapi.terapi1, 
 			terapi.terapi2, 
 			terapi.terapi3, 
-			(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok FROM rkm_medis INNER JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe LEFT JOIN kepala ON headtotoe.kd_kepala = kepala.kd_kepala LEFT JOIN thorak ON headtotoe.kd_thorak = thorak.kd_thorak LEFT JOIN abdomen ON headtotoe.kd_abdomen = abdomen.kd_abdomen LEFT JOIN ekstermitas ON headtotoe.kd_ekstermitas = ekstermitas.kd_ekstermitas LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi INNER JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
+			(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok FROM rkm_medis 
+			LEFT JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   
+			LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
+			LEFT JOIN kepala ON headtotoe.kd_kepala = kepala.kd_kepala 
+			LEFT JOIN thorak ON headtotoe.kd_thorak = thorak.kd_thorak 
+			LEFT JOIN abdomen ON headtotoe.kd_abdomen = abdomen.kd_abdomen 
+			LEFT JOIN ekstermitas ON headtotoe.kd_ekstermitas = ekstermitas.kd_ekstermitas 
+			LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi 
+			LEFT JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
 
 																				WHERE rkm_medis.kd_pasien = '$nomor_pasien'";
 		
@@ -420,44 +454,8 @@ class Dokter_handler extends CI_Controller {
 				$query .= " OR rkm_medis.kd_rkm = $idS_rekam_medis[$i]";
 
 			}
-			$query .= ") GROUP BY rkm_medis.kd_rkm";
 
-			// $rekam medis adalah string untuk menyimpan rekam medis yang akan dicetak. variabel telah memuat data yang diambil dari database
-			$rekam_medis 	= $this->Kesehatan_M->rawQuery($query)->result();
-			$objektif		= $this->Kesehatan_M->readS('objek')->result();
-			$pasien 		= $this->Kesehatan_M->readCol('pasien',array('kd_pasien'=>$nomor_pasien),array('pembayaran','nama','nik','tmp_lahir','tgl_lahir','alamat','jkelamin','pekerjaan'))->result();
-			
-			$this->load->library('pdf');
-			$this->load->helper('kesehatan_fpdf');
-			$pdf_mc = new PDF_MC_TABLE();
-			$pdf_mc->AddPage('L',array(330,215));
-			
-			$pdf_mc->SetFont('Arial','',20);
-		    $pdf_mc->Cell(0,15,strtoupper($pasien[0]->pembayaran),0,0,'L');
-		    $pdf_mc->Cell(0,15,"No. ".strtoupper($nomor_pasien),0,0,'R');
-		    $pdf_mc->Ln(15);
 
-			$pdf_mc->SetFont('Arial','',11);
-			
-			$pdf_mc->SetWidths(array(40,5,105,40,5,110));
-			$pdf_mc->Row(array('Nama',':',$pasien[0]->nama,'Alamat',':',$pasien[0]->alamat),FALSE);
-			$pdf_mc->Row(array('NIK',':',$pasien[0]->nik,'Jenis Kelamin',':',$pasien[0]->jkelamin),FALSE);
-			$pdf_mc->Row(array('Tempat / Tgl Lahir',':',$pasien[0]->tmp_lahir." / ".$pasien[0]->tgl_lahir,'Pekerjaan',':',$pasien[0]->pekerjaan),FALSE);
-		    $pdf_mc->Ln(10);
-			
-			$pdf_mc->SetWidths(array(40,50,60,90,70));
-			
-			foreach ($rekam_medis as $key => $value) {
-				$pdf_mc->Row(array(
-						tgl_indo(substr($value->tgl_jam,0,10))." ".substr($value->tgl_jam,10,6)." WIB",
-						$value->subjek,
-							"TB/BB : ".$objektif[$key]->tb."cm / ".$objektif[$key]->bb."Kg \nTD : ".$objektif[$key]->td1." / ".$objektif[$key]->td2." mmHg\nRR : ".$objektif[$key]->RR."rpm \nN : ".$objektif[$key]->N."     T".utf8_decode("°")."Ax : ".$objektif[$key]->TAx.utf8_decode("°C")." \nHeadToToe : ".$objektif[$key]->text_headtotoe,
-						$value->kelompok,
-						$value->planning
-					)
-				);
-			}
-			$pdf_mc->Output();
 		}
 
 		// finalisasi string query;
@@ -488,12 +486,14 @@ class Dokter_handler extends CI_Controller {
 	    $pdf_mc->Ln(10);
 		
 		$pdf_mc->SetWidths(array(40,50,60,90,70));
-		
+		$pdf_mc->Row(array('Tanggal','Subjektif','Objektif','assessment','Palnning'),TRUE);
+		$pdf_mc->SetAutoPageBreak(true,10);
+
 		foreach ($rekam_medis as $key => $value) {
 			$pdf_mc->Row(array(
 					tgl_indo(substr($value->tgl_jam,0,10))." ".substr($value->tgl_jam,10,6)." WIB",
 					$value->subjek,
-						chr(127)."TB/BB : ".$objektif[$key]->tb."cm / ".$objektif[$key]->bb."Kg \n".
+					chr(127)."TB/BB : ".$objektif[$key]->tb."cm / ".$objektif[$key]->bb."Kg \n".
 						chr(127)."TD : ".$objektif[$key]->td1." / ".$objektif[$key]->td2." mmHg\n".
 						chr(127)."RR : ".$objektif[$key]->RR."rpm \n".
 						chr(127)."N : ".$objektif[$key]->N."     T".utf8_decode("°")."Ax : ".$objektif[$key]->TAx.utf8_decode("°C")." \n".
@@ -518,6 +518,100 @@ class Dokter_handler extends CI_Controller {
 			);
 		}
 		$pdf_mc->Output();
+	}
+	
+	/*
+	* function untuk mengontrol antrian selain oleh petugas
+	*/
+	function antrian($aksi,$nomor_pasien)
+	{
+		$this->Kesehatan_M->delete(
+									'antrian',
+									array(
+											'nomor_pasien'	=>	$nomor_pasien
+									));
+		if ($aksi == 'proses') {
+			$this->Kesehatan_M->create(
+										'proses_antrian',
+										array(
+												'nomor_pasien'	=>	$nomor_pasien
+										)
+									);
+			redirect(base_url()."Dokter/log/$nomor_pasien");
+		}elseif ($aksi == 'hapus') {
+			$ambil_rkm_obj = $this->Kesehatan_M->rawQuery("SELECT kd_objek,kd_rkm FROM rkm_medis WHERE kd_pasien='$nomor_pasien' AND YEAR(tgl_jam)='".date('Y')."' AND MONTH(tgl_jam)='".date('m')."' AND DAY(tgl_jam)='".date('d')."' ORDER BY kd_rkm DESC LIMIT 1")->result();
+			$this->Kesehatan_M->delete(
+									'objek',
+									array(
+											'kd_objek'	=>	$ambil_rkm_obj[0]->kd_objek
+									));
+			$this->Kesehatan_M->delete(
+										'rkm_medis',
+										array(
+												'kd_rkm' =>$ambil_rkm_obj[0]->kd_rkm
+										)
+									);
+			$this->Kesehatan_M->delete('proses_antrian',array('nomor_pasien'=>$nomor_pasien));
+			redirect(base_url()."Dokter/index");
+		}
+		
+	}
+
+	/*
+	* function untuk redirect ke halaman rekam medis seorang pasien melalui pencarian nomor pasien atau nama pasien
+	*/
+	function redirector(){
+		if ($this->input->get() != NULL) {
+			redirect(base_url()."Dokter/rekam_medis/".$this->input->get('nama_or_nomor'));
+		}else{
+			redirect(base_url());
+		}
+	}
+
+
+
+		/*
+	* form handler untuk pemeriksaan awal
+	*/
+	function pemeriksaan(){
+		$postedData = 	array(
+								'tb'	=>	$this->input->post('tinggi_badan'),
+								'bb'	=>	$this->input->post('berat_badan'),
+								'td1'	=>	$this->input->post('sistol'),
+								'td2'	=>	$this->input->post('diastol'),
+								'N'	=>	$this->input->post('denyut_nadi'),
+								'RR'=>$this->input->post('frekuensi_pernapasan'),
+								'TAx'=>$this->input->post('suhu'),
+						);
+		$insert_tabel_objek = $this->Kesehatan_M->create_id('objek',$postedData);
+		// id
+		$postedData['nomor_pasien'] = $this->input->post('nomor_pasien');
+
+		// masukk rm
+		$insert_tabel_objek = json_decode($insert_tabel_objek,false);
+		// var_dump($insert_tabel_objek);
+		// die();
+		$this->Kesehatan_M->create('rkm_medis',array('kd_pasien'=>$postedData['nomor_pasien'],'kd_objek'=>$insert_tabel_objek->message,'tgl_jam'=>date("Y-m-d H:i:s")));
+
+		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
+		$this->Kesehatan_M->delete(
+									'antrian',
+									array(
+											'nomor_pasien'	=>	$postedData['nomor_pasien']
+									));
+			$this->Kesehatan_M->create(
+										'proses_antrian',
+										array(
+												'nomor_pasien'	=>	$postedData['nomor_pasien']
+										)
+									);
+
+		if ($result->status) {
+			alert('alert','success','Berhasil','Data berhasil dimasukkan');
+		}else{
+			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
+		}
+		redirect(base_url()."Dokter/pemeriksaan/$postedData[nomor_pasien]");
 	}
 }
 

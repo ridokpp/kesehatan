@@ -181,25 +181,40 @@ class Petugas_handler extends CI_Controller {
 		}
 	}
 
-	function proses_antrian()
+	function antrian($aksi,$nomor_pasien)
 	{
-		if ($this->input->post() !== NULL) {
+		if ($aksi == 'proses') {
 			$this->Kesehatan_M->create(
 										'proses_antrian',
 										array(
-												'nomor_pasien'	=>	$this->input->post('nomor_pasien'),
-												'nomor_antrian'	=>	$this->input->post('nomor_antrian')
+												'nomor_pasien'	=>	$nomor_pasien
+										)
+									);
+		}elseif ($aksi == 'hapus') {
+			$ambil_rkm_obj = $this->Kesehatan_M->rawQuery("SELECT kd_objek,kd_rkm FROM rkm_medis WHERE kd_pasien='$nomor_pasien' AND YEAR(tgl_jam)='".date('Y')."' AND MONTH(tgl_jam)='".date('m')."' AND DAY(tgl_jam)='".date('d')."' ORDER BY kd_rkm DESC LIMIT 1")->result();
+			
+			$this->Kesehatan_M->delete(
+									'objek',
+									array(
+											'kd_objek'	=>	$ambil_rkm_obj[0]->kd_objek
+									));
+			$this->Kesehatan_M->delete(
+										'rkm_medis',
+										array(
+												'kd_rkm' =>$ambil_rkm_obj[0]->kd_rkm
 										)
 									);
 			$this->Kesehatan_M->delete(
-										'antrian',
-										array(
-												'nomor_antrian'	=>	$this->input->post('nomor_antrian')
-										));
-			redirect(base_url()."Petugas/menu/antrian");
-		}else{
-			var_dump($this->input->post());
-			die();
+									'proses_antrian',
+									array(
+											'nomor_pasien'	=>	$nomor_pasien
+									));
 		}
+		$this->Kesehatan_M->delete(
+									'antrian',
+									array(
+											'nomor_pasien'	=>	$nomor_pasien
+									));
+		redirect(base_url()."Petugas/menu/antrian");
 	}
 }

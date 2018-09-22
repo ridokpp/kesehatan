@@ -1,10 +1,10 @@
 <?php
 $method = $this->router->fetch_method();
-if ($this->uri->segment(1, 0) == 'Petugas') {
+if ($this->session->userdata('logged_in')['akses'] == '3') {
   $menu = $this->uri->segment(3, 0);
-}elseif ($this->uri->segment(1, 0) == 'Dokter') {
+}elseif ($this->session->userdata('logged_in')['akses'] == '2') {
   $menu = $this->uri->segment(2, 0);
-}elseif ($this->uri->segment(1, 0) == 'Admin') {
+}elseif ($this->session->userdata('logged_in')['akses'] == '1') {
   $menu = $this->uri->segment(3, 0);
 }
 ?>
@@ -31,14 +31,14 @@ if ($this->uri->segment(1, 0) == 'Petugas') {
       </li>
     </ul>
     <?php
-    }elseif ($this->session->userdata('logged_in')['akses'] == '2') { ?>
+    }elseif ($this->session->userdata('logged_in')['akses'] == '2') {?>
     <ul class="navbar-nav mr-auto">
-      <!-- <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Dokter/antrian">Antrian</a>
-      </li> -->
-      <!-- <li class="nav-item <?=($menu == 'pemeriksaan') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Dokter/pemeriksaan">Pemeriksaan</a>
-      </li> -->
+      <li class="nav-item <?php if($menu == 'index'){echo 'active'; }else{echo '';}?>   ">
+        <a class="nav-link" href="<?php echo base_url()?>Dokter/index">Antrian</a>
+      </li>
+      <li class="nav-item <?php if($menu == 'cari_pasien') {echo 'active';}else{ echo '';}?>">
+        <a class="nav-link" href="<?php echo base_url()?>Dokter/cari_pasien">Cari Pasien</a>
+      </li>
     </ul>
     <?php 
     }elseif ($this->session->userdata('logged_in')['akses'] == '3') { ?>
