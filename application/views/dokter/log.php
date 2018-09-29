@@ -179,5 +179,7 @@ $(document).ready(function() {
   <input type="checkbox" name="idS_rekam_medis[]" value="3">
   <input type="checkbox" name="idS_rekam_medis[]" value="4">
   <input type="checkbox" name="idS_rekam_medis[]" value="5">
+  <input type="checkbox" name="idS_rekam_medis[]" value="6">
+  <input type="checkbox" name="idS_rekam_medis[]" value="7">
   <input type="submit" name="submit">
 </form>

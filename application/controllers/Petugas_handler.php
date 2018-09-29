@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Petugas_handler extends CI_Controller {
 	
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('Kesehatan_M');
 		date_default_timezone_set("Asia/Jakarta");
@@ -12,7 +13,8 @@ class Petugas_handler extends CI_Controller {
 	/*
 	* form handler untuk register pasien
 	*/
-	function pendaftaran(){
+	function pendaftaran()
+	{
 		$nik = $this->input->post('nik');
 		$result = $this->Kesehatan_M->read('pasien',array('nik'=>$nik));
 		if ($result->num_rows() == 0) {
@@ -85,6 +87,11 @@ class Petugas_handler extends CI_Controller {
 			// tahun datang
 			$tahun_datang = $now->format('Y');
 			
+			// jika pembayaran == BPJS tambahkan nomornya
+			$pembayaran = $this->input->post('pembayaran');
+			if ($pembayaran=='BPJS') {
+				$pembayaran.= ' : '.$this->input->post('nomor_bpjs');
+			}
 			$dataForm = array(	'nama'			=>ucwords($this->input->post('nama_lengkap')),
 								'nik' 			=>$nik,
 								'tmp_lahir'		=>ucwords($this->input->post('tempat_lahir')),
@@ -99,7 +106,7 @@ class Petugas_handler extends CI_Controller {
 								'jkelamin'		=>$this->input->post('jenis_kelamin'),
 								'pekerjaan'		=>ucwords($this->input->post('pekerjaan')),
 								'kelurahan'		=>ucwords($kelurahan),
-								'pembayaran'	=>$this->input->post('pembayaran'),
+								'pembayaran'	=>$pembayaran,
 								'nomor_pasien'	=>$no_urut."-".$kd_kelurahan."-".$kode_jenis_kelamin."-".$kode_usia."-".$bulan_datang."-".$tahun_datang
 							);
 			// echo "<pre>";
@@ -121,7 +128,8 @@ class Petugas_handler extends CI_Controller {
 	/*
 	* form handler untuk pemeriksaan awal
 	*/
-	function pemeriksaan(){
+	function pemeriksaan()
+	{
 		$postedData = 	array(
 								'tb'	=>	$this->input->post('tinggi_badan'),
 								'bb'	=>	$this->input->post('berat_badan'),
@@ -137,11 +145,12 @@ class Petugas_handler extends CI_Controller {
 
 		// masukk rm
 		$insert_tabel_objek = json_decode($insert_tabel_objek,false);
-		// var_dump($insert_tabel_objek);
-		// die();
+		
+		// create ke tabel RM dengan isi objektif
 		$this->Kesehatan_M->create('rkm_medis',array('kd_pasien'=>$postedData['nomor_pasien'],'kd_objek'=>$insert_tabel_objek->message,'tgl_jam'=>date("Y-m-d H:i:s")));
 
 		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
+
 		if ($result->status) {
 			alert('alert','success','Berhasil','Data berhasil dimasukkan');
 			redirect(base_url()."Petugas/menu/antrian/");
@@ -154,7 +163,8 @@ class Petugas_handler extends CI_Controller {
 	/*
 	* cari nomor pasien via ajax
 	*/
-	function redirector(){
+	function redirector()
+	{
 		if ($this->input->get() != NULL) {
 			redirect(base_url()."Petugas/menu/pemeriksaan/".$this->input->get('nama_or_nomor'));
 		}else{
@@ -216,5 +226,30 @@ class Petugas_handler extends CI_Controller {
 											'nomor_pasien'	=>	$nomor_pasien
 									));
 		redirect(base_url()."Petugas/menu/antrian");
+	}
+
+	function liveAntrian()
+	{
+		$data['antrian']		=	$this->Kesehatan_M->rawQuery('
+																	SELECT 
+																		pasien.nama, 
+																		antrian.jam_datang, 
+																		antrian.nomor_antrian, 
+																		pasien.pembayaran, 
+																		pasien.nomor_pasien 
+																	FROM antrian 
+																	INNER JOIN pasien on antrian.nomor_pasien=pasien.nomor_pasien
+																	WHERE DATE(jam_datang) = DATE(CURRENT_DATE()) ORDER BY nomor_antrian
+																')->result();
+			
+		$data['proses_antrian']	=	$this->Kesehatan_M->rawQuery('
+																SELECT 
+																	proses_antrian.nomor_pasien,
+																	pasien.nama, 
+																	pasien.pembayaran 
+																FROM proses_antrian 
+																INNER JOIN pasien on proses_antrian.nomor_pasien=pasien.nomor_pasien
+															')->result();
+		echo json_encode($data);
 	}
 }

@@ -4,15 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
 * controller untuk bagian petugas depan
 */
-class Petugas extends CI_Controller {
+class Petugas extends CI_Controller 
+{
 	
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Kesehatan_M');
 		date_default_timezone_set("Asia/Jakarta");
-		// if ($this->session->userdata('logged_in')['akses'] != '3' ){
-		// 	redirect(base_url()."Account/logout_handler");
-		// }
+		if ($this->session->userdata('logged_in')['akses'] != '3' ){
+			redirect(base_url()."Account/logout_handler");
+		}
 
 		$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
 		$now 					=	date("Y-m-d H:i:s");
@@ -50,33 +51,9 @@ class Petugas extends CI_Controller {
 			$this->load->view('static/navbar');
 			$this->load->view('petugas/cari_pasien');
 		}elseif ($menu == 'antrian') {
-			// checking sinkronisasi terakhir
-			
-
-			
-			$data['antrian']		=	$this->Kesehatan_M->rawQuery('
-																	SELECT 
-																		pasien.nama, 
-																		antrian.jam_datang, 
-																		antrian.nomor_antrian, 
-																		pasien.pembayaran, 
-																		pasien.nomor_pasien 
-																	FROM antrian 
-																	INNER JOIN pasien on antrian.nomor_pasien=pasien.nomor_pasien
-																	WHERE DATE(jam_datang) = DATE(CURRENT_DATE())
-																')->result();
-			
-			$data['proses_antrian']	=	$this->Kesehatan_M->rawQuery('
-																	SELECT 
-																		proses_antrian.nomor_pasien,
-																		pasien.nama, 
-																		pasien.pembayaran 
-																	FROM proses_antrian 
-																	INNER JOIN pasien on proses_antrian.nomor_pasien=pasien.nomor_pasien
-																')->result();
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
-			$this->load->view('petugas/antri',$data);
+			$this->load->view('petugas/antri');
 		}else{
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');

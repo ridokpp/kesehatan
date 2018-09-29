@@ -444,14 +444,14 @@ class Dokter_handler extends CI_Controller {
 			LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi 
 			LEFT JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
 
-																				WHERE rkm_medis.kd_pasien = '$nomor_pasien'";
+			WHERE rkm_medis.kd_pasien = '$nomor_pasien'";
 		
 		// perulangan untuk set string where
 		for ($i=0; $i <sizeof($idS_rekam_medis) ; $i++) { 
 			if ($i == 0) {
-				$query .= " AND (rkm_medis.kd_rkm = $idS_rekam_medis[$i]";
+				$query .= " AND (rkm_medis.kd_rkm = '$idS_rekam_medis[$i]'";
 			}else{
-				$query .= " OR rkm_medis.kd_rkm = $idS_rekam_medis[$i]";
+				$query .= " OR rkm_medis.kd_rkm = '$idS_rekam_medis[$i]'";
 
 			}
 
@@ -567,10 +567,8 @@ class Dokter_handler extends CI_Controller {
 			redirect(base_url());
 		}
 	}
-
-
-
-		/*
+	
+	/*
 	* form handler untuk pemeriksaan awal
 	*/
 	function pemeriksaan(){
@@ -612,6 +610,31 @@ class Dokter_handler extends CI_Controller {
 			alert('alert','success','Gagal','Kegagalan database'.$result->error_message);
 		}
 		redirect(base_url()."Dokter/pemeriksaan/$postedData[nomor_pasien]");
+	}
+
+	function liveAntrian()
+	{
+		$data['antrian']		=	$this->Kesehatan_M->rawQuery('
+																	SELECT 
+																		pasien.nama, 
+																		antrian.jam_datang, 
+																		antrian.nomor_antrian, 
+																		pasien.pembayaran, 
+																		pasien.nomor_pasien 
+																	FROM antrian 
+																	INNER JOIN pasien on antrian.nomor_pasien=pasien.nomor_pasien
+																	WHERE DATE(jam_datang) = DATE(CURRENT_DATE()) ORDER BY jam_datang
+																')->result();
+			
+		$data['proses_antrian']	=	$this->Kesehatan_M->rawQuery('
+																SELECT 
+																	proses_antrian.nomor_pasien,
+																	pasien.nama, 
+																	pasien.pembayaran 
+																FROM proses_antrian 
+																INNER JOIN pasien on proses_antrian.nomor_pasien=pasien.nomor_pasien
+															')->result();
+		echo json_encode($data);
 	}
 }
 

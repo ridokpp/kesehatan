@@ -38,77 +38,79 @@ class Dokter extends CI_Controller {
 
 		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery("SELECT rkm_medis.kd_rkm, 
 			rkm_medis.kd_objek, 
-		rkm_medis.kd_pasien, 
-		rkm_medis.tgl_jam, 
-		rkm_medis.subjek, 
-		rkm_medis.planning, 
-		objek.tb, 
-		objek.bb, 
-		objek.td1, 
-		objek.td2, 
-		objek.N, 
-		objek.RR, 
-		objek.TAx, 
-		objek.text_headtotoe, 
-		headtotoe.keluhan, 
-		headtotoe.GCS_E, 
-		headtotoe.GCS_V, 
-		headtotoe.GCS_M, 
-		 headtotoe.GCS_opsi, 
-		 headtotoe.lain_lain, 
-		kepala.anemis_kiri, 
-		kepala.anemis_kanan, 
-		kepala.ikterik_kiri, 
-		kepala.ikterik_kanan, 
-		kepala.cianosis_kiri, 
-		kepala.cianosis_kanan, 
-		kepala.deformitas_kiri, 
-		kepala.deformitas_kanan, 
-		kepala.refchy_kiri, 
-		kepala.refchy_kanan, 
-		kepala.refchyopsi, 
-		kepala.ket_tambahan, 
-		thorak.metris, 
-		thorak.wheezing_kiri, 
-		thorak.wheezing_kanan, 
-		thorak.ronkhi_kiri, 
-		thorak.ronkhi_kanan, 
-		thorak.vesikuler_kiri, 
-		thorak.vesikuler_kanan, 
-		thorak.jantung_icor, 
-		thorak.s1_s2, 
-		thorak.s_tambahan, 
-		thorak.ket_tambahan, 
-		abdomen.BU, 
-		abdomen.ny1, 
-		abdomen.ny2, 
-		abdomen.ny3, 
-		abdomen.ny4, 
-		abdomen.ny5, 
-		abdomen.ny6, 
-		abdomen.ny7, 
-		abdomen.ny8, 
-		abdomen.ny9, 
-		abdomen.hpmgl, 
-		abdomen.spmgl, 
-		ekstermitas.ah1, 
-		ekstermitas.ah2, 
-		ekstermitas.ah3, 
-		ekstermitas.ah4, 
-		ekstermitas.crt1, 
-		ekstermitas.crt2, 
-		ekstermitas.crt3, 
-		ekstermitas.crt4, 
-		ekstermitas.edm1, 
-		ekstermitas.edm2, 
-		ekstermitas.edm3, 
-		ekstermitas.edm4, 
-		ekstermitas.pitting, 
-		ekstermitas.ket_tambahan, 
-		terapi.terapi1, 
-		terapi.terapi2, 
-		terapi.terapi3, 
-		(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok FROM rkm_medis 
+			rkm_medis.kd_pasien, 
+			rkm_medis.tgl_jam, 
+			rkm_medis.subjek, 
+			rkm_medis.planning, 
+			objek.tb, 
+			objek.bb, 
+			objek.td1, 
+			objek.td2, 
+			objek.N, 
+			objek.RR, 
+			objek.TAx, 
+			objek.text_headtotoe, 
+			headtotoe.keluhan, 
+			headtotoe.GCS_E, 
+			headtotoe.GCS_V, 
+			headtotoe.GCS_M, 
+			 headtotoe.GCS_opsi, 
+			 headtotoe.lain_lain, 
+			kepala.anemis_kiri, 
+			kepala.anemis_kanan, 
+			kepala.ikterik_kiri, 
+			kepala.ikterik_kanan, 
+			kepala.cianosis_kiri, 
+			kepala.cianosis_kanan, 
+			kepala.deformitas_kiri, 
+			kepala.deformitas_kanan, 
+			kepala.refchy_kiri, 
+			kepala.refchy_kanan, 
+			kepala.refchyopsi, 
+			kepala.ket_tambahan, 
+			thorak.metris, 
+			thorak.wheezing_kiri, 
+			thorak.wheezing_kanan, 
+			thorak.ronkhi_kiri, 
+			thorak.ronkhi_kanan, 
+			thorak.vesikuler_kiri, 
+			thorak.vesikuler_kanan, 
+			thorak.jantung_icor, 
+			thorak.s1_s2, 
+			thorak.s_tambahan, 
+			thorak.ket_tambahan, 
+			abdomen.BU, 
+			abdomen.ny1, 
+			abdomen.ny2, 
+			abdomen.ny3, 
+			abdomen.ny4, 
+			abdomen.ny5, 
+			abdomen.ny6, 
+			abdomen.ny7, 
+			abdomen.ny8, 
+			abdomen.ny9, 
+			abdomen.hpmgl, 
+			abdomen.spmgl, 
+			ekstermitas.ah1, 
+			ekstermitas.ah2, 
+			ekstermitas.ah3, 
+			ekstermitas.ah4, 
+			ekstermitas.crt1, 
+			ekstermitas.crt2, 
+			ekstermitas.crt3, 
+			ekstermitas.crt4, 
+			ekstermitas.edm1, 
+			ekstermitas.edm2, 
+			ekstermitas.edm3, 
+			ekstermitas.edm4, 
+			ekstermitas.pitting, 
+			ekstermitas.ket_tambahan, 
+			terapi.terapi1, 
+			terapi.terapi2, 
+			terapi.terapi3, 
+			(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok 
+
+			FROM rkm_medis 
 
 			LEFT JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   
 			LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
@@ -119,15 +121,22 @@ class Dokter extends CI_Controller {
 			LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi 
 			LEFT JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
 
-																				WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
-																				GROUP BY kd_rkm")->result();
+			WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
+			GROUP BY kd_rkm")->result();
+
 		$data['objektif']		= $this->Kesehatan_M->readS('objek')->result();
+		// echo "<pre>";
+		// var_dump($data);
+		// echo "</pre>";
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/log',$data);
 		$this->load->view('static/footer');
 	}
 
+	/*
+	* cetak log
+	*/
 	function cetak_log()
 	{
 		$nomor_pasien = $this->input->post('nomor_pasien');
@@ -150,7 +159,7 @@ class Dokter extends CI_Controller {
 																			),
 																		'kd_objek')->result();
 			if ($kd_objek != array()) {
-				$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[0]->kd_objek))->result();
+				$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[sizeof($kd_objek)-1]->kd_objek))->result();
 				$this->load->view('static/header');
 				$this->load->view('static/navbar');
 				$this->load->view('dokter/pemeriksaan',$data);
@@ -193,21 +202,9 @@ class Dokter extends CI_Controller {
 	*/
 	function index(){
 		// baca antrian yang tersedia, tampilkan nama dan waktu datang
-		$data['proses_antrian'] = $this->Kesehatan_M->rawQuery('SELECT pasien.nama,pasien.pembayaran,pasien.nomor_pasien FROM pasien INNER JOIN proses_antrian ON pasien.nomor_pasien=proses_antrian.nomor_pasien')->result();
-		$data['antrian']		=	$this->Kesehatan_M->rawQuery('
-																	SELECT 
-																		pasien.nama, 
-																		antrian.jam_datang, 
-																		antrian.nomor_antrian, 
-																		pasien.pembayaran, 
-																		pasien.nomor_pasien 
-																	FROM antrian 
-																	INNER JOIN pasien on antrian.nomor_pasien=pasien.nomor_pasien
-																	WHERE DATE(jam_datang) = DATE(CURRENT_DATE())
-																')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
-		$this->load->view('dokter/antri',$data);
+		$this->load->view('dokter/antri');
 		$this->load->view('static/footer');
 	}
 
@@ -223,7 +220,7 @@ class Dokter extends CI_Controller {
 	}
 
 	/*
-	* function untuk mambaca rekam mdis setiap pasien
+	* function untuk mambaca rekam mesdis setiap pasien
 	*/
 	function rekam_medis($nomor_pasien)
 	{
