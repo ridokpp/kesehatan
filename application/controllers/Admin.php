@@ -16,6 +16,7 @@ class Admin extends CI_Controller {
 	}
 
 	function menu($menu){
+		
 		if ($menu == 'dashboard') {
 			/*pasien yang datang bulan ini*/
 			$this->load->view('static/header');
@@ -32,15 +33,17 @@ class Admin extends CI_Controller {
 			$this->load->view('static/footer');
 		}elseif ($menu == 'daftar_pasien') {
 			/*daftar pasienr*/
+			$data['pasien'] 		= $this->Kesehatan_M->readS('pasien')->result();
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
-			$this->load->view('admin/daftar_pasien');
+			$this->load->view('admin/daftar_pasien',$data);
 			$this->load->view('static/footer');
 		}elseif ($menu == 'daftar_dokter') {
 			/*daftar pasienr*/
+			$data['dokter'] 		= $this->Kesehatan_M->readS('dokter')->result();
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
-			$this->load->view('admin/daftar_dokter');
+			$this->load->view('admin/daftar_dokter',$data);
 			$this->load->view('static/footer');
 		}else{
 			$this->load->view('static/header');
@@ -65,4 +68,5 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/rekam_dokter');
 		$this->load->view('static/footer');
 	}
+	
 }

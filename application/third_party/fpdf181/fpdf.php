@@ -281,7 +281,7 @@ function Close()
 	// Page footer
 	$this->InFooter = true;
 	$this->Footer();
-	$this->InFooter = false;
+	$this->InFooter = true;
 	// Close page
 	$this->_endpage();
 	// Close document
@@ -365,7 +365,11 @@ function Header()
 
 function Footer()
 {
-	// To be implemented in your own inherited class
+	 // Page footer
+    $this->SetY(-15);
+    $this->SetFont('Arial','I',8);
+    $this->SetTextColor(128);
+    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
 }
 
 function PageNo()

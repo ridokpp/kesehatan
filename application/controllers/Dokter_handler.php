@@ -467,7 +467,7 @@ class Dokter_handler extends CI_Controller {
 		$pasien 		= $this->Kesehatan_M->readCol('pasien',array('kd_pasien'=>$nomor_pasien),array('pembayaran','nama','nik','tmp_lahir','tgl_lahir','alamat','jkelamin','pekerjaan'))->result();
 		
 		$this->load->library('pdf');
-		$this->load->helper('kesehatan_fpdf');
+		$this->load->helper('kesehatan_fpdf_helper');
 		$pdf_mc = new PDF_MC_TABLE();
 		// $pdf_mc->AddPage('L',array(330,215));
 		$pdf_mc->AddPage();
@@ -487,7 +487,7 @@ class Dokter_handler extends CI_Controller {
 		
 		$pdf_mc->SetWidths(array(40,50,60,90,70));
 		$pdf_mc->Row(array('Tanggal','Subjektif','Objektif','assessment','Palnning'),TRUE);
-		$pdf_mc->SetAutoPageBreak(true,10);
+		
 
 		foreach ($rekam_medis as $key => $value) {
 			$pdf_mc->Row(array(
@@ -517,6 +517,7 @@ class Dokter_handler extends CI_Controller {
 				)
 			);
 		}
+		$pdf_mc->SetAutoPageBreak(true,10);
 		$pdf_mc->Output();
 	}
 	

@@ -47,6 +47,7 @@ function Row($data,$RowBorder = TRUE)
     $this->CheckPageBreak($h);
 
     //Go to the next line
+    $this->PageBreakTrigger = $this->h-$this->bMargin;
     $this->Ln($h);
 }
 

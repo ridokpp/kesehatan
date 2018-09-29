@@ -19,4 +19,11 @@ class Admin_handler extends CI_Controller {
 		$this->Kesehatan_M->update('user',array('id_user'=>$id_user),array('verified'=>'sudah'));
 		redirect(base_url()."Admin/menu/verifikasi");
 	}
+
+	function update(){
+
+	}
+	function reset(){
+		
+	}
 }
