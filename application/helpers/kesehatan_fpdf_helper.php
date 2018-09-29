@@ -24,6 +24,10 @@ function Row($data,$RowBorder = TRUE)
         $nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
     $h=5*$nb;
     // $h=3*$nb;
+    // echo "-----------<br>H : $h <br>";
+    if ($h > 140) {
+        // $this->AddPage();
+    }
     //Issue a page break first if needed
     // $this->CheckPageBreak($h);
     //Draw the cells of the row
@@ -43,8 +47,9 @@ function Row($data,$RowBorder = TRUE)
         // $this->MultiCell($w,3,$data[$i],0,$a);
         //Put the position to the right of the cell
         $this->SetXY($x+$w,$y);
+        // echo "$i - $y  + $x <br>";
     }
-    $this->CheckPageBreak($h);
+    // $this->CheckPageBreak($h);
 
     //Go to the next line
     $this->PageBreakTrigger = $this->h-$this->bMargin;
@@ -106,8 +111,11 @@ function NbLines($w,$txt)
         else
             $i++;
     }
+    // echo $nl." + ";
     return $nl;
 }
+
+
 
 }
 ?>

@@ -69,6 +69,15 @@
 			}
 		}
 	}
+
+	function cekPembayaran(){
+		var pembayaran = $('#jenis_pembayaran').val();
+		if (pembayaran != 'BPJS') {
+			$('#nomor_bpjs').css('display','none');
+		}else{
+			$('#nomor_bpjs').css('display','');
+		}
+	}
 </script>
 <h3 class="text-center mt-3">Pendafataran Awal Pasien</h3>
 <form action="<?= base_url().'Petugas_handler/pendaftaran'?>" method="POST">
@@ -205,11 +214,11 @@
 						<div class="form-group row">
 						    <label class="col-sm-1 col-form-label">RT</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RT" placeholder="RT" required="">
+						      	<input type="number" class="form-control" id="" name="RT" placeholder="RT" required="" min="1">
 						    </div>
 						    <label class="col-sm-1 col-form-label">RW</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RW" placeholder="RW" required="">
+						      	<input type="number" class="form-control" id="" name="RW" placeholder="RW" required="" min="1">
 						    </div>
 						</div>
 					</div>
@@ -223,7 +232,7 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Gender</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<select class="form-control" id="state_id" name="jenis_kelamin" required="">
+				      	<select class="form-control" name="jenis_kelamin" required="">
 							<option value="Laki-laki">Laki - Laki</option>
 							<option value="Perempuan">Perempuan</option>
 						</select>	
@@ -234,13 +243,21 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Pembayaran</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<select class="form-control" id="state_id" name="pembayaran" required="">
-							<option value="umum">Umum</option>
-							<option value="bpjs">BPJS</option>
-							<option value="royalefamily">Royale Family</option>
+				      	<select class="form-control" id="jenis_pembayaran" name="pembayaran" required="" onchange="cekPembayaran()">
+							<option value="Umum">Umum</option>
+							<option value="BPJS">BPJS</option>
+							<option value="RF">Royale Family</option>
 						</select>	
 				    </div>
 				</div>
+
+				<!-- JIKA BPJS MAKA TAMPILKAN KOLOM TAMBAHAN UNTUK PENGSIAN NOMOR BPJS -->
+				<div class="form-group row" id="nomor_bpjs" style="display: none;">
+				    <label class="col-1 col-form-label">Nomor BPJS</label>
+				    <div class="input-group-prepend col-7">
+				    	<input class="form-control " type="text" placeholder="Nomor BPJS" name="nomor_bpjs">
+				    </div>
+				</div>				
 
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Pekerjaan</label>

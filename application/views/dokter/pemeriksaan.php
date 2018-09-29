@@ -2,9 +2,6 @@
 <style type="text/css">
 	.my-error-class {color:#FF0000;}
 	.my-valid-class {color:#00CC00;}
-	.tkn{
-		display:none;
-			}
 </style>
 <script type="text/javascript">
 
@@ -84,71 +81,7 @@
 			errorClass: "my-error-class",
 			validClass: "my-valid-class"
 		});
-
-		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
-		$('#modalSuratSakit').on('hidden.bs.modal', function () {
-			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sakit/<?=$pasien[0]->nomor_pasien?>", function(data) {
-				data = JSON.parse(data);
-				if (data[0].nomor_surat < 10 ) {
-					data[0].nomor_surat = "00"+data[0].nomor_surat;
-				}else{
-					data[0].nomor_surat = "0"+data[0].nomor_surat;
-				}
-				if(document.getElementById('planning').value == ''){
-					document.getElementById('planning').value += "Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
-				}else{
-					document.getElementById('planning').value += ", Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
-				}
-			})
-			.fail(function() {
-			alert( "error" );
-			})
-		});
-
-		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
-		$('#modalSuratSehat').on('hidden.bs.modal', function () {
-			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sehat/<?=$pasien[0]->nomor_pasien?>", function(data) {
-				data = JSON.parse(data);
-				if (data[0].nomor_surat < 10 ) {
-					data[0].nomor_surat = "00"+data[0].nomor_surat;
-				}else{
-					data[0].nomor_surat = "0"+data[0].nomor_surat;
-				}
-				if(document.getElementById('planning').value == ''){
-					document.getElementById('planning').value += "Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
-				}else{
-					document.getElementById('planning').value += ", Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
-				}
-			})
-			.fail(function() {
-			alert( "error" );
-			})
-		});
-
-		// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
-		$('#modalSuratRujukan').on('hidden.bs.modal', function () {
-			var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/rujukan/<?=$pasien[0]->nomor_pasien?>", function(data) {
-				data = JSON.parse(data);
-				if (data[0].nomor_surat < 10 ) {
-					data[0].nomor_surat = "00"+data[0].nomor_surat;
-				}else{
-					data[0].nomor_surat = "0"+data[0].nomor_surat;
-				}
-				// console.log(document.getElementById('planning').value);
-				if(document.getElementById('planning').value == ''){
-					document.getElementById('planning').value += "Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
-				}else{
-					document.getElementById('planning').value += ", Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
-				}
-				document.getElementById('planning').value += ", Terapi : " + document.getElementById('terapi1').value + ", Perencanaan Lab : " + document.getElementById('terapi2').value + ", Perencanaan Rujuk : " + document.getElementById('terapi3').value;
-
-			})
-			.fail(function() {
-			alert( "error" );
-			})
-		});
-
-	});	
+	});
 
 	// setting tampilan live clock
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
@@ -237,33 +170,88 @@
 	function headtotoeToPemeriksaan(){
 		$('#textareaHeadToToePemeriksaan').val($('#textareaHeadToToe').val());
 	} 
+
+	// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+	function SuratSakit() {
+		var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sakit/<?=$pasien[0]->nomor_pasien?>", function(data) {
+			data = JSON.parse(data);
+			if (data[0].nomor_surat < 10 ) {
+				data[0].nomor_surat = "00"+data[0].nomor_surat;
+			}else{
+				data[0].nomor_surat = "0"+data[0].nomor_surat;
+			}
+			if(document.getElementById('planning').value == ''){
+				document.getElementById('planning').value += "Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
+			}else{
+				document.getElementById('planning').value += ", Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
+			}
+		})
+		.fail(function() {
+		alert( "error" );
+		})
+	}
+
+	// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+	function SuratSehat() {
+		var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/sehat/<?=$pasien[0]->nomor_pasien?>", function(data) {
+			data = JSON.parse(data);
+			if (data[0].nomor_surat < 10 ) {
+				data[0].nomor_surat = "00"+data[0].nomor_surat;
+			}else{
+				data[0].nomor_surat = "0"+data[0].nomor_surat;
+			}
+			if(document.getElementById('planning').value == ''){
+				document.getElementById('planning').value += "Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
+			}else{
+				document.getElementById('planning').value += ", Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
+			}
+		})
+		.fail(function() {
+		alert( "error" );
+		})
+	}
+
+	// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+	function SuratRujukan() {
+		var jqxhr = $.get( "<?=base_url()?>Dokter_handler/getTabelSurat/rujukan/<?=$pasien[0]->nomor_pasien?>", function(data) {
+			data = JSON.parse(data);
+			if (data[0].nomor_surat < 10 ) {
+				data[0].nomor_surat = "00"+data[0].nomor_surat;
+			}else{
+				data[0].nomor_surat = "0"+data[0].nomor_surat;
+			}
+			// console.log(document.getElementById('planning').value);
+			if(document.getElementById('planning').value == ''){
+				document.getElementById('planning').value += "Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
+			}else{
+				document.getElementById('planning').value += ", Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
+			}
+			document.getElementById('planning').value += ", Terapi : " + document.getElementById('terapi1').value + ", Perencanaan Lab : " + document.getElementById('terapi2').value + ", Perencanaan Rujuk : " + document.getElementById('terapi3').value;
+
+		})
+		.fail(function() {
+		alert( "error" );
+		})
+	}
 </script>
 
 <h3 class="text-center mt-3">Pemeriksaan Dokter</h3>
 
 <div class="container">
 	<div class="row justify-content-md-center">
-		<div class="col col-lg-1">
-	     	<h5><span class="badge <?=($pasien[0]->pembayaran != 'rf' OR $pasien[0]->pembayaran != 'RF') ? 'badge-success' : 'badge-secondary' ?>"><?=$pasien[0]->pembayaran?></span></h5>
+		<div class="col text-right">
+	     	<h5><span class="badge <?=($pasien[0]->pembayaran != 'RF') ? 'badge-success' : 'badge-secondary' ?>"><?=$pasien[0]->pembayaran?></span></h5>
 	    </div>
-	    <?php
-	    $pembayaran =  $pasien[0]->pembayaran;
- 		if ($pembayaran == 'rf' OR $pembayaran == 'RF'){?>
- 		<style type="text/css">.tkn{
-		display:block;
-			}</style>
-			<?php
- 		}
- 		?>
-	    <div class="col-md-auto">
+	    <div class="col">
 	      	<?= $pasien[0]->nomor_pasien?>
 	    </div>
 	</div>
 	<div class="row">
 		<div class="col" >
 			<h5><?php
-				$hari = array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu");
-				$bulan = array("","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+				$hari 	= array("Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu");
+				$bulan 	= array("","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+
 				echo $hari[date("w")].", ".date("j")." ".$bulan[date("n")]." ".date("Y"); ?></h5>	
 		</div>
 		<div class="col-1">
@@ -377,19 +365,20 @@
 				</div>
 			</div>
 			
-			<div class="tkn">
-			<div class="row mt-2">
-				<div class="col-4">
-					Tekanan Darah
+			<!-- JIKA RF MAKA TAMPILKAN KOLOM INPUT TEKANAN DARAH -->
+			<?php if ($pasien[0]->pembayaran == 'RF') { ?>
+				<div class="row mt-2">
+					<div class="col-4">
+						Tekanan Darah
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col">
+						<?=$objek[0]->td1?> / <?=$objek[0]->td2?> mmHg
+					</div>
 				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$objek[0]->td1?> / <?=$objek[0]->td2?>
-				</div>
-			</div>
-			</div>
+			<?php } ?>
 
 			<div class="row mt-2">
 				<div class="col-4">
@@ -546,7 +535,7 @@
 								</div>
 						    </div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary btn-sm">CETAK</button>
+					    		<button type="submit" class="btn btn-primary btn-sm" onclick="SuratSakit()">CETAK</button>
 					    	</div>
 				    	</form>
 				    </div>
@@ -590,7 +579,7 @@
 								<textarea class="form-control" aria-label="With textarea" name="keperluan" required=""></textarea>
 							</div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary">Cetak</button>
+					    		<button type="submit" class="btn btn-primary" onclick="SuratSehat()">Cetak</button>
 					    	</div>
 			    		</form>
 					</div>
@@ -681,48 +670,6 @@
 								       </div>
 								    </div>
 								</fieldset>
-<!-- 								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">TB</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->tb?>" id="" name="tb" placeholder="TB"  readonly="">cm
-								    </div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">BB</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->bb?>" id="" name="bb" placeholder="BB"  readonly="">kg
-								    </div>
-								</div>
-
-								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">Tekanan Darah</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->td1?>" id="" name="tekanan_darah" placeholder=""  readonly="">
-								      	&nbsp;/&nbsp;
-								      	<input type="text" class="form-control" value="<?=$objek[0]->td2?>" id="" name="tekanan_darah" placeholder=""  readonly="">mmHg
-								    </div>
-								</div>
-								
-								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">Nadi</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->N?>" id="" name="nadi" placeholder=""  readonly="">rpm
-								    </div>
-								</div>
-
-								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">Respiratory R.</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->RR?>" id="" name="respiratory" placeholder=""  readonly="">rpm
-								    </div>
-								</div>
-
-								<div class="form-group row">
-									<label class="col-sm-4 col-form-label">TᵒAxilla</label>
-								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" value="<?=$objek[0]->TAx?>" id="" name="respiratory" placeholder=""  readonly="">ᵒc
-								    </div>
-								</div> -->
 								<hr></hr>
 								<center><h4>Head to Toe</h4></center>
 								<hr></hr>
@@ -1109,7 +1056,7 @@
 								</div>
 							</div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary">Cetak</button>
+					    		<button type="submit" class="btn btn-primary" onclick="SuratRujukan()">Cetak</button>
 					    	</div>
 						</form>
 					</div>
