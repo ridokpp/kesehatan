@@ -233,6 +233,29 @@
 		alert( "error" );
 		})
 	}
+
+		function save()
+	{
+		var url;
+
+		if(mode == 'add')
+		{
+			url= "<?php echo site_url('Dokter_handler/addheadtotoe') ?>";
+		}
+
+		$.ajax({
+			url : url,
+			type : 'POST',
+			dataType : 'JSON',
+			data: $("#modalSuratRujukan").serialize(),
+			success: function(data){
+				$("#modalSuratRujukan").modal("hide");
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				alert('Error Add Data');
+			}
+		});
+	}
 </script>
 
 <h3 class="text-center mt-3">Pemeriksaan Dokter</h3>
@@ -607,20 +630,20 @@
 							    <div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keluhan</label>
 								    <div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="keluhan" required=""></textarea>
+									<textarea class="form-control" aria-label="With textarea" name="keluhan" ></textarea>
 									</div>
 								</div>
 
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">GCS</label>
 								    <div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_E" placeholder="E" required="">
+									<input type="text" class="form-control" id="" name="GCS_E" placeholder="E" >
 									</div>
 									<div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_V" placeholder="V" required="">
+									<input type="text" class="form-control" id="" name="GCS_V" placeholder="V" >
 									</div>
 									<div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_M" placeholder="M" required="">
+									<input type="text" class="form-control" id="" name="GCS_M" placeholder="M" >
 									</div>							
 								</div>
 								<fieldset class="form-group">
@@ -727,11 +750,11 @@
 								<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">isokor</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="refchy_opsi" value="Isokor" required="">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" value="Isokor">
 									</div>
 								 	<label class="col-sm-1 col-form-label">anisokor</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="refchy_opsi" value="Anisokor" required="">
+									<input type="radio" class="form-control" id="" name="refchy_opsi" value="Anisokor">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -748,11 +771,11 @@
 									<label class="col-sm-1 col-form-label">:</label>
 								 	<label class="col-sm-1 col-form-label">Simetris</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="Simetris" required="">
+									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="Simetris">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Asimetris</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="Asimetris" required="">
+									<input type="radio" class="form-control" id="" name="metris" placeholder="" value="Asimetris" >
 									</div>
 								</div>
 								<div class="form-group row">
@@ -793,13 +816,13 @@
 									  	<legend class="col-form-label col-sm-1 pt-0">:</legend>
 								      	<div class="col-sm-5">
 								        	<div class="form-check">
-								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Tampak" required="">
+								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Tampak" >
 								          		<label class="form-check-label">
 								            		Tampak
 								          		</label>
 								        	</div>
 								       		<div class="form-check">
-								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Tak Tampak" required="">
+								          		<input class="form-check-input" type="radio" name="jantung_icor" value="Tak Tampak">
 								          		<label class="form-check-label">
 								            		Tak Tampak
 								          		</label>
@@ -808,13 +831,13 @@
 								      			<legend class="col-form-label col-sm-5 pt-0">S1 / S2</legend>
 								      			<div class="col-sm-5">
 								        			<div class="form-check">
-								          				<input class="form-check-input" type="radio" name="s1_s2" value="Reguler" required="">
+								          				<input class="form-check-input" type="radio" name="s1_s2" value="Reguler" >
 								          				<label class="form-check-label">
 								            				Reguler
 								          				</label>
 								        			</div>
 								        			<div class="form-check">
-								          				<input class="form-check-input" type="radio" name="s1_s2" value="Irreguler" required="">
+								          				<input class="form-check-input" type="radio" name="s1_s2" value="Irreguler" >
 								          				<label class="form-check-label">
 								            				Irreguler
 								          				</label>
@@ -842,22 +865,22 @@
 									<label class="col-sm-2 col-form-label">BU </label>
 								 	<label class="col-sm-1 col-form-label">Normal</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Meningkat</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Meningkat" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Meningkat">
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label"></label>
 									<label class="col-sm-1 col-form-label">Menurun</label>
 								 	<div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Menurun" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Menurun">
 									</div>
 								 	<label class="col-sm-1 col-form-label">Negatif</label>
 								 	 <div class="input-group-prepend col-sm-3">
-									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Negatif" required="">
+									<input type="radio" class="form-control" id="" name="BU" placeholder="" value="Negatif">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -904,13 +927,13 @@
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Hepatomegali</label>
 								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" id="" name="hpmgl" placeholder="" value="" required="">
+								      	<input type="text" class="form-control" id="" name="hpmgl" placeholder="" value="">
 								    </div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-3 col-form-label">Spleenomegali</label>
 								    <div class="input-group-prepend col-sm-2">
-								      	<input type="text" class="form-control" id="" name="spmgl" placeholder="" value="" required="">
+								      	<input type="text" class="form-control" id="" name="spmgl" placeholder="" value="">
 								    </div>
 								</div>
 								<div class="form-group row">
@@ -990,7 +1013,7 @@
 										<legend class="col-form-label col-sm-2 pt-0"></legend>
 										<div class="col-sm-4">
 									        <div class="form-check">
-									        	<input class="form-check-input" type="radio" name="pitting" value="1" required="">
+									        	<input class="form-check-input" type="radio" name="pitting" value="1">
 									        	<label class="form-check-label">
 									            	non-pitting
 									          	</label>
@@ -998,7 +1021,7 @@
 								        </div>
 								        <div class="col-sm-4">
 								        	<div class="form-check">
-								          		<input class="form-check-input" type="radio" name="pitting" value="0" required="">
+								          		<input class="form-check-input" type="radio" name="pitting" value="0">
 								          		<label class="form-check-label">
 								            		pitting
 								          		</label>
@@ -1057,6 +1080,7 @@
 							</div>
 					    	<div class="modal-footer">
 					    		<button type="submit" class="btn btn-primary" onclick="SuratRujukan()">Cetak</button>
+					    		<button type="submit" class="btn btn-primary" onclick="Save()">Save</button>
 					    	</div>
 						</form>
 					</div>
