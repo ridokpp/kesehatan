@@ -234,22 +234,17 @@
 		})
 	}
 
-		function save()
-	{
-		var url;
-
-		if(mode == 'add')
-		{
-			url= "<?php echo site_url('Dokter_handler/addheadtotoe') ?>";
-		}
-
+	function Save()	{
+		// var formData = new FormData($("#formHeadtotoeDetil")[0]);
+		var formData = $("#formHeadtotoeDetil").serialize();
+		console.log(formData);
 		$.ajax({
-			url : url,
-			type : 'POST',
-			dataType : 'JSON',
-			data: $("#modalSuratRujukan").serialize(),
+			url : "<?=base_url('Dokter_handler/addheadtotoe')?>",
+			type : "POST",
+			data: formData,
 			success: function(data){
-				$("#modalSuratRujukan").modal("hide");
+				// $("#modalSuratRujukan").modal("hide");
+				console.log(data);
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				alert('Error Add Data');
@@ -623,7 +618,7 @@
 				          		<span aria-hidden="true">&times;</span>
 				        	</button>
 				      	</div>
-				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST">
+				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST" id="formHeadtotoeDetil">
 					    	<div class="modal-body" >
 								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="nomor_pasien" readonly="">
 								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
@@ -1079,8 +1074,8 @@
 								</div>
 							</div>
 					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary" onclick="SuratRujukan()">Cetak</button>
-					    		<button type="submit" class="btn btn-primary" onclick="Save()">Save</button>
+					    		<button type="button" class="btn btn-primary" onclick="Save()">Hanya Simpan ke Objektif</button>
+					    		<button type="submit" class="btn btn-primary" onclick="SuratRujukan()">Cetak Surat Rujukan</button>
 					    	</div>
 						</form>
 					</div>
