@@ -44,7 +44,7 @@ if ($this->session->userdata('logged_in')['akses'] == '3') {
     }elseif ($this->session->userdata('logged_in')['akses'] == '3') { ?>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <?=($menu == 'cari') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/cari">Cari</a>
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/cari">Cari Pasien</a>
       </li>
       <li class="nav-item <?=($menu == 'pendaftaran') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pendaftaran">Pendaftaran</a>

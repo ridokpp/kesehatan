@@ -6,7 +6,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Dokter_handler extends CI_Controller {
 	
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 		$this->load->model('Kesehatan_M');
 		date_default_timezone_set("Asia/Jakarta");
@@ -113,7 +114,6 @@ class Dokter_handler extends CI_Controller {
 			$data['kd_thorak']				= json_decode($this->Kesehatan_M->create_id('thorak',$dataThorak));
 			$data['kd_thorak']				= $data['kd_thorak']->message;
 
-
 			$dataAbdomen['BU'] 				= $this->input->post('BU');
 			$dataAbdomen['ny1'] 			= $this->input->post('ny1');
 			$dataAbdomen['ny2'] 			= $this->input->post('ny2');
@@ -128,8 +128,7 @@ class Dokter_handler extends CI_Controller {
 			$dataAbdomen['spmgl'] 			= $this->input->post('spmgl');
 			$dataAbdomen['ket_tambahan']	= $this->input->post('ket_tambahanab');
 			$data['kd_abdomen']				= json_decode($this->Kesehatan_M->create_id('abdomen',$dataAbdomen));
-			$data['kd_abdomen']				= $data['kd_abdomen']->message;
-			
+			$data['kd_abdomen']				= $data['kd_abdomen']->message;	
 
 			$dataEkstermitas['ah1']			= $this->input->post('ah1');
 			$dataEkstermitas['ah2']			= $this->input->post('ah2');
@@ -147,14 +146,12 @@ class Dokter_handler extends CI_Controller {
 			$dataEkstermitas['ket_tambahan']= $this->input->post('ket_tambahaneks');
 			$data['kd_ekstermitas'] 		= json_decode($this->Kesehatan_M->create_id('ekstermitas',$dataEkstermitas));
 			$data['kd_ekstermitas'] 		= $data['kd_ekstermitas']->message;
-			
 
 			$dataTerapi['terapi1'] 			= $this->input->post('terapi1');
 			$dataTerapi['terapi2'] 			= $this->input->post('terapi2');
 			$dataTerapi['terapi3'] 			= $this->input->post('terapi3');
 			$data['kd_terapi'] 				= json_decode($this->Kesehatan_M->create_id('terapi',$dataTerapi));
 			$data['kd_terapi'] 				= $data['kd_terapi']->message;
-
 
 			$dataHeadtotoe['keluhan'] 		= $this->input->post('keluhan');
 			$dataHeadtotoe['GCS_E'] 		= $this->input->post('GCS_E');
@@ -215,7 +212,7 @@ class Dokter_handler extends CI_Controller {
 			$data['GCS_opsi'] 		= $this->input->post('GCS_opsi');
 
 
-			// ambil value bagian diagnosa dari modal form. masing masing variabel berupa array. diagnosa yang diambiil hanya digunaknan untuk pencetakan semata. tidak masuk ke database
+			// ambil value bagian diagnosa dari modal form. masing masing variabel berupa array. diagnosa yang diambiil hanya digunakan untuk pencetakan semata. tidak masuk ke database
 			$data['diagnosaPrimer']				= $this->input->post('diagnosaPrimary[]');
 			$data['diagnosaSekunder'] 			= $this->input->post('diagnosaSecondary[]');
 			$data['diagnosaLain'] 				= $this->input->post('diagnosaLain[]');
@@ -243,7 +240,8 @@ class Dokter_handler extends CI_Controller {
 	/*
 	* get nomor surat untuk disalurkan ke kolom planning
 	*/
-	function getTabelSurat($surat,$nomor_pasien){
+	function getTabelSurat($surat,$nomor_pasien)
+	{
 		// select * from suratrujukan WHERE nomor_pasien='001-006-01-02-07-2018' ORDER BY id DESC limit 1 ;
 		// sebelumnya telah dibuatkan data pada tabel surat rujukan, actionnya saat klink tombol surat rujukan pada pemeriksaan
 		$data = json_encode($this->Kesehatan_M->rawQuery("SELECT * FROM surat".$surat." WHERE nomor_pasien='".$nomor_pasien."' ORDER BY id DESC limit 1 ")->result());
@@ -251,7 +249,8 @@ class Dokter_handler extends CI_Controller {
 	}
 
 	// Fungsi ini digunakan untuk mencari data pada tabel ICD 10
-	function cari_icd(){
+	function cari_icd()
+	{
 		if ($this->input->get() != NULL) {
 			$dataForm = $this->input->get();
 			$dataReturn = $this->Kesehatan_M->orLike('icd10',array('Diagnosa'=>$dataForm['term']['term'],'Diskripsi'=>$dataForm['term']['term']))->result();
@@ -267,10 +266,11 @@ class Dokter_handler extends CI_Controller {
 	}
 
 	/*
-	* function untuk memasukkan form halaman pemeriksaan ke tabel rekam medis dan related.
-	* update karena telah ada pemasukan data pada pemeriksaan awal oleh petugas
+	* function untuk memasukkan form halaman pemeriksaan ke tabel rekam medis dan relatednya.
+	* action nya adalah update record karena telah ada pemasukan data pada pemeriksaan awal oleh petugas
 	*/
-	function update_rm(){
+	function update_rm()
+	{
 		if ($this->input->post() !== NULL) {
 			$kd_objek 					= $this->input->post('kd_objek');
 			$nomor_pasien 					= $this->input->post('nomor_pasien');
@@ -354,8 +354,11 @@ class Dokter_handler extends CI_Controller {
 		}
 	}
 
-
-	function cetak_RM(){
+	/*
+	* cetak RM menggunakan fpdf
+	*/
+	function cetak_RM()
+	{
 		$nomor_pasien		= $this->input->post('nomor_pasien');
 		$idS_rekam_medis 	= $this->input->post('idS_rekam_medis[]');
 		$bool_halaman_awal 	= $this->input->post('bool_halaman_awal');
@@ -561,7 +564,8 @@ class Dokter_handler extends CI_Controller {
 	/*
 	* function untuk redirect ke halaman rekam medis seorang pasien melalui pencarian nomor pasien atau nama pasien
 	*/
-	function redirector(){
+	function redirector()
+	{
 		if ($this->input->get() != NULL) {
 			redirect(base_url()."Dokter/rekam_medis/".$this->input->get('nama_or_nomor'));
 		}else{
@@ -572,7 +576,8 @@ class Dokter_handler extends CI_Controller {
 	/*
 	* form handler untuk pemeriksaan awal
 	*/
-	function pemeriksaan(){
+	function pemeriksaan()
+	{
 		$postedData = 	array(
 								'tb'	=>	$this->input->post('tinggi_badan'),
 								'bb'	=>	$this->input->post('berat_badan'),
@@ -613,6 +618,9 @@ class Dokter_handler extends CI_Controller {
 		redirect(base_url()."Dokter/pemeriksaan/$postedData[nomor_pasien]");
 	}
 
+	/*
+	* function untuk lihat antrian secara live
+	*/
 	function liveAntrian()
 	{
 		$data['antrian']		=	$this->Kesehatan_M->rawQuery('
@@ -638,7 +646,12 @@ class Dokter_handler extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	function addheadtotoe (){
+	/*
+	* function untuk memasukkan data objektif yang lebih detil ke halaman pemeriksaan.
+	* mirip dengan objektif pada saat pengurusan surat rujukan, namun tanpa fitur cetak.
+	*/
+	function addheadtotoe()
+	{
 			$dataKepala['anemis_kiri'] 		= $this->input->post('anemis_kiri');
 			$dataKepala['anemis_kanan'] 	= $this->input->post('anemis_kanan');
 			$dataKepala['ikterik_kiri'] 	= $this->input->post('ikterik_kiri');
@@ -653,7 +666,9 @@ class Dokter_handler extends CI_Controller {
 			$dataKepala['ket_tambahan']		= $this->input->post('ket_tambahankpl');
 			$data['kd_kepala']				= json_decode($this->Kesehatan_M->create_id('kepala',$dataKepala));
 			$data['kd_kepala']				= $data['kd_kepala']->message;
-			var_dump($data['kd_kepalakepala']);
+
+			// var_dump($data['kd_kepalakepala']);
+			
 			$dataThorak['metris'] 			= $this->input->post('metris');
 			$dataThorak['wheezing_kiri'] 	= $this->input->post('wheezing_kiri');
 			$dataThorak['wheezing_kanan'] 	= $this->input->post('wheezing_kanan');
@@ -667,7 +682,8 @@ class Dokter_handler extends CI_Controller {
 			$dataThorak['ket_tambahan'] 	= $this->input->post('ket_tambahantr');
 			$data['kd_thorak']				= json_decode($this->Kesehatan_M->create_id('thorak',$dataThorak));
 			$data['kd_thorak']				= $data['kd_thorak']->message;
-			var_dump($data['kd_thorak']);
+			
+			// var_dump($data['kd_thorak']);
 
 			$dataAbdomen['BU'] 				= $this->input->post('BU');
 			$dataAbdomen['ny1'] 			= $this->input->post('ny1');
@@ -684,7 +700,8 @@ class Dokter_handler extends CI_Controller {
 			$dataAbdomen['ket_tambahan']	= $this->input->post('ket_tambahanab');
 			$data['kd_abdomen']				= json_decode($this->Kesehatan_M->create_id('abdomen',$dataAbdomen));
 			$data['kd_abdomen']				= $data['kd_abdomen']->message;
-			var_dump($data['kd_abdomen']);
+			
+			// var_dump($data['kd_abdomen']);
 
 			$dataEkstermitas['ah1']			= $this->input->post('ah1');
 			$dataEkstermitas['ah2']			= $this->input->post('ah2');
@@ -702,14 +719,16 @@ class Dokter_handler extends CI_Controller {
 			$dataEkstermitas['ket_tambahan']= $this->input->post('ket_tambahaneks');
 			$data['kd_ekstermitas'] 		= json_decode($this->Kesehatan_M->create_id('ekstermitas',$dataEkstermitas));
 			$data['kd_ekstermitas'] 		= $data['kd_ekstermitas']->message;
-			var_dump($data['kd_ekstermitas']);
+
+			// var_dump($data['kd_ekstermitas']);
 
 			$dataTerapi['terapi1'] 			= $this->input->post('terapi1');
 			$dataTerapi['terapi2'] 			= $this->input->post('terapi2');
 			$dataTerapi['terapi3'] 			= $this->input->post('terapi3');
 			$data['kd_terapi'] 				= json_decode($this->Kesehatan_M->create_id('terapi',$dataTerapi));
 			$data['kd_terapi'] 				= $data['kd_terapi']->message;
-			var_dump($data['kd_terapi']);
+			
+			// var_dump($data['kd_terapi']);
 
 			$dataHeadtotoe['keluhan'] 		= $this->input->post('keluhan');
 			$dataHeadtotoe['GCS_E'] 		= $this->input->post('GCS_E');
@@ -718,10 +737,13 @@ class Dokter_handler extends CI_Controller {
 			
 			$GCS_opsi				 		= $this->input->post('GCS_opsi[]');
 			$dataHeadtotoe['GCS_opsi'] = '';
-			foreach ($GCS_opsi as $key => $value) {
-				$dataHeadtotoe['GCS_opsi'] .= $value." ";
+			if ($GCS_opsi != array()) {
+				foreach ($GCS_opsi as $key => $value) {
+					$dataHeadtotoe['GCS_opsi'] .= $value." ";
+				}
 			}
-			var_dump($data['GCS_opsi[]']);
+
+			// var_dump($data['GCS_opsi[]']);
 
 			$dataHeadtotoe['kd_kepala'] 	= $data['kd_kepala'];
 			$dataHeadtotoe['kd_thorak'] 	= $data['kd_thorak'];
@@ -730,11 +752,19 @@ class Dokter_handler extends CI_Controller {
 			$dataHeadtotoe['lain_lain']		= $this->input->post('lain_lain');
 			$dataHeadtotoe['kd_terapi'] 	= $data['kd_terapi'];
 			$data['kd_headtotoe'] 			= json_decode($this->Kesehatan_M->create_id('headtotoe',$dataHeadtotoe));
+<<<<<<< HEAD
 			var_dump($data['kd_headtotoe']);
 			
 			$data = json_encode($this->Kesehatan_M->rawQuery("SELECT * FROM surat".$surat." WHERE nomor_pasien='".$nomor_pasien."' ORDER BY id DESC limit 1 ")->result());
 			echo $data;
 		}
+=======
+			// var_dump($data['kd_headtotoe']);
+
+			echo json_encode($data);
+	}
+
+>>>>>>> a7942c2704c11c4911320bae196241e3ac0ca625
 }
 
 
