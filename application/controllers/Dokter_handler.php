@@ -731,9 +731,10 @@ class Dokter_handler extends CI_Controller {
 			$dataHeadtotoe['kd_terapi'] 	= $data['kd_terapi'];
 			$data['kd_headtotoe'] 			= json_decode($this->Kesehatan_M->create_id('headtotoe',$dataHeadtotoe));
 			var_dump($data['kd_headtotoe']);
-			}
+			
 			$data = json_encode($this->Kesehatan_M->rawQuery("SELECT * FROM surat".$surat." WHERE nomor_pasien='".$nomor_pasien."' ORDER BY id DESC limit 1 ")->result());
 			echo $data;
+		}
 }
 
 
