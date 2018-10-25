@@ -253,15 +253,48 @@
 	}
 </script>
 
-<h3 class="text-center mt-3">Pemeriksaan Dokter</h3>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#example').DataTable( {
+	  dom: 'Bfrtip',
+	  buttons: [
+		{
+			extend: 'print',
+			text: 'Print all',
+			exportOptions: {
+				modifier: {
+					selected: null
+				},
+				columns: [ 6, ':visible' ]
+			}
+		}
+	  ],columnDefs: [ 
+		{ 
+		  orderable: false, 
+		  targets: [2,3,4,5,6] 
+		} 
+	  ],
+	  select: true
+	});
+
+} );	
+</script>
+
+<style type="text/css">
+	.linone {
+		display: none;
+	}
+	.no-bullets {
+	list-style-type: none;
+	}
+</style>
+
+<h3 class="text-center mt-3"><strong>Pemeriksaan Dokter</strong></h3>
 
 <div class="container">
 	<div class="row justify-content-md-center">
-		<div class="col text-right">
+		<div class="col text-center">
 	     	<h5><span class="badge <?=($pasien[0]->pembayaran != 'RF') ? 'badge-success' : 'badge-secondary' ?>"><?=$pasien[0]->pembayaran?></span></h5>
-	    </div>
-	    <div class="col">
-	      	<?= $pasien[0]->nomor_pasien?>
 	    </div>
 	</div>
 	<div class="row">
@@ -279,420 +312,365 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col border rounded">
+		<div class="col-3 border rounded">
 
-			<h5 class="text-center mt-3">Data Pasien</h5>
-
-			<div class="row mt-2">
-				<div class="col-3">
-					Nama 
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$pasien[0]->nama?>
-				</div>
+			<div class="text-center">
+				<h5 class="mt-3 mb-3">Data Pasien</h5>
+				<img src="<?=base_url()?>assets/images/blank-none.jpg" class="rounded">
 			</div>
 
-			<div class="row mt-2">
-				<div class="col-3">
-					NIK
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$pasien[0]->nik?>
-				</div>
+			<div class="row mt-3 text-center">
+				<div class="col"><strong><?= $pasien[0]->nomor_pasien?></strong></div>
 			</div>
 
-			<div class="row mt-2">
-				<div class="col-3">
-					TTL 
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir)?>
-				</div>
+			<div class="row mt-3">
+				<div class="col-3">Nama</div>
+				<div class="col-1">:</div>
+				<div class="col">Mochammad Fadhli Zhil Iqram</div>
 			</div>
 
-			<div class="row mt-2">
-				<div class="col-3">
-					Alamat
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$pasien[0]->alamat?>
-				</div>
+			<div class="row">
+				<div class="col-3">NIK</div>
+				<div class="col-1">:</div>
+				<div class="col">124125132634623</div>
 			</div>
 
-			<div class="row mt-2">
-				<div class="col-3">
-					Jenis Kelamin
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$pasien[0]->jkelamin?>
-				</div>
+			<div class="row">
+				<div class="col-3">TTL</div>
+				<div class="col-1">:</div>
+				<div class="col">Malang, 16 Mei 1996</div>
 			</div>
 
-			<div class="row mt-2">
-				<div class="col-3">
-					Pekerjaan 
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$pasien[0]->pekerjaan?>
-				</div>
-			</div>
-		</div>
-
-		<div class="col border rounded">
-			<h5 class="text-center mt-3">Objektif</h5>
-
-			<div class="row mt-2">
-				<div class="col-4">
-					Tinggi Badan
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$objek[0]->tb?> cm
-				</div>
-			</div>
-
-			<div class="row mt-2">
-				<div class="col-4">
-					Berat Badan
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$objek[0]->bb?> kg
-				</div>
+			<div class="row">
+				<div class="col-3">Alamat</div>
+				<div class="col-1">:</div>
+				<div class="col">Jalan Tata Surya 1 Nomer 21</div>
 			</div>
 			
-			<!-- JIKA RF MAKA TAMPILKAN KOLOM INPUT TEKANAN DARAH -->
-			<?php if ($pasien[0]->pembayaran == 'RF') { ?>
-				<div class="row mt-2">
-					<div class="col-4">
-						Tekanan Darah
-					</div>
-					<div class="col-1">
-						:
-					</div>
-					<div class="col">
-						<?=$objek[0]->td1?> / <?=$objek[0]->td2?> mmHg
-					</div>
-				</div>
-			<?php } ?>
-
-			<div class="row mt-2">
-				<div class="col-4">
-					Nadi
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$objek[0]->N?> rpm
-				</div>
+			<div class="row">
+				<div class="col-3">Jenis Kelamin</div>
+				<div class="col-1">:</div>
+				<div class="col">Laki - laki</div>
 			</div>
 
-			<div class="row mt-2">
-				<div class="col-4">
-					Respiratory R.
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$objek[0]->RR?> rpm
-				</div>
+			<div class="row">
+				<div class="col-3">Pekerjaan</div>
+				<div class="col-1">:</div>
+				<div class="col">Mahasiswa</div>
 			</div>
-
-			<div class="row mt-2">
-				<div class="col-4">
-					Temperature Ax.
-				</div>
-				<div class="col-1">
-					:
-				</div>
-				<div class="col">
-					<?=$objek[0]->TAx?> &deg;C
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-4 col-form-label">Head To Toe</label>
-				<div class="input-group col-8">
-				    <textarea class="form-control" id="textareaHeadToToe" name="text_headtotoe" onchange="headtotoeToPemeriksaan()"></textarea>
-			 	</div>
-			</div>
-		</div>
-	</div>
-	<!-- FORM UNTUK SUBMIT PEMERIKSAAN -->
-	<form action="<?=base_url()?>Dokter_handler/update_rm" method="POST">
-		<!-- khusus text area dibawah ini nggk perlu styling-->
-		<textarea id="textareaHeadToToePemeriksaan" name="headtotoeText" style="display: none;"></textarea>
-		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
-		<input type="hidden" name="kd_objek" value="<?=$objek[0]->kd_objek?>">
-
-		<div class="row mb-3">
-			<div class="col">
-				<h5 class="text-center mt-3">Subjektif</h5>
-				<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
-			</div>
-
-			<div class="col">
-				<h5 class="text-center mt-3">Planing</h5>
-				<textarea class="form-control" id="planning" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<h5 class="text-center mt-3">Assesment</h5>
-			</div>
-		</div>
-
-		<div class="row mb-3">	
-			<div class="col-4">
-				<h6 class="text-center">Primary</h6>
-			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="primary" name="assessmentPrimary[]" multiple="multiple" style="width: 99%">
-					</select>
-				</div> 
-			</div>
-			<div class="col-4">
-				<h6 class="text-center">Sekunder</h6>
-			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="secondary" name="assessmentSecondary[]" multiple="multiple" style="width: 99%">
-					</select>
-				</div> 
-			</div>
-			<div class="col-4">
-				<h6 class="text-center">Lain-lain</h6>
-			 	<div class="form-group row">
-			      	<select class="js-data-example-ajax" id="lain" name="assessmentLain[]" multiple="multiple" style="width: 99%">
-					</select>
-				</div> 
-			</div>
-			<textarea name="assessmentPemeriksaanLab" placeholder="pemeriksaan laboratorium" id="pemeriksaanLab"></textarea>
-		</div>
-
-	<div class="row">
-		<div class="col">
-			<input type="submit" class="btn btn-primary btn-block" value="SUBMIT">
-		</div>
-	<!-- form e nyalipbos -->
-	</form>
-		<div class="col">
-			<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#modalSuratSakit">SURAT SAKIT</button>
 			
-			<!-- SURAT SAKIT -->
-			<div class="modal fade" id="modalSuratSakit" tabindex="-1" role="dialog" aria-labelledby="modalSuratSakitTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="modalSuratSakitTitle">Surat Sakit</h5>
-				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          		<span aria-hidden="true">&times;</span>
-				        	</button>
-				      	</div>
-			    		<form id="formSuratSakit" action="<?=base_url()?>Dokter_handler/cetak/suratsakit" target="_blank" method="POST">
-					    	<div class="modal-body">
-					    		<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
-					    		<div class="form-group row">
-					    			<label class="col-4 col-form-label">Alasan</label>
-					    			<div class="input-group col-8">
-							    		<select class="custom-select" id="alasan" name="alasan" required="">
-											<option value="1">Istirahat Sakit</option>
-											<option value="2">Pelakuan Khusus</option>
-										</select>
-									</div>
-					    		</div>
-								<div class="form-group row">
-						    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Awal</label>
-						    		<div class="input-group-prepend col-sm-8">
-						      			<input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" required="" value="<?=date("Y-m-d")?>" readonly="">
-						   			</div>
-								</div>
-					    		<div class="form-group row">
-								    <label class="col-4 col-form-label">Selama</label>
-								    <div class="input-group col-8">
-								      	<input type="number" class="form-control" id="selama" name="selama" placeholder="Angka" >
-								    	<div class="input-group-append">
-								          	<!-- <div class="input-group-text"> -->
-								          		<select class="input-group-text custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()" required="">
-								          			<option selected="" disabled="">Satuan</option>
-								          			<option value="hari">Hari</option>
-								          			<option value="minggu">Minggu</option>
-								          			<option value="bulan">Bulan</option>
-								          		</select>
-								          	<!-- </div> -->
-								          	<!-- <div class="input-group-text">Hari</div> -->
-							    		</div>
-								    </div>
-								</div>
-								<div class="form-group row">
-						    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Akhir</label>
-						    		<div class="input-group-prepend col-sm-8">
-						      			<input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" required="" readonly="" formart>
-						   			</div>
-								</div>
-						    </div>
-					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary btn-sm" onclick="SuratSakit()">CETAK</button>
-					    	</div>
-				    	</form>
-				    </div>
-				</div>
-			</div>
-			<!-- END SURAT SAKIT -->
 		</div>
-		<div class="col">
-			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#modalSuratSehat">SURAT SEHAT</button>
-			
-			<!-- SURAT SEHAT -->
-			<div class="modal fade" id="modalSuratSehat" tabindex="-1" role="dialog" aria-labelledby="modalSuratSehatTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="modalSuratSehat">Surat Sehat</h5>
-				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          		<span aria-hidden="true">&times;</span>
-				        	</button>
-				      	</div>
-
-				    	<form action="<?=base_url()?>Dokter_handler/cetak/suratsehat" target="_blank" method="POST" id="formSuratSehat" >
-					    	<div class="modal-body">
-								<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
-						    	<label class="col-6 col-form-label"><strong>Tes Buta Warna</strong></label>
-						    	<div class="custom-control custom-radio ml-5">
-						    		<div class="row">
-			 							<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya">
-			  							<label class="custom-control-label" for="tesButaWarna1">Ya</label>
-						    		</div>
-						    		<div class="row">
-				  						<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak">
-				  						<label class="custom-control-label" for="tesButaWarna2">Tidak</label>
-						    		</div>
-						    		<div class="row">
-										<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial">
-										<label class="custom-control-label" for="tesButaWarna3">Parsial</label>
-						    		</div>
-						    	</div>
-								<h5 class="col-6 col-form-label"><strong>Keperluan</strong></h5>
-								<textarea class="form-control" aria-label="With textarea" name="keperluan" required=""></textarea>
+		<div class="col-9 border rounded">
+			<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="home-tab" data-toggle="tab" href="#rekam_medis" role="tab" aria-controls="rekam_medis" aria-selected="true">Rekam Media</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" id="profile-tab" data-toggle="tab" href="#pemeriksaan" role="tab" aria-controls="pemeriksaan" aria-selected="false">Pemeriksaan</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#surat_sakit" role="tab" aria-controls="surat_sakit" aria-selected="false">Surat Sakit</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#surat_sehat" role="tab" aria-controls="surat_sehat" aria-selected="false">Surat Sehat</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade" id="rekam_medis" role="tabpanel" aria-labelledby="home-tab">
+					
+					<h5 class="text-center mt-3">Rekam Medis</h5>
+					<div class="container">
+							
+						<div class=" row mt-5">	
+							<div class="col-12">	
+								<table class="table" id="example">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Tanggal / Jam Periksa </th>
+											<th>Subjektif</th>
+											<th>Objektif</th>
+											<th>Assessment</th>
+											<th>Planing</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									<?php
+										$i = 1;
+										foreach($rekam_medis as $key => $value) {
+									?>
+									<tr>
+										<td>
+											<?=$i?>
+										</td>
+										<td>
+											<ul>
+												<li class="no-bullets">
+													<?=tgl_indo(substr($value->tgl_jam,0,10))?>
+												</li>
+												<li class="no-bullets">
+													<?=substr($value->tgl_jam,10,6)?>
+										  		</li>
+											</ul>
+									 	</td>
+									  	<td>
+											<?=$value->subjek?>
+									  	</td>
+									  	<td>
+											<ul>
+												<li class="no-bullets">TB/BB : <?=$objektif[$key]->tb?> cm/ <?=$objektif[$key]->bb?> Kg</li>
+												<li class="no-bullets">TD : <?=$objektif[$key]->td1?>/<?=$objektif[$key]->td2?> mmHg</li>
+												<li class="no-bullets">RR : <?=$objektif[$key]->RR?></li>
+												<li class="no-bullets">N  : <?=$objektif[$key]->N?> rpm</li>
+												<li class="no-bullets">TAx: <?=$objektif[$key]->TAx?> &deg;C</li>
+												<li class="no-bullets">Head to Toe : <?=$objektif[$key]->text_headtotoe?></li>
+										  		<?php
+										  		if ($objektif[$key]->kd_headtotoe) { ?>
+												<li class="no-bullets">keluhan: <?=$value->keluhan?></li>
+												<li class="no-bullets">GCS E : <?=$value->GCS_E?>; V: <?=$value->GCS_V?>; M:<?=$value->GCS_M?> (<?=$value->GCS_opsi?>)</li>
+												<li class="no-bullets">TB/BB: <?=$value->tb?> cm / <?=$value->bb?> kg</li>
+												<?php
+										  		}?>
+											</ul>
+									  	</td>
+										<td><?=$value->kelompok?></td>
+										<td><?=$value->planning?></td>
+										<td><button type="button" class="btn btn-primary" >CETAK</button> </td>
+									</tr>
+								 	<?php $i++; }
+									?>
+									</tbody>
+							  	</table>
 							</div>
-					    	<div class="modal-footer">
-					    		<button type="submit" class="btn btn-primary" onclick="SuratSehat()">Cetak</button>
-					    	</div>
-			    		</form>
+						</div>
+						<form method="POST" action="<?=base_url()?>Dokter_handler/cetak_RM" target="_blank">
+							<input type="text" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+							<input type="radio" name="bool_halaman_awal" value="1">
+							<input type="radio" name="bool_halaman_awal" value="0">
+							<input type="checkbox" name="idS_rekam_medis[]" value="1">
+							<input type="checkbox" name="idS_rekam_medis[]" value="2">
+							<input type="checkbox" name="idS_rekam_medis[]" value="3">
+							<input type="checkbox" name="idS_rekam_medis[]" value="4">
+							<input type="checkbox" name="idS_rekam_medis[]" value="5">
+							<input type="checkbox" name="idS_rekam_medis[]" value="6">
+							<input type="checkbox" name="idS_rekam_medis[]" value="7">
+							<input type="submit" name="submit">
+						</form>
 					</div>
 				</div>
-			</div>
-			<!-- END SURAT SEHAT -->
-		</div>
-		<div class="col">
-			<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#modalSuratRujukan" onclick="getassesment()">RUJUKAN</button>
-			
-			<!-- SURAT RUJUKAN -->
-			<div class="modal fade" id="modalSuratRujukan" tabindex="-1" role="dialog" aria-labelledby="modalSuratRujukanTitle" aria-hidden="true" >
-				<div class="modal-dialog modal-dialog-centered" role="document" >
-					<div class="modal-content">
-				      	<div class="modal-header">
-				        	<h5 class="modal-title" id="modalSuratRujukanTitle">Surat Rujukan</h5>
-				        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				          		<span aria-hidden="true">&times;</span>
-				        	</button>
-				      	</div>
-				      	<form action="<?=base_url()?>Dokter_handler/cetak/suratrujukan" target="_blank" method= "POST" id="formHeadtotoeDetil">
-					    	<div class="modal-body" >
-								<input type="text" class="form-control" value="<?=$pasien[0]->nomor_pasien?>" name="nomor_pasien" readonly="">
-								<input type="text" class="form-control" value="<?=$pasien[0]->nama?>" name="nama" readonly="">
-							    <div class="form-group row">
-									<label class="col-sm-2 col-form-label">Keluhan</label>
-								    <div class="input-group-prepend col">
-									<textarea class="form-control" aria-label="With textarea" name="keluhan" ></textarea>
-									</div>
-								</div>
 
-								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">GCS</label>
-								    <div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_E" placeholder="E" >
+				<div class="tab-pane fade show active" id="pemeriksaan" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="container">
+						<h5 class="text-center mt-3">Subjektif</h5>
+							<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
+						<hr>
+
+						<h5 class="text-center mt-3">Objektif</h5>
+
+						<div class="row mt-3">
+							<div class="col-6">
+								<div class="row">
+									<div class="col-4">Tinggi Badan</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<div class="input-group">
+									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->tb?>">
+									    	<div class="input-group-append">
+									          	<div class="input-group-text">cm</div>
+								    		</div>
+									    </div>
 									</div>
-									<div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_V" placeholder="V" >
-									</div>
-									<div class="input-group-prepend col-sm-2">
-									<input type="text" class="form-control" id="" name="GCS_M" placeholder="M" >
-									</div>							
 								</div>
-								<fieldset class="form-group">
-								    <div class="row">
-								    <label class="col-sm-2"></label>
-								      <div class="col-sm-3">
-								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="CM">
-								          <label class="form-check-label">
-								            CM
-								          </label>
-								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Apatis">
-								          <label class="form-check-label">
-								            Apatis
-								          </label>
-								        </div>
-								       </div>
-								       <div class="col-sm-3">
-								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Delirium">
-								          <label class="form-check-label">
-								            Delirium
-								          </label>
-								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Somnolen">
-								          <label class="form-check-label">
-								            Somnolen
-								          </label>
-								        </div>
-								       </div>
-								       <div class="col-sm-3">
-								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Stupor">
-								          <label class="form-check-label">
-								            Stupor
-								          </label>
-								        </div>
-								        <div class="form-check">
-								          <input class="form-check-input" type="checkbox" name="GCS_opsi[]" value="Coma">
-								          <label class="form-check-label">
-								            Coma
-								          </label>
-								        </div>
-								       </div>
-								    </div>
-								</fieldset>
-								<hr></hr>
-								<center><h4>Head to Toe</h4></center>
-								<hr></hr>
-								<strong>Kepala :</strong>
-								<div class="form-group row">
+							</div>
+							<div class="col-6">
+								<div class="row">
+									<div class="col-4">Berat Badan</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<div class="input-group">
+									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->bb?>">
+									    	<div class="input-group-append">
+									          	<div class="input-group-text">kg</div>
+								    		</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-6">
+								<div class="row mt-3">
+									<div class="col-4">Tekanan Darah</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<div class="input-group">
+									      	<input type="number" class="form-control mr-1" id="" name="" value="<?=$objek[0]->td1?>">
+									      	/
+									      	<input type="number" class="form-control ml-1" id="" name="" value="<?=$objek[0]->td2?>"><div class="input-group-append">
+									          	<div class="input-group-text">mhg</div>
+								    		</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="row mt-3">
+									<div class="col-4">Nadi</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<div class="input-group">
+									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->N?>">
+									    	<div class="input-group-append">
+									          	<div class="input-group-text">rpm</div>
+								    		</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-6">
+								<div class="row">
+									<div class="col-4">Respiratory R.</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<div class="input-group">
+									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->RR?>">
+									    	<div class="input-group-append">
+									          	<div class="input-group-text">rpm</div>
+								    		</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="row">
+									<div class="col-4">Temp. Axile</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<div class="input-group">
+									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->TAx?>">
+									    	<div class="input-group-append">
+									          	<div class="input-group-text">kg</div>
+								    		</div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-6">
+								<div class="row">
+									<div class="col-4">Head To Toe</div>
+									<div class="col-1">:</div>
+									<div class="col">
+										<input type="text" class="form-control" id="" name="">
+									</div>
+								</div>
+							</div>
+							<div class="col-6">	
+							</div>
+						</div>
+
+						<hr>
+
+						<h5 class="text-center mt-3">Assesment</h5>
+						<div class="row mt-3">
+							<div class="col-2">Primary</div>
+							<div class="col-1">:</div>
+							<div class="col-9">
+								<select class="js-data-example-ajax" id="primary" name="assessmentPrimary[]" multiple="multiple" style="width: 99%"></select>
+							</div>	
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-2">Sekunder</div>
+							<div class="col-1">:</div>
+							<div class="col-9">
+								<select class="js-data-example-ajax" id="secondary" name="assessmentSecondary[]" multiple="multiple" style="width: 99%"></select>
+							</div>	
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-2">Lain-lain</div>
+							<div class="col-1">:</div>
+							<div class="col-9">
+								<select class="js-data-example-ajax" id="lain" name="assessmentLain[]" multiple="multiple" style="width: 99%"></select>
+							</div>	
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-2">Laboratorium</div>
+							<div class="col-1">:</div>
+							<div class="col-9">
+								<input class="form-control" type="text" name="assessmentPemeriksaanLab" placeholder="Pemeriksaan Laboratorium" id="pemeriksaanLab">
+							</div>	
+						</div>
+
+						<hr>
+
+						<h5 class="text-center mt-3">Planing</h5>
+						<textarea class="form-control" id="planning" aria-label="With textarea" required="" placeholder="Planing" name="planning"></textarea>
+						<hr>
+
+						<h5 class="text-center mt-3">Keperluan Rujukan</h5>
+
+						<div class="row">
+							<div class="col-2">Keluhan</div>
+							<div class="col-1">:</div>
+							<div class="col-9">
+								<input class="form-control" type="text" name="">
+							</div>	
+						</div>
+
+						<!-- Start Form GCS -->
+						<div class="row mt-3">
+							<div class="col-2">GCS</div>
+							<div class="col-1">:</div>
+							<div class="col"><input type="text" class="form-control" id="" name="GCS_E" placeholder="E" ></div>
+							<div class="col"><input type="text" class="form-control" id="" name="GCS_V" placeholder="V" ></div>
+							<div class="col"><input type="text" class="form-control" id="" name="GCS_M" placeholder="M" ></div>	
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-3"></div>
+							<div class="col form-check ml-3">
+								<input class="form-check-input" type="checkbox" name="">
+								<label class="form-check-label">CM</label>
+							</div>
+							<div class="col form-check">
+								<input class="form-check-input" type="checkbox" name="">
+								<label class="form-check-label">Apatis</label>
+							</div>
+							<div class="col form-check">
+								<input class="form-check-input" type="checkbox" name="">
+								<label class="form-check-label">Derilium</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-3"></div>
+							<div class="col form-check ml-3">
+								<input class="form-check-input" type="checkbox" name="">
+								<label class="form-check-label">Somnolen</label>
+							</div>
+							<div class="col form-check">
+								<input class="form-check-input" type="checkbox" name="">
+								<label class="form-check-label">Stupor</label>
+							</div>
+							<div class="col form-check">
+								<input class="form-check-input" type="checkbox" name="">
+								<label class="form-check-label">Coma</label>
+							</div>
+						</div>
+						<!-- End Form GCS -->
+
+						<h5 class="text-center mt-3">Head Toe To</h5>
+						<div class="form-group row">
 								 	<label class="col-sm-1 col-form-label">Anemis</label>
 								 	<div class="input-group-prepend col-sm-3">
 										<input type="checkbox" class="form-control" id="" name="anemis_kiri" value="1">
@@ -1072,16 +1050,102 @@
 									<input type="text" class="form-control" id="terapi3" name="terapi3" placeholder="..." >
 									</div>
 								</div>
+
+
+
+
+
+
+
+						
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="surat_sakit" role="tabpanel" aria-labelledby="home-tab">
+					<h5 class="text-center mt-3">Surat Sakit</h5>
+					<div class="container">	
+						<div class="row mt-3">
+							<div class="col-2">Alasan</div>
+							<div class="col">:</div>
+							<div class="col-9">
+								<select class="custom-select" id="alasan" name="alasan" required="">
+									<option value="1">Istirahat Sakit</option>
+									<option value="2">Pelakuan Khusus</option>
+								</select>
 							</div>
-					    	<div class="modal-footer">
-					    		<button type="button" class="btn btn-primary" onclick="Save()">Hanya Simpan ke Objektif</button>
-					    		<button type="submit" class="btn btn-primary" onclick="SuratRujukan()">Cetak Surat Rujukan</button>
-					    	</div>
-						</form>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-2">Tanggal Awal</div>
+							<div class="col">:</div>
+							<div class="col-9">
+								<input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" required="" value="<?=date("Y-m-d")?>" readonly="">
+							</div>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-2">Selama</div>
+							<div class="col">:</div>
+							<div class="col-9">
+								<div class="input-group">
+						      	<input type="number" class="form-control" id="selama" name="selama" placeholder="Angka" >
+							    	<div class="input-group-append">
+						          		<select class="input-group-text custom-select" name="selama_satuan" id="selama_satuan" onchange="updateTglAkhir()" required="">
+						          			<option selected="" disabled="">Satuan</option>
+						          			<option value="hari">Hari</option>
+						          			<option value="minggu">Minggu</option>
+						          			<option value="bulan">Bulan</option>
+						          		</select>
+						    		</div>
+							    </div>
+							</div>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-2">Tanggal Akhir</div>
+							<div class="col">:</div>
+							<div class="col-9">
+								<input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir" required="" readonly="" formart>
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-primary mt-3 offset-11" onclick="SuratSakit()">Cetak</button>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="surat_sehat" role="tabpanel" aria-labelledby="home-tab">
+					<div class="container">
+						<h5 class="text-center mt-3">Surat Sehat</h5>
+
+						<div class="row mt-3">
+							<div class="col-3">Tes Buta Warna</div>
+							<div class="col">:</div>
+							<div class="col">
+								<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya">
+				  				<label class="custom-control-label" for="tesButaWarna1">Ya</label>
+							</div>
+							<div class="col">
+								<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak">
+					  			<label class="custom-control-label" for="tesButaWarna2">Tidak</label>
+							</div>
+							<div class="col">
+								<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial">
+								<label class="custom-control-label" for="tesButaWarna3">Parsial</label>
+							</div>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-3">Keperluan</div>
+							<div class="col">:</div>
+							<div class="col-8">
+								<input type="text" class="form-control" name="keperluan" required="">
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-primary mt-3 offset-11" onclick="SuratSehat()">Cetak</button>
 					</div>
 				</div>
 			</div>
-			<!-- SURAT RUJUKAN END -->
-		</div>
+		</div>	
 	</div>
 </div>
