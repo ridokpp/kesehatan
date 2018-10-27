@@ -450,7 +450,7 @@ $(document).ready(function() {
 					</div>
 				</div>
 
-				<div class="tab-pane fade" id="pemeriksaan" role="tabpanel" aria-labelledby="profile-tab">
+				<div class="tab-pane fade show active" id="pemeriksaan" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="container">
 						<h5 class="text-center mt-3">Subjektif</h5>
 							<textarea class="form-control" aria-label="With textarea" required="" placeholder="Subjektif" name="subjektif"></textarea>
