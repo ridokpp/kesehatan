@@ -465,7 +465,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->tb?>">
+									      	<input type="number" class="form-control" id="" name="" value="">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">cm</div>
 								    		</div>
@@ -479,7 +479,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->bb?>">
+									      	<input type="number" class="form-control" id="" name="" value="">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">kg</div>
 								    		</div>
@@ -496,9 +496,9 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control mr-1" id="" name="" value="<?=$objek[0]->td1?>">
+									      	<input type="number" class="form-control mr-1" id="" name="" value="">
 									      	/
-									      	<input type="number" class="form-control ml-1" id="" name="" value="<?=$objek[0]->td2?>"><div class="input-group-append">
+									      	<input type="number" class="form-control ml-1" id="" name="" value=""><div class="input-group-append">
 									          	<div class="input-group-text">mhg</div>
 								    		</div>
 									    </div>
@@ -511,7 +511,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->N?>">
+									      	<input type="number" class="form-control" id="" name="" value=">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">rpm</div>
 								    		</div>
@@ -528,7 +528,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->RR?>">
+									      	<input type="number" class="form-control" id="" name="" value="">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">rpm</div>
 								    		</div>
@@ -542,7 +542,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value="<?=$objek[0]->TAx?>">
+									      	<input type="number" class="form-control" id="" name="" value=">">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">kg</div>
 								    		</div>
