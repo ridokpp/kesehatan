@@ -511,7 +511,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value=">
+									      	<input type="number" class="form-control" id="" name="" value="">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">rpm</div>
 								    		</div>
@@ -542,7 +542,7 @@ $(document).ready(function() {
 									<div class="col-1">:</div>
 									<div class="col">
 										<div class="input-group">
-									      	<input type="number" class="form-control" id="" name="" value=">">
+									      	<input type="number" class="form-control" id="" name="" value="">
 									    	<div class="input-group-append">
 									          	<div class="input-group-text">kg</div>
 								    		</div>
