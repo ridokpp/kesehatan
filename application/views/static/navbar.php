@@ -36,21 +36,27 @@ if ($this->session->userdata('logged_in')['akses'] == '3') {
       <li class="nav-item <?php if($menu == 'index'){echo 'active'; }else{echo '';}?>   ">
         <a class="nav-link" href="<?php echo base_url()?>Dokter/index">Antrian</a>
       </li>
+      <li class="nav-item <?php if($menu == 'logistik'){echo 'active'; }else{echo '';}?>   ">
+        <a class="nav-link" href="<?php echo base_url()?>Dokter/logistik">Logistik</a>
+      </li>
       <li class="nav-item <?php if($menu == 'cari_pasien') {echo 'active';}else{ echo '';}?>">
-        <a class="nav-link" href="<?php echo base_url()?>Dokter/cari_pasien">Cari Pasien</a>
+        <a class="nav-link" href="<?php echo base_url()?>Dokter/cari_pasien">Cari Rekam Medis</a>
+      </li>
+      <li class="nav-item <?php if($menu == 'cari_pasien') {echo 'active';}else{ echo '';}?>">
+        <a class="nav-link" href="<?php echo base_url()?>Dokter/cari_pasien">Logistik</a>
       </li>
     </ul>
     <?php 
     }elseif ($this->session->userdata('logged_in')['akses'] == '3') { ?>
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/antrian">Antrian</a>
+      </li>
       <li class="nav-item <?=($menu == 'cari') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/cari">Cari Pasien</a>
+        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/cari">Tambah Antrian</a>
       </li>
       <li class="nav-item <?=($menu == 'pendaftaran') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/pendaftaran">Pendaftaran</a>
-      </li>
-      <li class="nav-item <?=($menu == 'antrian') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Petugas/menu/antrian">Antrian</a>
       </li>
     </ul>
     <?php } 

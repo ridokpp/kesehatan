@@ -28,120 +28,6 @@ class Dokter extends CI_Controller {
 		}
 	}
 
-	/*
-	* log pengobatan setiap pasien
-	*/
-	function log($nomor_pasien)
-	{
-		$data['pasien'] 		= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
-		$update_kd_dokter		= $this->Kesehatan_M->update('rkm_medis',array('kd_pasien'=>$nomor_pasien),array('kd_dokter'=>$this->session->userdata('logged_in')['id_user']));
-
-		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery("SELECT rkm_medis.kd_rkm, 
-			rkm_medis.kd_objek, 
-			rkm_medis.kd_pasien, 
-			rkm_medis.tgl_jam, 
-			rkm_medis.subjek, 
-			rkm_medis.planning, 
-			objek.tb, 
-			objek.bb, 
-			objek.td1, 
-			objek.td2, 
-			objek.N, 
-			objek.RR, 
-			objek.TAx, 
-			objek.text_headtotoe, 
-			headtotoe.keluhan, 
-			headtotoe.GCS_E, 
-			headtotoe.GCS_V, 
-			headtotoe.GCS_M, 
-			 headtotoe.GCS_opsi, 
-			 headtotoe.lain_lain, 
-			kepala.anemis_kiri, 
-			kepala.anemis_kanan, 
-			kepala.ikterik_kiri, 
-			kepala.ikterik_kanan, 
-			kepala.cianosis_kiri, 
-			kepala.cianosis_kanan, 
-			kepala.deformitas_kiri, 
-			kepala.deformitas_kanan, 
-			kepala.refchy_kiri, 
-			kepala.refchy_kanan, 
-			kepala.refchyopsi, 
-			kepala.ket_tambahan, 
-			thorak.metris, 
-			thorak.wheezing_kiri, 
-			thorak.wheezing_kanan, 
-			thorak.ronkhi_kiri, 
-			thorak.ronkhi_kanan, 
-			thorak.vesikuler_kiri, 
-			thorak.vesikuler_kanan, 
-			thorak.jantung_icor, 
-			thorak.s1_s2, 
-			thorak.s_tambahan, 
-			thorak.ket_tambahan, 
-			abdomen.BU, 
-			abdomen.ny1, 
-			abdomen.ny2, 
-			abdomen.ny3, 
-			abdomen.ny4, 
-			abdomen.ny5, 
-			abdomen.ny6, 
-			abdomen.ny7, 
-			abdomen.ny8, 
-			abdomen.ny9, 
-			abdomen.hpmgl, 
-			abdomen.spmgl, 
-			ekstermitas.ah1, 
-			ekstermitas.ah2, 
-			ekstermitas.ah3, 
-			ekstermitas.ah4, 
-			ekstermitas.crt1, 
-			ekstermitas.crt2, 
-			ekstermitas.crt3, 
-			ekstermitas.crt4, 
-			ekstermitas.edm1, 
-			ekstermitas.edm2, 
-			ekstermitas.edm3, 
-			ekstermitas.edm4, 
-			ekstermitas.pitting, 
-			ekstermitas.ket_tambahan, 
-			terapi.terapi1, 
-			terapi.terapi2, 
-			terapi.terapi3, 
-			(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok 
-
-			FROM rkm_medis 
-
-			LEFT JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   
-			LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
-			LEFT JOIN kepala ON headtotoe.kd_kepala = kepala.kd_kepala 
-			LEFT JOIN thorak ON headtotoe.kd_thorak = thorak.kd_thorak 
-			LEFT JOIN abdomen ON headtotoe.kd_abdomen = abdomen.kd_abdomen 
-			LEFT JOIN ekstermitas ON headtotoe.kd_ekstermitas = ekstermitas.kd_ekstermitas 
-			LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi 
-			LEFT JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
-
-			WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
-			GROUP BY kd_rkm")->result();
-
-		$data['objektif']		= $this->Kesehatan_M->readS('objek')->result();
-		// echo "<pre>";
-		// var_dump($data);
-		// echo "</pre>";
-		$this->load->view('static/header');
-		$this->load->view('static/navbar');
-		$this->load->view('dokter/log',$data);
-		$this->load->view('static/footer');
-	}
-
-	/*
-	* cetak log
-	*/
-	function cetak_log()
-	{
-		$nomor_pasien = $this->input->post('nomor_pasien');
-		$data = ''; 
-	}
 
 	/*
 	* form pemeriksaan setiap pasien
@@ -150,27 +36,11 @@ class Dokter extends CI_Controller {
 	{
 		$data['pasien'] = $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
 		if ($data['pasien'] != array()) {
-			$kd_objek		= $this->Kesehatan_M->readCol('rkm_medis',
-																		array(
-																				'kd_pasien'=>$nomor_pasien,
-																				'MONTH(tgl_jam)'=>date('m'),
-																				'YEAR(tgl_jam)'=>date('Y'),
-																				'DAY(tgl_jam)'=>date('d')
-																			),
-																		'kd_objek')->result();
-			if ($kd_objek != array()) {
-				$data['objek']	= $this->Kesehatan_M->read('objek',array('kd_objek'=>$kd_objek[sizeof($kd_objek)-1]->kd_objek))->result();
-				$this->load->view('static/header');
-				$this->load->view('static/navbar');
-				$this->load->view('dokter/pemeriksaan',$data);
-				$this->load->view('static/footer');
-			}else{
-				$this->load->view('static/header');
-				$this->load->view('static/navbar');
-				$data['heading']	= "Pasien tidak dalam antrian";
-				$data['message']	= "<p> Klik <a href='".base_url()."Dokter/index'>disini </a>untuk kembali melihat daftar pasien yang sedang antri</p>";
-				$this->load->view('errors/html/error_404',$data);
-			}
+			$data['rekam_medis'] = $this->Kesehatan_M->read('rekam_medis',array('nomor_pasien'=>$nomor_pasien))->result();
+			$this->load->view('static/header');
+			$this->load->view('static/navbar');
+			$this->load->view('dokter/pemeriksaan',$data);
+			$this->load->view('static/footer');
 		}else{
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
@@ -220,102 +90,63 @@ class Dokter extends CI_Controller {
 	}
 
 	/*
+	* funtion untuk menampilkan halaman tambah antrian
+	*/
+	function pemeriksaan_langsung()
+	{
+		$this->load->view('static/header');
+		$this->load->view('static/navbar');
+		$this->load->view('dokter/tambah_antrian');
+		$this->load->view('static/footer');
+	}
+
+	/*
 	* function untuk mambaca rekam mesdis setiap pasien
 	*/
 	function rekam_medis($nomor_pasien)
 	{
-		$data['pasien'] 		= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$nomor_pasien))->result();
-		$update_kd_dokter		= $this->Kesehatan_M->update('rkm_medis',array('kd_pasien'=>$nomor_pasien),array('kd_dokter'=>$this->session->userdata('logged_in')['id_user']));
 
-		$data['rekam_medis'] 	= $this->Kesehatan_M->rawQuery("SELECT rkm_medis.kd_rkm, 
-			rkm_medis.kd_objek, 
-		rkm_medis.kd_pasien, 
-		rkm_medis.tgl_jam, 
-		rkm_medis.subjek, 
-		rkm_medis.planning, 
-		objek.tb, 
-		objek.bb, 
-		objek.td1, 
-		objek.td2, 
-		objek.N, 
-		objek.RR, 
-		objek.TAx, 
-		objek.text_headtotoe, 
-		headtotoe.keluhan, 
-		headtotoe.GCS_E, 
-		headtotoe.GCS_V, 
-		headtotoe.GCS_M, 
-		 headtotoe.GCS_opsi, 
-		 headtotoe.lain_lain, 
-		kepala.anemis_kiri, 
-		kepala.anemis_kanan, 
-		kepala.ikterik_kiri, 
-		kepala.ikterik_kanan, 
-		kepala.cianosis_kiri, 
-		kepala.cianosis_kanan, 
-		kepala.deformitas_kiri, 
-		kepala.deformitas_kanan, 
-		kepala.refchy_kiri, 
-		kepala.refchy_kanan, 
-		kepala.refchyopsi, 
-		kepala.ket_tambahan, 
-		thorak.metris, 
-		thorak.wheezing_kiri, 
-		thorak.wheezing_kanan, 
-		thorak.ronkhi_kiri, 
-		thorak.ronkhi_kanan, 
-		thorak.vesikuler_kiri, 
-		thorak.vesikuler_kanan, 
-		thorak.jantung_icor, 
-		thorak.s1_s2, 
-		thorak.s_tambahan, 
-		thorak.ket_tambahan, 
-		abdomen.BU, 
-		abdomen.ny1, 
-		abdomen.ny2, 
-		abdomen.ny3, 
-		abdomen.ny4, 
-		abdomen.ny5, 
-		abdomen.ny6, 
-		abdomen.ny7, 
-		abdomen.ny8, 
-		abdomen.ny9, 
-		abdomen.hpmgl, 
-		abdomen.spmgl, 
-		ekstermitas.ah1, 
-		ekstermitas.ah2, 
-		ekstermitas.ah3, 
-		ekstermitas.ah4, 
-		ekstermitas.crt1, 
-		ekstermitas.crt2, 
-		ekstermitas.crt3, 
-		ekstermitas.crt4, 
-		ekstermitas.edm1, 
-		ekstermitas.edm2, 
-		ekstermitas.edm3, 
-		ekstermitas.edm4, 
-		ekstermitas.pitting, 
-		ekstermitas.ket_tambahan, 
-		terapi.terapi1, 
-		terapi.terapi2, 
-		terapi.terapi3, 
-		(SELECT GROUP_CONCAT(assessment.tipe,' ',assessment.detil SEPARATOR ' ; ') FROM assessment WHERE assessment.kd_assessment = rkm_medis.kd_assessment) AS kelompok FROM rkm_medis 
+	}
 
-			LEFT JOIN objek ON rkm_medis.kd_objek = objek.kd_objek   
-			LEFT JOIN headtotoe ON objek.kd_headtotoe = headtotoe.kd_headtotoe 
-			LEFT JOIN kepala ON headtotoe.kd_kepala = kepala.kd_kepala 
-			LEFT JOIN thorak ON headtotoe.kd_thorak = thorak.kd_thorak 
-			LEFT JOIN abdomen ON headtotoe.kd_abdomen = abdomen.kd_abdomen 
-			LEFT JOIN ekstermitas ON headtotoe.kd_ekstermitas = ekstermitas.kd_ekstermitas 
-			LEFT JOIN terapi ON headtotoe.kd_terapi = terapi.kd_terapi 
-			LEFT JOIN assessment ON rkm_medis.kd_assessment = rkm_medis.kd_assessment 
+	/*
+	* cari nama pasien via ajax
+	*/
+	function cari_nama()
+	{
+		if ($this->input->get() != NULL) {
+			$dataForm = $this->input->get();
+			$dataReturn = $this->Kesehatan_M->orLike('pasien',array('nama'=>$dataForm['term']['term'],'nomor_pasien'=>$dataForm['term']['term']))->result();
+			$data = array();
+			foreach ($dataReturn as $key => $value) {
+				$data[$key]['id'] = $value->nomor_pasien;
+				$data[$key]['text'] = $value->nama." / ".$value->nomor_pasien;
+			}
+			echo json_encode($data);
+		}else{
+			redirect(base_url());
+		}
+	}
 
-																				WHERE rkm_medis.kd_pasien = '".$nomor_pasien."'
-																				GROUP BY kd_rkm")->result();
-		$data['objektif']		= $this->Kesehatan_M->readS('objek')->result();
+	/*
+	* handle submit form cari pasien untuk tambah antrian
+	*/
+	function redirector()
+	{
+		if ($this->input->get() != NULL) {
+			redirect(base_url()."Dokter/pemeriksaan/".$this->input->get('nama_or_nomor'));
+		}else{
+			redirect(base_url());
+		}
+	}
+
+	/*
+	* function untuk menampilkan halaman logistik
+	*/
+	function logistik()
+	{
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
-		$this->load->view('dokter/rekam_medis',$data);
+		$this->load->view('dokter/logistik');
 		$this->load->view('static/footer');
 	}
 }

@@ -13,6 +13,7 @@
         setTimeout(loadstack, 2000);
         $.get( "<?=base_url()?>Dokter_handler/liveAntrian", function( data ) {
             var LiveAntrian = JSON.parse(data);
+            console.log(LiveAntrian);
             var TableContentAntrian = '';
             var TableContentProsesAntrian = '';
             if (LiveAntrian.antrian != '') {
@@ -29,22 +30,19 @@
             if (LiveAntrian.proses_antrian != '') {
                 var nomorProsesAntrian = 1;
                 for (var i in LiveAntrian.proses_antrian ) {
-                    TableContentProsesAntrian += "<tr><td>"+nomorProsesAntrian+"</td><td>"+LiveAntrian.proses_antrian[i].nama+"</td><td>"+LiveAntrian.proses_antrian[i].pembayaran+"</td><td><div class='btn-group' role='group' aria-label='Basic example'><a href='<?= base_url()?>Dokter/log/"+LiveAntrian.proses_antrian[i].nomor_pasien+"' class='btn btn-success btn-sm btn-block tombol-proses'>Proses</a><a href='<?=base_url()?>Dokter_handler/antrian/hapus/"+LiveAntrian.proses_antrian[i].nomor_pasien+"' class='btn btn-danger btn-sm tombol-proses'>Hapus</a></td></tr>"
+                    TableContentProsesAntrian += "<tr><td>"+nomorProsesAntrian+"</td><td>"+LiveAntrian.proses_antrian[i].nama+"</td><td>"+LiveAntrian.proses_antrian[i].pembayaran+"</td><td><div class='btn-group' role='group' aria-label='Basic example'><a href='<?= base_url()?>Dokter/pemeriksaan/"+LiveAntrian.proses_antrian[i].nomor_pasien+"' class='btn btn-success btn-sm btn-block tombol-proses'>Proses</a><a href='<?=base_url()?>Dokter_handler/antrian/hapus/"+LiveAntrian.proses_antrian[i].nomor_pasien+"' class='btn btn-danger btn-sm tombol-proses'>Hapus</a></td></tr>"
                     nomorProsesAntrian++;
                 }
                 // console.log(TableContentProsesAntrian);
                 // console.log('exec antrian P');
             }
             $("#pasienDalamProses").html(TableContentProsesAntrian);
-
-
-
-
         });
     }
 </script>
 
 <h3 class="text-center mt-3">Antrian Pasien</h3>
+    <a class="btn btn-primary" role="button" href="<?=base_url()?>Dokter/pemeriksaan_langsung">Pemeriksaan Langsung</a>
 <div class="row">
     <div class="col">
         <?=$this->session->flashdata("alert");?>

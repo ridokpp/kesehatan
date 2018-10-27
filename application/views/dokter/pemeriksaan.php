@@ -320,50 +320,50 @@ $(document).ready(function() {
 			</div>
 
 			<div class="row mt-3 text-center">
-				<div class="col"><strong><?= $pasien[0]->nomor_pasien?></strong></div>
+				<div class="col"><strong><?=$pasien[0]->nomor_pasien?></strong></div>
 			</div>
 
 			<div class="row mt-3">
 				<div class="col-3">Nama</div>
 				<div class="col-1">:</div>
-				<div class="col">Mochammad Fadhli Zhil Iqram</div>
+				<div class="col"><?=$pasien[0]->nama?></div>
 			</div>
 
 			<div class="row">
 				<div class="col-3">NIK</div>
 				<div class="col-1">:</div>
-				<div class="col">124125132634623</div>
+				<div class="col"><?=$pasien[0]->nik?></div>
 			</div>
 
 			<div class="row">
 				<div class="col-3">TTL</div>
 				<div class="col-1">:</div>
-				<div class="col">Malang, 16 Mei 1996</div>
+				<div class="col"><?=$pasien[0]->tempat_lahir?>, <?=tgl_indo($pasien[0]->tanggal_lahir)?></div>
 			</div>
 
 			<div class="row">
 				<div class="col-3">Alamat</div>
 				<div class="col-1">:</div>
-				<div class="col">Jalan Tata Surya 1 Nomer 21</div>
+				<div class="col"><?=$pasien[0]->alamat?></div>
 			</div>
 			
 			<div class="row">
 				<div class="col-3">Jenis Kelamin</div>
 				<div class="col-1">:</div>
-				<div class="col">Laki - laki</div>
+				<div class="col"><?=$pasien[0]->jenis_kelamin?></div>
 			</div>
 
 			<div class="row">
 				<div class="col-3">Pekerjaan</div>
 				<div class="col-1">:</div>
-				<div class="col">Mahasiswa</div>
+				<div class="col"><?=$pasien[0]->pekerjaan?></div>
 			</div>
 			
 		</div>
 		<div class="col-9 border rounded">
 			<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link" id="home-tab" data-toggle="tab" href="#rekam_medis" role="tab" aria-controls="rekam_medis" aria-selected="true">Rekam Media</a>
+					<a class="nav-link" id="home-tab" data-toggle="tab" href="#rekam_medis" role="tab" aria-controls="rekam_medis" aria-selected="true">Rekam Medis</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link active" id="profile-tab" data-toggle="tab" href="#pemeriksaan" role="tab" aria-controls="pemeriksaan" aria-selected="false">Pemeriksaan</a>
@@ -407,11 +407,8 @@ $(document).ready(function() {
 										<td>
 											<ul>
 												<li class="no-bullets">
-													<?=tgl_indo(substr($value->tgl_jam,0,10))?>
+													<?=tgl_indo(substr($value->tanggal_jam,0,10))?>
 												</li>
-												<li class="no-bullets">
-													<?=substr($value->tgl_jam,10,6)?>
-										  		</li>
 											</ul>
 									 	</td>
 									  	<td>
@@ -419,19 +416,12 @@ $(document).ready(function() {
 									  	</td>
 									  	<td>
 											<ul>
-												<li class="no-bullets">TB/BB : <?=$objektif[$key]->tb?> cm/ <?=$objektif[$key]->bb?> Kg</li>
-												<li class="no-bullets">TD : <?=$objektif[$key]->td1?>/<?=$objektif[$key]->td2?> mmHg</li>
-												<li class="no-bullets">RR : <?=$objektif[$key]->RR?></li>
-												<li class="no-bullets">N  : <?=$objektif[$key]->N?> rpm</li>
-												<li class="no-bullets">TAx: <?=$objektif[$key]->TAx?> &deg;C</li>
-												<li class="no-bullets">Head to Toe : <?=$objektif[$key]->text_headtotoe?></li>
-										  		<?php
-										  		if ($objektif[$key]->kd_headtotoe) { ?>
-												<li class="no-bullets">keluhan: <?=$value->keluhan?></li>
-												<li class="no-bullets">GCS E : <?=$value->GCS_E?>; V: <?=$value->GCS_V?>; M:<?=$value->GCS_M?> (<?=$value->GCS_opsi?>)</li>
-												<li class="no-bullets">TB/BB: <?=$value->tb?> cm / <?=$value->bb?> kg</li>
-												<?php
-										  		}?>
+												<li class="no-bullets">TB/BB : <?=$value->tinggi_badan?> cm/ <?=$value->berat_badan?> Kg</li>
+												<li class="no-bullets">TD : <?=$value->sistol?>/<?=$value->diastol?> mmHg</li>
+												<li class="no-bullets">RR : <?=$value->respiratory_rate?></li>
+												<li class="no-bullets">N  : <?=$value->nadi?> rpm</li>
+												<li class="no-bullets">TAx: <?=$value->temperature_ax?> &deg;C</li>
+												<li class="no-bullets">Head to Toe : <?=$value->headtotoe?></li>
 											</ul>
 									  	</td>
 										<td><?=$value->kelompok?></td>

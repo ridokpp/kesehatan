@@ -129,16 +129,13 @@ class Account extends CI_Controller {
 				$record 					= $record->row();
 
 				$session_data = array(
-											'id_user'	=>	$record->id_user,
+											'id_user'	=>	$record->id,
 											'akses'		=>	$record->hak_akses,
 											'nama_user'	=>	$record->nama,
 											'foto'		=>	$record->foto,
 											'sip'		=>	$record->sip,
 				);
-				// var_dump($session_data);
-				// die();
-				
-				// alert('alert','success','Berhasil','Selamat datang '.$session_data['nama_user']);
+				alert('alert','success','Berhasil','Selamat datang '.$session_data['nama_user']);
 				$this->session->set_userdata('logged_in', $session_data);
 				if ($record->hak_akses == '1') {
 					redirect(base_url().'Admin/menu/dashboard');

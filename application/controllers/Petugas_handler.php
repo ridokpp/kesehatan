@@ -20,8 +20,8 @@ class Petugas_handler extends CI_Controller {
 		if ($result->num_rows() == 0) {
 			
 			// ambil id terakhir
-			$no_urut 	= $this->Kesehatan_M->rawQuery("SELECT AUTO_INCREMENT AS no_urut FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'kesehatan' AND TABLE_NAME = 'pasien'")->result();
-
+			$no_urut 	= $this->Kesehatan_M->rawQuery("SELECT AUTO_INCREMENT AS no_urut FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'kesehatan001' AND TABLE_NAME = 'pasien'")->result();
+			
 			// ambil id untuk dijadikan nomor identitas pasien
 			if ($no_urut == array()) {
 				$no_urut = "000";
@@ -89,13 +89,14 @@ class Petugas_handler extends CI_Controller {
 			
 			// jika pembayaran == BPJS tambahkan nomornya
 			$pembayaran = $this->input->post('pembayaran');
+			// echo "$pembayaran";die()
 			if ($pembayaran=='BPJS') {
-				$pembayaran.= ' : '.$this->input->post('nomor_bpjs');
+				$pembayaran .= ' : '.$this->input->post('nomor_bpjs');
 			}
 			$dataForm = array(	'nama'			=>ucwords($this->input->post('nama_lengkap')),
 								'nik' 			=>$nik,
-								'tmp_lahir'		=>ucwords($this->input->post('tempat_lahir')),
-								'tgl_lahir'		=>$tgl_lahir->format('Y-m-d'),
+								'tempat_lahir'		=>ucwords($this->input->post('tempat_lahir')),
+								'tanggal_lahir'		=>$tgl_lahir->format('Y-m-d'),
 								'usia'			=>$usia,
 								'alamat'		=>	"Jalan ".ucwords($this->input->post('jalan')).
 													" RT".$this->input->post('RT').
@@ -103,15 +104,17 @@ class Petugas_handler extends CI_Controller {
 													" Kelurahan ".ucwords($kelurahan).
 													" Kecamatan ".ucwords($kecamatan).
 													" Kota ".ucwords($kota),
-								'jkelamin'		=>$this->input->post('jenis_kelamin'),
+								'jenis_kelamin'		=>$this->input->post('jenis_kelamin'),
 								'pekerjaan'		=>ucwords($this->input->post('pekerjaan')),
 								'kelurahan'		=>ucwords($kelurahan),
 								'pembayaran'	=>$pembayaran,
 								'nomor_pasien'	=>$no_urut."-".$kd_kelurahan."-".$kode_jenis_kelamin."-".$kode_usia."-".$bulan_datang."-".$tahun_datang
 							);
-			// echo "<pre>";
-			// var_dump($dataForm);die();
 			$result = json_decode($this->Kesehatan_M->create('pasien',$dataForm),false);
+			// echo "<pre>";
+			// var_dump($dataForm);
+			// var_dump($result);
+			// die();
 			if ($result->status) {
 				alert('alert','success','Berhasil','Registrasi berhasil');
 				redirect(base_url()."Petugas/menu/pemeriksaan/".$dataForm['nomor_pasien']);
@@ -131,24 +134,20 @@ class Petugas_handler extends CI_Controller {
 	function pemeriksaan()
 	{
 		$postedData = 	array(
-								'tb'	=>	$this->input->post('tinggi_badan'),
-								'bb'	=>	$this->input->post('berat_badan'),
-								'td1'	=>	$this->input->post('sistol'),
-								'td2'	=>	$this->input->post('diastol'),
-								'N'	=>	$this->input->post('denyut_nadi'),
-								'RR'=>$this->input->post('frekuensi_pernapasan'),
-								'TAx'=>$this->input->post('suhu'),
+								'tinggi_badan'		=>	$this->input->post('tinggi_badan'),
+								'berat_badan'		=>	$this->input->post('berat_badan'),
+								'sistol'			=>	$this->input->post('sistol'),
+								'diastol'			=>	$this->input->post('diastol'),
+								'nadi'				=>	$this->input->post('denyut_nadi'),
+								'respiratory_rate'	=>	$this->input->post('frekuensi_pernapasan'),
+								'temperature_ax'	=>	$this->input->post('suhu'),
+								'nomor_pasien'		=>	$this->input->post('nomor_pasien'),
+								'tanggal_jam'		=>	date("Y-m-d H:i:s")
 						);
-		$insert_tabel_objek = $this->Kesehatan_M->create_id('objek',$postedData);
-		// id
-		$postedData['nomor_pasien'] = $this->input->post('nomor_pasien');
 
-		// masukk rm
-		$insert_tabel_objek = json_decode($insert_tabel_objek,false);
 		
 		// create ke tabel RM dengan isi objektif
-		$this->Kesehatan_M->create('rkm_medis',array('kd_pasien'=>$postedData['nomor_pasien'],'kd_objek'=>$insert_tabel_objek->message,'tgl_jam'=>date("Y-m-d H:i:s")));
-
+		$this->Kesehatan_M->create('rekam_medis',$postedData);
 		$result = json_decode($this->Kesehatan_M->create('antrian',array('nomor_pasien'=>$postedData['nomor_pasien'],'jam_datang'=>date("Y-m-d H:i:s"))),false);
 
 		if ($result->status) {
@@ -201,19 +200,8 @@ class Petugas_handler extends CI_Controller {
 										)
 									);
 		}elseif ($aksi == 'hapus') {
-			$ambil_rkm_obj = $this->Kesehatan_M->rawQuery("SELECT kd_objek,kd_rkm FROM rkm_medis WHERE kd_pasien='$nomor_pasien' AND YEAR(tgl_jam)='".date('Y')."' AND MONTH(tgl_jam)='".date('m')."' AND DAY(tgl_jam)='".date('d')."' ORDER BY kd_rkm DESC LIMIT 1")->result();
-			
-			$this->Kesehatan_M->delete(
-									'objek',
-									array(
-											'kd_objek'	=>	$ambil_rkm_obj[0]->kd_objek
-									));
-			$this->Kesehatan_M->delete(
-										'rkm_medis',
-										array(
-												'kd_rkm' =>$ambil_rkm_obj[0]->kd_rkm
-										)
-									);
+			$this->Kesehatan_M->rawQuery("DELETE FROM rekam_medis WHERE nomor_pasien='$nomor_pasien' AND YEAR(tanggal_jam)='".date('Y')."' AND MONTH(tanggal_jam)='".date('m')."' AND DAY(tanggal_jam)='".date('d')."' ORDER BY id DESC LIMIT 1");
+
 			$this->Kesehatan_M->delete(
 									'proses_antrian',
 									array(
