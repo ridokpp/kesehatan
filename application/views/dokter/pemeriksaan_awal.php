@@ -60,7 +60,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="denyut_nadi" placeholder="Denyut Nadi" required="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Kg</div>
+				          	<div class="input-group-text">rpm</div>
 			    		</div>
 				    </div>
 				</div>
@@ -70,7 +70,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="frekuensi_pernapasan" placeholder="Respiration Rate" required="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Kg</div>
+				          	<div class="input-group-text">rpm</div>
 			    		</div>
 				    </div>
 				</div>
@@ -80,7 +80,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="suhu" placeholder="Temperature Axilla" required="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Kg</div>
+				          	<div class="input-group-text">&deg;C</div>
 			    		</div>
 				    </div>
 				</div>

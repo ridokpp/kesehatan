@@ -144,9 +144,11 @@ class Dokter extends CI_Controller {
 	*/
 	function logistik()
 	{
+		$data['logistik'] = $this->Kesehatan_M->readS('logistik')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
-		$this->load->view('dokter/logistik');
+		$this->load->view('dokter/logistik',$data);
+
 		$this->load->view('static/footer');
 	}
 }
