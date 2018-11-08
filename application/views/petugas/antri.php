@@ -12,14 +12,14 @@
 
     function loadstack(){
         setTimeout(loadstack, 2000);
-        $.get( "<?=base_url()?>Petugas_handler/liveAntrian", function( data ) {
+        $.get( "<?=base_url()?>Petugas/liveAntrian", function( data ) {
             var LiveAntrian = JSON.parse(data);
             var TableContentAntrian = '';
             var TableContentProsesAntrian = '';
             if (LiveAntrian.antrian != '') {
                 var nomorAntrian = 1;
                 for (var i in LiveAntrian.antrian ) {
-                    TableContentAntrian += "<tr><td>"+nomorAntrian+"</td><td>"+LiveAntrian.antrian[i].nama+"</td><td>"+LiveAntrian.antrian[i].jam_datang+"</td><td>"+LiveAntrian.antrian[i].pembayaran+"</td><td><div class='btn-group' role='group' aria-label='Basic example'><a href='<?=base_url()?>Petugas_handler/antrian/proses/"+LiveAntrian.antrian[i].nomor_pasien+"' class='btn btn-success btn-sm tombol-proses'>Proses</a><a href='<?=base_url()?>Petugas_handler/antrian/hapus/"+LiveAntrian.antrian[i].nomor_pasien+"' class='btn btn-danger btn-sm tombol-proses'>Hapus</a></div></td></tr>";
+                    TableContentAntrian += "<tr><td>"+nomorAntrian+"</td><td>"+LiveAntrian.antrian[i].nama+"</td><td>"+LiveAntrian.antrian[i].jam_datang+"</td><td>"+LiveAntrian.antrian[i].pembayaran+"</td><td><div class='btn-group' role='group' aria-label='Basic example'><a href='<?=base_url()?>Petugas/submitAntrian/proses/"+LiveAntrian.antrian[i].nomor_pasien+"' class='btn btn-success btn-sm tombol-proses'>Proses</a><a href='<?=base_url()?>Petugas/submitAntrian/hapus/"+LiveAntrian.antrian[i].nomor_pasien+"' class='btn btn-danger btn-sm tombol-proses'>Hapus</a></div></td></tr>";
                     nomorAntrian++;
                 }
                 // console.log(TableContentAntrian);
@@ -30,17 +30,13 @@
             if (LiveAntrian.proses_antrian != '') {
                 var nomorProsesAntrian = 1;
                 for (var i in LiveAntrian.proses_antrian ) {
-                    TableContentProsesAntrian += "<tr><td>"+nomorProsesAntrian+"</td><td>"+LiveAntrian.proses_antrian[i].nama+"</td><td>"+LiveAntrian.proses_antrian[i].pembayaran+"</td><td><a href='<?=base_url()?>Petugas_handler/antrian/hapus/"+LiveAntrian.proses_antrian[i].nomor_pasien+"' class='btn btn-danger btn-sm tombol-proses'>Hapus</a></td></tr>"
+                    TableContentProsesAntrian += "<tr><td>"+nomorProsesAntrian+"</td><td>"+LiveAntrian.proses_antrian[i].nama+"</td><td>"+LiveAntrian.proses_antrian[i].pembayaran+"</td><td><a href='<?=base_url()?>Petugas/submitAntrian/hapus/"+LiveAntrian.proses_antrian[i].nomor_pasien+"' class='btn btn-danger btn-sm tombol-proses'>Hapus</a></td></tr>"
                     nomorProsesAntrian++;
                 }
                 // console.log(TableContentProsesAntrian);
                 // console.log('exec antrian P');
             }
             $("#pasienDalamProses").html(TableContentProsesAntrian);
-
-
-
-
         });
     }
 </script>

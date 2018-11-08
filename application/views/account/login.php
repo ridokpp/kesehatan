@@ -5,7 +5,7 @@
 			<div class="card">
 				<div class="card-header">Login Pengguna Klinik Pratama</div>
 				<div class="card-body">
-					<form role="form" method="POST" action="<?=base_url().'Account/login_handler'?>">
+					<form role="form" method="POST" action="<?=base_url().'Account/submitLogin'?>">
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="Username" name="username" type="text" autofocus="">

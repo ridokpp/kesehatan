@@ -78,9 +78,10 @@
 			$('#nomor_bpjs').css('display','');
 		}
 	}
+
 </script>
 <h3 class="text-center mt-3">Pendafataran Awal Pasien</h3>
-<form action="<?= base_url().'Petugas_handler/pendaftaran'?>" method="POST">
+<form action="<?= base_url().'Petugas/submitPendaftaran'?>" method="POST">
 	<div class="container">
 		<?=$this->session->flashdata("alert");?>
 		<div class="row">
@@ -89,14 +90,21 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Nama</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Nama Lengkap" required="">
+				      	<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Masukkan Nama Lengkap" required="">
+				    </div>
+				</div>
+
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">Pekerjaan</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Masukkan Pekerjaan" required="">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">NIK</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="" name="nik" placeholder="Nomor Induk Kependudukan" required="">
+				      	<input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan Nomor Induk Kependudukan">
 				    </div>
 				</div>
 
@@ -111,7 +119,7 @@
 				     	<div class="form-group row">
 				   			<label for="inputEmail3" class="col-sm-3 col-form-label">Tempat</label>
 				  		  	<div class="input-group-prepend col-sm-9">
-				      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Tempat Lahir" required="">
+				      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required="">
 				    		</div>
 						</div>
 					</div>
@@ -206,7 +214,7 @@
 						<div class="form-group row">
 						    <label class="col-sm-3 col-form-label">Jalan</label>
 						    <div class="input-group-prepend col-sm-9">
-						      	<input type="text" class="form-control" id="" name="jalan" placeholder="Jalan" required="">
+						      	<input type="text" class="form-control" id="" name="jalan" placeholder="Masukkan Jalan" required="">
 						    </div>
 						</div>	
 					</div>
@@ -214,11 +222,11 @@
 						<div class="form-group row">
 						    <label class="col-sm-1 col-form-label">RT</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RT" placeholder="RT" required="" min="1">
+						      	<input type="number" class="form-control" id="" name="RT" placeholder="Contoh: 02" required="" min="1">
 						    </div>
 						    <label class="col-sm-1 col-form-label">RW</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RW" placeholder="RW" required="" min="1">
+						      	<input type="number" class="form-control" id="" name="RW" placeholder="Contoh: 02" required="" min="1">
 						    </div>
 						</div>
 					</div>
@@ -255,17 +263,9 @@
 				<div class="form-group row" id="nomor_bpjs" style="display: none;">
 				    <label class="col-1 col-form-label">Nomor BPJS</label>
 				    <div class="input-group-prepend col-7">
-				    	<input class="form-control " type="text" placeholder="Nomor BPJS" name="nomor_bpjs">
+				    	<input class="form-control " type="text" placeholder="Masukkan Nomor BPJS" name="nomor_bpjs">
 				    </div>
 				</div>				
-
-				<div class="form-group row">
-				    <label class="col-sm-1 col-form-label">Pekerjaan</label>
-				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="" name="pekerjaan" placeholder="Pekerjaan" required="">
-				    </div>
-				</div>		
-				
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>  

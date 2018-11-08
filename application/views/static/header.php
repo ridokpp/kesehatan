@@ -33,7 +33,9 @@ if (!isset($title) AND !isset($pasien)) {
 	<script src="<?php echo base_url()?>assets/datatables-logistik/js/jquery.dataTables.min.js"></script> <!-- Baru Logistik -->
 	<script src="<?php echo base_url()?>assets/DataTables/DataTables-1.10.18/js/dataTables.buttons.min.js"></script> <!-- Lama iclude Logistik -->
 	<script src="<?php echo base_url()?>assets/datatables-logistik/js/dataTables.select.min.js"></script> <!-- Baru Logistik -->
-	<script src="<?php echo base_url()?>assets/datatables-logistik/js/dataTables.editor.min.js"></script> <!-- Baru Logistik -->
+
+	<!-- Baru Logistik -->
+	<!-- <script src="<?php echo base_url()?>assets/datatables-logistik/js/dataTables.editor.min.js"></script>  -->
 
 
 

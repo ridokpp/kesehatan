@@ -1,7 +1,7 @@
 
 <h3 class="text-center mt-3">Pemeriksaan Awal Pasien</h3>
 
-<form action="<?=base_url()."Petugas_handler/pemeriksaan"?>" method="POST">
+<form action="<?=base_url()."Petugas/submitPemeriksaan"?>" method="POST">
 	<div class="container">
 		<?=$this->session->flashdata("alert");?>
 		<div class="row">
@@ -17,7 +17,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="tinggi_badan" placeholder="Tinggi Badan" required="" autofocus="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Cm</div>
+				          	<div class="input-group-text">cm</div>
 			    		</div>
 				    </div>
 				</div>
@@ -58,7 +58,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="denyut_nadi" placeholder="Denyut Nadi" required="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Kg</div>
+				          	<div class="input-group-text">rpm</div>
 			    		</div>
 				    </div>
 				</div>
@@ -68,7 +68,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="frekuensi_pernapasan" placeholder="Respiration Rate" required="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Kg</div>
+				          	<div class="input-group-text">rpm</div>
 			    		</div>
 				    </div>
 				</div>
@@ -78,7 +78,7 @@
 				    <div class="input-group col-10">
 				      	<input type="number" class="form-control" id="" name="suhu" placeholder="Temperature Axilla" required="">
 				    	<div class="input-group-append">
-				          	<div class="input-group-text">Kg</div>
+				          	<div class="input-group-text">°C</div>
 			    		</div>
 				    </div>
 				</div>
@@ -140,7 +140,7 @@
 						:
 					</div>
 					<div class="col-7">
-						<?=$pasien[0]->usia?>
+						<?=$pasien[0]->usia?> Tahun
 					</div>
 				</div>
 				<div class="row mt-2">

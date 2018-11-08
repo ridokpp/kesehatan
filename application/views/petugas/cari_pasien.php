@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$('select').select2();
 	$("#nama_or_nomor").select2({
 		ajax: {
-			url: '<?=base_url()?>Petugas_handler/cari_nama/',
+			url: '<?=base_url()?>Petugas/cariNama/',
 			dataType: 'json',
 			delay: 1000,
 			data: function (term, page) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
 				<h3 class="text-center">Cari berdasarkan nama pasien atau nomor pasien</h3>
 			</div>
 			<div class="card-body">
-				<form action="<?=base_url().'Petugas_handler/redirector'?>" method="GET">
+				<form action="<?=base_url().'Petugas/redirector'?>" method="GET">
 					<div class="row">
 						<div class="col">
 						 	<div class="form-group row">

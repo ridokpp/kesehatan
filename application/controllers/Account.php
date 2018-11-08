@@ -12,39 +12,36 @@ class Account extends CI_Controller {
 		date_default_timezone_set("Asia/Jakarta");
 	}
 
-	function menu($menu = 'login')
+	function login()
 	{
-		if ($this->session->userdata('logged_in') == array()) {
-			
-			$this->load->view('static/header');
-			if ($menu == 'login') {
-				$sess_array = array(
-									'hak_akses'	=>	'',
-									'id_user'	=>	'',
-									'nama_user'	=>	'',
-									'foto'		=>	''
-				);
-
-				$this->session->unset_userdata('logged_in', $sess_array);
-				$this->load->view('account/login');
-			}elseif ($menu == 'register') {
-				$this->load->view('account/register');
-			}
-			$this->load->view('static/footer');
-		}else{
-			redirect(base_url()."Account/logout_handler");
-		}
+		$this->session->unset_userdata('logged_in');
+		$this->load->view('static/header');
+		$this->load->view('account/login');
+		$this->load->view('static/footer');
 	}
 
+	/*
+	* funtion untk menampilkan halaman register petugas atatu dokter
+	*/
+	function register()
+	{
+		$this->session->unset_userdata('logged_in', $sess_array);
+		$this->load->view('static/header');
+		$this->load->view('account/register');
+		$this->load->view('static/footer');
+	}
 
-	function register_handler()
+	/*
+	* funtion untk action form register dokter atau petugas
+	*/
+	function submitRegister()
 	{
 		if ($this->input->post() !== null) {
 			$password 		= $this->input->post('password');
 			$hak_akses 		= $this->input->post('hak_akses');
 			if($hak_akses == '1' && substr($password, -5,5) !== 'admin'){
 				alert('alert_','warning','Gagal','Pendaftaran sebagai admin gagal');
-				redirect(base_url().'Account/menu/register');
+				redirect('Account/register');
 			}else{
 				if ($hak_akses != '3') {
 					$sip	= $this->input->post('no_sip');
@@ -102,7 +99,7 @@ class Account extends CI_Controller {
 					alert('alert','warning','Gagal','Upload foto profil gagal. Hanya gambar dengan ekstensi jpg,png, atau jpeg. Harap isi kembali form');
 				}
 
-				redirect(base_url()."Account/menu/register");
+				redirect("Account/register");
 			}
 
 		}else{
@@ -112,18 +109,16 @@ class Account extends CI_Controller {
 		}
 	}
 
-	function login_handler()
+	/*
+	* funtion untuk action form login
+	*/
+	function submitLogin()
 	{
 		if ($this->input->post() !== null) {
-
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-
 			$record = $this->Kesehatan_M->read('user',array(	'username'	=>	$this->input->post('username'),
 																	'password'	=>	hash("sha256", $this->input->post('password')),
 																	'verified' => 'sudah'
 																));
-
 			if ($record->num_rows() == 1) {
 				
 				$record 					= $record->row();
@@ -138,17 +133,16 @@ class Account extends CI_Controller {
 				alert('alert','success','Berhasil','Selamat datang '.$session_data['nama_user']);
 				$this->session->set_userdata('logged_in', $session_data);
 				if ($record->hak_akses == '1') {
-					redirect(base_url().'Admin/menu/dashboard');
+					redirect(base_url().'Admin/dashboard');
 				}elseif ($record->hak_akses == '2') {
-					redirect(base_url().'Dokter/index');
+					redirect(base_url().'Dokter/antrian');
 				}elseif ($record->hak_akses == '3') {
-					redirect(base_url().'Petugas/menu/cari');
+					redirect(base_url().'Petugas/cari');
 				}
 			}else{
 				alert('alert','danger','Gagal','Login gagal. Anda tidak terdaftar atau akun anda belum diverifikasi oleh admin. Hubungi admin untuk verifikasi akun anda');
-				redirect(base_url().'Account/menu/login');
+				redirect(base_url().'Account/login');
 			}
-
 		}else{
 			$data['heading']		=	"Null POST";
 			$data['message']		=	"<p>Tidak ada data yang di post</p>";
@@ -156,7 +150,7 @@ class Account extends CI_Controller {
 		}
 	}
 
-	function logout_handler()
+	function logout()
 	{
 		$sess_array = array(
 							'hak_akses'	=>	'',
@@ -166,24 +160,24 @@ class Account extends CI_Controller {
 		);
 
 		$this->session->unset_userdata('logged_in', $sess_array);
-		redirect(base_url()."Account/menu/login");
+		redirect(base_url()."Account/login");
 	}
 
-	function edit_identitas_handler()
+	function submitEditIdentitas()
 	{
 		$update = $this->Kesehatan_M->update('user',array('id_user'=>$this->input->post('id_user')),array(
 																									'nomor_identitas'	=>	$this->input->post('nomor_identitas'),
 																									'tanggal_lahir'		=>	$this->input->post('tanggal_lahir')));
 		$update = json_decode($update);
 		if ($update->status) {
-			alert('alert_edit_identitas','success','Berhasil','Perubahan telah masuk database');
+			alert('alert','success','Berhasil','Perubahan telah masuk database');
 		}else{
-			alert('alert_edit_identitas','danger','Gagal','Perubahan tidak masuk database');
+			alert('alert','danger','Gagal','Perubahan tidak masuk database');
 		}
 		redirect();
 	}
 
-	function ubah_password_handler()
+	function submitUbahPassword()
 	{
 		if ($this->input->post()!= null) {
 			$id_user				= $this->input->post('id_user');
@@ -199,24 +193,24 @@ class Account extends CI_Controller {
 					$result 		= $this->Kesehatan_M->update('user',array('id_user'=>$id_user),array('password'=>$encrypted_verif));
 					$results 		= json_decode($result);
 					if ($results->status) {
-						alert('alert_ubah_password','success','Berhasil','Ubah password berhasil');
+						alert('alert','success','Berhasil','Ubah password berhasil');
 					}
 					else{
-						alert('alert_ubah_password','danger','Gagal','Ubah password gagal');
+						alert('alert','danger','Gagal','Ubah password gagal');
 					}
 				}else{
-					alert('alert_ubah_password','danger','Gagal','password baru dengan password verifikasi tidak sama');
+					alert('alert','danger','Gagal','password baru dengan password verifikasi tidak sama');
 				}
 			}else{
-				alert('alert_ubah_password','danger','Gagal','data user tidak ditemukan');
+				alert('alert','danger','Gagal','data user tidak ditemukan');
 			}
 		}else{
-			alert('alert_ubah_password','danger','Gagal','tidak ada data yang di post');
+			alert('alert','danger','Gagal','tidak ada data yang di post');
 		}
 		redirect();
 	}
 
-	function my_account()
+	function myAccount()
 	{
 		if ($this->session->userdata('logged_in') !== array()) {
 			$data['user'] = $this->Kesehatan_M->read('user',array('id_user'=>$this->session->userdata('logged_in')['id_user']))->result();
