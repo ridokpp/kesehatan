@@ -482,114 +482,114 @@ class Dokter extends CI_Controller {
 				}
 				$gcs = rtrim($gcs,", ");
 
-				/*kepala*/
-					$kepala = " Anemis ";
-					if ($this->input->post('anemis_kiri') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-					$kepala .= "/";
-					if ($this->input->post('anemis_kanan') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-
-					$kepala .= " Ikterik ";
-					if ($this->input->post('ikterik_kiri') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-					$kepala .= "/";
-					if ($this->input->post('ikterik_kanan') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-
-					$kepala .= " Cianosis ";
-					if ($this->input->post('cianosis_kiri') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-					$kepala .= "/";
-					if ($this->input->post('cianosis_kanan') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-
-					$kepala .= " Deformitas ";
-					if ($this->input->post('deformitas_kiri') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-					$kepala .= "/";
-					if ($this->input->post('deformitas_kanan') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-
-					$kepala .= " Refleks cahaya ";
-					if ($this->input->post('refchy_kiri') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-					$kepala .= "/";
-					if ($this->input->post('refchy_kanan') == '1') {
-						$kepala .= "+";
-					}else{
-						$kepala .= " ";
-					}
-				/*end kepala*/
-
-				/*paru*/
-					$paru = "Wheezing ";
-					if ($this->input->post('wheezing_kiri') == '1') {
-						$paru .= "+";
-					}else{
-						$paru .= " ";
-					}
-					$paru .= "/";
-					if ($this->input->post('wheezing_kanan') == '1') {
-						$paru .= "+";
-					}else{
-						$paru .= " ";
-					}
-
-					$paru .= " Ronkhi ";
-					if ($this->input->post('ronkhi_kiri') == '1') {
-						$paru .= "+";
-					}else{
-						$paru .= " ";
-					}
-					$paru .= "/";
-					if ($this->input->post('ronkhi_kanan') == '1') {
-						$paru .= "+";
-					}else{
-						$paru .= " ";
-					}
-
-					$paru .= " Vesikuler ";
-					if ($this->input->post('vesikuler_kiri') == '1') {
-						$paru .= "+";
-					}else{
-						$paru .= " ";
-					}
-					$paru .= "/";
-					if ($this->input->post('vesikuler_kanan') == '1') {
-						$paru .= "+";
-					}else{
-						$paru .= " ";
-					}
-				/*end paru*/
 			}
+			/*kepala*/
+				$kepala = " Anemis ";
+				if ($this->input->post('anemis_kiri') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+				$kepala .= "/";
+				if ($this->input->post('anemis_kanan') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+
+				$kepala .= " Ikterik ";
+				if ($this->input->post('ikterik_kiri') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+				$kepala .= "/";
+				if ($this->input->post('ikterik_kanan') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+
+				$kepala .= " Cianosis ";
+				if ($this->input->post('cianosis_kiri') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+				$kepala .= "/";
+				if ($this->input->post('cianosis_kanan') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+
+				$kepala .= " Deformitas ";
+				if ($this->input->post('deformitas_kiri') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+				$kepala .= "/";
+				if ($this->input->post('deformitas_kanan') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+
+				$kepala .= " Refleks cahaya ";
+				if ($this->input->post('refchy_kiri') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+				$kepala .= "/";
+				if ($this->input->post('refchy_kanan') == '1') {
+					$kepala .= "+";
+				}else{
+					$kepala .= " ";
+				}
+			/*end kepala*/
+
+			/*paru*/
+				$paru = "Wheezing ";
+				if ($this->input->post('wheezing_kiri') == '1') {
+					$paru .= "+";
+				}else{
+					$paru .= " ";
+				}
+				$paru .= "/";
+				if ($this->input->post('wheezing_kanan') == '1') {
+					$paru .= "+";
+				}else{
+					$paru .= " ";
+				}
+
+				$paru .= " Ronkhi ";
+				if ($this->input->post('ronkhi_kiri') == '1') {
+					$paru .= "+";
+				}else{
+					$paru .= " ";
+				}
+				$paru .= "/";
+				if ($this->input->post('ronkhi_kanan') == '1') {
+					$paru .= "+";
+				}else{
+					$paru .= " ";
+				}
+
+				$paru .= " Vesikuler ";
+				if ($this->input->post('vesikuler_kiri') == '1') {
+					$paru .= "+";
+				}else{
+					$paru .= " ";
+				}
+				$paru .= "/";
+				if ($this->input->post('vesikuler_kanan') == '1') {
+					$paru .= "+";
+				}else{
+					$paru .= " ";
+				}
+			/*end paru*/
 
 
 			/*insert ke tabel assesmet*/
@@ -687,7 +687,7 @@ class Dokter extends CI_Controller {
 								'terapi_1'					=>	$this->input->post('terapi_1'),
 								'terapi_2'					=>	$this->input->post('terapi_2'),
 								'terapi_3'					=>	$this->input->post('terapi_3'),
-								'dokter_pemeriksa'			=>	$this->session->userdata('logged_in')['id'],
+								'dokter_pemeriksa'			=>	$this->session->userdata('logged_in')['id_user'],
 								'planning'					=>	$this->input->post('planning')
 							);
 
@@ -709,6 +709,42 @@ class Dokter extends CI_Controller {
 			$data['message']	= "<p> Tidak ada data yang di post</p>";
 			$this->load->view('errors/html/error_404',$data);
 		}
+	}
+
+	/*
+	* funtion untuk handle form submit add logistik obat
+	*/
+	function submitAddLogistik()
+	{
+		$queryInsert['nama'] = $this->input->post('nama');
+		$queryInsert['stok'] = $this->input->post('stok');
+		$queryInsert['satuan'] = $this->input->post('satuan');
+		$queryInsert['kadaluarsa'] = $this->input->post('kadaluarsa');
+		
+		// cek adakah duplikasi nama obat
+		$cekDuplikasiObat = $this->Kesehatan_M->read('logistik',array('nama' => $queryInsert['nama']));
+		if ($cekDuplikasiObat->num_rows() == 0) {
+			$execQueryInsert = $this->Kesehatan_M->create('logistik',$queryInsert);
+			$execQueryInsert = json_decode($execQueryInsert);
+			if ($execQueryInsert->status) {
+				alert('alert','success','Berhasil','Data berhasil dimasukkan');
+				redirect("Dokter/logistik");
+			}else{
+				var_dump($execQueryInsert->message);
+			}
+		}else{
+			alert('alert','danger','Gagal','Obat sudah ada');
+			redirect("Dokter/logistik");
+		}
+
+	}
+
+	/*
+	* funtion untuk handle form submit add stok logistik
+	*/
+	function submitAddStok()
+	{
+		# code...
 	}
 
 }

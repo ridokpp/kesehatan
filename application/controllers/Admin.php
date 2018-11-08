@@ -82,10 +82,12 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/rekam_dokter');
 		$this->load->view('static/footer');
 	}
-	
+
+	/*
+	* function handler untuk verifikasi seorang pengguna
+	*/
 	function submitVerifikasi($id_user){
 		$this->Kesehatan_M->update('user',array('id_user'=>$id_user),array('verified'=>'sudah'));
-		redirect(base_url()."Admin/
-			verifikasi");
+		redirect("Admin/verifikasi");
 	}
 }
