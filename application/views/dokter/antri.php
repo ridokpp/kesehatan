@@ -40,13 +40,13 @@
     }
 </script>
 
-<h3 class="text-center mt-3">Antrian Pasien</h3>
-    <a class="btn btn-primary" role="button" href="<?=base_url()?>Dokter/pemeriksaanLangsung">Pemeriksaan Langsung</a>
-<div class="row">
+<div class="row mt-3 mb-3">
     <div class="col">
         <?=$this->session->flashdata("alert");?>
     </div>
 </div>
+<h3 class="text-center mt-3">Antrian Pasien</h3>
+    <a class="btn btn-primary" role="button" href="<?=base_url()?>Dokter/pemeriksaanLangsung">Pemeriksaan Langsung</a>
 <div class="row">
     <div class="col-8">
         <h5 class="text-center mt-3">Pasien Antri</h5>

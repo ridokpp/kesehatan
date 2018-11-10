@@ -483,6 +483,48 @@ class Dokter extends CI_Controller {
 				$gcs = rtrim($gcs,", ");
 
 			}
+			/*NOTE : jantung nggk perlu di manipulasi string karena setiap input field korelasi 1-1 dengan kolom*/
+
+			/*insert ke tabel assesmet*/
+			if ($this->input->post('assessmentPrimer') !== NULL OR $this->input->post('assessmentSekunder') !== NULL OR $this->input->post('assessmentLain') !== NULL OR $this->input->post('assessmentPemeriksaanLab') !== NULL) {
+				
+				// 1. baca available available_id_assessment di tabel available_id_assessment
+				$available_id_assessment = $this->Kesehatan_M->readS('available_id_assessment')->result();
+				$available_id_assessment = $available_id_assessment[0]->available_id_assessment;
+
+				// 2. segera update available_id_assessment di tabel available_id_assessment. agar saat digunakan oleh dokter lain tidak crash
+				$this->Kesehatan_M->rawQuery("UPDATE available_id_assessment SET available_id_assessment = available_id_assessment + 1 WHERE available_id_assessment ='$available_id_assessment'");
+
+				// 3. masukkan assessment inputan ke tabel assessment disertai available id yang sudah diambil
+					$stringDiagnosa 			= "INSERT INTO assessment VALUES ";
+					if ($this->input->post('assessmentPrimer') != array()) {
+						foreach ($this->input->post('assessmentPrimer') as $key => $value) {
+							$stringDiagnosa		 	.= "(NULL,'$available_id_assessment','primer','$value'),";
+						}
+					}
+					// manipulasi string untuk masuk ke assessment. tipenya sekunder
+					if ($this->input->post('assessmentSekunder') != array()) {
+						foreach ($this->input->post('assessmentSekunder') as $key => $value) {
+							$stringDiagnosa 		.= "(NULL,'$available_id_assessment','sekunder','$value'),";
+						}
+					}
+					// manipulasi string untuk masuk ke assessment. tipenya lainlain
+					if ($this->input->post('assessmentLain') != array()) {
+						foreach ($this->input->post('assessmentLain') as $key => $value) {
+							$stringDiagnosa 	 	.= "(NULL,'$available_id_assessment','lainlain','$value'),";
+						}
+					}
+					// manipulasi string untuk masuk ke assessment. tipenya adalah pemeriksaan lab
+					if ($this->input->post('assessmentPemeriksaanLab') != '') {
+						$stringDiagnosa				.= "(NULL,'$available_id_assessment','pemeriksaanLab','".$this->input->post('assessmentPemeriksaanLab')."'),";
+					}
+					$stringDiagnosa				= rtrim($stringDiagnosa,",");
+					
+					// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel assessment
+					$this->Kesehatan_M->rawQuery($stringDiagnosa);
+			}
+			/*end insert ke tabel assesmet*/
+
 			/*kepala*/
 				$kepala = " Anemis ";
 				if ($this->input->post('anemis_kiri') == '1') {
@@ -591,48 +633,6 @@ class Dokter extends CI_Controller {
 				}
 			/*end paru*/
 
-
-			/*insert ke tabel assesmet*/
-			if ($this->input->post('assessmentPrimer') !== NULL OR $this->input->post('assessmentSekunder') !== NULL OR $this->input->post('assessmentLain') !== NULL OR $this->input->post('assessmentPemeriksaanLab') !== NULL) {
-				
-				// 1. baca available available_id_assessment di tabel available_id_assessment
-				$available_id_assessment = $this->Kesehatan_M->readS('available_id_assessment')->result();
-				$available_id_assessment = $available_id_assessment[0]->available_id_assessment;
-
-				// 2. segera update available_id_assessment di tabel available_id_assessment. agar saat digunakan oleh dokter lain tidak crash
-				$this->Kesehatan_M->rawQuery("UPDATE available_id_assessment SET available_id_assessment = available_id_assessment + 1 WHERE available_id_assessment ='$available_id_assessment'");
-
-				// 3. masukkan assessment inputan ke tabel assessment disertai available id yang sudah diambil
-					$stringDiagnosa 			= "INSERT INTO assessment VALUES ";
-					if ($this->input->post('assessmentPrimer') != array()) {
-						foreach ($this->input->post('assessmentPrimer') as $key => $value) {
-							$stringDiagnosa		 	.= "(NULL,'$available_id_assessment','primer','$value'),";
-						}
-					}
-					// manipulasi string untuk masuk ke assessment. tipenya sekunder
-					if ($this->input->post('assessmentSekunder') != array()) {
-						foreach ($this->input->post('assessmentSekunder') as $key => $value) {
-							$stringDiagnosa 		.= "(NULL,'$available_id_assessment','sekunder','$value'),";
-						}
-					}
-					// manipulasi string untuk masuk ke assessment. tipenya lainlain
-					if ($this->input->post('assessmentLain') != array()) {
-						foreach ($this->input->post('assessmentLain') as $key => $value) {
-							$stringDiagnosa 	 	.= "(NULL,'$available_id_assessment','lainlain','$value'),";
-						}
-					}
-					// manipulasi string untuk masuk ke assessment. tipenya adalah pemeriksaan lab
-					if ($this->input->post('assessmentPemeriksaanLab') != '') {
-						$stringDiagnosa				.= "(NULL,'$available_id_assessment','pemeriksaanLab','".$this->input->post('assessmentPemeriksaanLab')."'),";
-					}
-					$stringDiagnosa				= rtrim($stringDiagnosa,",");
-					
-					// masukkan kd_assessment beserta data pemeriksaan primer sekunder lainlain pememeriksaan lab ke tabel assessment
-					$this->Kesehatan_M->rawQuery($stringDiagnosa);
-
-			}
-			/*end insert ke tabel assesmet*/
-
 			$record = array(
 								'nomor_pasien'				=>	$this->input->post('nomor_pasien'),
 								'tanggal_jam'				=>	date('Y-m-d H:i:s'),
@@ -737,6 +737,20 @@ class Dokter extends CI_Controller {
 			redirect("Dokter/logistik");
 		}
 
+	}
+
+	/*
+	* funtion untuk handle form submit delete logistik obat
+	*/
+	function submitDeleteLogistik()
+	{
+		$execQueryDelete = $this->Kesehatan_M->delete('logistik',array('id'=>$this->input->post('id')));
+		if ($execQueryDelete) {
+			alert('alert','success','Berhasil','Data berhasil dihapus');
+			redirect("Dokter/logistik");
+		}else{
+			var_dump($execQueryDelete);
+		}
 	}
 
 	/*

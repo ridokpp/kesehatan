@@ -9,7 +9,17 @@
                 }
             ]
         });
+        $('#modalHapusObat').on('shown.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            $('#idobat').val(button.data('idobat')); // Extract info from data-* attributes
+        });
+        $('#modalEditObat').on('shown.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            $('#idobat').val(button.data('idobat')); // Extract info from data-* attributes
+        })
     });
+
+
 </script>
 
 <div class="text-center mt-3"><h5><strong>Daftar Logistik Obat</strong></h5></div>
@@ -140,28 +150,28 @@
 
 
     <!-- Modal hapus obat-->
-    <div class="modal" id="exampleModal2" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modalHapusObat" tabindex="-1" role="dialog" aria-labelledby="modalHapusObat" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Hapus Data</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Anda yakin untuk menghapus data tersebut?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger">Ya</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-          </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Hapus Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="<?=base_url()?>Dokter/SubmitDeleteLogistik">
+                    <div class="modal-body">
+                        <p>Anda yakin untuk menghapus data tersebut?</p>
+                        <input type="hidden" name="id" value="" id="idobat">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Ya</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-
-
-
 
 
     <table id="example" class="display" style="width:100%">
@@ -180,23 +190,23 @@
                 foreach($logistik as $key => $value) {
              ?>
             <tr>
-                <td class="text-center"></td>
+                <td class="text-center"><?=$i?></td>
                 <td><?=$value->nama?></td>
-                <td><?=$value->stok?></td>
+                <td><?=$value->stok?> <?=$value->satuan?></td>
                 <td><?=tgl_indo($value->kadaluarsa)?></td>
                 <td>
                     <div class="text-center">
-                        <button type="button" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" data-toggle="modal" data-idobat="<?=$value->id?>"  data-target="#modalEditObat">
                             <img src="<?php echo base_url()?>assets/icon/edit2.png">
                         </button>
 
-                        <button type="button" data-toggle="modal" data-target="#exampleModal2">
+                        <button type="button" data-toggle="modal" data-target="#modalHapusObat" data-idobat="<?=$value->id?>">
                             <img src="<?php echo base_url()?>assets/icon/delete.png">
                         </button>
                     </div>
                 </td>
             </tr>
-            <?php } ?>
+            <?php $i++; } ?>
         </tbody>
         <tfoot>
             <tr>
