@@ -760,8 +760,22 @@ class Dokter extends CI_Controller {
 			alert('alert','danger','Gagal','Obat sudah ada');
 			redirect("Dokter/logistik");
 		}
-
 	}
+
+	/*
+	* funtion untuk handle form submit add stok logistik
+	*/
+	function submitEditLogistik()
+	{
+		$execQueryEdit = $this->Kesehatan_M->update('logistik',array('id'=>$this->input->post('id')),array("nama"=>$this->input->post("nama"),"stok"=>$this->input->post('stok'),"satuan"=>$this->input->post('satuan'),"kadaluarsa"=>$this->input->post("kadaluarsa")));
+		if ($execQueryEdit) {
+			alert('alert','success','Berhasil','Data berhasil diedit');
+			redirect("Dokter/logistik");
+		}else{
+			var_dump($execQueryEdit);
+		}
+	}
+
 
 	/*
 	* funtion untuk handle form submit delete logistik obat
@@ -776,6 +790,8 @@ class Dokter extends CI_Controller {
 			var_dump($execQueryDelete);
 		}
 	}
+
+
 
 	/*
 	* funtion untuk handle form submit add stok logistik
@@ -792,12 +808,17 @@ class Dokter extends CI_Controller {
 	{
 		if ($this->input->get() != NULL) {
 			$dataForm = $this->input->get();
-			$dataReturn = $this->db->or_like(array('nama'=>$dataForm['term']['term']))->where("stok > 0")->get('logistik')->result();
+			
+			$dataReturn = $this->db->query(" SELECT * FROM logistik WHERE nama LIKE '%".$dataForm['term']['term']."%' ESCAPE '!' AND stok > 0")->result();			
+
 			$data = array();
 			foreach ($dataReturn as $key => $value) {
 				$data[$key]['id'] = $value->id."|".$value->nama;
 				$data[$key]['text'] = $value->nama;
 				$data[$key]['stok'] = $value->stok;
+				if ($value->kadaluarsa < date("Y-m-d-d")) {
+					$data[$key]['stok'] .= " Sudah kadaluarsa";
+				}
 				$data[$key]['satuan'] = $value->satuan;
 			}
 			echo json_encode($data);

@@ -15,7 +15,13 @@
         });
         $('#modalEditObat').on('shown.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
-            $('#idobat').val(button.data('idobat')); // Extract info from data-* attributes
+
+            // Extract info from data-* attributes
+            $('#idobat').val(button.data('idobat')); 
+            $('#namaobat').val(button.data('namaobat')); 
+            $('#stokobat').val(button.data('stokobat')); 
+            $('#satuanobat').val(button.data('satuanobat')); 
+            $('#kadaluarsaobat').val(button.data('kadaluarsaobat'));
         })
     });
 
@@ -77,7 +83,7 @@
                             <div class="col">Kadaluarsa</div>
                             <div class="col-1">:</div>
                             <div class="col">
-                                <input class="form-control" type="date" name="kadaluarsa"  >
+                                <input class="form-control" type="date" name="kadaluarsa" >
                             </div>
                         </div>
                     </div>
@@ -96,53 +102,56 @@
     <div class="modal fade" id="modalEditObat" tabindex="-1" role="dialog" aria-labelledby="modalEditObat" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Edit Obat</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mt-3">
-                        <div class="col">Nama Obat</div>
-                        <div class="col-1">:</div>
-                        <div class="col">
-                            <input class="form-control" type="text" name="" placeholder="Nama Obat">
-                        </div>
+                <form action="<?=base_url()?>Dokter/SubmitEditLogistik" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Obat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
+                        <input type="text" name="id" value="" id="idobat">
+                        <div class="row mt-3">
+                            <div class="col">Nama Obat</div>
+                            <div class="col-1">:</div>
+                            <div class="col">
+                                <input class="form-control" type="text" name="nama" id="namaobat" placeholder="Nama Obat">
+                            </div>
+                        </div>
 
-                    <div class="row mt-3">
-                        <div class="col">Stok Obat</div>
-                        <div class="col-1">:</div>
-                        <div class="col">
-                            <input class="form-control" type="number" name="" placeholder="Nama Obat">
+                        <div class="row mt-3">
+                            <div class="col">Stok Obat</div>
+                            <div class="col-1">:</div>
+                            <div class="col">
+                                <input class="form-control" type="number" name="stok" id="stokobat" placeholder="Stok Obat" min="0">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div class="col">Satuan</div>
-                        <div class="col-1">:</div>
-                        <div class="col">
-                            <select class="form-control">
-                                <option selected="" disabled="">Pilih Satuan Stok</option>
-                                <option value="Botol">Botol</option>
-                                <option value="Lembar">Lembar</option>
-                                <option value="Botol">Botol</option>
-                            </select>
+                        <div class="row mt-3">
+                            <div class="col">Satuan</div>
+                            <div class="col-1">:</div>
+                            <div class="col">
+                                <select class="form-control" name="satuan" id="satuanobat">
+                                    <option selected="" disabled="">Pilih Satuan Stok</option>
+                                    <option value="Botol">Botol</option>
+                                    <option value="Lembar">Lembar</option>
+                                    <option value="Botol">Botol</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div class="col">Kadaluarsa</div>
-                        <div class="col-1">:</div>
-                        <div class="col">
-                            <input class="form-control" type="date" name=""  >
+                        <div class="row mt-3">
+                            <div class="col">Kadaluarsa</div>
+                            <div class="col-1">:</div>
+                            <div class="col">
+                                <input class="form-control" type="date" name="kadaluarsa" id="kadaluarsaobat">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Ubah</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Ubah</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -196,7 +205,7 @@
                 <td><?=tgl_indo($value->kadaluarsa)?></td>
                 <td>
                     <div class="text-center">
-                        <button type="button" data-toggle="modal" data-idobat="<?=$value->id?>"  data-target="#modalEditObat">
+                        <button type="button" data-toggle="modal" data-target="#modalEditObat" data-idobat="<?=$value->id?>" data-namaobat="<?=$value->nama?>" data-stokobat="<?=$value->stok?>" data-satuanobat="<?=$value->satuan?>" data-kadaluarsaobat="<?=$value->kadaluarsa?>">
                             <img src="<?php echo base_url()?>assets/icon/edit2.png">
                         </button>
 

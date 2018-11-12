@@ -230,7 +230,7 @@
 			}else{
 				document.getElementById('planning').value += ", Surat Sakit : "+ data[0].nomor_surat +" / 002 / 0"+ data[0].tanggal_awal.substring(5, 7) +" / "+ data[0].tanggal_awal.substring(0, 4) +" ";
 			}
-		})
+		}).delay( 2000 )
 		.fail(function() {
 		alert( "error" );
 		})
@@ -250,7 +250,7 @@
 			}else{
 				document.getElementById('planning').value += ", Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
 			}
-		})
+		}).delay(2000)
 		.fail(function() {
 		alert( "error" );
 		})
