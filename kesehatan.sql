@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-04 19:46:49
+Date: 2018-11-12 11:36:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,7 @@ CREATE TABLE `available_id_assessment` (
 -- ----------------------------
 -- Records of available_id_assessment
 -- ----------------------------
-INSERT INTO `available_id_assessment` VALUES ('2');
+INSERT INTO `available_id_assessment` VALUES ('1');
 
 -- ----------------------------
 -- Table structure for icd10
@@ -10548,9 +10548,10 @@ INSERT INTO `icd10` VALUES ('Z99.9', 'Dependence on unspecified enabling machine
 DROP TABLE IF EXISTS `logistik`;
 CREATE TABLE `logistik` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(500) NOT NULL,
-  `stok` varchar(500) NOT NULL,
-  `kadaluarsa` varchar(500) NOT NULL,
+  `nama` varchar(500) DEFAULT NULL,
+  `stok` int(11) DEFAULT NULL,
+  `satuan` varchar(255) DEFAULT NULL,
+  `kadaluarsa` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -10693,7 +10694,61 @@ CREATE TABLE `settingan` (
 -- ----------------------------
 -- Records of settingan
 -- ----------------------------
-INSERT INTO `settingan` VALUES ('1', '2018-11-04 00:34:54');
+INSERT INTO `settingan` VALUES ('1', '2018-11-12 10:07:24');
+
+-- ----------------------------
+-- Table structure for suratrujukan
+-- ----------------------------
+DROP TABLE IF EXISTS `suratrujukan`;
+CREATE TABLE `suratrujukan` (
+  `id` int(11) NOT NULL,
+  `nomor_pasien` varchar(225) NOT NULL,
+  `tgl_jam` datetime NOT NULL,
+  `kd_objek` int(11) NOT NULL,
+  `kd_headtotoe` int(11) NOT NULL,
+  `nomor_surat` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of suratrujukan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for suratsakit
+-- ----------------------------
+DROP TABLE IF EXISTS `suratsakit`;
+CREATE TABLE `suratsakit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nomor_pasien` varchar(255) DEFAULT NULL,
+  `alasan` varchar(255) DEFAULT NULL,
+  `tanggal_awal` date DEFAULT NULL,
+  `tanggal_akhir` date DEFAULT NULL,
+  `nomor_surat` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of suratsakit
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for suratsehat
+-- ----------------------------
+DROP TABLE IF EXISTS `suratsehat`;
+CREATE TABLE `suratsehat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nomor_pasien` varchar(255) DEFAULT NULL,
+  `tes_buta_warna` varchar(255) DEFAULT NULL,
+  `keperluan` varchar(255) DEFAULT NULL,
+  `nomor_surat` int(11) DEFAULT NULL,
+  `tanggal_terbit` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of suratsehat
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
