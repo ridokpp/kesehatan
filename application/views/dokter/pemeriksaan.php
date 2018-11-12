@@ -8,6 +8,7 @@
 <script type="text/javascript">
 
 	// inisialisasi tabel rekam medis
+	var addObat;
  	$(document).ready(function() {
  		$('#example').DataTable({
 			dom: 'Bfrtip',
@@ -106,6 +107,69 @@
 			errorClass: "my-error-class",
 			validClass: "my-valid-class"
 		});
+
+		
+		// untuk add input form obat
+		var flagid = 0;
+		addObat = function addObat() {
+			$(".obat").select2();
+			flagid += 1;
+			$('#renderInputObat').append(	"<div class=row mt-5 mb-5'>"+
+												"<div class='col-6'>"+
+													"<select class='obat form-control' name='obat[]' style='height: 90%' id='obat"+flagid+"'>"+
+														"<option selected=' disabled='>PIlih obat</option>"+
+													"</select>"+
+												"</div>"+
+												"<div class='col-4'>"+
+													"<input type='number' class='form-control' name='jumlah_obat[]' placeholder='jumlah yg diberikan' id='jumlah"+flagid+"' min='0'></input>"+
+												"</div>"+
+												"<div class='col'>"+
+													"<input type='text' class='form-control' name='satuan[]' placeholder='satuan' id='satuan"+flagid+"' readonly=''></input>"+
+												"</div>"+
+											"</div>");
+			$(".obat").select2({
+				ajax: {
+					url: '<?=base_url()?>Dokter/cariObat/',
+					dataType: 'json',
+					delay: 1000,
+					data: function (term, page) {
+						return {
+							term: term, // search term
+							page: 10
+						};
+					},
+					processResults: function (data, page) {
+						$('#jumlah'+flagid).attr({"max" : data[0].stok});
+						$('#satuan'+flagid).val(data[0].satuan);
+						return {
+							results: data
+						};
+					},
+					cache: true
+				},
+				escapeMarkup: function (markup) { return markup; },
+				minimumInputLength: 1,
+				theme : "bootstrap",
+				templateResult: formatRepo,
+	  			templateSelection: formatRepoSelection
+			});
+			function formatRepo (data) {
+				if (data.loading) {
+					return data.text;
+				}
+
+				var markup = "<div class='clearfix'>";
+
+				markup += data.text+" :: Stok sekarang "+data.stok+
+				"</div>";
+
+				return markup;
+			}
+
+			function formatRepoSelection (data) {
+				return data.text;
+			}
+		}
 	});
 
 	// setting tampilan live clock
@@ -214,6 +278,7 @@
 		alert( "error" );
 		})
 	}
+
 </script>
 
 <h3 class="text-center mt-3"><strong>Pemeriksaan Dokter</strong></h3>
@@ -340,7 +405,7 @@
 											<?=tgl_indo(substr($value->tanggal_jam,0,10))?>
 									 	</td>
 									  	<td>
-											<?=$value->subjek?>
+											<?=$value->subjektif?>
 									  	</td>
 									  	<td>
 											<ul>
@@ -524,11 +589,6 @@
 									<input class="form-control" type="text" name="assessmentPemeriksaanLab" placeholder="Pemeriksaan Laboratorium" id="pemeriksaanLab">
 								</div>	
 							</div>
-
-							<hr>
-
-							<h5 class="text-center mt-3">Planing</h5>
-							<textarea class="form-control" id="planning" aria-label="With textarea" placeholder="Planing" name="planning"></textarea>
 
 							<hr>
 
@@ -938,14 +998,47 @@
 								</div>
 							</div>
 							<hr>
+
+							<h6 class="text-center mt-3">Lain-lain</h6>
 							
 							<div class="row mt-3">
-								<div class="col-2">Lain-lain</div>
-								<div class="col-1">:</div>
 								<div class="col">
 									<textarea class="form-control" aria-label="With textarea" name="lain_lain" placeholder="Lain-lain"></textarea>
 								</div>
 							</div>
+
+							<hr>
+							<h5 class="text-center mt-3">Planing</h5>
+							<textarea class="form-control" id="planning" aria-label="With textarea" placeholder="Planing" name="planning"></textarea>
+
+							<hr>
+							<h6 class="text-center mt-3">Terapi</h6>
+
+							<div class="row mt-3">
+								<div class="col">
+									<textarea class="form-control" aria-label="With textarea" name="terapi1" placeholder="Terapi 1"></textarea>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col">
+									<textarea class="form-control" aria-label="With textarea" name="terapi2" placeholder="Terapi 2"></textarea>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col">
+									<textarea class="form-control" aria-label="With textarea" name="terapi3" placeholder="Terapi 3"></textarea>
+								</div>
+							</div>
+							<hr>
+
+							<h6 class="text-center mt-3">Obat</h6>
+							<div class="row mt-3">
+								<button type="button" class="btn btn-primary btn-block ml-3" onclick="addObat()">Tambah Obat</button>
+							</div>
+							<div id="renderInputObat"></div>
+
+
+
 							<div class="row mb-3">
 								<div class="col text-right">
 									<button type="submit" class="btn btn-primary mt-3">Simpan Rekam Medis</button>
@@ -959,7 +1052,8 @@
 				<div class="tab-pane fade" id="surat_sakit" role="tabpanel" aria-labelledby="home-tab">
 					<h5 class="text-center mt-3">Surat Sakit</h5>
 					<div class="container">	
-						<form action="<??>" method="POST">
+						<form id="formSuratSakit" action="<?=base_url()?>Dokter/submitCetak/suratsakit" target="_blank" method="POST">
+							<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>" readonly="">
 							<div class="row mt-3">
 								<div class="col-2">Alasan</div>
 								<div class="col">:</div>
@@ -1017,37 +1111,39 @@
 				<div class="tab-pane fade" id="surat_sehat" role="tabpanel" aria-labelledby="home-tab">
 					<div class="container">
 						<h5 class="text-center mt-3">Surat Sehat</h5>
+						<form action="<?=base_url()?>Dokter/submitCetak/suratsehat" target="_blank" method="POST" id="formSuratSehat">
+							<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+							<div class="row mt-3">
+								<div class="col-3">Tes Buta Warna</div>
+								<div class="col">:</div>
+								<div class="col">
+									<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya">
+					  				<label class="custom-control-label" for="tesButaWarna1">Ya</label>
+								</div>
+								<div class="col">
+									<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak">
+						  			<label class="custom-control-label" for="tesButaWarna2">Tidak</label>
+								</div>
+								<div class="col">
+									<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial">
+									<label class="custom-control-label" for="tesButaWarna3">Parsial</label>
+								</div>
+							</div>
 
-						<div class="row mt-3">
-							<div class="col-3">Tes Buta Warna</div>
-							<div class="col">:</div>
-							<div class="col">
-								<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya">
-				  				<label class="custom-control-label" for="tesButaWarna1">Ya</label>
+							<div class="row mt-3">
+								<div class="col-3">Keperluan</div>
+								<div class="col">:</div>
+								<div class="col-8">
+									<input type="text" class="form-control" name="keperluan" required="">
+								</div>
 							</div>
-							<div class="col">
-								<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak">
-					  			<label class="custom-control-label" for="tesButaWarna2">Tidak</label>
+							
+							<div class="row mt-3">
+								<div class="col text-right">
+									<button type="submit" class="btn btn-primary" onclick="SuratSehat()">Cetak</button>		
+								</div>
 							</div>
-							<div class="col">
-								<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial">
-								<label class="custom-control-label" for="tesButaWarna3">Parsial</label>
-							</div>
-						</div>
-
-						<div class="row mt-3">
-							<div class="col-3">Keperluan</div>
-							<div class="col">:</div>
-							<div class="col-8">
-								<input type="text" class="form-control" name="keperluan" required="">
-							</div>
-						</div>
-						
-						<div class="row mt-3">
-							<div class="col text-right">
-								<button type="submit" class="btn btn-primary" onclick="SuratSehat()">Cetak</button>		
-							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -49,7 +49,7 @@
 					Tempat / Tgl Lahir
 				</div>
 				<div class="col">
-					: <?=ucwords($pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir))?>
+					: <?=ucwords($pasien[0]->tempat_lahir.", ".tgl_indo($pasien[0]->tanggal_lahir))?>
 				</div>
 			</div>
 			<div class="row">
@@ -58,10 +58,10 @@
 				</div>
 				<div class="col">
 					: <?php
-					if ($pasien[0]->jkelamin == 'Laki-laki') {
-						echo ucwords($pasien[0]->jkelamin)." / <strike>Perempuan</strike>";
-					}elseif($pasien[0]->jkelamin == 'Perempuan'){
-						echo "<strike>Laki-laki</strike>".ucwords($pasien[0]->jkelamin);
+					if ($pasien[0]->jenis_kelamin == 'Laki-laki') {
+						echo ucwords($pasien[0]->jenis_kelamin)." / <strike>Perempuan</strike>";
+					}elseif($pasien[0]->jenis_kelamin == 'Perempuan'){
+						echo "<strike>Laki-laki</strike>".ucwords($pasien[0]->jenis_kelamin);
 					}
 					?>
 				</div>
@@ -92,7 +92,7 @@
 					TB / BB
 				</div>
 				<div class="col">
-					: <?=$objek[0]->tb?> cm / <?=$objek[0]->bb?> kg.
+					: <?=$rekam_medis[0]->tinggi_badan?> cm / <?=$rekam_medis[0]->berat_badan?> kg.
 				</div>		
 			</div>
 			<div class="row">
@@ -100,7 +100,7 @@
 					Tekanan darah
 				</div>
 				<div class="col">
-					: <?=$objek[0]->td1?> / <?=$objek[0]->td2?> mmHg.
+					: <?=$rekam_medis[0]->sistol?> / <?=$rekam_medis[0]->diastol?> mmHg.
 				</div>
 			</div>
 			<div class="row">
@@ -108,7 +108,7 @@
 					Nadi		
 				</div>
 				<div class="col">
-					: <?=$objek[0]->N?> rpm
+					: <?=$rekam_medis[0]->nadi?> rpm
 				</div>
 			</div>
 			<div class="row" >

@@ -49,7 +49,7 @@
 					Tempat / Tgl Lahir
 				</div>
 				<div class="col">
-					: <?=ucwords($pasien[0]->tmp_lahir.", ".tgl_indo($pasien[0]->tgl_lahir))?>
+					: <?=ucwords($pasien[0]->tempat_lahir.", ".tgl_indo($pasien[0]->tanggal_lahir))?>
 				</div>
 			</div>
 			<div class="row">
@@ -57,7 +57,7 @@
 					Jenis Kelamin		
 				</div>
 				<div class="col">
-					: <?=ucwords($pasien[0]->jkelamin )?>
+					: <?=ucwords($pasien[0]->jenis_kelamin )?>
 				</div>
 			</div>
 			<div class="row">

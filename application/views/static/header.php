@@ -11,7 +11,10 @@ if (!isset($title) AND !isset($pasien)) {
   <title><?=$title?></title>
   	<link rel="icon" href="<?=base_url()?>assets/images/LOGO YAYASAN.png">
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap/css/bootstrap.min.css"/>
+	
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/select2/dist/css/select2.min.css"/>
+	<link rel="stylesheet" href="<?php echo base_url()?>assets/select2-bootstrap/select2-bootstrap.min.css"></link>
+
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/DataTables/DataTables-1.10.18/css/buttons.dataTables.min.css"></link> <!-- Lama iclude Logistik -->
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css"></link> <!-- Lama iclude Logistik -->
 

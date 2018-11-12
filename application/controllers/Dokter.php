@@ -40,7 +40,7 @@ class Dokter extends CI_Controller {
 																			array('nomor_pasien'		=>	$nomor_pasien,
 																				'MONTH(tanggal_jam)'=>	date('m'),
 																				'YEAR(tanggal_jam)'	=>	date('Y'),
-																				'DAY(tanggal_jam)'	=>	date('d')
+																				// 'DAY(tanggal_jam)'	=>	date('d')
 																			))->result();
 			$this->load->view('static/header');
 			$this->load->view('static/navbar');
@@ -128,7 +128,7 @@ class Dokter extends CI_Controller {
 			}
 			echo json_encode($data);
 		}else{
-			redirect(base_url());
+			redirect();
 		}
 	}
 
@@ -171,8 +171,8 @@ class Dokter extends CI_Controller {
 			$data['nama_user']		= $this->session->userdata('logged_in')['nama_user'];
 			$data['sip']			= $this->session->userdata('logged_in')['sip'];
 			$data['pasien']			= $this->Kesehatan_M->read('pasien',array('nomor_pasien'=>$data['nomor_pasien']))->result();
-			$data['rkm_medis']		= $this->Kesehatan_M->readCol('rkm_medis',array('kd_pasien'=>$data['nomor_pasien'],'DATE(tgl_jam)'=>date('Y-m-d')),array('kd_objek'))->result();
-			$data['objek']			= $this->Kesehatan_M->read('objek',array('kd_objek'=>$data['rkm_medis'][0]->kd_objek))->result();
+			$data['rekam_medis']	= $this->Kesehatan_M->rawQuery("SELECT tinggi_badan,berat_badan,sistol,diastol,nadi,respiratory_rate,temperature_ax FROM rekam_medis WHERE nomor_pasien = ".$data['nomor_pasien']." ORDER BY id DESC LIMIT 1")->result();
+			var_dump($data['rekam_medis']);die();
 
 			$nomor_surat 			= $this->Kesehatan_M->readCol('suratsehat',array('MONTH(tanggal_terbit)'=>date('m'),'YEAR(tanggal_terbit)'=>date('Y')),array('MAX(nomor_surat) AS nomor_surat'))->result();
 			$insertSuratSehat['nomor_pasien']		= $data['nomor_pasien'];
@@ -502,18 +502,21 @@ class Dokter extends CI_Controller {
 							$stringDiagnosa		 	.= "(NULL,'$available_id_assessment','primer','$value'),";
 						}
 					}
+
 					// manipulasi string untuk masuk ke assessment. tipenya sekunder
 					if ($this->input->post('assessmentSekunder') != array()) {
 						foreach ($this->input->post('assessmentSekunder') as $key => $value) {
 							$stringDiagnosa 		.= "(NULL,'$available_id_assessment','sekunder','$value'),";
 						}
 					}
+
 					// manipulasi string untuk masuk ke assessment. tipenya lainlain
 					if ($this->input->post('assessmentLain') != array()) {
 						foreach ($this->input->post('assessmentLain') as $key => $value) {
 							$stringDiagnosa 	 	.= "(NULL,'$available_id_assessment','lainlain','$value'),";
 						}
 					}
+
 					// manipulasi string untuk masuk ke assessment. tipenya adalah pemeriksaan lab
 					if ($this->input->post('assessmentPemeriksaanLab') != '') {
 						$stringDiagnosa				.= "(NULL,'$available_id_assessment','pemeriksaanLab','".$this->input->post('assessmentPemeriksaanLab')."'),";
@@ -633,6 +636,27 @@ class Dokter extends CI_Controller {
 				}
 			/*end paru*/
 
+			
+			$planning = $this->input->post('planning').". ";
+			/*ekstrak value dari select2, pisahkan id beserta nama obatnya agar tidak baca lagi di database. nama obat disertakan untuk keperluan penambahan kolom planning*/
+				$id_obat = array();
+				$nama_obat = array();
+
+				foreach ($this->input->post('obat') as $key => $value) {
+					$temp = explode("|", $value);
+					array_push($id_obat, $temp[0]);
+					array_push($nama_obat, $temp[1]);
+				}
+			/*end ekstrak value dari select2, pisahkan id beserta nama obatnya agar tidak baca lagi di database. nama obat disertakan untuk keperluan penambahan kolom planning*/
+			
+
+			/*untuk setiap obat, lakukan pengurangan stok pada tabel logistik. dan juga lakukan penggabungan string ke $planning*/
+				foreach ($id_obat as $key => $value) {
+					$planning .= $nama_obat[$key]." ".$this->input->post('jumlah_obat')[$key]." ".$this->input->post('satuan')[$key].". ";
+					$this->Kesehatan_M->rawQuery("UPDATE logistik SET stok = stok - ".$this->input->post('jumlah_obat')[$key]." WHERE id=$value");
+				}
+			/*end untuk setiap obat, lakukan pengurangan stok pada tabel logistik*/
+
 			$record = array(
 								'nomor_pasien'				=>	$this->input->post('nomor_pasien'),
 								'tanggal_jam'				=>	date('Y-m-d H:i:s'),
@@ -688,7 +712,7 @@ class Dokter extends CI_Controller {
 								'terapi_2'					=>	$this->input->post('terapi_2'),
 								'terapi_3'					=>	$this->input->post('terapi_3'),
 								'dokter_pemeriksa'			=>	$this->session->userdata('logged_in')['id_user'],
-								'planning'					=>	$this->input->post('planning')
+								'planning'					=>	$planning
 							);
 
 			// insert ke tabel assessment
@@ -696,7 +720,7 @@ class Dokter extends CI_Controller {
 			$insertIntoRekamMedis = json_decode($insertIntoRekamMedis);
 
 			if ($insertIntoRekamMedis->status) {
-				$this->Kesehatan_M->delete('proses_antrian',array('nomor_pasien'=>$nomor_pasien));
+				$this->Kesehatan_M->delete('proses_antrian',array('nomor_pasien'=>$this->input->post('nomor_pasien')));
 				alert('alert','success','Berhasil','Data berhasil dimasukkan');
 				redirect("Dokter/antrian");
 			}else{
@@ -716,7 +740,7 @@ class Dokter extends CI_Controller {
 	*/
 	function submitAddLogistik()
 	{
-		$queryInsert['nama'] = $this->input->post('nama');
+		$queryInsert['nama'] = ucwords($this->input->post('nama'));
 		$queryInsert['stok'] = $this->input->post('stok');
 		$queryInsert['satuan'] = $this->input->post('satuan');
 		$queryInsert['kadaluarsa'] = $this->input->post('kadaluarsa');
@@ -759,6 +783,27 @@ class Dokter extends CI_Controller {
 	function submitAddStok()
 	{
 		# code...
+	}
+
+	/*
+	* funtion untuk menangani ajax request cari obat
+	*/
+	function cariObat()
+	{
+		if ($this->input->get() != NULL) {
+			$dataForm = $this->input->get();
+			$dataReturn = $this->db->or_like(array('nama'=>$dataForm['term']['term']))->where("stok > 0")->get('logistik')->result();
+			$data = array();
+			foreach ($dataReturn as $key => $value) {
+				$data[$key]['id'] = $value->id."|".$value->nama;
+				$data[$key]['text'] = $value->nama;
+				$data[$key]['stok'] = $value->stok;
+				$data[$key]['satuan'] = $value->satuan;
+			}
+			echo json_encode($data);
+		}else{
+			redirect();
+		}		
 	}
 
 }
