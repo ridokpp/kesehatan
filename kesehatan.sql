@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-11-12 11:36:25
+Date: 2018-11-19 08:45:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,7 @@ CREATE TABLE `available_id_assessment` (
 -- ----------------------------
 -- Records of available_id_assessment
 -- ----------------------------
-INSERT INTO `available_id_assessment` VALUES ('1');
+INSERT INTO `available_id_assessment` VALUES ('3');
 
 -- ----------------------------
 -- Table structure for icd10
@@ -10553,11 +10553,13 @@ CREATE TABLE `logistik` (
   `satuan` varchar(255) DEFAULT NULL,
   `kadaluarsa` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of logistik
 -- ----------------------------
+INSERT INTO `logistik` VALUES ('1', 'Betadin 250 Ml', '100', 'Botol', '2018-11-09');
+INSERT INTO `logistik` VALUES ('2', 'Parasetamol', '20', 'Lembar', '2019-06-12');
 
 -- ----------------------------
 -- Table structure for log_kunjungan
@@ -10591,13 +10593,12 @@ CREATE TABLE `pasien` (
   `pembayaran` varchar(250) NOT NULL,
   `nomor_pasien` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pasien
 -- ----------------------------
-INSERT INTO `pasien` VALUES ('1', 'Abu Rizal Bakri', '3573051902970001', 'Malang', '1991-08-21', '27', 'Jalan Jl. Raya Cemorokandang RT03 RW02 Kelurahan Kedung Kandang Kecamatan Kedungkandang Kota Malang', 'Laki-laki', 'Petani', 'Kedung Kandang', 'Umum', '001-005-01-02-11-2018');
-INSERT INTO `pasien` VALUES ('2', 'Bambang Susilo', '', 'Malang', '2014-08-27', '4', 'Jalan Jl. Raya Cemorokandang RT01 RW09 Kelurahan Cemoro Kandang Kecamatan Kedungkandang Kota Malang', 'Laki-laki', 'Pelajar', 'Cemoro Kandang', 'RF', '002-004-01-01-11-2018');
+INSERT INTO `pasien` VALUES ('1', 'M Salas', '', 'Malang', '2004-07-21', '14', 'Jalan Jl. Raya Cemorokandang RT01 RW01 Kelurahan Sawojajar Kecamatan Kedungkandang Kota Malang', 'Laki-laki', 'Petani', 'Sawojajar', 'RF', '001-010-01-01-11-2018');
 
 -- ----------------------------
 -- Table structure for proses_antrian
@@ -10694,7 +10695,7 @@ CREATE TABLE `settingan` (
 -- ----------------------------
 -- Records of settingan
 -- ----------------------------
-INSERT INTO `settingan` VALUES ('1', '2018-11-12 10:07:24');
+INSERT INTO `settingan` VALUES ('1', '2018-11-19 00:00:24');
 
 -- ----------------------------
 -- Table structure for suratrujukan
