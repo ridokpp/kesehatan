@@ -240,7 +240,6 @@
 			return true;
 		}else{
 			alert('Mohon lengkapi data pemeriksaan objektif kecuali Head To Toe');
-			break;
 			return false;
 
 		}
@@ -301,14 +300,66 @@
 		$('#deformitas_kanan_rujukan').prop("checked" , $('#deformitas_kanan_pemeriksaan').prop("checked"))
 		$('#refchy_kiri_rujukan').prop("checked" , $('#refchy_kiri_pemeriksaan').prop("checked"))
 		$('#refchy_kanan_rujukan').prop("checked" , $('#refchy_kanan_pemeriksaan').prop("checked"))
+		$('#kepala_ket_tambahan_rujukan').val($('#kepala_ket_tambahan_pemeriksaan').val());
+
+		$('#wheezing_kiri_rujukan').prop("checked" , $('#wheezing_kiri_pemeriksaan').prop("checked"))
+		$('#wheezing_kanan_rujukan').prop("checked" , $('#wheezing_kanan_pemeriksaan').prop("checked"))
+		$('#ronkhi_kiri_rujukan').prop("checked" , $('#ronkhi_kiri_pemeriksaan').prop("checked"))
+		$('#ronkhi_kanan_rujukan').prop("checked" , $('#ronkhi_kanan_pemeriksaan').prop("checked"))
+		$('#vesikuler_kiri_rujukan').prop("checked" , $('#vesikuler_kiri_pemeriksaan').prop("checked"))
+		$('#vesikuler_kanan_rujukan').prop("checked" , $('#vesikuler_kanan_pemeriksaan').prop("checked"))
+		$('#jantung_suaratambahan_rujukan').val($('#jantung_suaratambahan_pemeriksaan').val());
+		$('#jantung_ket_tambahan_rujukan').val($('#jantung_ket_tambahan_pemeriksaan').val());
+
+		$('#nyeri_tekan1_rujukan').prop("checked" , $('#nyeri_tekan1_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan2_rujukan').prop("checked" , $('#nyeri_tekan2_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan3_rujukan').prop("checked" , $('#nyeri_tekan3_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan4_rujukan').prop("checked" , $('#nyeri_tekan4_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan5_rujukan').prop("checked" , $('#nyeri_tekan5_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan6_rujukan').prop("checked" , $('#nyeri_tekan6_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan7_rujukan').prop("checked" , $('#nyeri_tekan7_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan8_rujukan').prop("checked" , $('#nyeri_tekan8_pemeriksaan').prop("checked"))
+		$('#nyeri_tekan9_rujukan').prop("checked" , $('#nyeri_tekan9_pemeriksaan').prop("checked"))
+		$('#hepatomegali_rujukan').val($('#hepatomegali_pemeriksaan').val());
+		$('#spleenomegali_rujukan').val($('#spleenomegali_pemeriksaan').val());
+		$('#abdomen_ket_tambahan_rujukan').val($('#abdomen_ket_tambahan_pemeriksaan').val());
+		$('#akral_hangat1_rujukan').prop("checked" , $('#akral_hangat1_pemeriksaan').prop("checked"))
+		$('#akral_hangat2_rujukan').prop("checked" , $('#akral_hangat2_pemeriksaan').prop("checked"))
+		$('#akral_hangat3_rujukan').prop("checked" , $('#akral_hangat3_pemeriksaan').prop("checked"))
+		$('#akral_hangat4_rujukan').prop("checked" , $('#akral_hangat4_pemeriksaan').prop("checked"))
+		$('#crt1_rujukan').prop("checked" , $('#crt1_pemeriksaan').prop("checked"))
+		$('#crt2_rujukan').prop("checked" , $('#crt2_pemeriksaan').prop("checked"))
+		$('#crt3_rujukan').prop("checked" , $('#crt3_pemeriksaan').prop("checked"))
+		$('#crt4_rujukan').prop("checked" , $('#crt4_pemeriksaan').prop("checked"))
+		$('#edema1_rujukan').prop("checked" , $('#edema1_pemeriksaan').prop("checked"))
+		$('#edema2_rujukan').prop("checked" , $('#edema2_pemeriksaan').prop("checked"))
+		$('#edema3_rujukan').prop("checked" , $('#edema3_pemeriksaan').prop("checked"))
+		$('#edema4_rujukan').prop("checked" , $('#edema4_pemeriksaan').prop("checked"))
+		$('#ekstermitas_kettambahan_rujukan').val($('#ekstermitas_kettambahan_pemeriksaan').val());
+		$('#lain_lain_rujukan').val($('#lain_lain_pemeriksaan').val());
+		$('#planning_rujukan').val($('#planning_pemeriksaan').val());
+		$('#terapi1_rujukan').val($('#terapi1_pemeriksaan').val());
+		$('#terapi2_rujukan').val($('#terapi2_pemeriksaan').val());
+		$('#terapi3_rujukan').val($('#terapi3_pemeriksaan').val());
+
 
 
 
 		console.log($("input[name=refchy_opsi]:checked").val())
+
+		$("input[name='refchy_opsi_rujukan'][value='"+$("input[name=refchy_opsi_pemeriksaan]:checked").val()+"']").prop('checked', true);
+ 		$("input[name='paru_simetris_asimetris_rujukan'][value='"+$("input[name=paru_simetris_asimetris_pemeriksaan]:checked").val()+"']").prop('checked', true);
+		$("input[name='jantung_ictuscordis_rujukan'][value='"+$("input[name=jantung_ictuscordis_pemeriksaan]:checked").val()+"']").prop('checked', true);
+		$("input[name='jantung_s1_s2_rujukan'][value='"+$("input[name=jantung_s1_s2_pemeriksaan]:checked").val()+"']").prop('checked', true);
+
+		$("input[name='BU_rujukan'][value='"+$("input[name=BU_pemeriksaan]:checked").val()+"']").prop('checked', true);
+
+		$("input[name='pitting_rujukan'][value='"+$("input[name=pitting_pemeriksaan]:checked").val()+"']").prop('checked', true);
+
 		
 		$('#headtotoe_rujukan').val($('#headtotoe_pemeriksaan').val());
 
-		// $('#suratrujukan')[0].submit();
+		$('#suratrujukan')[0].submit();
 	}
 	// saat submit cetak surat rujukan, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
 	function SuratRujukan() {
@@ -772,9 +823,9 @@
 								<div class="col-6">
 									<div class="row">
 										<div class="col">Isokor</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="refchy_opsi_pemeriksaan" name="refchy_opsi" value="Isokor"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="refchy_opsi_pemeriksaan" name="refchy_opsi_pemeriksaan" value="Isokor"></div>
 										<div class="col ml">Anisokor</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="refchy_opsi_pemeriksaan" name="refchy_opsi" value="Anisokor"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="refchy_opsi_pemeriksaan" name="refchy_opsi_pemeriksaan" value="Anisokor"></div>
 									</div>
 								</div>
 							</div>
@@ -796,9 +847,9 @@
 								<div class="col-6">
 									<div class="row">
 										<div class="col">Simetris</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="paru_simetris_asimetris" value="Simetris"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="" name="paru_simetris_asimetris_pemeriksaan" value="Simetris"></div>
 										<div class="col ml">Asimetris</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="paru_simetris_asimetris" value="Asimetris"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="" name="paru_simetris_asimetris_pemeriksaan" value="Asimetris"></div>
 									</div>
 								</div>
 								<div class="col-6">
@@ -806,11 +857,11 @@
 										<div class="col-4">Wheezing</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="wheezing_kiri" value="1">
+											<input type="checkbox" class="form-control" id="wheezing_kiri_pemeriksaan" name="wheezing_kiri" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="wheezing_kanan" value="1">
+											<input type="checkbox" class="form-control" id="wheezing_kanan_pemeriksaan" name="wheezing_kanan" value="1">
 										</div>
 									</div>
 								</div>
@@ -822,11 +873,11 @@
 										<div class="col-4">Ronkhi</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="ronkhi_kiri" placeholder="" value="1">
+											<input type="checkbox" class="form-control" id="ronkhi_kiri_pemeriksaan" name="ronkhi_kiri" placeholder="" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="ronkhi_kanan" placeholder="" value="1">
+											<input type="checkbox" class="form-control" id="ronkhi_kanan_pemeriksaan" name="ronkhi_kanan" placeholder="" value="1">
 										</div>
 									</div>
 								</div>
@@ -835,11 +886,11 @@
 										<div class="col-4">Vesikular</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="vesikuler_kiri" placeholder="" value="1">
+											<input type="checkbox" class="form-control" id="vesikuler_kiri_pemeriksaan" name="vesikuler_kiri" placeholder="" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="vesikuler_kanan" placeholder="" value="1">
+											<input type="checkbox" class="form-control" id="vesikuler_kanan_pemeriksaan" name="vesikuler_kanan" placeholder="" value="1">
 										</div>
 									</div>
 								</div>
@@ -853,17 +904,17 @@
 								<div class="col-6">
 									<div class="row">
 										<div class="col-4">Tampak</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_ictuscordis" value="Tampak"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_ictuscordis_pemeriksaan" value="Tampak"></div>
 										<div class="col-4ml">Tak Tampak</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_ictuscordis" value="Tak Tampak"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_ictuscordis_pemeriksaan" value="Tak Tampak"></div>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="row">
 										<div class="col">Reguler</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_s1_s2" value="Reguler"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_s1_s2_pemeriksaan" value="Reguler"></div>
 										<div class="col ml">Irreguler</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_s1_s2" value="Irreguler"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="" name="jantung_s1_s2_pemeriksaan" value="Irreguler"></div>
 									</div>
 								</div>
 							</div>
@@ -874,7 +925,7 @@
 										<div class="col-4">Suara Tambahan</div>
 										<div class="col-1">:</div>
 										<div class="col">
-									      	<input type="text" class="form-control" id="" name="jantung_suaratambahan">
+									      	<input type="text" class="form-control" id="jantung_suaratambahan_pemeriksaan" name="jantung_suaratambahan">
 										</div>
 									</div>
 								</div>
@@ -883,7 +934,7 @@
 										<div class="col-4">Keterangan Tambahan</div>
 										<div class="col-1">:</div>
 										<div class="col">
-									      	<input type="text" class="form-control" id="" name="thorak_ket_tambahan">
+									      	<input type="text" class="form-control" id="jantung_ket_tambahan_pemeriksaan" name="jantung_ket_tambahan">
 										</div>
 									</div>
 								</div>
@@ -897,51 +948,51 @@
 								<div class="col-2">BU</div>
 								<div class="col-1">:</div>
 								<div class="col-1">Normal</div>
-								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal"></div>
+								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU_pemeriksaan" placeholder="" value="Normal"></div>
 								<div class="col-1">Menurun</div>
-								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal"></div>
+								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU_pemeriksaan" placeholder="" value="Menurun"></div>
 								<div class="col-1">Meningkat</div>
-								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal"></div>
+								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU_pemeriksaan" placeholder="" value="Meningkat"></div>
 								<div class="col-1">Negatif</div>
-								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU" placeholder="" value="Normal"></div>
+								<div class="col-1 mt-2"><input type="radio" class="form-control" id="" name="BU_pemeriksaan" placeholder="" value="Negatif"></div>
 							</div>
 
 							<div class="row mt-3">
 								<div class="col-2">Nyeri Tekan</div>
 								<div class="col-1">:</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan1" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan1_pemeriksaan" name="nyeri_tekan1" value="1">
 									<label class="form-check-label">1</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan2" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan2_pemeriksaan" name="nyeri_tekan2" value="1">
 									<label class="form-check-label">2</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan3" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan3_pemeriksaan" name="nyeri_tekan3" value="1">
 									<label class="form-check-label">3</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan4" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan4_pemeriksaan" name="nyeri_tekan4" value="1">
 									<label class="form-check-label">4</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan5" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan5_pemeriksaan" name="nyeri_tekan5" value="1">
 									<label class="form-check-label">5</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan6" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan6_pemeriksaan" name="nyeri_tekan6" value="1">
 									<label class="form-check-label">6</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan7" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan7_pemeriksaan" name="nyeri_tekan7" value="1">
 									<label class="form-check-label">7</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan8" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan8_pemeriksaan" name="nyeri_tekan8" value="1">
 									<label class="form-check-label">8</label>
 								</div><div class="col-1">
-									<input class="form-check-input" type="checkbox" name="nyeri_tekan9" value="1">
+									<input class="form-check-input" type="checkbox" id="nyeri_tekan9_pemeriksaan" name="nyeri_tekan9" value="1">
 									<label class="form-check-label">9</label>
 								</div>
 							</div>
@@ -950,7 +1001,7 @@
 								<div class="col-2">Hepatomegali</div>
 								<div class="col-1">:</div>
 								<div class="col">
-									<input type="text" class="form-control" id="" name="hepatomegali" placeholder="">
+									<input type="text" class="form-control" id="hepatomegali_pemeriksaan" name="hepatomegali" placeholder="">
 								</div>
 							</div>
 
@@ -958,14 +1009,14 @@
 								<div class="col-2">Spleenomegali</div>
 								<div class="col-1">:</div>
 								<div class="col-9">
-									<input type="text" class="form-control" id="" name="spleenomegali" placeholder="">
+									<input type="text" class="form-control" id="spleenomegali_pemeriksaan" name="spleenomegali" placeholder="">
 								</div>
 							</div>
 							<div class="row mt-3">
 								<div class="col-2">Keterangan Tambahan Abdomen</div>
 								<div class="col-1">:</div>
 								<div class="col">
-									<textarea class="form-control" aria-label="With textarea" name="abdomen_ket_tambahan" placeholder="Keterangan Tambahan" ></textarea>
+									<textarea class="form-control" aria-label="With textarea" id="abdomen_ket_tambahan_pemeriksaan" name="abdomen_ket_tambahan" placeholder="Keterangan Tambahan" ></textarea>
 								</div>
 							</div>
 
@@ -977,19 +1028,19 @@
 								<div class="col-2">Akral Hangat</div>
 								<div class="col-1">:</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="akral_hangat_1" value="1">
+									<input class="form-check-input" type="checkbox" id="akral_hangat1_pemeriksaan" name="akral_hangat_1" value="1">
 									<label class="form-check-label">1</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="akral_hangat_2" value="1">
+									<input class="form-check-input" type="checkbox" id="akral_hangat2_pemeriksaan" name="akral_hangat_2" value="1">
 									<label class="form-check-label">2</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="akral_hangat_3" value="1">
+									<input class="form-check-input" type="checkbox" id="akral_hangat3_pemeriksaan" name="akral_hangat_3" value="1">
 									<label class="form-check-label">3</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="akral_hangat_4" value="1">
+									<input class="form-check-input" type="checkbox" id="akral_hangat4_pemeriksaan" name="akral_hangat_4" value="1">
 									<label class="form-check-label">4</label>
 								</div>
 							</div>
@@ -998,19 +1049,19 @@
 								<div class="col-2">CRT</div>
 								<div class="col-1">:</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="crt_1" value="1">
+									<input class="form-check-input" type="checkbox" id="crt1_pemeriksaan" name="crt_1" value="1">
 									<label class="form-check-label">1</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="crt_2" value="1">
+									<input class="form-check-input" type="checkbox" id="crt2_pemeriksaan" name="crt_2" value="1">
 									<label class="form-check-label">2</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="crt_3" value="1">
+									<input class="form-check-input" type="checkbox" id="crt3_pemeriksaan" name="crt_3" value="1">
 									<label class="form-check-label">3</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="crt_4" value="1">
+									<input class="form-check-input" type="checkbox" id="crt4_pemeriksaan" name="crt_4" value="1">
 									<label class="form-check-label">4</label>
 								</div>
 								<div class="col-1">/</div>
@@ -1021,19 +1072,19 @@
 								<div class="col-2">Edema</div>
 								<div class="col-1">:</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="edema_1" value="1">
+									<input class="form-check-input" type="checkbox" id="edema1_pemeriksaan" name="edema_1" value="1">
 									<label class="form-check-label">1</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="edema_2" value="1">
+									<input class="form-check-input" type="checkbox" id="edema2_pemeriksaan" name="edema_2" value="1">
 									<label class="form-check-label">2</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="edema_3" value="1">
+									<input class="form-check-input" type="checkbox" id="edema3_pemeriksaan" name="edema_3" value="1">
 									<label class="form-check-label">3</label>
 								</div>
 								<div class="col-1">
-									<input class="form-check-input" type="checkbox" name="edema_4" value="1">
+									<input class="form-check-input" type="checkbox" id="edema4_pemeriksaan" name="edema_4" value="1">
 									<label class="form-check-label">4</label>
 								</div>
 							</div>
@@ -1042,11 +1093,11 @@
 								<div class="col-2">Ekstermitas</div>
 								<div class="col-1">:</div>
 								<div class="col">
-									<input class="form-check-input" type="radio" name="pitting" value="Non-pitting">
+									<input class="form-check-input" type="radio" name="pitting_pemeriksaan" value="Non-pitting">
 						        	<label class="form-check-label">Non-pitting</label>
 								</div>
 								<div class="col">
-									<input class="form-check-input" type="radio" name="pitting" value="Pitting">
+									<input class="form-check-input" type="radio" name="pitting_pemeriksaan" value="Pitting">
 						        	<label class="form-check-label">Pitting</label>
 								</div>
 							</div>
@@ -1055,7 +1106,7 @@
 								<div class="col-2">Keterangan Tambahan Ekstermitas</div>
 								<div class="col-1">:</div>
 								<div class="col">
-									<textarea class="form-control" aria-label="With textarea" name="ekstermitas_ket_tambahan" placeholder="Keterangan Tambahan"></textarea>
+									<textarea class="form-control" aria-label="With textarea" id="ekstermitas_kettambahan_pemeriksaan" name="ekstermitas_ket_tambahan" placeholder="Keterangan Tambahan"></textarea>
 								</div>
 							</div>
 							<hr>
@@ -1064,30 +1115,30 @@
 							
 							<div class="row mt-3">
 								<div class="col">
-									<textarea class="form-control" aria-label="With textarea" name="lain_lain" placeholder="Lain-lain"></textarea>
+									<textarea class="form-control" aria-label="With textarea" id="lain_lain_pemeriksaan" name="lain_lain" placeholder="Lain-lain"></textarea>
 								</div>
 							</div>
 
 							<hr>
 							<h5 class="text-center mt-3">Planing</h5>
-							<textarea class="form-control" id="planning" aria-label="With textarea" placeholder="Planing" name="planning"></textarea>
+							<textarea class="form-control" aria-label="With textarea" placeholder="Planing" id="planning_pemeriksaan" name="planning"></textarea>
 
 							<hr>
 							<h6 class="text-center mt-3">Terapi</h6>
 
 							<div class="row mt-3">
 								<div class="col">
-									<textarea class="form-control" aria-label="With textarea" name="terapi1" placeholder="Terapi 1"></textarea>
+									<textarea class="form-control" aria-label="With textarea" id="terapi1_pemeriksaan" name="terapi1" placeholder="Terapi 1"></textarea>
 								</div>
 							</div>
 							<div class="row mt-3">
 								<div class="col">
-									<textarea class="form-control" aria-label="With textarea" name="terapi2" placeholder="Terapi 2"></textarea>
+									<textarea class="form-control" aria-label="With textarea" id="terapi2_pemeriksaan" name="terapi2" placeholder="Terapi 2"></textarea>
 								</div>
 							</div>
 							<div class="row mt-3">
 								<div class="col">
-									<textarea class="form-control" aria-label="With textarea" name="terapi3" placeholder="Terapi 3"></textarea>
+									<textarea class="form-control" aria-label="With textarea" id="terapi3_pemeriksaan" name="terapi3" placeholder="Terapi 3"></textarea>
 								</div>
 							</div>
 							<hr>
@@ -1136,7 +1187,70 @@
 
 	<input type="checkbox" id="anemis_kiri_rujukan" name="anemis_kiri" value="1">
 	<input type="checkbox" id="anemis_kanan_rujukan" name="anemis_kanan" value="1">
+	<input type="checkbox" id="ikterik_kiri_rujukan" name="ikterik_kiri" value="1">
+	<input type="checkbox" id="ikterik_kanan_rujukan" name="ikterik_kanan" value="1">
+	<input type="checkbox" id="cianosis_kiri_rujukan" name="cianosis_kiri" value="1">
+	<input type="checkbox" id="cianosis_kanan_rujukan" name="cianosis_kanan" value="1">
+	<input type="checkbox" id="deformitas_kiri_rujukan" name="deformitas_kiri" value="1">
+	<input type="checkbox" id="deformitas_kanan_rujukan" name="deformitas_kanan" value="1">
+	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Isokor">
+	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Anisokor">
+
+	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris_rujukan" value="Simetris">
+	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris_rujukan" value="Asimetris">
+	<input type="checkbox" id="wheezing_kiri_rujukan" name="wheezing_kiri" value="1">
+	<input type="checkbox" id="wheezing_kanan_rujukan" name="wheezing_kanan" value="1">
+	<input type="checkbox" id="ronkhi_kiri_rujukan" name="ronkhi_kiri" value="1">
+	<input type="checkbox" id="ronkhi_kanan_rujukan" name="ronkhi_kanan" value="1">
+	<input type="checkbox" id="vesikuler_kiri_rujukan" name="vesikuler_kiri" value="1">
+	<input type="checkbox" id="vesikuler_kanan_rujukan" name="vesikuler_kanan" value="1">
 	
+	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis_rujukan" value="Tampak">
+	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis_rujukan" value="Tak Tampak">
+	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2_rujukan" value="Reguler">
+	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2_rujukan" value="Irreguler">
+	<input type="text" name="jantung_suaratambahan_rujukan" id="jantung_suaratambahan_rujukan">
+	<input type="text" name="jantung_ket_tambahan_rujukan" id="jantung_ket_tambahan_rujukan">
+
+
+	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Normal">
+	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Menurun">
+	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Meningkat">
+	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Negatif">
+	<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8_rujukan" value="1">
+	<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9_rujukan" value="1">
+	<input type="text" name="hepatomegali_rujukan" id="hepatomegali_rujukan">
+	<input type="text" name="spleenomegali_rujukan" id="spleenomegali_rujukan">
+	<input type="text" name="abdomen_ket_tambahan_rujukan" id="abdomen_ket_tambahan_rujukan">
+	<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1_rujukan" value="1">
+	<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2_rujukan" value="1">
+	<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3_rujukan" value="1">
+	<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4_rujukan" value="1">
+	<input type="checkbox" id="crt1_rujukan" name="crt1_rujukan" value="1">
+	<input type="checkbox" id="crt2_rujukan" name="crt2_rujukan" value="1">
+	<input type="checkbox" id="crt3_rujukan" name="crt3_rujukan" value="1">
+	<input type="checkbox" id="crt4_rujukan" name="crt4_rujukan" value="1">
+	<input type="checkbox" id="edema1_rujukan" name="edema1_rujukan" value="1">
+	<input type="checkbox" id="edema2_rujukan" name="edema2_rujukan" value="1">
+	<input type="checkbox" id="edema3_rujukan" name="edema3_rujukan" value="1">
+	<input type="checkbox" id="edema4_rujukan" name="edema4_rujukan" value="1">
+	<input type="radio" id="pitting_rujukan" name="pitting_rujukan" value="Non-pitting">
+	<input type="radio" id="pitting_rujukan" name="pitting_rujukan" value="Pitting">
+	<input type="text" name="ekstermitas_kettambahan_rujukan" id="ekstermitas_kettambahan_rujukan">
+	<input type="text" name="lain_lain_rujukan" id="lain_lain_rujukan">
+	<input type="text" name="planning_rujukan" id="planning_rujukan">
+	<input type="text" name="terapi1_rujukan" id="terapi1_rujukan">
+	<input type="text" name="terapi2_rujukan" id="terapi2_rujukan">
+	<input type="text" name="terapi3_rujukan" id="terapi3_rujukan">
+
+
 </form>
 <!-- HIDDEN FORM SURAT RUJUKAN -->
 
