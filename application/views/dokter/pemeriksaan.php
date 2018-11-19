@@ -1,4 +1,3 @@
-<!-- https://pdfcrowd.com/i/how-to-export-html-to-pdf-with-php.html -->
 <style type="text/css">
 	.my-error-class {color:#FF0000;}
 	.my-valid-class {color:#00CC00;}
@@ -88,19 +87,11 @@
 		// inisialisasi dan set alert form surat sehat
 		$("#formSuratSehat").validate({
 			rules:{
-				alasan:{
-					required:true,
-				},selama:{
-					required:true,
-				},selama_satuan:{
+				keperluan:{
 					required:true,
 				}
 			},messages:{
-				alasan:{
-					required:"Mohon isi alasan",
-				},selama:{
-					required:"Mohon isi data yang dibutuhkan",
-				},selama_satuan:{
+				keperluan:{
 					required:"Mohon isi data yang dibutuhkan",
 				}
 			},
@@ -216,7 +207,7 @@
 		document.getElementById("tanggal_akhir").value = y+'-'+mm+'-'+dd;
 	}
 
-	// saat tutup modal surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+	// setelah cetak surat sakit, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
 	function SuratSakit() {
 		var jqxhr = $.get( "<?=base_url()?>Dokter/getTabelSurat/sakit/<?=$pasien[0]->nomor_pasien?>", function(data) {
 			data = JSON.parse(data);
@@ -236,8 +227,28 @@
 		})
 	}
 
-	// saat tutup modal surat sehat, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+	// function untuk menyalurkan tinggi badan via submit form surat sehat. executenya nyalip open blank page.
+	function formSuratSehat() {
+		document.getElementById('sistol_sehat').value 			= document.getElementById('sistol_pemeriksaan').value;
+		document.getElementById('diastol_sehat').value 			= document.getElementById('diastol_pemeriksaan').value;
+		if (document.getElementById('tinggi_badan_pemeriksaan').value !== 'undefined' && document.getElementById('berat_badan_pemeriksaan').value !== 'undefined' && document.getElementById('nadi_pemeriksaan').value !== 'undefined' && document.getElementById('respiratory_rate_pemeriksaan').value !== 'undefined' && document.getElementById('temperature_ax_pemeriksaan').value !== 'undefined') {
+			document.getElementById('tinggi_badan_sehat').value 		= document.getElementById('tinggi_badan_pemeriksaan').value;
+			document.getElementById('berat_badan_sehat').value 		= document.getElementById('berat_badan_pemeriksaan').value;
+			document.getElementById('nadi_sehat').value 				= document.getElementById('nadi_pemeriksaan').value;
+			document.getElementById('respiratory_rate_sehat').value 	= document.getElementById('respiratory_rate_pemeriksaan').value;
+			document.getElementById('temperature_ax_sehat').value 	= document.getElementById('temperature_ax_pemeriksaan').value;
+			return true;
+		}else{
+			alert('Mohon lengkapi data pemeriksaan objektif kecuali Head To Toe');
+			break;
+			return false;
+
+		}
+	}
+
+	// setelah cetak surat sehat, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
 	function SuratSehat() {
+		
 		var jqxhr = $.get( "<?=base_url()?>Dokter/getTabelSurat/sehat/<?=$pasien[0]->nomor_pasien?>", function(data) {
 			data = JSON.parse(data);
 			if (data[0].nomor_surat < 10 ) {
@@ -250,13 +261,56 @@
 			}else{
 				document.getElementById('planning').value += ", Surat Sehat : "+ data[0].nomor_surat +" / 001 / 0"+ data[0].tanggal_terbit.substring(5, 7) +" / "+ data[0].tanggal_terbit.substring(0, 4) +" ";
 			}
-		}).delay(2000)
-		.fail(function() {
+
+		}).fail(function() {
 		alert( "error" );
 		})
 	}
 
-	// saat tutup modal surat rujukan, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
+	// saat klik tombol surat rujukan. isi hidden form surat rujukan, karena secara tampilan satu form dengan pemeriksaan tapi secara koding beda tag form
+	function formSuratRujukan() {
+		// set input type hidden
+		$('#nomor_pasien_rujukan').val($('#nomor_pasien_pemeriksaan').val());
+		
+		$('#gcs_e_rujukan').val($('#gcs_e_pemeriksaan').val());
+		$('#gcs_v_rujukan').val($('#gcs_v_pemeriksaan').val());
+		$('#gcs_m_rujukan').val($('#gcs_m_pemeriksaan').val());
+		
+		$('#gcs_opsi_cm_rujukan').prop("checked" , $('#gcs_opsi_cm_pemeriksaan').prop("checked"));
+		$('#gcs_opsi_apatis_rujukan').prop("checked" , $('#gcs_opsi_apatis_pemeriksaan').prop("checked"))
+		$('#gcs_opsi_derilium_rujukan').prop("checked" , $('#gcs_opsi_derilium_pemeriksaan').prop("checked"))
+		$('#gcs_opsi_somnolen_rujukan').prop("checked" , $('#gcs_opsi_somnolen_pemeriksaan').prop("checked"))
+		$('#gcs_opsi_stupor_rujukan').prop("checked" , $('#gcs_opsi_stupor_pemeriksaan').prop("checked"))
+		$('#gcs_opsi_coma_rujukan').prop("checked" , $('#gcs_opsi_coma_pemeriksaan').prop("checked"))
+
+		$('#tinggi_badan_rujukan').val($('#tinggi_badan_pemeriksaan').val());
+		$('#berat_badan_rujukan').val($('#berat_badan_pemeriksaan').val());
+		$('#sistol_rujukan').val($('#sistol_pemeriksaan').val());
+		$('#diastol_rujukan').val($('#diastol_pemeriksaan').val());
+		$('#respiratory_rate_rujukan').val($('#respiratory_rate_pemeriksaan').val());
+		$('#nadi_rujukan').val($('#nadi_pemeriksaan').val());
+		$('#temperature_ax_rujukan').val($('#temperature_ax_pemeriksaan').val());
+
+		$('#anemis_kiri_rujukan').prop("checked" , $('#anemis_kiri_pemeriksaan').prop("checked"))
+		$('#anemis_kanan_rujukan').prop("checked" , $('#anemis_kanan_pemeriksaan').prop("checked"))
+		$('#ikterik_kiri_rujukan').prop("checked" , $('#ikterik_kiri_pemeriksaan').prop("checked"))
+		$('#ikterik_kanan_rujukan').prop("checked" , $('#ikterik_kanan_pemeriksaan').prop("checked"))
+		$('#cianosis_kiri_rujukan').prop("checked" , $('#cianosis_kiri_pemeriksaan').prop("checked"))
+		$('#cianosis_kanan_rujukan').prop("checked" , $('#cianosis_kanan_pemeriksaan').prop("checked"))
+		$('#deformitas_kiri_rujukan').prop("checked" , $('#deformitas_kiri_pemeriksaan').prop("checked"))
+		$('#deformitas_kanan_rujukan').prop("checked" , $('#deformitas_kanan_pemeriksaan').prop("checked"))
+		$('#refchy_kiri_rujukan').prop("checked" , $('#refchy_kiri_pemeriksaan').prop("checked"))
+		$('#refchy_kanan_rujukan').prop("checked" , $('#refchy_kanan_pemeriksaan').prop("checked"))
+
+
+
+		console.log($("input[name=refchy_opsi]:checked").val())
+		
+		$('#headtotoe_rujukan').val($('#headtotoe_pemeriksaan').val());
+
+		// $('#suratrujukan')[0].submit();
+	}
+	// saat submit cetak surat rujukan, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
 	function SuratRujukan() {
 		var jqxhr = $.get( "<?=base_url()?>Dokter/getTabelSurat/rujukan/<?=$pasien[0]->nomor_pasien?>", function(data) {
 			data = JSON.parse(data);
@@ -272,12 +326,12 @@
 				document.getElementById('planning').value += ", Surat Rujukan : "+ data[0].nomor_surat +" / 003 / 0"+ data[0].tanggal.substring(5, 7) +" / "+ data[0].tanggal.substring(0, 4) +" ";
 			}
 			document.getElementById('planning').value += ", Terapi : " + document.getElementById('terapi1').value + ", Perencanaan Lab : " + document.getElementById('terapi2').value + ", Perencanaan Rujuk : " + document.getElementById('terapi3').value;
-
 		})
 		.fail(function() {
-		alert( "error" );
+			alert( "error" );
 		})
 	}
+
 
 </script>
 
@@ -372,6 +426,9 @@
 					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#surat_sehat" role="tab" aria-controls="surat_sehat" aria-selected="false">Surat Sehat</a>
 				</li>
 			</ul>
+
+
+<!-- REKAM MEDIS -->
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="rekam_medis" role="tabpanel" aria-labelledby="home-tab">
 					
@@ -442,17 +499,20 @@
 						</form>
 					</div>
 				</div>
+<!-- REKAM MEDIS -->
 
+
+<!-- TAB PEMERIKSAAN -->
 				<div class="tab-pane fade show active" id="pemeriksaan" role="tabpanel" aria-labelledby="profile-tab">
 					<form method="POST" action="<?=base_url('Dokter/submitPemeriksaan')?>">
-						<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
+						<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>" id="nomor_pasien_pemeriksaan">
 						<div class="container">
 							<h5 class="text-center mt-3">Subjektif</h5>
 								<textarea class="form-control" aria-label="With textarea" placeholder="Subjektif" name="subjektif"></textarea>
 							<hr>
 
 							<h5 class="text-center mt-3">Objektif</h5>
-
+<!-- START FORM OBJEKTIF -->
 							<div class="row mt-3">
 								<div class="col-6">
 									<div class="row">
@@ -460,7 +520,7 @@
 										<div class="col-1">:</div>
 										<div class="col">
 											<div class="input-group">
-										      	<input type="number" class="form-control" id="" name="tinggi_badan" value="<?=(isset($rekam_medis[0]->tinggi_badan) ? $rekam_medis[0]->tinggi_badan : '')?>">
+										      	<input type="number" class="form-control" id="tinggi_badan_pemeriksaan" name="tinggi_badan" value="<?=(isset($rekam_medis[0]->tinggi_badan) ? $rekam_medis[0]->tinggi_badan : '')?>">
 										    	<div class="input-group-append">
 										          	<div class="input-group-text">cm</div>
 									    		</div>
@@ -474,7 +534,7 @@
 										<div class="col-1">:</div>
 										<div class="col">
 											<div class="input-group">
-										      	<input type="number" class="form-control" id="" name="berat_badan" value="<?=(isset($rekam_medis[0]->berat_badan) ? $rekam_medis[0]->berat_badan : '')?>">
+										      	<input type="number" class="form-control" id="berat_badan_pemeriksaan" name="berat_badan" value="<?=(isset($rekam_medis[0]->berat_badan) ? $rekam_medis[0]->berat_badan : '')?>">
 										    	<div class="input-group-append">
 										          	<div class="input-group-text">kg</div>
 									    		</div>
@@ -491,10 +551,10 @@
 										<div class="col-1">:</div>
 										<div class="col">
 											<div class="input-group">
-										      	<input type="number" class="form-control mr-1" id="" name="sistol" value="<?=(isset($rekam_medis[0]->sistol) ? $rekam_medis[0]->sistol : '')?>" <?=($pasien[0]->pembayaran == 'RF' ? '' : 'disabled=""' )?>>
+										      	<input type="number" class="form-control mr-1" id="sistol_pemeriksaan" name="sistol" value="<?=(isset($rekam_medis[0]->sistol) ? $rekam_medis[0]->sistol : '')?>" <?=($pasien[0]->pembayaran == 'RF' ? '' : 'disabled=""' )?>>
 										      	/
-										      	<input type="number" class="form-control ml-1" id="" name="diastol" value="<?=(isset($rekam_medis[0]->diastol) ? $rekam_medis[0]->diastol : '')?>" <?=($pasien[0]->pembayaran == 'RF' ? '' : 'disabled=""' )?>><div class="input-group-append">
-										          	<div class="input-group-text">mhg</div>
+										      	<input type="number" class="form-control ml-1" id="diastol_pemeriksaan" name="diastol" value="<?=(isset($rekam_medis[0]->diastol) ? $rekam_medis[0]->diastol : '')?>" <?=($pasien[0]->pembayaran == 'RF' ? '' : 'disabled=""' )?>><div class="input-group-append">
+										          	<div class="input-group-text">mmHg</div>
 									    		</div>
 										    </div>
 										</div>
@@ -506,7 +566,7 @@
 										<div class="col-1">:</div>
 										<div class="col">
 											<div class="input-group">
-										      	<input type="number" class="form-control" id="" name="nadi" value="<?=(isset($rekam_medis[0]->nadi) ? $rekam_medis[0]->nadi : '')?>">
+										      	<input type="number" class="form-control" id="nadi_pemeriksaan" name="nadi" value="<?=(isset($rekam_medis[0]->nadi) ? $rekam_medis[0]->nadi : '')?>">
 										    	<div class="input-group-append">
 										          	<div class="input-group-text">rpm</div>
 									    		</div>
@@ -523,7 +583,7 @@
 										<div class="col-1">:</div>
 										<div class="col">
 											<div class="input-group">
-										      	<input type="number" class="form-control" id="" name="respiratory_rate" value="<?=(isset($rekam_medis[0]->respiratory_rate) ? $rekam_medis[0]->respiratory_rate : '')?>">
+										      	<input type="number" class="form-control" id="respiratory_rate_pemeriksaan" name="respiratory_rate" value="<?=(isset($rekam_medis[0]->respiratory_rate) ? $rekam_medis[0]->respiratory_rate : '')?>">
 										    	<div class="input-group-append">
 										          	<div class="input-group-text">rpm</div>
 									    		</div>
@@ -537,7 +597,7 @@
 										<div class="col-1">:</div>
 										<div class="col">
 											<div class="input-group">
-										      	<input type="number" class="form-control" id="" name="temperature_ax" value="<?=(isset($rekam_medis[0]->temperature_ax) ? $rekam_medis[0]->temperature_ax : '')?>">
+										      	<input type="number" class="form-control" id="temperature_ax_pemeriksaan" name="temperature_ax" value="<?=(isset($rekam_medis[0]->temperature_ax) ? $rekam_medis[0]->temperature_ax : '')?>">
 										    	<div class="input-group-append">
 										          	<div class="input-group-text">&deg;C</div>
 									    		</div>
@@ -551,9 +611,10 @@
 									<div class="col-2">Head To Toe</div>
 									<div class="col-1">:</div>
 									<div class="col">
-										<input type="text" class="form-control" id="" name="headtotoe">
+										<input type="text" class="form-control" id="headtotoe_pemeriksaan" name="headtotoe">
 									</div>
 							</div>
+<!-- END FORM OBJEKTIF -->							
 
 							<hr>
 
@@ -562,7 +623,7 @@
 								<div class="col-2">Primary</div>
 								<div class="col-1">:</div>
 								<div class="col-9">
-									<select class="js-data-example-ajax" id="primary" name="assessmentPrimary[]" multiple="multiple" style="width: 99%"></select>
+									<select class="js-data-example-ajax" id="primary_pemeriksaan" name="assessmentPrimary[]" multiple="multiple" style="width: 99%"></select>
 								</div>	
 							</div>
 
@@ -570,7 +631,7 @@
 								<div class="col-2">Sekunder</div>
 								<div class="col-1">:</div>
 								<div class="col-9">
-									<select class="js-data-example-ajax" id="secondary" name="assessmentSecondary[]" multiple="multiple" style="width: 99%"></select>
+									<select class="js-data-example-ajax" id="secondary_pemeriksaan" name="assessmentSecondary[]" multiple="multiple" style="width: 99%"></select>
 								</div>	
 							</div>
 
@@ -578,7 +639,7 @@
 								<div class="col-2">Lain-lain</div>
 								<div class="col-1">:</div>
 								<div class="col-9">
-									<select class="js-data-example-ajax" id="lain" name="assessmentLain[]" multiple="multiple" style="width: 99%"></select>
+									<select class="js-data-example-ajax" id="lain_pemeriksaan" name="assessmentLain[]" multiple="multiple" style="width: 99%"></select>
 								</div>	
 							</div>
 
@@ -592,27 +653,27 @@
 
 							<hr>
 
-							<!-- Start Form GCS -->
+<!-- Start Form GCS -->
 							<div class="row mt-3">
 								<div class="col-2">GCS</div>
 								<div class="col-1">:</div>
-								<div class="col"><input type="text" class="form-control" id="" name="gcs_e" placeholder="E" ></div>
-								<div class="col"><input type="text" class="form-control" id="" name="gcs_v" placeholder="V" ></div>
-								<div class="col"><input type="text" class="form-control" id="" name="gcs_m" placeholder="M" ></div>	
+								<div class="col"><input type="text" class="form-control" id="gcs_e_pemeriksaan" name="gcs_e" placeholder="E" ></div>
+								<div class="col"><input type="text" class="form-control" id="gcs_v_pemeriksaan" name="gcs_v" placeholder="V" ></div>
+								<div class="col"><input type="text" class="form-control" id="gcs_m_pemeriksaan" name="gcs_m" placeholder="M" ></div>	
 							</div>
 
 							<div class="row mt-3">
 								<div class="col-3"></div>
 								<div class="col form-check ml-3">
-									<input class="form-check-input" type="checkbox" name="gcs_opsi[]" value="CM">
+									<input class="form-check-input" type="checkbox" id="gcs_opsi_cm_pemeriksaan" name="gcs_opsi[]" value="CM">
 									<label class="form-check-label">CM</label>
 								</div>
 								<div class="col form-check">
-									<input class="form-check-input" type="checkbox" name="gcs_opsi[]" value="Apatis">
+									<input class="form-check-input" type="checkbox" id="gcs_opsi_apatis_pemeriksaan" name="gcs_opsi[]" value="Apatis">
 									<label class="form-check-label">Apatis</label>
 								</div>
 								<div class="col form-check">
-									<input class="form-check-input" type="checkbox" name="gcs_opsi[]" value="Derilium">
+									<input class="form-check-input" type="checkbox" id="gcs_opsi_derilium_pemeriksaan" name="gcs_opsi[]" value="Derilium">
 									<label class="form-check-label">Derilium</label>
 								</div>
 							</div>
@@ -620,21 +681,21 @@
 							<div class="row">
 								<div class="col-3"></div>
 								<div class="col form-check ml-3">
-									<input class="form-check-input" type="checkbox" name="gcs_opsi[]" value="Somnolen">
+									<input class="form-check-input" type="checkbox" id="gcs_opsi_somnolen_pemeriksaan" name="gcs_opsi[]" value="Somnolen">
 									<label class="form-check-label">Somnolen</label>
 								</div>
 								<div class="col form-check">
-									<input class="form-check-input" type="checkbox" name="gcs_opsi[]" value="Stupor">
+									<input class="form-check-input" type="checkbox" id="gcs_opsi_stupor_pemeriksaan" name="gcs_opsi[]" value="Stupor">
 									<label class="form-check-label">Stupor</label>
 								</div>
 								<div class="col form-check">
-									<input class="form-check-input" type="checkbox" name="gcs_opsi[]" value="Coma">
+									<input class="form-check-input" type="checkbox" id="gcs_opsi_coma_pemeriksaan" name="gcs_opsi[]" value="Coma">
 									<label class="form-check-label">Coma</label>
 								</div>
 							</div>
-							<!-- End Form GCS -->
+<!-- End Form GCS -->
 							<hr>
-
+<!-- KEPALA -->							
 							<h5 class="text-center mt-3">Head Toe To</h5>
 							<h6 class="text-center">Kepala</h6>
 
@@ -644,11 +705,11 @@
 										<div class="col-4">Anemis</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="anemis_kiri" value="1">
+											<input type="checkbox" class="form-control" id="anemis_kiri_pemeriksaan" name="anemis_kiri" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="anemis_kanan" value="1">
+											<input type="checkbox" class="form-control" id="anemis_kanan_pemeriksaan" name="anemis_kanan" value="1">
 										</div>
 									</div>
 								</div>
@@ -657,11 +718,11 @@
 										<div class="col-4">Ikterik</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="ikterik_kiri" value="1">
+											<input type="checkbox" class="form-control" id="ikterik_kiri_pemeriksaan" name="ikterik_kiri" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="ikterik_kanan" value="1">
+											<input type="checkbox" class="form-control" id="ikterik_kanan_pemeriksaan" name="ikterik_kanan" value="1">
 										</div>
 									</div>
 								</div>
@@ -672,11 +733,11 @@
 										<div class="col-4">Cianosis</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="cianosis_kiri" value="1">
+											<input type="checkbox" class="form-control" id="cianosis_kiri_pemeriksaan" name="cianosis_kiri" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="cianosis_kanan" value="1">
+											<input type="checkbox" class="form-control" id="cianosis_kanan_pemeriksaan" name="cianosis_kanan" value="1">
 										</div>
 									</div>
 								</div>
@@ -685,11 +746,11 @@
 										<div class="col-4">Deformitas</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="deformitas_kiri" value="1">
+											<input type="checkbox" class="form-control" id="deformitas_kiri_pemeriksaan" name="deformitas_kiri" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="deformitas_kanan" value="1">
+											<input type="checkbox" class="form-control" id="deformitas_kanan_pemeriksaan" name="deformitas_kanan" value="1">
 										</div>
 									</div>
 								</div>
@@ -700,20 +761,20 @@
 										<div class="col-4">Reflek Cahaya</div>
 										<div class="col-1">:</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="refchy_kiri" value="1">
+											<input type="checkbox" class="form-control" id="refchy_kiri_pemeriksaan" name="refchy_kiri" value="1">
 										</div>
 										<div class="col-1">/</div>
 										<div class="col-3 mt-2">
-											<input type="checkbox" class="form-control" id="" name="refchy_kanan" value="1">
+											<input type="checkbox" class="form-control" id="refchy_kanan_pemeriksaan" name="refchy_kanan" value="1">
 										</div>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="row">
 										<div class="col">Isokor</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="refchy_opsi" value="Isokor"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="refchy_opsi_pemeriksaan" name="refchy_opsi" value="Isokor"></div>
 										<div class="col ml">Anisokor</div>
-										<div class="col mt-2"><input type="radio" class="form-control" id="" name="refchy_opsi" value="Anisokor"></div>
+										<div class="col mt-2"><input type="radio" class="form-control" id="refchy_opsi_pemeriksaan" name="refchy_opsi" value="Anisokor"></div>
 									</div>
 								</div>
 							</div>
@@ -722,10 +783,10 @@
 								<div class="col-2">Ket. Tambahan</div>
 								<div class="col-1">:</div>
 								<div class="col">
-									<input class="form-control" type="text" name="kepala_ket_tambahan" placeholder="Pemeriksaan Laboratorium" id="pemeriksaanLab">
+									<input class="form-control" type="text" name="kepala_ket_tambahan" placeholder="Keterangan tambahan kepala" id="kepala_ket_tambahan_pemeriksaan">
 								</div>		
 							</div>
-							
+<!-- END KEPALA -->							
 							<hr>
 
 							<h6 class="text-center mt-3">Thorak</h6>
@@ -1042,13 +1103,46 @@
 							<div class="row mb-3">
 								<div class="col text-right">
 									<button type="submit" class="btn btn-primary mt-3">Simpan Rekam Medis</button>
-									<a role="button" class="btn btn-primary mt-3 text-white">Cetak Rujukan</a>
+									<a role="button" class="btn btn-primary mt-3 text-white" onclick="formSuratRujukan()">Cetak Rujukan</a>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
 
+<!-- HIDDEN FORM SURAT RUJUKAN -->
+<form method="POST" action="<?=base_url()?>Dokter/submitCetak/suratrujukan" target="_blank" onsubmit="SuratRujukan()" id="suratrujukan">
+	<input type="text" name="nomor_pasien" id="nomor_pasien_rujukan">
+	
+	<input type="text" name="gcs_e" id="gcs_e_rujukan">
+	<input type="text" name="gcs_v" id="gcs_v_rujukan">
+	<input type="text" name="gcs_m" id="gcs_m_rujukan">
+
+	<input type="checkbox" id="gcs_opsi_cm_rujukan" name="gcs_opsi[]" value="CM">
+	<input type="checkbox" id="gcs_opsi_apatis_rujukan" name="gcs_opsi[]" value="Apatis">
+	<input type="checkbox" id="gcs_opsi_derilium_rujukan" name="gcs_opsi[]" value="Derilium">
+	<input type="checkbox" id="gcs_opsi_somnolen_rujukan" name="gcs_opsi[]" value="Somnolen">
+	<input type="checkbox" id="gcs_opsi_stupor_rujukan" name="gcs_opsi[]" value="Stupor">
+	<input type="checkbox" id="gcs_opsi_coma_rujukan" name="gcs_opsi[]" value="Coma">
+
+	<input type="text" name="tinggi_badan" id="tinggi_badan_rujukan">
+	<input type="text" name="berat_badan" id="berat_badan_rujukan">
+	<input type="text" name="sistol" id="sistol_rujukan">
+	<input type="text" name="diastol" id="diastol_rujukan">
+	<input type="text" name="respiratory_rate" id="respiratory_rate_rujukan">
+	<input type="text" name="nadi" id="nadi_rujukan">
+	<input type="text" name="temperature_ax" id="temperature_ax_rujukan">
+	<input type="text" name="headtotoe" id="headtotoe_rujukan">
+
+	<input type="checkbox" id="anemis_kiri_rujukan" name="anemis_kiri" value="1">
+	<input type="checkbox" id="anemis_kanan_rujukan" name="anemis_kanan" value="1">
+	
+</form>
+<!-- HIDDEN FORM SURAT RUJUKAN -->
+
+<!-- TAB PEMERIKSAAN -->
+
+<!-- TAB SURAT SAKIT -->
 				<div class="tab-pane fade" id="surat_sakit" role="tabpanel" aria-labelledby="home-tab">
 					<h5 class="text-center mt-3">Surat Sakit</h5>
 					<div class="container">	
@@ -1101,31 +1195,34 @@
 
 							<div class="row mt-3">
 								<div class="col text-right">
-									<button type="submit" class="btn btn-primary" onclick="SuratSakit()">Cetak</button>		
+									<button type="submit" class="btn btn-primary" onclick="setTimeout(SuratSakit, 1000)">Cetak</button>		
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
+<!-- TAB SURAT SAKIT -->
 
+
+<!-- TAB SURAT SEHAT -->
 				<div class="tab-pane fade" id="surat_sehat" role="tabpanel" aria-labelledby="home-tab">
 					<div class="container">
 						<h5 class="text-center mt-3">Surat Sehat</h5>
-						<form action="<?=base_url()?>Dokter/submitCetak/suratsehat" target="_blank" method="POST" id="formSuratSehat">
+						<form action="<?=base_url()?>Dokter/submitCetak/suratsehat" onsubmit="return formSuratSehat()" target="_blank" method="POST" id="formSuratSehat">
 							<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
 							<div class="row mt-3">
 								<div class="col-3">Tes Buta Warna</div>
 								<div class="col">:</div>
 								<div class="col">
-									<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya">
+									<input type="radio" class="custom-control-input" id="tesButaWarna1" name="tes_buta_warna" value="Ya" required="">
 					  				<label class="custom-control-label" for="tesButaWarna1">Ya</label>
 								</div>
 								<div class="col">
-									<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak">
+									<input type="radio" class="custom-control-input" id="tesButaWarna2" name="tes_buta_warna" value="Tidak" required="">
 						  			<label class="custom-control-label" for="tesButaWarna2">Tidak</label>
 								</div>
 								<div class="col">
-									<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial">
+									<input type="radio" class="custom-control-input" id="tesButaWarna3" name="tes_buta_warna" value="Parsial" required="">
 									<label class="custom-control-label" for="tesButaWarna3">Parsial</label>
 								</div>
 							</div>
@@ -1134,18 +1231,26 @@
 								<div class="col-3">Keperluan</div>
 								<div class="col">:</div>
 								<div class="col-8">
-									<input type="text" class="form-control" name="keperluan" required="">
+									<input type="text" class="form-control" id="keperluan" name="keperluan" required="">
+									<input type="hidden" class="form-control" name="tinggi_badan" id="tinggi_badan_sehat">
+									<input type="hidden" class="form-control" name="berat_badan" id="berat_badan_sehat">
+									<input type="hidden" class="form-control" name="sistol" id="sistol_sehat">
+									<input type="hidden" class="form-control" name="diastol" id="diastol_sehat">
+									<input type="hidden" class="form-control" name="nadi" id="nadi_sehat">
+									<input type="hidden" class="form-control" name="respiratory_rate" id="respiratory_rate_sehat">
+									<input type="hidden" class="form-control" name="temperature_ax" id="temperature_ax_sehat">
 								</div>
 							</div>
 							
 							<div class="row mt-3">
 								<div class="col text-right">
-									<button type="submit" class="btn btn-primary" onclick="SuratSehat()">Cetak</button>		
+									<button type="submit" class="btn btn-primary" onclick="setTimeout(SuratSehat, 1000)" >Cetak</button>		
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
+<!-- TAB SURAT SEHAT -->
 			</div>
 		</div>	
 	</div>

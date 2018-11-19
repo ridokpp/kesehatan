@@ -92,7 +92,7 @@
 					TB / BB
 				</div>
 				<div class="col">
-					: <?=$rekam_medis[0]->tinggi_badan?> cm / <?=$rekam_medis[0]->berat_badan?> kg.
+					: <?=$tinggi_badan?> cm / <?=$berat_badan?> kg.
 				</div>		
 			</div>
 			<div class="row">
@@ -100,7 +100,7 @@
 					Tekanan darah
 				</div>
 				<div class="col">
-					: <?=$rekam_medis[0]->sistol?> / <?=$rekam_medis[0]->diastol?> mmHg.
+					: <?=$sistol?> / <?=$diastol?> mmHg.
 				</div>
 			</div>
 			<div class="row">
@@ -108,7 +108,7 @@
 					Nadi		
 				</div>
 				<div class="col">
-					: <?=$rekam_medis[0]->nadi?> rpm
+					: <?=$nadi?> rpm
 				</div>
 			</div>
 			<div class="row" >
