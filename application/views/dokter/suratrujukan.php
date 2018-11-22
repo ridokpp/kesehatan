@@ -136,7 +136,7 @@ table tr td:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=ucwords($pasien[0]->tmp_lahir).", ".tgl_indo($pasien[0]->tgl_lahir)?>
+					<?=ucwords($pasien[0]->tempat_lahir).", ".tgl_indo($pasien[0]->tanggal_lahir)?>
 				</div>	
 			</div>
 			<div class="row">
@@ -147,7 +147,7 @@ table tr td:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=ucwords($pasien[0]->jkelamin)?>
+					<?=ucwords($pasien[0]->jenis_kelamin)?>
 				</div>
 			</div>
 			<div class="row">
@@ -186,7 +186,7 @@ table tr td:last-child {
 					:
 				</div>	
 				<div class="col-9">
-					<?=ucwords($headtotoe['keluhan'])?>
+					<?=ucwords($data['subjektif'])?>
 				</div>		
 			</div>
 			<div class="row">
@@ -197,8 +197,8 @@ table tr td:last-child {
 					:
 				</div>	
 				<div class="col-9">
-					E <?=$headtotoe['GCS_E']?> &nbsp;&nbsp;  V <?=$headtotoe['GCS_V']?> &nbsp;&nbsp;  M <?=$headtotoe['GCS_M']?> &nbsp;&nbsp; 
-					( <?= (in_array("CM", $GCS_opsi)) ? "CM" : "<strike>CM</strike>"?>, <?= (in_array("Apatis", $GCS_opsi)) ? "Apatis" : "<strike>Apatis</strike>"?>, <?= (in_array("Delirium", $GCS_opsi)) ? "Delirium" : "<strike>Delirium</strike>"?>, <?= (in_array("Somnolen", $GCS_opsi)) ? "Somnolen" : "<strike>Somnolen</strike>"?>, <?= (in_array("Stupor", $GCS_opsi)) ? "Stupor" : "<strike>Stupor</strike>"?>, <?= (in_array("Coma", $GCS_opsi)) ? "Coma" : "<strike>Coma</strike>"?>).*)
+					E <?=$data['gcs_e']?> &nbsp;&nbsp;  V <?=$data['gcs_v']?> &nbsp;&nbsp;  M <?=$data['gcs_m']?> &nbsp;&nbsp; 
+					( <?= (in_array("CM", $data['gcs_opsi'])) ? "CM" : "<strike>CM</strike>"?>, <?= (in_array("Apatis", $data['gcs_opsi'])) ? "Apatis" : "<strike>Apatis</strike>"?>, <?= (in_array("Delirium", $data['gcs_opsi'])) ? "Delirium" : "<strike>Delirium</strike>"?>, <?= (in_array("Somnolen", $data['gcs_opsi'])) ? "Somnolen" : "<strike>Somnolen</strike>"?>, <?= (in_array("Stupor", $data['gcs_opsi'])) ? "Stupor" : "<strike>Stupor</strike>"?>, <?= (in_array("Coma", $data['gcs_opsi'])) ? "Coma" : "<strike>Coma</strike>"?>).*)
 				</div>		
 			</div>
 			<div class="row">
@@ -209,7 +209,7 @@ table tr td:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$objek[0]->tb?> cm / <?=$objek[0]->bb?> kg
+					<?=$data['tinggi_badan']?> cm / <?=$data['berat_badan']?> kg
 				</div>	
 			</div>
 			<div class="row">
@@ -220,7 +220,7 @@ table tr td:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$objek[0]->td1?> / <?=$objek[0]->td2?> mmHg
+					<?=$data['sistol']?> / <?=$data['diastol']?> mmHg
 				</div>
 			</div>
 			<div class="row">
@@ -231,7 +231,7 @@ table tr td:last-child {
 					:
 				</div>
 				<div class="col-9">
-					<?=$objek[0]->N?> rpm.
+					<?=$data['nadi']?> rpm.
 				</div>
 			</div>
 			<div class="row">
@@ -251,10 +251,10 @@ table tr td:last-child {
 				</div>
 				<div class="col-9">
 				
-				Anemis <?=($kepala['anemis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['anemis_kanan'] == '1') ? '+' : '-'?> Ikterik <?=($kepala['ikterik_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['ikterik_kanan'] == '1') ? '+' : '-'?> Cianosis <?=($kepala['cianosis_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['cianosis_kanan'] == '1') ? '+' : '-'?> Deformitas <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['deformitas_kiri'] == '1') ? '+' : '-'?> Refleksi cahaya <?=($kepala['refchy_kiri'] == '1') ? '+' : '-'?> / <?=($kepala['refchy_kanan'] == '1') ? '+' : '-'?> <?=($kepala['refchyopsi'] == '1') ? 'Isokor / <strike>Anisokor</strike>' : '<strike>Isokor</strike> / Anisokor'?>.*)
+				Anemis <?=($data['anemis_kiri'] == '1') ? '+' : '-'?> / <?=($data['anemis_kanan'] == '1') ? '+' : '-'?> Ikterik <?=($data['ikterik_kiri'] == '1') ? '+' : '-'?> / <?=($data['ikterik_kanan'] == '1') ? '+' : '-'?> Cianosis <?=($data['cianosis_kiri'] == '1') ? '+' : '-'?> / <?=($data['cianosis_kanan'] == '1') ? '+' : '-'?> Deformitas <?=($data['deformitas_kiri'] == '1') ? '+' : '-'?> / <?=($data['deformitas_kiri'] == '1') ? '+' : '-'?> Refleksi cahaya <?=($data['refchy_kiri'] == '1') ? '+' : '-'?> / <?=($data['refchy_kanan'] == '1') ? '+' : '-'?> <?=($data['refchy_opsi'] == '1') ? 'Isokor / <strike>Anisokor</strike>' : '<strike>Isokor</strike> / Anisokor'?>.*)
 				</div>
 				<div class="col-5 offset-2">
-				Keterangan tambahan :  <?=$kepala['ket_tambahan']?>
+				Keterangan tambahan :  <?=$data['kepala_ket_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -267,12 +267,12 @@ table tr td:last-child {
 				</div>
 				:
 				<div class="col-3">
-					<?=($thorak['metris'] == '1') ? 'Simetris / <strike>Asimetris</strike>' : '<strike>Simetris</strike> / Asimetris'?>.*)
+					<?=($data['paru_simetris_asimetris'] == 'Simetris') ? 'Simetris / <strike>Asimetris</strike>' : '<strike>Simetris</strike> / Asimetris'?>.*)
 				</div>
 			</div>
 			<div class="row">
 				<div class="col offset-3">
-				Wheezing <?=($thorak['wheezing_kiri'] == '1') ? '+' : '-'?> / <?=($thorak['wheezing_kanan'] == '1') ? '+' : '-'?> Ronkhi <?=($thorak['ronkhi_kiri'] == '1') ? '+' : '-'?> / <?=($thorak['ronkhi_kanan'] == '1') ? '+' : '-'?> Vesikuler <?=($thorak['vesikuler_kiri'] == '1') ? '+' : '-'?> / <?=($thorak['vesikuler_kanan'] == '1') ? '+' : '-'?>
+				Wheezing <?=($data['wheezing_kiri'] == '1') ? '+' : '-'?> / <?=($data['wheezing_kanan'] == '1') ? '+' : '-'?> Ronkhi <?=($data['ronkhi_kiri'] == '1') ? '+' : '-'?> / <?=($data['ronkhi_kanan'] == '1') ? '+' : '-'?> Vesikuler <?=($data['vesikuler_kiri'] == '1') ? '+' : '-'?> / <?=($data['vesikuler_kanan'] == '1') ? '+' : '-'?>
 				</div>
 			</div>
 			<div class="row">
@@ -282,17 +282,17 @@ table tr td:last-child {
 				</div>
 				:
 				<div class="col-4">
-					Ictus cordis <?=($thorak['jantung_icor'] == '1') ? 'Tampak / <strike>Tak Tampak</strike>' : '<strike>Tampak</strike> / Tak Tampak'?>.*)
+					Ictus cordis <?=($data['jantung_ictuscordis'] == 'Tampak') ? 'Tampak / <strike>Tak Tampak</strike>' : '<strike>Tampak</strike> / Tak Tampak'?>.*)
 				</div>
 			</div>
 			<div class="row">
 				<div class="col offset-3">
-				S1-S2 <?=($thorak['s1_s2'] == '1') ? 'Reguler / <strike>Irreguler</strike>' : '<strike>Reguler</strike> / Irreguler'?>.*), Suara tambahan <?=$thorak['s_tambahan']?>
+				S1-S2 <?=($data['jantung_s1_s2'] == 'Reguler') ? 'Reguler / <strike>Irreguler</strike>' : '<strike>Reguler</strike> / Irreguler'?>.*), Suara tambahan <?=$data['jantung_suaratambahan']?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col offset-2">
-				Keterangan tambahan :  <?=$thorak['ket_tambahan']?>
+				Keterangan tambahan :  <?=$data['jantung_ket_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -302,22 +302,22 @@ table tr td:last-child {
 					:
 				<div class="col-4">
 				BU <?php
-				if($abdomen['BU'] == 'Normal'){ 
+				if($data['BU'] == 'Normal'){ 
 						echo "Normal / "; 
 						echo "<strike>Meningkat</strike> / ";
 						echo "<strike>Menurun</strike> / ";
 						echo "<strike>Negatif</strike>";
-					} elseif ($abdomen['BU'] == 'Meningkat') {
+					} elseif ($data['BU'] == 'Meningkat') {
 						echo "<strike>Normal</strike> / ";
 						echo "Meningkat / ";
 						echo "<strike>Menurun</strike> / ";
 						echo "<strike>Negatif</strike>";
-					} elseif ($abdomen['BU'] == 'Menurun') {
+					} elseif ($data['BU'] == 'Menurun') {
 						echo "<strike>Normal</strike> / ";
 						echo "<strike>Meningkat</strike> / ";
 						echo "Menurun / ";
 						echo "<strike>Negatif</strike>";
-					} elseif ($abdomen['BU'] == 'Negatif') { 
+					} elseif ($data['BU'] == 'Negatif') { 
 						echo "<strike>Normal</strike> / ";
 						echo "<strike>Meningkat</strike> / ";
 						echo "<strike>Menurun</strike> / ";
@@ -334,31 +334,31 @@ table tr td:last-child {
 				<div class="col-1">
 				<table >
 				  <tr>
-				    <td width="20" height="20"><?=($abdomen['ny1'] == '1') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($abdomen['ny2'] == '2') ?  '✓': '  '?></td>
-				    <td width="20" height="20"><?=($abdomen['ny3'] == '3') ?  '✓': '  '?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan1'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan2'] == '1') ?  '✓': '  '?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan3'] == '1') ?  '✓': '  '?></td>
 				  </tr>
 				  <tr>
-				    <td width="20" height="20"><?=($abdomen['ny4'] == '4') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($abdomen['ny5'] == '5') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($abdomen['ny6'] == '6') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan4'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan5'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan6'] == '1') ?  '✓': ' ' ?></td>
 				  </tr>
 				   <tr>
-				    <td width="20" height="20"><?=($abdomen['ny7'] == '7') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($abdomen['ny8'] == '8') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($abdomen['ny9'] == '9') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan7'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan8'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['nyeri_tekan9'] == '1') ?  '✓': ' ' ?></td>
 				  </tr>
 				</table>
 				</div>
 
 
 				<div class="col-4">
-				Hepatomegali(<?=$abdomen['hpmgl']?>), Spleenomegali(<?=$abdomen['spmgl']?>)
+				Hepatomegali(<?=$data['hepatomegali']?>), Spleenomegali(<?=$data['spleenomegali']?>)
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-5 offset-2">
-				Keterangan tambahan : <?=$abdomen['ket_tambahan']?>
+				Keterangan tambahan : <?=$data['abdomen_ket_tambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -371,12 +371,12 @@ table tr td:last-child {
 				
 				<table>
 					<tr>
-						<td width="20" height="20"><?=($ekstermitas['ah1'] == '1') ?  '✓': ' ' ?></td>
-						<td width="20" height="20"><?=($ekstermitas['ah2'] == '2') ?  '✓': ' ' ?></td>
+						<td width="20" height="20"><?=($data['akral_hangat1'] == '1') ?  '✓': ' ' ?></td>
+						<td width="20" height="20"><?=($data['akral_hangat2'] == '1') ?  '✓': ' ' ?></td>
 					</tr>
 					<tr>
-						<td width="20" height="20"><?=($ekstermitas['ah3'] == '3') ?  '✓': ' ' ?></td>
-						<td width="20" height="20"><?=($ekstermitas['ah4'] == '4') ?  '✓': ' ' ?></td>
+						<td width="20" height="20"><?=($data['akral_hangat3'] == '1') ?  '✓': ' ' ?></td>
+						<td width="20" height="20"><?=($data['akral_hangat4'] == '1') ?  '✓': ' ' ?></td>
 					</tr>
 				</table>
 				;
@@ -386,12 +386,12 @@ table tr td:last-child {
 				</div>
 				<table >
 				  <tr>
-				    <td width="20" height="20"><?=($ekstermitas['crt1'] == '1') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($ekstermitas['crt2'] == '2') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['crt1'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['crt2'] == '1') ?  '✓': ' ' ?></td>
 				  </tr>
 				  <tr>
-				    <td width="20" height="20"><?=($ekstermitas['crt3'] == '3') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($ekstermitas['crt4'] == '4') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['crt3'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['crt4'] == '1') ?  '✓': ' ' ?></td>
 				  </tr>
 				</table>
 				2 detik;
@@ -401,16 +401,16 @@ table tr td:last-child {
 				</div>
 				<table >
 				  <tr>
-				    <td width="20" height="20"><?=($ekstermitas['edm1'] == '1') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($ekstermitas['edm2'] == '2') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['edema1'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['edema2'] == '1') ?  '✓': ' ' ?></td>
 				  </tr>
 				  <tr>
-				    <td width="20" height="20"><?=($ekstermitas['edm3'] == '3') ?  '✓': ' ' ?></td>
-				    <td width="20" height="20"><?=($ekstermitas['edm4'] == '4') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['edema3'] == '1') ?  '✓': ' ' ?></td>
+				    <td width="20" height="20"><?=($data['edema4'] == '1') ?  '✓': ' ' ?></td>
 				  </tr>
 				</table>
 				<div class="col-3">
-				<?=($ekstermitas['pitting'] ? 'Non-Pitting' : 'Pitting')?>.*
+				<?=($data['pitting'] ? 'Non-Pitting' : 'Pitting')?>.*
 				</div>
 			</div>
 			<div class="row">
@@ -419,7 +419,7 @@ table tr td:last-child {
 				</div>
 					:
 				<div class="col-4">
-				<?=$headtotoe['lain_lain']?>
+				<?=$data['lain_lain']?>
 				</div>
 			</div>
 			<div class="row">
@@ -452,19 +452,19 @@ table tr td:last-child {
 					:
 				</div>
 				<div class="col-7">
-				R/ <?=$terapi['terapi1']?>
+				R/ <?=$data['terapi1']?>
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-7 offset-2">
-				R/ <?=$terapi['terapi2']?>
+				R/ <?=$data['terapi2']?>
 				</div>
 			</div>
 			<div class="row">
 				&nbsp;
 				<div class="col-7 offset-2">
-				R/ <?=$terapi['terapi3']?>
+				R/ <?=$data['terapi3']?>
 				</div>
 			</div>
 

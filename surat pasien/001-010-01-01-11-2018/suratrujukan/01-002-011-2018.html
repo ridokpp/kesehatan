@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <title>Pasien : M Salas</title>
+  	<link rel="icon" href="http://localhost/kesehatan/assets/images/LOGO YAYASAN.png">
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/bootstrap/css/bootstrap.min.css"/>
+	
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/select2/dist/css/select2.min.css"/>
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/select2-bootstrap/select2-bootstrap.min.css"></link>
+
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/css/buttons.dataTables.min.css"></link> <!-- Lama iclude Logistik -->
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css"></link> <!-- Lama iclude Logistik -->
+
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/datatables-logistik/css/select.dataTables.min.css"></link> <!-- Baru Logistik -->
+	<link rel="stylesheet" href="http://localhost/kesehatan/assets/datatables-logistik/css/editor.dataTables.min.css"></link> <!-- Baru Logistik -->
+
+	<!-- <link rel="stylesheet" href="http://localhost/kesehatan/assets/bootstrap-datepicker/css/bootstrap-datepicker3.css"/> -->
+	<script src="http://localhost/kesehatan/assets/bootstrap/js/jquery-3.3.1.min.js"></script>
+	<script src="http://localhost/kesehatan/assets/bootstrap/js/popper.min.js"></script>
+	<script src="http://localhost/kesehatan/assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- <script src="http://localhost/kesehatan/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> -->
+	<script src="http://localhost/kesehatan/assets/select2/dist/js/select2.min.js"></script>
+	<script src="http://localhost/kesehatan/assets/jquery-validation-1.17.0/dist/jquery.validate.min.js"></script>
+	<script src="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+
+
+	
+	<script src="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+	<script src="http://localhost/kesehatan/assets/datatables-logistik/js/jquery.dataTables.min.js"></script> <!-- Baru Logistik -->
+	<script src="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/js/dataTables.buttons.min.js"></script> <!-- Lama iclude Logistik -->
+	<script src="http://localhost/kesehatan/assets/datatables-logistik/js/dataTables.select.min.js"></script> <!-- Baru Logistik -->
+
+	<!-- Baru Logistik -->
+	<!-- <script src="http://localhost/kesehatan/assets/datatables-logistik/js/dataTables.editor.min.js"></script>  -->
+
+
+
+	<script src="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/js/buttons.print.min.js"></script>
+	<script type="text/javascript" src="http://localhost/kesehatan/assets/DataTables/DataTables-1.10.18/js/dataTables.select.js"></script>
+
+
+	<style>
+		body{padding: 20px}
+	</style>
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img src="http://localhost/kesehatan/assets/images/LOGO YAYASAN.png" style="width: 40px" > KLINIK PRATAMA</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+
+
+        <ul class="navbar-nav mr-auto">
+      <li class="nav-item    ">
+        <a class="nav-link" href="http://localhost/kesehatan/Dokter/antrian">Antrian</a>
+      </li>
+      <li class="nav-item    ">
+        <a class="nav-link" href="http://localhost/kesehatan/Dokter/logistik">Logistik</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="http://localhost/kesehatan/Dokter/cariRekamMedis">Cari Rekam Medis</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="http://localhost/kesehatan/Dokter/cariPasien">Cari Pasien</a>
+      </li>
+    </ul>
+
+
+
+
+
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost/kesehatan/Account/logout/">dr. Muchamad Zubait</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost/kesehatan/Account/logout/">Sign Out</a>
+      </li>
+    </ul>
+    </div>
+</nav><style type="text/css">
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+table td {
+  border: 1px solid black; 
+}
+table tr:first-child td {
+  border-top: 0;
+}
+table tr td:first-child {
+  border-left: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:last-child {
+  border-right: 0;
+}
+</style>
+<br>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="row">
+				<div class="col-2 offset-1 "> 
+					<img class="img-responsive" src="http://localhost/kesehatan/assets/images/LOGO YAYASAN.png" style="width:150px">
+				</div>
+				<div class="col-8">
+					<div>
+						<p class="text-success text-center mb-0 font-weight-bold">YAYASAN DARUL'ULUM AGUNG</p>
+					</div>
+					<div>
+						<p class="text-center mb-3 font-weight-bold">PRAKTIK DOKTER UMUM</p>
+					</div>
+					<div>
+						<p class="text-center mb-0 font-weight-bold">Jl. Mayjen Sungkono No 09 Bumiayu Kedungkandang Malang 65135</p>
+					</div>
+					<div>
+						<p class="text-center mb-0 font-weight-bold">Telp. 0341-752866, Fax. 0341-752</p>
+					</div>
+					<div>
+						<p class="text-center mb-0 font-weight-bold">Akte Notaris : H. Romlan, SH, M.Hum. No. 26 Tanggal 19 November 2015</p>
+					</div>
+				</div>
+			</div>
+
+			<hr class="mt-0 mb-0 ">
+			<div class="ml-5">
+			<div class="row">
+				<div class="col mt-4">
+					<div class="row">
+						<div class="row col-2 ">
+							Perihal
+						</div>
+						<div class= "offset-1">
+						:
+						</div>	
+						<div class="col-9">
+							Rujukan Pasien
+						</div>
+					</div>
+					<div class="row">
+						<div class="row col-2 ">
+							No. Surat
+						</div>
+						<div class= "offset-1">
+						:
+						</div>	
+						<div class="col-9">
+							001 / 003 / 011 / 2018						</div>
+					</div>
+					<div class="row">
+						<div class="row col-2 ">
+						Lampiran
+						</div>
+						<div class= "offset-1">
+						:
+						</div>	
+						<div class="col-9">
+							..............................................................
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="row">
+						Kepada YTH.
+					</div>
+					<div class="row"">
+						Dr.	________________________________________
+					</div>
+					<div class="row">
+						di RS ______________________________________
+					</div>
+					<div class="row">
+						Kota ______________________________________
+					</div>
+				</div>	
+			</div>
+			<div class="row mb-4">
+				Assalamu'allaikum Wr. Wb.<br>
+				Mohon konsul dan penata laksanaan lebih lanjut pada penderita;
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Nama
+				</div>
+				<div class="col-0">
+					:
+				</div>	
+				<div class="col-9">
+					M Salas				</div>		
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					NIK
+				</div>
+				<div class="col-0">
+					:
+				</div>	
+				<div class="col-9">
+									</div>		
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Tempat / Tgl Lahir
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					Malang, 21 Juli 2004				</div>	
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Jenis Kelamin		
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					Laki-laki				</div>
+			</div>
+			<div class="row">
+				<div class="col-2"> 	
+					Pekerjaan					
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					Petani				</div>
+			</div>
+			<div class="row mb-4">
+				<div class="col-2"> 
+					Alamat		
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					Jalan Jl. Raya Cemorokandang RT01 RW01 Kelurahan Sawojajar Kecamatan Kedungkandang Kota Malang				</div>
+			</div>
+			<div class="row mb-4">
+				Hasil Pemeriksaan
+				<div class="col-2">
+					:
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Keluhan
+				</div>
+				<div class="col-0">
+					:
+				</div>	
+				<div class="col-9">
+									</div>		
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					GCS
+				</div>
+				<div class="col-0">
+					:
+				</div>	
+				<div class="col-9">
+					E 11 &nbsp;&nbsp;  V 12 &nbsp;&nbsp;  M 13 &nbsp;&nbsp; 
+					( CM, <strike>Apatis</strike>, <strike>Delirium</strike>, <strike>Somnolen</strike>, Stupor, Coma).*)
+				</div>		
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					TB / BB
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					173 cm / 62 kg
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Tekanan Darah		
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					120 / 120 mmHg
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-2"> 	
+					Nadi					
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+					120 rpm.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Head to Toe		
+				</div>
+				<div class="col-0">
+					:
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1 offset-1"> 
+					Kepala		
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-9">
+				
+				Anemis + / - Ikterik - / - Cianosis + / - Deformitas - / - Refleksi cahaya + / - <strike>Isokor</strike> / Anisokor.*)
+				</div>
+				<div class="col-5 offset-2">
+				Keterangan tambahan :  				</div>
+			</div>
+			<div class="row">
+				<div class="col-1 offset-1"> 
+					Thorak		
+				</div>
+					:
+				<div class="col-1">
+				Paru
+				</div>
+				:
+				<div class="col-3">
+					<strike>Simetris</strike> / Asimetris.*)
+				</div>
+			</div>
+			<div class="row">
+				<div class="col offset-3">
+				Wheezing + / - Ronkhi - / + Vesikuler + / -				</div>
+			</div>
+			<div class="row">
+				&nbsp;
+				<div class="col-1 offset-2">
+					Jantung
+				</div>
+				:
+				<div class="col-4">
+					Ictus cordis <strike>Tampak</strike> / Tak Tampak.*)
+				</div>
+			</div>
+			<div class="row">
+				<div class="col offset-3">
+				S1-S2 <strike>Reguler</strike> / Irreguler.*), Suara tambahan jantung suara tambahan				</div>
+			</div>
+			<div class="row">
+				<div class="col offset-2">
+				Keterangan tambahan :  jantung keterangan tambahan				</div>
+			</div>
+			<div class="row">
+				<div class="col-1 offset-1"> 
+					Abdomen		
+				</div>
+					:
+				<div class="col-4">
+				BU .*)
+				</div>
+			</div>
+			<div class="row">
+				&nbsp;
+				<div class="col-1 offset-2">
+				Nyeri Tekan
+				</div>
+				<div class="col-1">
+				<table >
+				  <tr>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20">✓</td>
+				    <td width="20" height="20">✓</td>
+				  </tr>
+				  <tr>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20"> </td>
+				  </tr>
+				   <tr>
+				    <td width="20" height="20">✓</td>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20">✓</td>
+				  </tr>
+				</table>
+				</div>
+
+
+				<div class="col-4">
+				Hepatomegali(hepatomegali pasien), Spleenomegali(spleenomegali pasien)
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-5 offset-2">
+				Keterangan tambahan : keterangan tambahan abdomen				</div>
+			</div>
+			<div class="row">
+				<div class="col-1 offset-1"> 
+					Ekstermitas		
+				</div>
+				<div class="col-2">
+				: Akral Hangat
+				</div>
+				
+				<table>
+					<tr>
+						<td width="20" height="20">✓</td>
+						<td width="20" height="20"> </td>
+					</tr>
+					<tr>
+						<td width="20" height="20"> </td>
+						<td width="20" height="20">✓</td>
+					</tr>
+				</table>
+				;
+
+				<div class="col-1">
+				CRT
+				</div>
+				<table >
+				  <tr>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20">✓</td>
+				  </tr>
+				  <tr>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20"> </td>
+				  </tr>
+				</table>
+				2 detik;
+
+				<div class="col-1">
+				Edema
+				</div>
+				<table >
+				  <tr>
+				    <td width="20" height="20"> </td>
+				    <td width="20" height="20"> </td>
+				  </tr>
+				  <tr>
+				    <td width="20" height="20">✓</td>
+				    <td width="20" height="20">✓</td>
+				  </tr>
+				</table>
+				<div class="col-3">
+				Pitting.*
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-1 offset-1"> 
+					Lain-lain		
+				</div>
+					:
+				<div class="col-4">
+				lainlain				</div>
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Diagnosa		
+				</div>:
+				<div class="col">
+							
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Undefined variable: diagnosaPrimer</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 431</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 431<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Warning</p>
+<p>Message:  Invalid argument supplied for foreach()</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 431</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 431<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Undefined variable: diagnosaSekunder</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 435</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 435<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Warning</p>
+<p>Message:  Invalid argument supplied for foreach()</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 435</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 435<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Undefined variable: diagnosaLain</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 439</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 439<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Warning</p>
+<p>Message:  Invalid argument supplied for foreach()</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 439</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 439<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Notice</p>
+<p>Message:  Undefined variable: diagnosaPemeriksaanLab</p>
+<p>Filename: dokter/suratrujukan.php</p>
+<p>Line Number: 443</p>
+
+
+	<p>Backtrace:</p>
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\views\dokter\suratrujukan.php<br />
+			Line: 443<br />
+			Function: _error_handler			</p>
+
+		
+	
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\application\controllers\Dokter.php<br />
+			Line: 339<br />
+			Function: view			</p>
+
+		
+	
+		
+	
+		
+			<p style="margin-left:10px">
+			File: C:\xampp_\htdocs\kesehatan\index.php<br />
+			Line: 315<br />
+			Function: require_once			</p>
+
+		
+	
+
+</div>, 				</div>
+			</div>
+			<div class="row">
+				<div class="col-2"> 
+					Terapi		
+				</div>
+				<div class="col-0">
+					:
+				</div>
+				<div class="col-7">
+				R/ terapi 1				</div>
+			</div>
+			<div class="row">
+				&nbsp;
+				<div class="col-7 offset-2">
+				R/ terapi 2				</div>
+			</div>
+			<div class="row">
+				&nbsp;
+				<div class="col-7 offset-2">
+				R/ terapi 3				</div>
+			</div>
+
+			<div class="row mt-2">
+				Demikian atas perhatiannya, diucapkan banyak terima kasih.
+			</div>
+			<div class="row">
+				Wassalamu'allaikum Wr. Wb.
+			</div>
+			
+			<div class="row">
+				<div class="col mt-4">
+				<div class="row"  style="margin-top: 100px">
+						NB : .*) Coret yang tidak perlu.
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="row">
+						Malang, 22 November 2018					</div>
+					<div class="row" style="margin-bottom: 100px">
+						Pemeriksa,
+					</div>
+					<div class="row mt-5">
+						Dr. Muchamad Zubait					</div>
+					<div class="row">
+						SIP : 446.DU/1616.1/35.73.302/2018					</div>
+				</div>	
+			</div>
+		</div>
+	  </div>	
+	</div>
+</div></body>
+</html>

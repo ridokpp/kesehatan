@@ -271,10 +271,41 @@
 		// set input type hidden
 		$('#nomor_pasien_rujukan').val($('#nomor_pasien_pemeriksaan').val());
 		
+		$('#subjektif_rujukan').val($('#subjektif_pemeriksaan').val());
 		$('#gcs_e_rujukan').val($('#gcs_e_pemeriksaan').val());
 		$('#gcs_v_rujukan').val($('#gcs_v_pemeriksaan').val());
 		$('#gcs_m_rujukan').val($('#gcs_m_pemeriksaan').val());
 		
+		// set select2 untuk clear all option yang ada di hidden form. (restart). defaultya kosong
+		$('#primary_rujukan').val(null).trigger('change');
+		$('#secondary_rujukan').val(null).trigger('change');
+		$('#lain_rujukan').val(null).trigger('change');
+		
+		// CREATE PRIMARY SELECT ELEMENT
+		var primarySelected = $("#primary_pemeriksaan").select2('data');
+		for (i in primarySelected){
+			var primaryDescOnly = primarySelected[i].text.split(" / ");
+			var newOption = new Option(primaryDescOnly[1], primaryDescOnly[1], true, true);
+			$('#primary_rujukan').append(newOption).trigger('change');
+		}
+		// CREATE SECONDARY SELECT ELEMENT
+		var secondarySelected = $("#secondary_pemeriksaan").select2('data');
+		for (i in secondarySelected){
+			var secondaryDescOnly = secondarySelected[i].text.split(" / ");
+			var newOption = new Option(secondaryDescOnly[1], secondaryDescOnly[1], true, true);
+			$('#secondary_rujukan').append(newOption).trigger('change');
+		}
+		// CREATE LAINLAIN SELECT ELEMENT
+		var lainlainSelected = $("#lain_pemeriksaan").select2('data');
+		for (i in lainlainSelected){
+			lainlainDescOnly = lainlainSelected[i].text.split(" / ");
+			var newOption = new Option(lainlainDescOnly[1], lainlainDescOnly[1], true, true);
+			$('#lain_rujukan').append(newOption).trigger('change');
+		}
+		// get and set element text area
+		var pemeriksaanLab = $("#pemeriksaan_lab_pemeriksaan").val();
+		$("#pemeriksaan_lab_rujukan").val(pemeriksaanLab);
+
 		$('#gcs_opsi_cm_rujukan').prop("checked" , $('#gcs_opsi_cm_pemeriksaan').prop("checked"));
 		$('#gcs_opsi_apatis_rujukan').prop("checked" , $('#gcs_opsi_apatis_pemeriksaan').prop("checked"))
 		$('#gcs_opsi_derilium_rujukan').prop("checked" , $('#gcs_opsi_derilium_pemeriksaan').prop("checked"))
@@ -342,11 +373,6 @@
 		$('#terapi2_rujukan').val($('#terapi2_pemeriksaan').val());
 		$('#terapi3_rujukan').val($('#terapi3_pemeriksaan').val());
 
-
-
-
-		console.log($("input[name=refchy_opsi]:checked").val())
-
 		$("input[name='refchy_opsi_rujukan'][value='"+$("input[name=refchy_opsi_pemeriksaan]:checked").val()+"']").prop('checked', true);
  		$("input[name='paru_simetris_asimetris_rujukan'][value='"+$("input[name=paru_simetris_asimetris_pemeriksaan]:checked").val()+"']").prop('checked', true);
 		$("input[name='jantung_ictuscordis_rujukan'][value='"+$("input[name=jantung_ictuscordis_pemeriksaan]:checked").val()+"']").prop('checked', true);
@@ -355,12 +381,13 @@
 		$("input[name='BU_rujukan'][value='"+$("input[name=BU_pemeriksaan]:checked").val()+"']").prop('checked', true);
 
 		$("input[name='pitting_rujukan'][value='"+$("input[name=pitting_pemeriksaan]:checked").val()+"']").prop('checked', true);
-
 		
 		$('#headtotoe_rujukan').val($('#headtotoe_pemeriksaan').val());
 
 		$('#suratrujukan')[0].submit();
+
 	}
+
 	// saat submit cetak surat rujukan, tambahkan nomor surat sakit yang telah tercetak ke kolom planning untuk dokumnetasi lebih jelas
 	function SuratRujukan() {
 		var jqxhr = $.get( "<?=base_url()?>Dokter/getTabelSurat/rujukan/<?=$pasien[0]->nomor_pasien?>", function(data) {
@@ -559,7 +586,7 @@
 						<input type="hidden" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>" id="nomor_pasien_pemeriksaan">
 						<div class="container">
 							<h5 class="text-center mt-3">Subjektif</h5>
-								<textarea class="form-control" aria-label="With textarea" placeholder="Subjektif" name="subjektif"></textarea>
+								<textarea class="form-control" aria-label="With textarea" placeholder="Subjektif" name="subjektif" id="subjektif_pemeriksaan"></textarea>
 							<hr>
 
 							<h5 class="text-center mt-3">Objektif</h5>
@@ -698,7 +725,7 @@
 								<div class="col-2">Laboratorium</div>
 								<div class="col-1">:</div>
 								<div class="col-9">
-									<input class="form-control" type="text" name="assessmentPemeriksaanLab" placeholder="Pemeriksaan Laboratorium" id="pemeriksaanLab">
+									<input class="form-control" type="text" name="assessmentPemeriksaanLab" placeholder="Pemeriksaan Laboratorium" id="pemeriksaan_lab_pemeriksaan">
 								</div>	
 							</div>
 
@@ -1165,6 +1192,8 @@
 <form method="POST" action="<?=base_url()?>Dokter/submitCetak/suratrujukan" target="_blank" onsubmit="SuratRujukan()" id="suratrujukan">
 	<input type="text" name="nomor_pasien" id="nomor_pasien_rujukan">
 	
+	<textarea id="subjektif_rujukan" name="subjektif"></textarea>
+	
 	<input type="text" name="gcs_e" id="gcs_e_rujukan">
 	<input type="text" name="gcs_v" id="gcs_v_rujukan">
 	<input type="text" name="gcs_m" id="gcs_m_rujukan">
@@ -1175,6 +1204,10 @@
 	<input type="checkbox" id="gcs_opsi_somnolen_rujukan" name="gcs_opsi[]" value="Somnolen">
 	<input type="checkbox" id="gcs_opsi_stupor_rujukan" name="gcs_opsi[]" value="Stupor">
 	<input type="checkbox" id="gcs_opsi_coma_rujukan" name="gcs_opsi[]" value="Coma">
+	<select id="primary_rujukan" name="diagnosaPrimary[]" multiple="multiple" style="width: 100%"></select>
+	<select id="secondary_rujukan" name="diagnosaSecondary[]" multiple="multiple" style="width: 100%"></select>
+	<select id="lain_rujukan" name="diagnosaLain[]" multiple="multiple" style="width: 100%"></select>
+	<textarea id="pemeriksaan_lab_rujukan" name="diagnosaPemeriksaanLab"></textarea>
 
 	<input type="text" name="tinggi_badan" id="tinggi_badan_rujukan">
 	<input type="text" name="berat_badan" id="berat_badan_rujukan">
@@ -1193,11 +1226,15 @@
 	<input type="checkbox" id="cianosis_kanan_rujukan" name="cianosis_kanan" value="1">
 	<input type="checkbox" id="deformitas_kiri_rujukan" name="deformitas_kiri" value="1">
 	<input type="checkbox" id="deformitas_kanan_rujukan" name="deformitas_kanan" value="1">
+	<input type="checkbox" id="refchy_kiri_rujukan" name="refchy_kiri" value="1">
+	<input type="checkbox" id="refchy_kanan_rujukan" name="refchy_kanan" value="1">
+	
 	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Isokor">
 	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Anisokor">
+	<input type="text" name="kepala_ket_tambahan" id="kepala_ket_tambahan_rujukan">
 
-	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris_rujukan" value="Simetris">
-	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris_rujukan" value="Asimetris">
+	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Simetris">
+	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Asimetris">
 	<input type="checkbox" id="wheezing_kiri_rujukan" name="wheezing_kiri" value="1">
 	<input type="checkbox" id="wheezing_kanan_rujukan" name="wheezing_kanan" value="1">
 	<input type="checkbox" id="ronkhi_kiri_rujukan" name="ronkhi_kiri" value="1">
@@ -1205,50 +1242,51 @@
 	<input type="checkbox" id="vesikuler_kiri_rujukan" name="vesikuler_kiri" value="1">
 	<input type="checkbox" id="vesikuler_kanan_rujukan" name="vesikuler_kanan" value="1">
 	
-	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis_rujukan" value="Tampak">
-	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis_rujukan" value="Tak Tampak">
-	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2_rujukan" value="Reguler">
-	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2_rujukan" value="Irreguler">
-	<input type="text" name="jantung_suaratambahan_rujukan" id="jantung_suaratambahan_rujukan">
-	<input type="text" name="jantung_ket_tambahan_rujukan" id="jantung_ket_tambahan_rujukan">
+	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tampak">
+	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tak Tampak">
+	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Reguler">
+	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Irreguler">
+	<input type="text" name="jantung_suaratambahan" id="jantung_suaratambahan_rujukan">
+	<input type="text" name="jantung_ket_tambahan" id="jantung_ket_tambahan_rujukan">
 
-
-	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Normal">
-	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Menurun">
-	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Meningkat">
-	<input type="radio" id="BU_rujukan" name="BU_rujukan" value="Negatif">
-	<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8_rujukan" value="1">
-	<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9_rujukan" value="1">
-	<input type="text" name="hepatomegali_rujukan" id="hepatomegali_rujukan">
-	<input type="text" name="spleenomegali_rujukan" id="spleenomegali_rujukan">
-	<input type="text" name="abdomen_ket_tambahan_rujukan" id="abdomen_ket_tambahan_rujukan">
-	<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1_rujukan" value="1">
-	<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2_rujukan" value="1">
-	<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3_rujukan" value="1">
-	<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4_rujukan" value="1">
-	<input type="checkbox" id="crt1_rujukan" name="crt1_rujukan" value="1">
-	<input type="checkbox" id="crt2_rujukan" name="crt2_rujukan" value="1">
-	<input type="checkbox" id="crt3_rujukan" name="crt3_rujukan" value="1">
-	<input type="checkbox" id="crt4_rujukan" name="crt4_rujukan" value="1">
-	<input type="checkbox" id="edema1_rujukan" name="edema1_rujukan" value="1">
-	<input type="checkbox" id="edema2_rujukan" name="edema2_rujukan" value="1">
-	<input type="checkbox" id="edema3_rujukan" name="edema3_rujukan" value="1">
-	<input type="checkbox" id="edema4_rujukan" name="edema4_rujukan" value="1">
-	<input type="radio" id="pitting_rujukan" name="pitting_rujukan" value="Non-pitting">
-	<input type="radio" id="pitting_rujukan" name="pitting_rujukan" value="Pitting">
-	<input type="text" name="ekstermitas_kettambahan_rujukan" id="ekstermitas_kettambahan_rujukan">
-	<input type="text" name="lain_lain_rujukan" id="lain_lain_rujukan">
-	<input type="text" name="planning_rujukan" id="planning_rujukan">
-	<input type="text" name="terapi1_rujukan" id="terapi1_rujukan">
-	<input type="text" name="terapi2_rujukan" id="terapi2_rujukan">
-	<input type="text" name="terapi3_rujukan" id="terapi3_rujukan">
+	<input type="radio" id="BU_rujukan" name="BU" value="Normal">
+	<input type="radio" id="BU_rujukan" name="BU" value="Menurun">
+	<input type="radio" id="BU_rujukan" name="BU" value="Meningkat">
+	<input type="radio" id="BU_rujukan" name="BU" value="Negatif">
+	<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1" value="1">
+	<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2" value="1">
+	<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3" value="1">
+	<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4" value="1">
+	<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5" value="1">
+	<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6" value="1">
+	<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7" value="1">
+	<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8" value="1">
+	<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9" value="1">
+	<input type="text" name="hepatomegali" id="hepatomegali_rujukan">
+	<input type="text" name="spleenomegali" id="spleenomegali_rujukan">
+	<input type="text" name="abdomen_ket_tambahan" id="abdomen_ket_tambahan_rujukan">
+	
+	<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1" value="1">
+	<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2" value="1">
+	<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3" value="1">
+	<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4" value="1">
+	<input type="checkbox" id="crt1_rujukan" name="crt1" value="1">
+	<input type="checkbox" id="crt2_rujukan" name="crt2" value="1">
+	<input type="checkbox" id="crt3_rujukan" name="crt3" value="1">
+	<input type="checkbox" id="crt4_rujukan" name="crt4" value="1">
+	<input type="checkbox" id="edema1_rujukan" name="edema1" value="1">
+	<input type="checkbox" id="edema2_rujukan" name="edema2" value="1">
+	<input type="checkbox" id="edema3_rujukan" name="edema3" value="1">
+	<input type="checkbox" id="edema4_rujukan" name="edema4" value="1">
+	<input type="radio" id="pitting_rujukan" name="pitting" value="Non-pitting">
+	<input type="radio" id="pitting_rujukan" name="pitting" value="Pitting">
+	<input type="text" name="ekstermitas_ket_tambahan" id="ekstermitas_kettambahan_rujukan">
+	
+	<input type="text" name="lain_lain" id="lain_lain_rujukan">
+	<input type="text" name="planning" id="planning_rujukan">
+	<input type="text" name="terapi1" id="terapi1_rujukan">
+	<input type="text" name="terapi2" id="terapi2_rujukan">
+	<input type="text" name="terapi3" id="terapi3_rujukan">
 
 
 </form>
