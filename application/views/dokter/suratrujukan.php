@@ -428,19 +428,23 @@ table tr td:last-child {
 				</div>:
 				<div class="col">
 							<?php 
-							foreach ($diagnosaPrimer as $key => $value ) {
-								echo $value." ; ";
-								error_reporting(0);
+							if ($data['diagnosa_primary'] !== array()) {
+								foreach ($data['diagnosa_primary'] as $key => $value ) {
+									echo $value." ; ";
+								}
 							}
-							foreach ($diagnosaSekunder as $key => $value) {
-								echo $value." ; ";
-								error_reporting(0);
+							if ($data['diagnosa_secondary']  !== array()) {
+								foreach ($data['diagnosa_secondary'] as $key => $value) {
+									echo $value." ; ";
+								}
+								
 							}
-							foreach ($diagnosaLain as $key => $value) {
-								echo $value;
-								error_reporting(0);
+							if ($data['diagnosa_secondary']  !== array()) {
+								foreach ($data['diagnosa_lain'] as $key => $value) {
+									echo $value;
+								}
 							}
-							echo ", ".$diagnosaPemeriksaanLab;
+							echo ", ".$data['diagnosa_pemeriksaan_lab'];
 							?>
 				</div>
 			</div>

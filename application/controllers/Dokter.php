@@ -255,7 +255,7 @@ class Dokter extends CI_Controller {
 												"gcs_opsi" => $this->input->post("gcs_opsi[]"),
 												"diagnosa_primary" => $this->input->post("diagnosaPrimary[]"),
 												"diagnosa_secondary" => $this->input->post("diagnosaSecondary[]"),
-												"diagnosa_secondary" => $this->input->post("diagnosaSecondary[]"),
+												"diagnosa_lain" => $this->input->post("diagnosaLain[]"),
 												"diagnosa_pemeriksaan_lab" => $this->input->post("diagnosaPemeriksaanLab"),
 
 												"tinggi_badan" => $this->input->post("tinggi_badan"),
