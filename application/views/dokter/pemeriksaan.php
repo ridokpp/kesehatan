@@ -1190,103 +1190,108 @@
 
 <!-- HIDDEN FORM SURAT RUJUKAN -->
 <form method="POST" action="<?=base_url()?>Dokter/submitCetak/suratrujukan" target="_blank" onsubmit="SuratRujukan()" id="suratrujukan">
-	<input type="text" name="nomor_pasien" id="nomor_pasien_rujukan">
+	<style type="text/css">
+		.sembunyikan {
+			display: none
+		}
+	</style>
+	<input type="text" name="nomor_pasien" id="nomor_pasien_rujukan" class="sembunyikan">
 	
-	<textarea id="subjektif_rujukan" name="subjektif"></textarea>
+	<textarea id="subjektif_rujukan" name="subjektif" class="sembunyikan"></textarea>
 	
-	<input type="text" name="gcs_e" id="gcs_e_rujukan">
-	<input type="text" name="gcs_v" id="gcs_v_rujukan">
-	<input type="text" name="gcs_m" id="gcs_m_rujukan">
+	<input type="text" name="gcs_e" id="gcs_e_rujukan" class="sembunyikan">
+	<input type="text" name="gcs_v" id="gcs_v_rujukan" class="sembunyikan">
+	<input type="text" name="gcs_m" id="gcs_m_rujukan" class="sembunyikan">
 
-	<input type="checkbox" id="gcs_opsi_cm_rujukan" name="gcs_opsi[]" value="CM">
-	<input type="checkbox" id="gcs_opsi_apatis_rujukan" name="gcs_opsi[]" value="Apatis">
-	<input type="checkbox" id="gcs_opsi_derilium_rujukan" name="gcs_opsi[]" value="Derilium">
-	<input type="checkbox" id="gcs_opsi_somnolen_rujukan" name="gcs_opsi[]" value="Somnolen">
-	<input type="checkbox" id="gcs_opsi_stupor_rujukan" name="gcs_opsi[]" value="Stupor">
-	<input type="checkbox" id="gcs_opsi_coma_rujukan" name="gcs_opsi[]" value="Coma">
-	<select id="primary_rujukan" name="diagnosaPrimary[]" multiple="multiple" style="width: 100%"></select>
-	<select id="secondary_rujukan" name="diagnosaSecondary[]" multiple="multiple" style="width: 100%"></select>
-	<select id="lain_rujukan" name="diagnosaLain[]" multiple="multiple" style="width: 100%"></select>
-	<textarea id="pemeriksaan_lab_rujukan" name="diagnosaPemeriksaanLab"></textarea>
+	<input type="checkbox" id="gcs_opsi_cm_rujukan" name="gcs_opsi[]" value="CM"  class="sembunyikan">
+	<input type="checkbox" id="gcs_opsi_apatis_rujukan" name="gcs_opsi[]" value="Apatis"  class="sembunyikan">
+	<input type="checkbox" id="gcs_opsi_derilium_rujukan" name="gcs_opsi[]" value="Derilium"  class="sembunyikan">
+	<input type="checkbox" id="gcs_opsi_somnolen_rujukan" name="gcs_opsi[]" value="Somnolen"  class="sembunyikan">
+	<input type="checkbox" id="gcs_opsi_stupor_rujukan" name="gcs_opsi[]" value="Stupor"  class="sembunyikan">
+	<input type="checkbox" id="gcs_opsi_coma_rujukan" name="gcs_opsi[]" value="Coma"  class="sembunyikan">
+	<select id="primary_rujukan" name="diagnosaPrimary[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
+	<select id="secondary_rujukan" name="diagnosaSecondary[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
+	<select id="lain_rujukan" name="diagnosaLain[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
+	<textarea id="pemeriksaan_lab_rujukan" name="diagnosaPemeriksaanLab" class="sembunyikan"></textarea>
 
-	<input type="text" name="tinggi_badan" id="tinggi_badan_rujukan">
-	<input type="text" name="berat_badan" id="berat_badan_rujukan">
-	<input type="text" name="sistol" id="sistol_rujukan">
-	<input type="text" name="diastol" id="diastol_rujukan">
-	<input type="text" name="respiratory_rate" id="respiratory_rate_rujukan">
-	<input type="text" name="nadi" id="nadi_rujukan">
-	<input type="text" name="temperature_ax" id="temperature_ax_rujukan">
-	<input type="text" name="headtotoe" id="headtotoe_rujukan">
+	<input type="text" name="tinggi_badan" id="tinggi_badan_rujukan" class="sembunyikan">
+	<input type="text" name="berat_badan" id="berat_badan_rujukan" class="sembunyikan">
+	<input type="text" name="sistol" id="sistol_rujukan" class="sembunyikan">
+	<input type="text" name="diastol" id="diastol_rujukan" class="sembunyikan">
+	<input type="text" name="respiratory_rate" id="respiratory_rate_rujukan" class="sembunyikan">
+	<input type="text" name="nadi" id="nadi_rujukan" class="sembunyikan">
+	<input type="text" name="temperature_ax" id="temperature_ax_rujukan" class="sembunyikan">
+	<input type="text" name="headtotoe" id="headtotoe_rujukan" class="sembunyikan">
 
-	<input type="checkbox" id="anemis_kiri_rujukan" name="anemis_kiri" value="1">
-	<input type="checkbox" id="anemis_kanan_rujukan" name="anemis_kanan" value="1">
-	<input type="checkbox" id="ikterik_kiri_rujukan" name="ikterik_kiri" value="1">
-	<input type="checkbox" id="ikterik_kanan_rujukan" name="ikterik_kanan" value="1">
-	<input type="checkbox" id="cianosis_kiri_rujukan" name="cianosis_kiri" value="1">
-	<input type="checkbox" id="cianosis_kanan_rujukan" name="cianosis_kanan" value="1">
-	<input type="checkbox" id="deformitas_kiri_rujukan" name="deformitas_kiri" value="1">
-	<input type="checkbox" id="deformitas_kanan_rujukan" name="deformitas_kanan" value="1">
-	<input type="checkbox" id="refchy_kiri_rujukan" name="refchy_kiri" value="1">
-	<input type="checkbox" id="refchy_kanan_rujukan" name="refchy_kanan" value="1">
+	<input type="checkbox" id="anemis_kiri_rujukan" name="anemis_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="anemis_kanan_rujukan" name="anemis_kanan" value="1" class="sembunyikan">
+	<input type="checkbox" id="ikterik_kiri_rujukan" name="ikterik_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="ikterik_kanan_rujukan" name="ikterik_kanan" value="1" class="sembunyikan">
+	<input type="checkbox" id="cianosis_kiri_rujukan" name="cianosis_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="cianosis_kanan_rujukan" name="cianosis_kanan" value="1" class="sembunyikan">
+	<input type="checkbox" id="deformitas_kiri_rujukan" name="deformitas_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="deformitas_kanan_rujukan" name="deformitas_kanan" value="1" class="sembunyikan">
+	<input type="checkbox" id="refchy_kiri_rujukan" name="refchy_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="refchy_kanan_rujukan" name="refchy_kanan" value="1" class="sembunyikan">
 	
-	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Isokor">
-	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Anisokor">
-	<input type="text" name="kepala_ket_tambahan" id="kepala_ket_tambahan_rujukan">
+	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Isokor" class="sembunyikan">
+	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Anisokor" class="sembunyikan">
+	<input type="text" name="kepala_ket_tambahan" id="kepala_ket_tambahan_rujukan" class="sembunyikan">
 
-	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Simetris">
-	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Asimetris">
-	<input type="checkbox" id="wheezing_kiri_rujukan" name="wheezing_kiri" value="1">
-	<input type="checkbox" id="wheezing_kanan_rujukan" name="wheezing_kanan" value="1">
-	<input type="checkbox" id="ronkhi_kiri_rujukan" name="ronkhi_kiri" value="1">
-	<input type="checkbox" id="ronkhi_kanan_rujukan" name="ronkhi_kanan" value="1">
-	<input type="checkbox" id="vesikuler_kiri_rujukan" name="vesikuler_kiri" value="1">
-	<input type="checkbox" id="vesikuler_kanan_rujukan" name="vesikuler_kanan" value="1">
+	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Simetris" class="sembunyikan">
+	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Asimetris" class="sembunyikan">
+	<input type="checkbox" id="wheezing_kiri_rujukan" name="wheezing_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="wheezing_kanan_rujukan" name="wheezing_kanan" value="1" class="sembunyikan">
+	<input type="checkbox" id="ronkhi_kiri_rujukan" name="ronkhi_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="ronkhi_kanan_rujukan" name="ronkhi_kanan" value="1" class="sembunyikan">
+	<input type="checkbox" id="vesikuler_kiri_rujukan" name="vesikuler_kiri" value="1" class="sembunyikan">
+	<input type="checkbox" id="vesikuler_kanan_rujukan" name="vesikuler_kanan" value="1" class="sembunyikan">
 	
-	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tampak">
-	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tak Tampak">
-	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Reguler">
-	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Irreguler">
-	<input type="text" name="jantung_suaratambahan" id="jantung_suaratambahan_rujukan">
-	<input type="text" name="jantung_ket_tambahan" id="jantung_ket_tambahan_rujukan">
+	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tampak" class="sembunyikan">
+	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tak Tampak" class="sembunyikan">
+	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Reguler" class="sembunyikan">
+	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Irreguler" class="sembunyikan">
+	<input type="text" name="jantung_suaratambahan" id="jantung_suaratambahan_rujukan" class="sembunyikan">
+	<input type="text" name="jantung_ket_tambahan" id="jantung_ket_tambahan_rujukan" class="sembunyikan">
 
-	<input type="radio" id="BU_rujukan" name="BU" value="Normal">
-	<input type="radio" id="BU_rujukan" name="BU" value="Menurun">
-	<input type="radio" id="BU_rujukan" name="BU" value="Meningkat">
-	<input type="radio" id="BU_rujukan" name="BU" value="Negatif">
-	<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1" value="1">
-	<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2" value="1">
-	<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3" value="1">
-	<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4" value="1">
-	<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5" value="1">
-	<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6" value="1">
-	<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7" value="1">
-	<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8" value="1">
-	<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9" value="1">
-	<input type="text" name="hepatomegali" id="hepatomegali_rujukan">
-	<input type="text" name="spleenomegali" id="spleenomegali_rujukan">
-	<input type="text" name="abdomen_ket_tambahan" id="abdomen_ket_tambahan_rujukan">
+	<input type="radio" id="BU_rujukan" name="BU" value="Normal" class="sembunyikan">
+	<input type="radio" id="BU_rujukan" name="BU" value="Menurun" class="sembunyikan">
+	<input type="radio" id="BU_rujukan" name="BU" value="Meningkat" class="sembunyikan">
+	<input type="radio" id="BU_rujukan" name="BU" value="Negatif" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8" value="1" class="sembunyikan">
+	<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9" value="1" class="sembunyikan">
+	<input type="text" name="hepatomegali" id="hepatomegali_rujukan" class="sembunyikan">
+	<input type="text" name="spleenomegali" id="spleenomegali_rujukan" class="sembunyikan">
+	<input type="text" name="abdomen_ket_tambahan" id="abdomen_ket_tambahan_rujukan" class="sembunyikan">
 	
-	<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1" value="1">
-	<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2" value="1">
-	<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3" value="1">
-	<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4" value="1">
-	<input type="checkbox" id="crt1_rujukan" name="crt1" value="1">
-	<input type="checkbox" id="crt2_rujukan" name="crt2" value="1">
-	<input type="checkbox" id="crt3_rujukan" name="crt3" value="1">
-	<input type="checkbox" id="crt4_rujukan" name="crt4" value="1">
-	<input type="checkbox" id="edema1_rujukan" name="edema1" value="1">
-	<input type="checkbox" id="edema2_rujukan" name="edema2" value="1">
-	<input type="checkbox" id="edema3_rujukan" name="edema3" value="1">
-	<input type="checkbox" id="edema4_rujukan" name="edema4" value="1">
-	<input type="radio" id="pitting_rujukan" name="pitting" value="Non-pitting">
-	<input type="radio" id="pitting_rujukan" name="pitting" value="Pitting">
-	<input type="text" name="ekstermitas_ket_tambahan" id="ekstermitas_kettambahan_rujukan">
+	<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1" value="1" class="sembunyikan">
+	<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2" value="1" class="sembunyikan">
+	<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3" value="1" class="sembunyikan">
+	<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4" value="1" class="sembunyikan">
+	<input type="checkbox" id="crt1_rujukan" name="crt1" value="1" class="sembunyikan">
+	<input type="checkbox" id="crt2_rujukan" name="crt2" value="1" class="sembunyikan">
+	<input type="checkbox" id="crt3_rujukan" name="crt3" value="1" class="sembunyikan">
+	<input type="checkbox" id="crt4_rujukan" name="crt4" value="1" class="sembunyikan">
+	<input type="checkbox" id="edema1_rujukan" name="edema1" value="1" class="sembunyikan">
+	<input type="checkbox" id="edema2_rujukan" name="edema2" value="1" class="sembunyikan">
+	<input type="checkbox" id="edema3_rujukan" name="edema3" value="1" class="sembunyikan">
+	<input type="checkbox" id="edema4_rujukan" name="edema4" value="1" class="sembunyikan">
+	<input type="radio" id="pitting_rujukan" name="pitting" value="Non-pitting" class="sembunyikan">
+	<input type="radio" id="pitting_rujukan" name="pitting" value="Pitting" class="sembunyikan">
+	<input type="text" name="ekstermitas_ket_tambahan" id="ekstermitas_kettambahan_rujukan" class="sembunyikan">
 	
-	<input type="text" name="lain_lain" id="lain_lain_rujukan">
-	<input type="text" name="planning" id="planning_rujukan">
-	<input type="text" name="terapi1" id="terapi1_rujukan">
-	<input type="text" name="terapi2" id="terapi2_rujukan">
-	<input type="text" name="terapi3" id="terapi3_rujukan">
+	<input type="text" name="lain_lain" id="lain_lain_rujukan" class="sembunyikan">
+	<input type="text" name="planning" id="planning_rujukan" class="sembunyikan">
+	<input type="text" name="terapi1" id="terapi1_rujukan" class="sembunyikan">
+	<input type="text" name="terapi2" id="terapi2_rujukan" class="sembunyikan">
+	<input type="text" name="terapi3" id="terapi3_rujukan" class="sembunyikan">
 
 
 </form>

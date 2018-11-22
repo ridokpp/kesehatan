@@ -287,7 +287,7 @@ table tr td:last-child {
 			</div>
 			<div class="row">
 				<div class="col offset-3">
-				S1-S2 <?=($data['jantung_s1_s2'] == 'Reguler') ? 'Reguler / <strike>Irreguler</strike>' : '<strike>Reguler</strike> / Irreguler'?>.*), Suara tambahan <?=$data['jantung_suaratambahan']?>
+				S1-S2 <?=($data['jantung_s1_s2'] == 'Reguler') ? 'Reguler / <strike>Irreguler</strike>' : '<strike>Reguler</strike> / Irreguler'?>.*), Suara tambahan : <?=$data['jantung_suaratambahan']?>
 				</div>
 			</div>
 			<div class="row">
@@ -428,18 +428,18 @@ table tr td:last-child {
 				</div>:
 				<div class="col">
 							<?php 
-							if ($data['diagnosa_primary'] !== array()) {
+							if ($data['diagnosa_primary'] !== NULL) {
 								foreach ($data['diagnosa_primary'] as $key => $value ) {
 									echo $value." ; ";
 								}
 							}
-							if ($data['diagnosa_secondary']  !== array()) {
+							if ($data['diagnosa_secondary']  !== NULL) {
 								foreach ($data['diagnosa_secondary'] as $key => $value) {
 									echo $value." ; ";
 								}
 								
 							}
-							if ($data['diagnosa_secondary']  !== array()) {
+							if ($data['diagnosa_lain']  !== NULL) {
 								foreach ($data['diagnosa_lain'] as $key => $value) {
 									echo $value;
 								}
