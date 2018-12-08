@@ -23,6 +23,7 @@
 			}
 		}
 	}
+
 	function kecamatanLain(){
 		var lain = document.getElementById("kecamatanID");
 		var kecamatanLain = document.getElementById("kecamatanLain");
@@ -47,6 +48,7 @@
 			}
 		}
 	}
+	
 	function kelurahanLain(){
 		var lain = document.getElementById("kelurahanID");
 		var kelurahanLain = document.getElementById("kelurahanLain");
@@ -97,7 +99,7 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Pekerjaan</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Masukkan Pekerjaan" required="">
+				      	<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Contoh: pelajar" required="">
 				    </div>
 				</div>
 

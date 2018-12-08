@@ -15,7 +15,7 @@
 				<div class="form-group row">
 				    <label class="col-2 col-form-label">Tinggi Badan</label>
 				    <div class="input-group col-10">
-				      	<input type="number" class="form-control" id="" name="tinggi_badan" placeholder="Tinggi Badan" required="" autofocus="">
+				      	<input type="number" class="form-control" id="" name="tinggi_badan" placeholder="Tinggi Badan" autofocus="">
 				    	<div class="input-group-append">
 				          	<div class="input-group-text">cm</div>
 			    		</div>
@@ -25,7 +25,7 @@
 				<div class="form-group row">
 				    <label class="col-2 col-form-label">Berat Badan</label>
 				    <div class="input-group col-10">
-				      	<input type="number" class="form-control" id="" name="berat_badan" placeholder="Berat Badan" required="">
+				      	<input type="number" class="form-control" id="" name="berat_badan" placeholder="Berat Badan">
 				    	<div class="input-group-append">
 				          	<div class="input-group-text">Kg</div>
 			    		</div>
@@ -56,7 +56,7 @@
 			 	<div class="form-group row">
 				    <label class="col-2 col-form-label">Denyut Nadi</label>
 				    <div class="input-group col-10">
-				      	<input type="number" class="form-control" id="" name="denyut_nadi" placeholder="Denyut Nadi" required="">
+				      	<input type="number" class="form-control" id="" name="denyut_nadi" placeholder="Denyut Nadi">
 				    	<div class="input-group-append">
 				          	<div class="input-group-text">rpm</div>
 			    		</div>
@@ -66,7 +66,7 @@
 			    <div class="form-group row">
 				    <label class="col-2 col-form-label">Frekuensi Pernapasan</label>
 				    <div class="input-group col-10">
-				      	<input type="number" class="form-control" id="" name="frekuensi_pernapasan" placeholder="Respiration Rate" required="">
+				      	<input type="number" class="form-control" id="" name="frekuensi_pernapasan" placeholder="Respiration Rate">
 				    	<div class="input-group-append">
 				          	<div class="input-group-text">rpm</div>
 			    		</div>
@@ -76,7 +76,7 @@
 				<div class="form-group row">
 				    <label class="col-2 col-form-label">Suhu</label>
 				    <div class="input-group col-10">
-				      	<input type="number" class="form-control" id="" name="suhu" placeholder="Temperature Axilla" required="">
+				      	<input type="number" class="form-control" id="" name="suhu" placeholder="Temperature Axilla">
 				    	<div class="input-group-append">
 				          	<div class="input-group-text">°C</div>
 			    		</div>

@@ -786,11 +786,8 @@ class Dokter extends CI_Controller {
 				$data[$key]['id'] = $value->id."|".$value->nama;
 				$data[$key]['text'] = $value->nama;
 				$data[$key]['stok'] = $value->stok;
-				$data[$key]['harga'] = $value->harga;
 				if ($value->kadaluarsa < date("Y-m-d-d")) {
-					$data[$key]['expired'] = " :: Sudah kadaluarsa".tgl_indo($value->kadaluarsa);
-				}else{
-					$data[$key]['expired'] = " :: Exp ".tgl_indo($value->kadaluarsa);
+					$data[$key]['stok'] .= " Sudah kadaluarsa";
 				}
 				$data[$key]['satuan'] = $value->satuan;
 			}

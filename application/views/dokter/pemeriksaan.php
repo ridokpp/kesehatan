@@ -8,6 +8,7 @@
 
 	// inisialisasi tabel rekam medis
 	var addObat;
+	var flagid = 0;
  	$(document).ready(function() {
  		$('#example').DataTable({
 			dom: 'Bfrtip',
@@ -100,43 +101,51 @@
 		});
 
 		
+		
 		// untuk add input form obat
-		var flagid = 0;
 		addObat = function addObat() {
+			
+			
 			$(".obat").select2();
 			flagid += 1;
-			$('#renderInputObat').append(	"<div class=row mt-5 mb-5'>"+
-												"<div class='col-6'>"+
+			$('#renderInputObat').append(	"<div class='row mt-3 mb-3'>"+
+												"<div class='col-4'>"+
 													"<select class='obat form-control' name='obat[]' style='height: 90%' id='obat"+flagid+"'>"+
 														"<option selected=' disabled='>PIlih obat</option>"+
 													"</select>"+
 												"</div>"+
-												"<div class='col-4'>"+
-													"<input type='number' class='form-control' name='jumlah_obat[]' placeholder='jumlah yg diberikan' id='jumlah"+flagid+"' min='0'></input>"+
+												"<div class='col-3'>"+
+													"<input type='number' class='form-control' name='jumlah_obat[]' id='jumlah"+flagid+"' min='0' onkeyup='ubahHarga("+flagid+")'></input>"+
 												"</div>"+
-												"<div class='col'>"+
-													"<input type='text' class='form-control' name='satuan[]' placeholder='satuan' id='satuan"+flagid+"' readonly=''></input>"+
+												"<div class='col-2'>"+
+													"<input type='number' class='form-control' name='harga_obat[]' id='harga"+flagid+"' readonly></input>"+
 												"</div>"+
+												"<div class='col-3'>"+
+													"<input type='number' class='form-control per-item' name='per_item[]' id='perItem"+flagid+"' ></input>"+
+												"</div>"+
+												// "<div class='col'>"+
+												// 	"<input type='text' class='form-control' name='satuan[]' placeholder='satuan' id='satuan"+flagid+"' readonly=''></input>"+
+												// "</div>"+
 											"</div>");
+
+			// saat obat terpilih, tampilkan satuan, dan stok maksimal yang bisa dimasukkan via atribut max
 			$(".obat").select2({
 				ajax: {
 					url: '<?=base_url()?>Dokter/cariObat/',
 					dataType: 'json',
 					delay: 1000,
-					data: function (term, page) {
+					data: function (term) {
 						return {
-							term: term, // search term
-							page: 10
+							term: term // search term
 						};
 					},
-					processResults: function (data, page) {
-						$('#jumlah'+flagid).attr({"max" : data[0].stok});
-						$('#satuan'+flagid).val(data[0].satuan);
+					processResults: function (data) {
+						// console.log(data);
+
 						return {
 							results: data
 						};
-					},
-					cache: true
+					}
 				},
 				escapeMarkup: function (markup) { return markup; },
 				minimumInputLength: 1,
@@ -144,6 +153,7 @@
 				templateResult: formatRepo,
 	  			templateSelection: formatRepoSelection
 			});
+
 			function formatRepo (data) {
 				if (data.loading) {
 					return data.text;
@@ -151,18 +161,63 @@
 
 				var markup = "<div class='clearfix'>";
 
-				markup += data.text+" :: Stok sekarang "+data.stok+
+				markup += data.text+" :: Stok sekarang "+data.stok+" "+data.expired+
 				"</div>";
 
 				return markup;
 			}
 
 			function formatRepoSelection (data) {
+				// console.log(data);
+				$('#harga'+flagid).val(data.harga);
+				$('#jumlah'+flagid).attr(
+											{
+												"max" : data.stok
+											}
+										);
+
+				if (typeof(data.satuan) !== 'undefined') {
+					$('#jumlah'+flagid).attr(
+												{
+													"placeholder" : "contoh : 2 ("+data.satuan+")"
+												}
+											);
+				}
+				$('#perItem'+flagid).val($('#jumlah'+flagid).val() * $('#harga'+flagid).val());
 				return data.text;
 			}
+
 		}
+		// panggil hitung total agar mucul biaya yang harus dibayar
+	hitungTotal();
 	});
 
+	// ubah harga saat memasukkan jumlah obat yang akan diberikan
+	function ubahHarga(argument) {
+		$('#perItem'+argument).val($('#jumlah'+argument).val() * $('#harga'+argument).val());
+		hitungTotal();
+	}
+
+
+	
+	// hitung total biaya yang harus dibayar
+	function hitungTotal() {
+		$('#total').html();
+		var total = 0;
+		
+		if (flagid > 0) {
+			for (var i = 1; i <= flagid; i++) {
+				total = (total + parseInt($('#perItem'+i).val(), 10));
+			}
+		}
+		total = (total + parseInt($('#biaya_dokter').val(), 10));
+
+		if (isNaN(total)) {
+			total=0;
+		}
+		$('#total').html('Rp. '+total);
+	}
+	
 	// setting tampilan live clock
     var serverTime = new Date(<?php print date('Y, m, d, H, i, s, 0'); ?>);
     var clientTime = new Date();
@@ -409,7 +464,6 @@
 			alert( "error" );
 		})
 	}
-
 
 </script>
 
@@ -866,7 +920,7 @@
 							</div>
 <!-- END KEPALA -->							
 							<hr>
-
+<!-- THORAK -->
 							<h6 class="text-center mt-3">Thorak</h6>
 							<h6 class="text-center">Paru</h6>
 
@@ -922,9 +976,10 @@
 									</div>
 								</div>
 							</div>
+<!-- END THORAK -->
 
 							<hr>
-
+<!-- JANTUNG -->
 							<h6 class="text-center mt-3">Jantung</h6>
 
 							<div class="row mt-3">
@@ -966,9 +1021,10 @@
 									</div>
 								</div>
 							</div>
+<!-- END JANTUNG -->
 
 							<hr>
-
+<!-- ABDOMEN -->
 							<h6 class="text-center mt-3">Abdomen</h6>
 
 							<div class="row mt-3">
@@ -1046,8 +1102,9 @@
 									<textarea class="form-control" aria-label="With textarea" id="abdomen_ket_tambahan_pemeriksaan" name="abdomen_ket_tambahan" placeholder="Keterangan Tambahan" ></textarea>
 								</div>
 							</div>
-
+<!-- END ABDOMEN -->
 							<hr>
+<!-- EKSTERMITAS -->
 
 							<h6 class="text-center mt-3">Ekstermitas</h6>
 
@@ -1136,6 +1193,8 @@
 									<textarea class="form-control" aria-label="With textarea" id="ekstermitas_kettambahan_pemeriksaan" name="ekstermitas_ket_tambahan" placeholder="Keterangan Tambahan"></textarea>
 								</div>
 							</div>
+<!-- EKSTERMITAS -->
+
 							<hr>
 
 							<h6 class="text-center mt-3">Lain-lain</h6>
@@ -1172,11 +1231,28 @@
 
 							<h6 class="text-center mt-3">Obat</h6>
 							<div class="row mt-3">
-								<button type="button" class="btn btn-primary btn-block ml-3" onclick="addObat()">Tambah Obat</button>
+								<div class="col">
+									<button type="button" class="btn btn-primary btn-block" onclick="addObat()">Tambah Obat</button>
+								</div>
 							</div>
 							<div id="renderInputObat"></div>
+							<hr>
 
-
+							<h6 class="text-center mt-3">Biaya Dokter</h6>
+							<div class="row mt-3">
+								<div class="col">
+									<input type="number" class="form-control" name="biaya_dokter" onkeyup="hitungTotal()" id="biaya_dokter" value="10000">
+								</div>
+							</div>
+							<hr>
+							<div class="row mt-3">
+								<div class="col">
+									<h4 class="text-left mt-3">TOTAL</h4>
+								</div>
+								<div class="col">
+									<h6 id="total" class="text-right mt-3"></h6>
+								</div>
+							</div>
 
 							<div class="row mb-3">
 								<div class="col text-right">
@@ -1189,115 +1265,113 @@
 				</div>
 
 <!-- HIDDEN FORM SURAT RUJUKAN -->
-<form method="POST" action="<?=base_url()?>Dokter/submitCetak/suratrujukan" target="_blank" onsubmit="SuratRujukan()" id="suratrujukan">
-	<style type="text/css">
-		.sembunyikan {
-			display: none
-		}
-	</style>
-	<input type="text" name="nomor_pasien" id="nomor_pasien_rujukan" class="sembunyikan">
-	
-	<textarea id="subjektif_rujukan" name="subjektif" class="sembunyikan"></textarea>
-	
-	<input type="text" name="gcs_e" id="gcs_e_rujukan" class="sembunyikan">
-	<input type="text" name="gcs_v" id="gcs_v_rujukan" class="sembunyikan">
-	<input type="text" name="gcs_m" id="gcs_m_rujukan" class="sembunyikan">
+				<form method="POST" action="<?=base_url()?>Dokter/submitCetak/suratrujukan" target="_blank" onsubmit="SuratRujukan()" id="suratrujukan">
+					<style type="text/css">
+						.sembunyikan {
+							display: none
+						}
+					</style>
+					<input type="text" name="nomor_pasien" id="nomor_pasien_rujukan" class="sembunyikan">
+					
+					<textarea id="subjektif_rujukan" name="subjektif" class="sembunyikan"></textarea>
+					
+					<input type="text" name="gcs_e" id="gcs_e_rujukan" class="sembunyikan">
+					<input type="text" name="gcs_v" id="gcs_v_rujukan" class="sembunyikan">
+					<input type="text" name="gcs_m" id="gcs_m_rujukan" class="sembunyikan">
 
-	<input type="checkbox" id="gcs_opsi_cm_rujukan" name="gcs_opsi[]" value="CM"  class="sembunyikan">
-	<input type="checkbox" id="gcs_opsi_apatis_rujukan" name="gcs_opsi[]" value="Apatis"  class="sembunyikan">
-	<input type="checkbox" id="gcs_opsi_derilium_rujukan" name="gcs_opsi[]" value="Derilium"  class="sembunyikan">
-	<input type="checkbox" id="gcs_opsi_somnolen_rujukan" name="gcs_opsi[]" value="Somnolen"  class="sembunyikan">
-	<input type="checkbox" id="gcs_opsi_stupor_rujukan" name="gcs_opsi[]" value="Stupor"  class="sembunyikan">
-	<input type="checkbox" id="gcs_opsi_coma_rujukan" name="gcs_opsi[]" value="Coma"  class="sembunyikan">
-	<select id="primary_rujukan" name="diagnosaPrimary[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
-	<select id="secondary_rujukan" name="diagnosaSecondary[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
-	<select id="lain_rujukan" name="diagnosaLain[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
-	<textarea id="pemeriksaan_lab_rujukan" name="diagnosaPemeriksaanLab" class="sembunyikan"></textarea>
+					<input type="checkbox" id="gcs_opsi_cm_rujukan" name="gcs_opsi[]" value="CM"  class="sembunyikan">
+					<input type="checkbox" id="gcs_opsi_apatis_rujukan" name="gcs_opsi[]" value="Apatis"  class="sembunyikan">
+					<input type="checkbox" id="gcs_opsi_derilium_rujukan" name="gcs_opsi[]" value="Derilium"  class="sembunyikan">
+					<input type="checkbox" id="gcs_opsi_somnolen_rujukan" name="gcs_opsi[]" value="Somnolen"  class="sembunyikan">
+					<input type="checkbox" id="gcs_opsi_stupor_rujukan" name="gcs_opsi[]" value="Stupor"  class="sembunyikan">
+					<input type="checkbox" id="gcs_opsi_coma_rujukan" name="gcs_opsi[]" value="Coma"  class="sembunyikan">
+					<select id="primary_rujukan" name="diagnosaPrimary[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
+					<select id="secondary_rujukan" name="diagnosaSecondary[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
+					<select id="lain_rujukan" name="diagnosaLain[]" multiple="multiple" style="width: 100%"  class="sembunyikan"></select>
+					<textarea id="pemeriksaan_lab_rujukan" name="diagnosaPemeriksaanLab" class="sembunyikan"></textarea>
 
-	<input type="text" name="tinggi_badan" id="tinggi_badan_rujukan" class="sembunyikan">
-	<input type="text" name="berat_badan" id="berat_badan_rujukan" class="sembunyikan">
-	<input type="text" name="sistol" id="sistol_rujukan" class="sembunyikan">
-	<input type="text" name="diastol" id="diastol_rujukan" class="sembunyikan">
-	<input type="text" name="respiratory_rate" id="respiratory_rate_rujukan" class="sembunyikan">
-	<input type="text" name="nadi" id="nadi_rujukan" class="sembunyikan">
-	<input type="text" name="temperature_ax" id="temperature_ax_rujukan" class="sembunyikan">
-	<input type="text" name="headtotoe" id="headtotoe_rujukan" class="sembunyikan">
+					<input type="text" name="tinggi_badan" id="tinggi_badan_rujukan" class="sembunyikan">
+					<input type="text" name="berat_badan" id="berat_badan_rujukan" class="sembunyikan">
+					<input type="text" name="sistol" id="sistol_rujukan" class="sembunyikan">
+					<input type="text" name="diastol" id="diastol_rujukan" class="sembunyikan">
+					<input type="text" name="respiratory_rate" id="respiratory_rate_rujukan" class="sembunyikan">
+					<input type="text" name="nadi" id="nadi_rujukan" class="sembunyikan">
+					<input type="text" name="temperature_ax" id="temperature_ax_rujukan" class="sembunyikan">
+					<input type="text" name="headtotoe" id="headtotoe_rujukan" class="sembunyikan">
 
-	<input type="checkbox" id="anemis_kiri_rujukan" name="anemis_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="anemis_kanan_rujukan" name="anemis_kanan" value="1" class="sembunyikan">
-	<input type="checkbox" id="ikterik_kiri_rujukan" name="ikterik_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="ikterik_kanan_rujukan" name="ikterik_kanan" value="1" class="sembunyikan">
-	<input type="checkbox" id="cianosis_kiri_rujukan" name="cianosis_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="cianosis_kanan_rujukan" name="cianosis_kanan" value="1" class="sembunyikan">
-	<input type="checkbox" id="deformitas_kiri_rujukan" name="deformitas_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="deformitas_kanan_rujukan" name="deformitas_kanan" value="1" class="sembunyikan">
-	<input type="checkbox" id="refchy_kiri_rujukan" name="refchy_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="refchy_kanan_rujukan" name="refchy_kanan" value="1" class="sembunyikan">
-	
-	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Isokor" class="sembunyikan">
-	<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Anisokor" class="sembunyikan">
-	<input type="text" name="kepala_ket_tambahan" id="kepala_ket_tambahan_rujukan" class="sembunyikan">
+					<input type="checkbox" id="anemis_kiri_rujukan" name="anemis_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="anemis_kanan_rujukan" name="anemis_kanan" value="1" class="sembunyikan">
+					<input type="checkbox" id="ikterik_kiri_rujukan" name="ikterik_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="ikterik_kanan_rujukan" name="ikterik_kanan" value="1" class="sembunyikan">
+					<input type="checkbox" id="cianosis_kiri_rujukan" name="cianosis_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="cianosis_kanan_rujukan" name="cianosis_kanan" value="1" class="sembunyikan">
+					<input type="checkbox" id="deformitas_kiri_rujukan" name="deformitas_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="deformitas_kanan_rujukan" name="deformitas_kanan" value="1" class="sembunyikan">
+					<input type="checkbox" id="refchy_kiri_rujukan" name="refchy_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="refchy_kanan_rujukan" name="refchy_kanan" value="1" class="sembunyikan">
+					
+					<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Isokor" class="sembunyikan">
+					<input type="radio" id="refchy_opsi_rujukan" name="refchy_opsi_rujukan" value="Anisokor" class="sembunyikan">
+					<input type="text" name="kepala_ket_tambahan" id="kepala_ket_tambahan_rujukan" class="sembunyikan">
 
-	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Simetris" class="sembunyikan">
-	<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Asimetris" class="sembunyikan">
-	<input type="checkbox" id="wheezing_kiri_rujukan" name="wheezing_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="wheezing_kanan_rujukan" name="wheezing_kanan" value="1" class="sembunyikan">
-	<input type="checkbox" id="ronkhi_kiri_rujukan" name="ronkhi_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="ronkhi_kanan_rujukan" name="ronkhi_kanan" value="1" class="sembunyikan">
-	<input type="checkbox" id="vesikuler_kiri_rujukan" name="vesikuler_kiri" value="1" class="sembunyikan">
-	<input type="checkbox" id="vesikuler_kanan_rujukan" name="vesikuler_kanan" value="1" class="sembunyikan">
-	
-	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tampak" class="sembunyikan">
-	<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tak Tampak" class="sembunyikan">
-	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Reguler" class="sembunyikan">
-	<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Irreguler" class="sembunyikan">
-	<input type="text" name="jantung_suaratambahan" id="jantung_suaratambahan_rujukan" class="sembunyikan">
-	<input type="text" name="jantung_ket_tambahan" id="jantung_ket_tambahan_rujukan" class="sembunyikan">
+					<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Simetris" class="sembunyikan">
+					<input type="radio" id="paru_simetris_asimetris_rujukan" name="paru_simetris_asimetris" value="Asimetris" class="sembunyikan">
+					<input type="checkbox" id="wheezing_kiri_rujukan" name="wheezing_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="wheezing_kanan_rujukan" name="wheezing_kanan" value="1" class="sembunyikan">
+					<input type="checkbox" id="ronkhi_kiri_rujukan" name="ronkhi_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="ronkhi_kanan_rujukan" name="ronkhi_kanan" value="1" class="sembunyikan">
+					<input type="checkbox" id="vesikuler_kiri_rujukan" name="vesikuler_kiri" value="1" class="sembunyikan">
+					<input type="checkbox" id="vesikuler_kanan_rujukan" name="vesikuler_kanan" value="1" class="sembunyikan">
+					
+					<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tampak" class="sembunyikan">
+					<input type="radio" id="jantung_ictuscordis_rujukan" name="jantung_ictuscordis" value="Tak Tampak" class="sembunyikan">
+					<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Reguler" class="sembunyikan">
+					<input type="radio" id="jantung_s1_s2_rujukan" name="jantung_s1_s2" value="Irreguler" class="sembunyikan">
+					<input type="text" name="jantung_suaratambahan" id="jantung_suaratambahan_rujukan" class="sembunyikan">
+					<input type="text" name="jantung_ket_tambahan" id="jantung_ket_tambahan_rujukan" class="sembunyikan">
 
-	<input type="radio" id="BU_rujukan" name="BU" value="Normal" class="sembunyikan">
-	<input type="radio" id="BU_rujukan" name="BU" value="Menurun" class="sembunyikan">
-	<input type="radio" id="BU_rujukan" name="BU" value="Meningkat" class="sembunyikan">
-	<input type="radio" id="BU_rujukan" name="BU" value="Negatif" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8" value="1" class="sembunyikan">
-	<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9" value="1" class="sembunyikan">
-	<input type="text" name="hepatomegali" id="hepatomegali_rujukan" class="sembunyikan">
-	<input type="text" name="spleenomegali" id="spleenomegali_rujukan" class="sembunyikan">
-	<input type="text" name="abdomen_ket_tambahan" id="abdomen_ket_tambahan_rujukan" class="sembunyikan">
-	
-	<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1" value="1" class="sembunyikan">
-	<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2" value="1" class="sembunyikan">
-	<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3" value="1" class="sembunyikan">
-	<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4" value="1" class="sembunyikan">
-	<input type="checkbox" id="crt1_rujukan" name="crt1" value="1" class="sembunyikan">
-	<input type="checkbox" id="crt2_rujukan" name="crt2" value="1" class="sembunyikan">
-	<input type="checkbox" id="crt3_rujukan" name="crt3" value="1" class="sembunyikan">
-	<input type="checkbox" id="crt4_rujukan" name="crt4" value="1" class="sembunyikan">
-	<input type="checkbox" id="edema1_rujukan" name="edema1" value="1" class="sembunyikan">
-	<input type="checkbox" id="edema2_rujukan" name="edema2" value="1" class="sembunyikan">
-	<input type="checkbox" id="edema3_rujukan" name="edema3" value="1" class="sembunyikan">
-	<input type="checkbox" id="edema4_rujukan" name="edema4" value="1" class="sembunyikan">
-	<input type="radio" id="pitting_rujukan" name="pitting" value="Non-pitting" class="sembunyikan">
-	<input type="radio" id="pitting_rujukan" name="pitting" value="Pitting" class="sembunyikan">
-	<input type="text" name="ekstermitas_ket_tambahan" id="ekstermitas_kettambahan_rujukan" class="sembunyikan">
-	
-	<input type="text" name="lain_lain" id="lain_lain_rujukan" class="sembunyikan">
-	<input type="text" name="planning" id="planning_rujukan" class="sembunyikan">
-	<input type="text" name="terapi1" id="terapi1_rujukan" class="sembunyikan">
-	<input type="text" name="terapi2" id="terapi2_rujukan" class="sembunyikan">
-	<input type="text" name="terapi3" id="terapi3_rujukan" class="sembunyikan">
-
-
-</form>
+					<input type="radio" id="BU_rujukan" name="BU" value="Normal" class="sembunyikan">
+					<input type="radio" id="BU_rujukan" name="BU" value="Menurun" class="sembunyikan">
+					<input type="radio" id="BU_rujukan" name="BU" value="Meningkat" class="sembunyikan">
+					<input type="radio" id="BU_rujukan" name="BU" value="Negatif" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan1_rujukan" name="nyeri_tekan1" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan2_rujukan" name="nyeri_tekan2" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan3_rujukan" name="nyeri_tekan3" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan4_rujukan" name="nyeri_tekan4" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan5_rujukan" name="nyeri_tekan5" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan6_rujukan" name="nyeri_tekan6" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan7_rujukan" name="nyeri_tekan7" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan8_rujukan" name="nyeri_tekan8" value="1" class="sembunyikan">
+					<input type="checkbox" id="nyeri_tekan9_rujukan" name="nyeri_tekan9" value="1" class="sembunyikan">
+					<input type="text" name="hepatomegali" id="hepatomegali_rujukan" class="sembunyikan">
+					<input type="text" name="spleenomegali" id="spleenomegali_rujukan" class="sembunyikan">
+					<input type="text" name="abdomen_ket_tambahan" id="abdomen_ket_tambahan_rujukan" class="sembunyikan">
+					
+					<input type="checkbox" id="akral_hangat1_rujukan" name="akral_hangat1" value="1" class="sembunyikan">
+					<input type="checkbox" id="akral_hangat2_rujukan" name="akral_hangat2" value="1" class="sembunyikan">
+					<input type="checkbox" id="akral_hangat3_rujukan" name="akral_hangat3" value="1" class="sembunyikan">
+					<input type="checkbox" id="akral_hangat4_rujukan" name="akral_hangat4" value="1" class="sembunyikan">
+					<input type="checkbox" id="crt1_rujukan" name="crt1" value="1" class="sembunyikan">
+					<input type="checkbox" id="crt2_rujukan" name="crt2" value="1" class="sembunyikan">
+					<input type="checkbox" id="crt3_rujukan" name="crt3" value="1" class="sembunyikan">
+					<input type="checkbox" id="crt4_rujukan" name="crt4" value="1" class="sembunyikan">
+					<input type="checkbox" id="edema1_rujukan" name="edema1" value="1" class="sembunyikan">
+					<input type="checkbox" id="edema2_rujukan" name="edema2" value="1" class="sembunyikan">
+					<input type="checkbox" id="edema3_rujukan" name="edema3" value="1" class="sembunyikan">
+					<input type="checkbox" id="edema4_rujukan" name="edema4" value="1" class="sembunyikan">
+					<input type="radio" id="pitting_rujukan" name="pitting" value="Non-pitting" class="sembunyikan">
+					<input type="radio" id="pitting_rujukan" name="pitting" value="Pitting" class="sembunyikan">
+					<input type="text" name="ekstermitas_ket_tambahan" id="ekstermitas_kettambahan_rujukan" class="sembunyikan">
+					
+					<input type="text" name="lain_lain" id="lain_lain_rujukan" class="sembunyikan">
+					<input type="text" name="planning" id="planning_rujukan" class="sembunyikan">
+					<input type="text" name="terapi1" id="terapi1_rujukan" class="sembunyikan">
+					<input type="text" name="terapi2" id="terapi2_rujukan" class="sembunyikan">
+					<input type="text" name="terapi3" id="terapi3_rujukan" class="sembunyikan">
+				</form>
 <!-- HIDDEN FORM SURAT RUJUKAN -->
 
-<!-- TAB PEMERIKSAAN -->
+<!-- END TAB PEMERIKSAAN -->
 
 <!-- TAB SURAT SAKIT -->
 				<div class="tab-pane fade" id="surat_sakit" role="tabpanel" aria-labelledby="home-tab">
