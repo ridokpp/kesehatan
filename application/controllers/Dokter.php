@@ -445,18 +445,29 @@ class Dokter extends CI_Controller {
 	{
 		if ($this->input->post() !== array()) {
 
-			$gcs = "E: ".$this->input->post('gcs_e')." V: ".$this->input->post('gcs_v')." M: ".$this->input->post('gcs_m');
+			$gcs = '';
+			if ($this->input->post('gcs_e') !== '') {
+				$gcs .= "E: ".$this->input->post('gcs_e');
+			}
+			if ($this->input->post('gcs_v') !== '') {
+				$gcs .= " V: ".$this->input->post('gcs_v');
+			}
+			if ($this->input->post('gcs_m') !== '') {
+				$gcs .= " M: ".$this->input->post('gcs_m');
+			}
+
 			if ($this->input->post('$gcs_opsi[]') !== NULL) {
 				foreach ($this->input->post('$gcs_opsi[]') as $key => $value) {
 					$gcs .= $value.",";
 				}
 				$gcs = rtrim($gcs,", ");
-
 			}
+			
 			/*NOTE : jantung nggk perlu di manipulasi string karena setiap input field korelasi 1-1 dengan kolom*/
 
 			/*insert ke tabel assesmet*/
-			if ($this->input->post('assessmentPrimer') !== NULL OR $this->input->post('assessmentSekunder') !== NULL OR $this->input->post('assessmentLain') !== NULL OR $this->input->post('assessmentPemeriksaanLab') !== NULL) {
+			$available_id_assessment = NULL;
+			if ($this->input->post('assessmentPrimer') !== NULL OR $this->input->post('assessmentSekunder') !== NULL OR $this->input->post('assessmentLain') !== NULL OR $this->input->post('assessmentPemeriksaanLab') !== '') {
 				
 				// 1. baca available available_id_assessment di tabel available_id_assessment
 				$available_id_assessment = $this->Kesehatan_M->readS('available_id_assessment')->result();
@@ -499,123 +510,147 @@ class Dokter extends CI_Controller {
 			/*end insert ke tabel assesmet*/
 
 			/*kepala*/
-				$kepala = " Anemis ";
-				if ($this->input->post('anemis_kiri') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
-				}
-				$kepala .= "/";
-				if ($this->input->post('anemis_kanan') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
-				}
-
-				$kepala .= " Ikterik ";
-				if ($this->input->post('ikterik_kiri') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
-				}
-				$kepala .= "/";
-				if ($this->input->post('ikterik_kanan') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
+				$kepala = NULL;
+				if ($this->input->post('anemis_kiri') !== NULL OR $this->input->post('anemis_kanan') !== NULL) {
+					$kepala .= " Anemis ";
+					if ($this->input->post('anemis_kiri') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
+					$kepala .= "/";
+					if ($this->input->post('anemis_kanan') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
 				}
 
-				$kepala .= " Cianosis ";
-				if ($this->input->post('cianosis_kiri') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
-				}
-				$kepala .= "/";
-				if ($this->input->post('cianosis_kanan') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
-				}
-
-				$kepala .= " Deformitas ";
-				if ($this->input->post('deformitas_kiri') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
-				}
-				$kepala .= "/";
-				if ($this->input->post('deformitas_kanan') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
+				if ($this->input->post('ikterik_kiri') !== NULL OR $this->input->post('ikterik_kanan') !== NULL) {
+					$kepala .= " Ikterik ";
+					if ($this->input->post('ikterik_kiri') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
+					$kepala .= "/";
+					if ($this->input->post('ikterik_kanan') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
 				}
 
-				$kepala .= " Refleks cahaya ";
-				if ($this->input->post('refchy_kiri') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
+				if ($this->input->post('cianosis_kiri') !== NULL OR $this->input->post('cianosis_kanan') !== NULL) {
+					$kepala .= " Cianosis ";
+					if ($this->input->post('cianosis_kiri') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
+					$kepala .= "/";
+					if ($this->input->post('cianosis_kanan') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
 				}
-				$kepala .= "/";
-				if ($this->input->post('refchy_kanan') == '1') {
-					$kepala .= "+";
-				}else{
-					$kepala .= " ";
+
+				if ($this->input->post('deformitas_kiri') !== NULL OR $this->input->post('deformitas_kanan') !== NULL) {
+					$kepala .= " Deformitas ";
+					if ($this->input->post('deformitas_kiri') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
+					$kepala .= "/";
+					if ($this->input->post('deformitas_kanan') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
+				}
+
+				if ($this->input->post('refchy_kiri') !== NULL OR $this->input->post('refchy_kanan') !== NULL) {
+					$kepala .= " Refleks cahaya ";
+					if ($this->input->post('refchy_kiri') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
+					$kepala .= "/";
+					if ($this->input->post('refchy_kanan') == '1') {
+						$kepala .= "+";
+					}else{
+						$kepala .= " ";
+					}
 				}
 			/*end kepala*/
 
 			/*paru*/
-				$paru = "Wheezing ";
-				if ($this->input->post('wheezing_kiri') == '1') {
-					$paru .= "+";
-				}else{
-					$paru .= " ";
-				}
-				$paru .= "/";
-				if ($this->input->post('wheezing_kanan') == '1') {
-					$paru .= "+";
-				}else{
-					$paru .= " ";
-				}
-
-				$paru .= " Ronkhi ";
-				if ($this->input->post('ronkhi_kiri') == '1') {
-					$paru .= "+";
-				}else{
-					$paru .= " ";
-				}
-				$paru .= "/";
-				if ($this->input->post('ronkhi_kanan') == '1') {
-					$paru .= "+";
-				}else{
-					$paru .= " ";
+			$paru = NULL;
+				if ($this->input->post('wheezing_kiri') !== NULL OR $this->input->post('wheezing_kanan') !== NULL) {
+					$paru .= "Wheezing ";
+					if ($this->input->post('wheezing_kiri') == '1') {
+						$paru .= "+";
+					}else{
+						$paru .= " ";
+					}
+					$paru .= "/";
+					if ($this->input->post('wheezing_kanan') == '1') {
+						$paru .= "+";
+					}else{
+						$paru .= " ";
+					}
 				}
 
-				$paru .= " Vesikuler ";
-				if ($this->input->post('vesikuler_kiri') == '1') {
-					$paru .= "+";
-				}else{
-					$paru .= " ";
+				if ($this->input->post('Ronkhi_kiri') !== NULL OR $this->input->post('Ronkhi_kanan') !== NULL) {
+					$paru .= " Ronkhi ";
+					if ($this->input->post('ronkhi_kiri') == '1') {
+						$paru .= "+";
+					}else{
+						$paru .= " ";
+					}
+					$paru .= "/";
+					if ($this->input->post('ronkhi_kanan') == '1') {
+						$paru .= "+";
+					}else{
+						$paru .= " ";
+					}
 				}
-				$paru .= "/";
-				if ($this->input->post('vesikuler_kanan') == '1') {
-					$paru .= "+";
-				}else{
-					$paru .= " ";
+
+				if ($this->input->post('vesikuler_kiri') !== NULL OR $this->input->post('vesikuler_kanan') !== NULL) {
+					$paru .= " Vesikuler ";
+					if ($this->input->post('vesikuler_kiri') == '1') {
+						$paru .= "+";
+					}else{
+						$paru .= " ";
+					}
+					$paru .= "/";
+					if ($this->input->post('vesikuler_kanan') == '1') {
+						$paru .= "+";
+					}else{
+						$paru .= " ";
+					}
 				}
 			/*end paru*/
 
+			/* manipulasi string untuk kolom planning */
+				$planning = NULL;
+				if ($this->input->post('planning') !== '') {
+					$planning .= $this->input->post('planning').". ";
+				}
+			/* manipulasi string untuk kolom planning */
 			
-			$planning = $this->input->post('planning').". ";
 			/*ekstrak value dari select2, pisahkan id beserta nama obatnya agar tidak baca lagi di database. nama obat disertakan untuk keperluan penambahan kolom planning*/
 				$id_obat = array();
 				$nama_obat = array();
-
-				foreach ($this->input->post('obat') as $key => $value) {
-					$temp = explode("|", $value);
-					array_push($id_obat, $temp[0]);
-					array_push($nama_obat, $temp[1]);
+				if ($this->input->post('obat') !==NULL) {
+					foreach ($this->input->post('obat') as $key => $value) {
+						$temp = explode("|", $value);
+						array_push($id_obat, $temp[0]);
+						array_push($nama_obat, $temp[1]);
+					}
 				}
 			/*end ekstrak value dari select2, pisahkan id beserta nama obatnya agar tidak baca lagi di database. nama obat disertakan untuk keperluan penambahan kolom planning*/
 			
@@ -626,7 +661,6 @@ class Dokter extends CI_Controller {
 					$this->Kesehatan_M->rawQuery("UPDATE logistik SET stok = stok - ".$this->input->post('jumlah_obat')[$key]." WHERE id=$value");
 				}
 			/*end untuk setiap obat, lakukan pengurangan stok pada tabel logistik*/
-
 			$record = array(
 								'nomor_pasien'				=>	$this->input->post('nomor_pasien'),
 								'tanggal_jam'				=>	date('Y-m-d H:i:s'),

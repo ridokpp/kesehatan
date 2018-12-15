@@ -48,9 +48,6 @@ if ($this->session->userdata('logged_in')['akses'] == '3') {
       <li class="nav-item <?php if($menu == 'logistik'){echo 'active'; }else{echo '';}?>   ">
         <a class="nav-link" href="<?php echo base_url()?>Dokter/logistik">Logistik</a>
       </li>
-      <li class="nav-item <?php if($menu == 'cariRekamMedis') {echo 'active';}else{ echo '';}?>">
-        <a class="nav-link" href="<?php echo base_url()?>Dokter/cariRekamMedis">Cari Rekam Medis</a>
-      </li>
       <li class="nav-item <?php if($menu == 'cariPasien') {echo 'active';}else{ echo '';}?>">
         <a class="nav-link" href="<?php echo base_url()?>Dokter/cariPasien">Cari Pasien</a>
       </li>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-12-09 00:45:33
+Date: 2018-09-01 21:45:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -10593,13 +10593,37 @@ CREATE TABLE `pasien` (
   `kelurahan` varchar(250) NOT NULL,
   `pembayaran` varchar(250) NOT NULL,
   `nomor_pasien` varchar(50) NOT NULL,
+  `tanggal_datang` date NOT NULL,
+  `nama_ibu` varchar(255) DEFAULT NULL,
+  `nama_ayah` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pasien
 -- ----------------------------
-INSERT INTO `pasien` VALUES ('1', 'Zakiva Ambila', '', 'Malang', '2010-02-02', '8', 'Jalan Jalan Danau Sentani RT01 RW01 Kelurahan Kelurahan X Kecamatan Kecamatan X Kota Kota X', 'Perempuan', 'Pelajar', 'Kelurahan X', 'Umum', '001-013-02-01-09-2018');
+INSERT INTO `pasien` VALUES ('1', 'Zakiva Ambila', '', 'Malang', '2010-02-02', '8', 'Jalan Jalan Danau Sentani RT01 RW01 Kelurahan Kelurahan X Kecamatan Kecamatan X Kota Kota X', 'Perempuan', 'Pelajar', 'Kelurahan X', 'Umum', '001-013-02-01-09-2018', '2018-09-06', null, null);
+INSERT INTO `pasien` VALUES ('2', 'Alda Ayana', '', 'Sidoarjo', '2004-01-20', '14', 'Jalan Perum Puri Cempaka Putih 1 Blok P No 1 PP Nurul Hayat RT01 RW01 Kelurahan Lain Kecamatan Lain Kota Malang', 'Perempuan', 'Pelajar', 'Lain', 'Umum', '002-013-02-01-09-2018', '2018-09-06', null, null);
+INSERT INTO `pasien` VALUES ('3', 'Masyanada', '', 'Tuban', '2003-04-09', '15', 'Jalan Puri Cempaka Putih PP Nurul Hikmah RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Perempuan', 'Pelajar', 'Lain', 'Umum', '003-013-02-02-09-2018', '2018-09-06', null, null);
+INSERT INTO `pasien` VALUES ('4', 'Nayla Imtiaz', '', 'Surabaya', '2005-11-01', '12', 'Jalan PP Darul Ulum Agung RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Perempuan', 'Pelajar DU\'A', 'Lain', 'Umum', '004-013-02-01-09-2018', '2018-09-06', null, null);
+INSERT INTO `pasien` VALUES ('5', 'Sinta', '', 'Mojokerto', '2001-07-15', '17', 'Jalan PP Darul \'ulum Agung RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Perempuan', 'Pelajar Darul \'Ulum Agung', 'Lain', 'Umum', '005-013-02-02-09-2018', '2018-09-06', null, null);
+INSERT INTO `pasien` VALUES ('6', 'Saiful Anwar', '950415590125', 'Malang', '1995-04-11', '23', 'Jalan Batu Malang RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Lain', 'Laki-laki', 'Mahasiswa', 'Lain', 'Umum', '006-013-01-02-09-2018', '2018-09-08', null, null);
+INSERT INTO `pasien` VALUES ('7', 'Stela Amelia Putri', '', 'Malang', '2005-07-04', '13', 'Jalan Kedung Kandang RT00 RW00 Kelurahan Kedung Kandang Kecamatan Kedungkandang Kota Malang', 'Perempuan', 'Pelajar', 'Kedung Kandang', 'Umum', '007-005-02-01-09-2018', '2018-09-08', 'Mak Sani', '');
+INSERT INTO `pasien` VALUES ('8', 'Aditya Kusuma', '', 'Malang', '2005-11-01', '13', 'Jalan Jodipan / PP Darul \'ulum Agung RT00 RW00 Kelurahan Jodipan Kecamatan Jodipan Kota Malang', 'Laki-laki', 'Pelajar', 'Jodipan', 'Umum', '008-013-01-01-09-2018', '2018-09-10', 'Fitri', 'Muhammad Yasin');
+INSERT INTO `pasien` VALUES ('9', 'Nurul Isnaini', '', 'Malang', '2002-03-28', '16', 'Jalan Muharto RT00 RW00 Kelurahan Kota Lama Kecamatan Kedungkandang Kota Malang', 'Perempuan', 'Pelajar', 'Kota Lama', 'Umum', '009-006-02-02-09-2018', '2018-09-11', '', '');
+INSERT INTO `pasien` VALUES ('10', 'Siti Kholilah', '', 'Malang', '2001-11-11', '17', 'Jalan Jalan Kalisari RT03 RW03 Kelurahan Buring Kecamatan Kedungkandang Kota Malang', 'Perempuan', 'Pelajar XII IPS', 'Buring', 'Umum', '010-003-02-02-09-2018', '2018-09-12', '', '');
+INSERT INTO `pasien` VALUES ('11', 'Wildan Fatih', '', 'Sidoarjo', '2002-03-14', '16', 'Jalan Lain RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Lain', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '011-013-01-02-09-2018', '2018-09-12', '', '');
+INSERT INTO `pasien` VALUES ('12', 'Fatiha Nur Ratih', '', 'Cirebon', '2004-02-11', '14', 'Jalan PP Darul Ulum Agung RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Jogja', 'Perempuan', 'Pelajar', 'Lain', 'Umum', '012-013-02-01-09-2018', '2018-09-13', 'Ibu', 'Ayah');
+INSERT INTO `pasien` VALUES ('13', 'Mubarok', '', 'Pekalongan', '2006-10-17', '11', 'Jalan Lain RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Pekalongan', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '013-013-01-01-09-2018', '2018-09-14', 'Iskandar', 'Iskandar');
+INSERT INTO `pasien` VALUES ('14', 'Rico Setyawan', '', 'Bojonegoro', '2000-07-22', '18', 'Jalan Lesanpuro PP Darul Ulum Agung RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Laki-laki', 'Pelajar (santri Balap)', 'Lain', 'Umum', '014-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('15', 'M. Fauzan Farhat', '', 'Mojokerto', '2005-02-28', '13', 'Jalan Mojokerto (PP Darul Ulum Agung) RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Mojokerto', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '015-013-01-01-09-2018', '2018-09-14', 'Meriliana', 'H. Muchtarin');
+INSERT INTO `pasien` VALUES ('16', 'Muhamad Yusac Ekodi', '', 'Sidoarjo', '1994-03-13', '24', 'Jalan Sidoarjo (PP DU\'A) RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Sidoarjo', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '016-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('17', 'Rizka Alfian', '', 'Malang', '1990-07-22', '28', 'Jalan Kolonel Sugiono Gang 8 No 62 Jawa Timur RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Laki-laki', 'Wiraswasta', 'Lain', 'Umum', '017-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('18', 'Rahmat Maulana', '', 'Riau', '2003-07-23', '15', 'Jalan Riau (PP DU\'A) RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Riau', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '018-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('19', 'Darmawan Gusti', '', 'Malang', '1997-12-04', '20', 'Jalan Ciptomulyo Gg 8 / PP DU\'A RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '019-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('20', 'Thoriq Abdul Aziz', '', 'Jombang', '1997-07-04', '21', 'Jalan PP DU\'A RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Lain', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '020-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('21', 'Kholikul Anam', '', 'Jombang', '1993-11-10', '24', 'Jalan Jombang PP DU\'A RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Jombang', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '021-013-01-02-09-2018', '2018-09-14', '', '');
+INSERT INTO `pasien` VALUES ('22', 'Muhammad Sahari Riski ', '', 'Malang', '2005-04-03', '13', 'Jalan Kolonel Sugiono PP DU\'A RT00 RW00 Kelurahan Lain Kecamatan Lain Kota Malang', 'Laki-laki', 'Pelajar', 'Lain', 'Umum', '022-013-01-01-09-2018', '2018-09-24', 'Agus Hariyanto', 'Eni W');
 
 -- ----------------------------
 -- Table structure for proses_antrian
@@ -10677,12 +10701,13 @@ CREATE TABLE `rekam_medis` (
   `dokter_pemeriksa` varchar(255) DEFAULT NULL,
   `planning` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of rekam_medis
 -- ----------------------------
 INSERT INTO `rekam_medis` VALUES ('1', '001-013-02-01-09-2018', '2018-09-06 20:44:24', null, null, '', '', null, null, '', '', '', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `rekam_medis` VALUES ('2', '001-013-02-01-09-2018', '2018-12-09 16:17:47', '', '', '', '', null, null, '', '', '', 'demam pusing 2 minggu', null, null, '', null, null, null, null, '', null, null, null, null, null, null, null, null, null, null, null, '', '', '', null, null, null, null, null, null, null, null, null, null, null, null, null, '', '', null, null, null, null, '2', null);
 
 -- ----------------------------
 -- Table structure for settingan
@@ -10697,7 +10722,7 @@ CREATE TABLE `settingan` (
 -- ----------------------------
 -- Records of settingan
 -- ----------------------------
-INSERT INTO `settingan` VALUES ('1', '2018-12-09 00:00:31');
+INSERT INTO `settingan` VALUES ('1', '2018-12-15 20:10:13');
 
 -- ----------------------------
 -- Table structure for suratrujukan

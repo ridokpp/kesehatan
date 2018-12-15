@@ -143,6 +143,36 @@
 						<?=$pasien[0]->usia?> Tahun
 					</div>
 				</div>
+				<?php
+				if ($pasien[0]->nama_ayah !== '' OR $pasien[0]->nama_ibu !== '') { ?>
+				<div class="row mt-2">
+					<div class="col-4">
+						Nama Ayah / Ibu
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+					<?php if ($pasien[0]->nama_ayah !== '') { ?>
+						Tn <?=$pasien[0]->nama_ayah?>
+					<?php if ($pasien[0]->nama_ibu !== '') { echo " / "; } }
+					if ($pasien[0]->nama_ibu !== '') { ?>
+						Ny <?=$pasien[0]->nama_ibu?>
+					<?php } ?>
+					</div>
+				</div>
+				<?php } ?>
+				<div class="row mt-2">
+					<div class="col-4">
+						TTL
+					</div>
+					<div class="col-1">
+						:
+					</div>
+					<div class="col-7">
+						<?=$pasien[0]->tempat_lahir?>, <?=tgl_indo($pasien[0]->tanggal_lahir)?>
+					</div>
+				</div>
 				<div class="row mt-2">
 					<div class="col-4">
 						Alamat  

@@ -167,10 +167,23 @@ class Petugas extends CI_Controller
 		if ($pembayaran=='BPJS') {
 			$pembayaran .= ' : '.$this->input->post('nomor_bpjs');
 		}
+
+		if ($this->input->post('nama_ayah') !== '' OR $this->input->post('nama_ayah') !== NULL) {
+			$nama_ayah = $this->input->post('nama_ayah');
+		}else{
+			$nama_ayah = NULL;
+		}
+
+		if ($this->input->post('nama_ibu') !== '' OR $this->input->post('nama_ibu') !== NULL) {
+			$nama_ibu = $this->input->post('nama_ibu');
+		}else{
+			$nama_ibu = NULL;
+		}
+
 		$dataForm = array(	'nama'			=>ucwords($this->input->post('nama_lengkap')),
 							'nik' 			=>$nik,
-							'tempat_lahir'		=>ucwords($this->input->post('tempat_lahir')),
-							'tanggal_lahir'		=>$tgl_lahir->format('Y-m-d'),
+							'tempat_lahir'	=>ucwords($this->input->post('tempat_lahir')),
+							'tanggal_lahir' =>$tgl_lahir->format('Y-m-d'),
 							'usia'			=>$usia,
 							'alamat'		=>	"Jalan ".ucwords($this->input->post('jalan')).
 												" RT".$this->input->post('RT').
@@ -178,10 +191,13 @@ class Petugas extends CI_Controller
 												" Kelurahan ".ucwords($kelurahan).
 												" Kecamatan ".ucwords($kecamatan).
 												" Kota ".ucwords($kota),
-							'jenis_kelamin'		=>$this->input->post('jenis_kelamin'),
+							'jenis_kelamin'	=>$this->input->post('jenis_kelamin'),
 							'pekerjaan'		=>ucwords($this->input->post('pekerjaan')),
 							'kelurahan'		=>ucwords($kelurahan),
 							'pembayaran'	=>$pembayaran,
+							'tanggal_datang'=>date("y-m-d"),
+							'nama_ayah'		=>ucwords($nama_ayah),
+							'nama_ibu'		=>ucwords($nama_ibu),
 							'nomor_pasien'	=>$no_urut."-".$kd_kelurahan."-".$kode_jenis_kelamin."-".$kode_usia."-".$bulan_datang."-".$tahun_datang
 						);
 		$result = json_decode($this->Kesehatan_M->create('pasien',$dataForm),false);

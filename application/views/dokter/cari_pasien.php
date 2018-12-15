@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$('select').select2();
 	$("#nama_or_nomor").select2({
 		ajax: {
-			url: '<?=base_url()?>Petugas_handler/cari_nama/',
+			url: '<?=base_url()?>Dokter/cariNama/',
 			dataType: 'json',
 			delay: 1000,
 			data: function (term, page) {

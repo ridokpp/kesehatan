@@ -8,7 +8,7 @@
 			input_element.className 		= ("form-control");
 			input_element.setAttribute("type", "text");
 			input_element.setAttribute("name", "kota_lain");
-			input_element.setAttribute("placeholder", "Tuliskan Nama Kota Manual");
+			input_element.setAttribute("placeholder", "Contoh : Mojokerto");
 			input_element.setAttribute("required", "");
 			kotaORkabupatenLain.appendChild(input_element);
 
@@ -36,7 +36,7 @@
 			input_element.className 		= ("form-control");
 			input_element.setAttribute("type", "text");
 			input_element.setAttribute("name", "kecamatan_lain");
-			input_element.setAttribute("placeholder", "Tuliskan Nama Kecamatan");
+			input_element.setAttribute("placeholder", "Contoh: lowokwaru");
 			input_element.setAttribute("required", "");
 			kecamatanLain.appendChild(input_element);
 			document.getElementById("kelurahanID").value ="013 Lain-lain";kelurahanLain();
@@ -61,7 +61,7 @@
 			input_element.className 		= ("form-control");
 			input_element.setAttribute("type", "text");
 			input_element.setAttribute("name", "kelurahan_lain");
-			input_element.setAttribute("placeholder", "Tuliskan Nama Kelurahan");
+			input_element.setAttribute("placeholder", "Contoh: dinoyo");
 			input_element.setAttribute("required", "");
 			kelurahanLain.appendChild(input_element);
 		}else{
@@ -78,6 +78,39 @@
 			$('#nomor_bpjs').css('display','none');
 		}else{
 			$('#nomor_bpjs').css('display','');
+		}
+	}
+
+	function cekUmur(){
+		var dateinputan = new Date($('#tanggal_lahir').val());
+		tahun_lahir = dateinputan.getFullYear();
+		
+		var datenow = new Date();
+		tahun_sekarang = datenow.getFullYear();
+		var umur = tahun_sekarang - tahun_lahir;
+		
+		if (umur <= 14) {
+			elemToRender = "<div class='row'>"+
+				"<div class='col'>"+
+					"<div class='form-group row'>"+
+						"<label class='col-sm-3 col-form-label'>Nama Ayah</label>"+
+						"<div class='input-group-prepend col-sm-9'>"+
+							"<input type='text' class='form-control' name='nama_ayah'>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+				"<div class='col'>"+
+					"<div class='form-group row'>"+
+						"<label class='col-sm-3 col-form-label'>Nama Ibu</label>"+
+						"<div class='input-group-prepend col-sm-9'>"+
+							"<input type='text' class='form-control' name='nama_ibu'>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+			"<div>";
+			$('#nama_orang_tua').html(elemToRender);
+		}else{
+			$('#nama_orang_tua').html("");
 		}
 	}
 
@@ -106,7 +139,7 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">NIK</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan Nomor Induk Kependudukan">
+				      	<input type="text" class="form-control" id="nik" name="nik" placeholder="Contoh : 9801239801982388">
 				    </div>
 				</div>
 
@@ -119,30 +152,30 @@
 				<div class="row">
 			 		<div class="col">
 				     	<div class="form-group row">
-				   			<label for="inputEmail3" class="col-sm-3 col-form-label">Tempat</label>
+				   			<label class="col-sm-3 col-form-label">Tempat</label>
 				  		  	<div class="input-group-prepend col-sm-9">
-				      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Masukkan Tempat Lahir" required="">
+				      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Contoh : malang" required="">
 				    		</div>
 						</div>
 					</div>
 			    	<div class="col">
 				     	<div class="form-group row">
-				    		<label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal</label>
+				    		<label class="col-sm-4 col-form-label">Tanggal</label>
 				    		<div class="input-group-prepend col-sm-8">
-				      			<input type="date" class="form-control" name="tanggal_lahir" required="">
+				      			<input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required="" onchange="cekUmur()">
 				   			</div>
 						</div>
 					</div>
 					<div class="col">
 				     	<div class="form-group row">
-				    		<label for="inputEmail3" class="col-sm-2 col-form-label"></label>
+				    		<label class="col-sm-2 col-form-label"></label>
 				    		<div class="input-group-prepend col-sm-10">
-				      		
 				   			</div>
 						</div>
 					</div>
-
 			 	</div>
+
+			 	<div id="nama_orang_tua"></div><!-- jika anak2 maka tambahkan kolom inputan nama orang tua. -->
 
 			 	<div class="form-group row">
 					<div class="col">	
@@ -216,7 +249,7 @@
 						<div class="form-group row">
 						    <label class="col-sm-3 col-form-label">Jalan</label>
 						    <div class="input-group-prepend col-sm-9">
-						      	<input type="text" class="form-control" id="" name="jalan" placeholder="Masukkan Jalan" required="">
+						      	<input type="text" class="form-control" id="" name="jalan" placeholder="Contoh : mayjen sungkono no 123" required="">
 						    </div>
 						</div>	
 					</div>
@@ -224,11 +257,11 @@
 						<div class="form-group row">
 						    <label class="col-sm-1 col-form-label">RT</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RT" placeholder="Contoh: 02" required="" min="1">
+						      	<input type="number" class="form-control" id="" name="RT" placeholder="Contoh: 02" required="" min="0">
 						    </div>
 						    <label class="col-sm-1 col-form-label">RW</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RW" placeholder="Contoh: 02" required="" min="1">
+						      	<input type="number" class="form-control" id="" name="RW" placeholder="Contoh: 02" required="" min="0">
 						    </div>
 						</div>
 					</div>

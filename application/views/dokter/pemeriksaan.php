@@ -121,7 +121,7 @@
 													"<input type='number' class='form-control' name='harga_obat[]' id='harga"+flagid+"' readonly></input>"+
 												"</div>"+
 												"<div class='col-3'>"+
-													"<input type='number' class='form-control per-item' name='per_item[]' id='perItem"+flagid+"' ></input>"+
+													"<input type='number' class='form-control texxt-right ' name='per_item[]' id='perItem"+flagid+"' ></input>"+
 												"</div>"+
 												// "<div class='col'>"+
 												// 	"<input type='text' class='form-control' name='satuan[]' placeholder='satuan' id='satuan"+flagid+"' readonly=''></input>"+
@@ -616,19 +616,6 @@
 							  	</table>
 							</div>
 						</div>
-						<form method="POST" action="<?=base_url()?>Dokter/cetakRM" target="_blank">
-							<input type="text" name="nomor_pasien" value="<?=$pasien[0]->nomor_pasien?>">
-							<input type="radio" name="bool_halaman_awal" value="1">
-							<input type="radio" name="bool_halaman_awal" value="0">
-							<input type="checkbox" name="idS_rekam_medis[]" value="1">
-							<input type="checkbox" name="idS_rekam_medis[]" value="2">
-							<input type="checkbox" name="idS_rekam_medis[]" value="3">
-							<input type="checkbox" name="idS_rekam_medis[]" value="4">
-							<input type="checkbox" name="idS_rekam_medis[]" value="5">
-							<input type="checkbox" name="idS_rekam_medis[]" value="6">
-							<input type="checkbox" name="idS_rekam_medis[]" value="7">
-							<input type="submit" name="submit">
-						</form>
 					</div>
 				</div>
 <!-- REKAM MEDIS -->
@@ -1238,9 +1225,11 @@
 							<div id="renderInputObat"></div>
 							<hr>
 
-							<h6 class="text-center mt-3">Biaya Dokter</h6>
 							<div class="row mt-3">
 								<div class="col">
+									<h6 class="text-left mt-3">Biaya Dokter</h6>
+								</div>
+								<div class="col-3 float-right">
 									<input type="number" class="form-control" name="biaya_dokter" onkeyup="hitungTotal()" id="biaya_dokter" value="10000">
 								</div>
 							</div>
