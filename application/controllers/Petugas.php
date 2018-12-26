@@ -10,9 +10,9 @@ class Petugas extends CI_Controller
 		parent::__construct();
 		$this->load->model('Kesehatan_M');
 		date_default_timezone_set("Asia/Jakarta");
-		if ($this->session->userdata('logged_in')['akses'] != '3' ){
-			redirect("Account/logout");
-		}
+		// if ($this->session->userdata('logged_in')['akses'] != '3' ){
+		// 	redirect("Account/logout");
+		// }
 
 		$data['last_sync'] 		=	$this->Kesehatan_M->read('settingan',array('id'=>1))->result();
 		$now 					=	date("Y-m-d H:i:s");
@@ -81,68 +81,72 @@ class Petugas extends CI_Controller
 	*/
 	function SubmitPendaftaran()
 	{
+		// echo "<pre>";
+
 		$nik = $this->input->post('nik');
 
 		// cek apakah nik tidak ada isinya? jika tidak ada maka langsung skip pembacaan nik duplikat di database dan langsung insert. jika ada maka cek dulu di db adakah duplikasi
 		if ($nik !== '') {
+			// var_dump($nik);
+			// var_dump($this->input->post());die();
 			$result = $this->Kesehatan_M->read('pasien',array('nik'=>$nik));
 			if ($result->num_rows() !== 0) {
 				alert('alert','warning','Gagal','Duplikasi NIK');
 				redirect("Petugas/pendaftaran");
-				return false;
 			}
 		}
+		// echo "string";
+		// die();
 
 		// ambil id terakhir
-		$no_urut 	= $this->Kesehatan_M->rawQuery("SELECT AUTO_INCREMENT AS no_urut FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'kesehatan' AND TABLE_NAME = 'pasien'")->result();
+			$no_urut 	= $this->Kesehatan_M->rawQuery("SELECT AUTO_INCREMENT AS no_urut FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'kesehatan' AND TABLE_NAME = 'pasien'")->result();
 		
 		// ambil id untuk dijadikan nomor identitas pasien
-		if ($no_urut == array()) {
-			$no_urut = "000";
-		}else{
-			if($no_urut[0]->no_urut <= 9){
-				$no_urut = "00".$no_urut[0]->no_urut;
-			}elseif ($no_urut[0]->no_urut >=10 && $no_urut[0]->no_urut <=99) {
-				$no_urut = "0".$no_urut[0]->no_urut;
+			if ($no_urut == array()) {
+				$no_urut = "000";
 			}else{
-				$no_urut = $no_urut[0]->no_urut;
+				if($no_urut[0]->no_urut <= 9){
+					$no_urut = "00".$no_urut[0]->no_urut;
+				}elseif ($no_urut[0]->no_urut >=10 && $no_urut[0]->no_urut <=99) {
+					$no_urut = "0".$no_urut[0]->no_urut;
+				}else{
+					$no_urut = $no_urut[0]->no_urut;
+				}
 			}
-		}
 
 		// ambil kode kelurahan
-		$kelurahan = $this->input->post('kelurahan');
-		$kd_kelurahan = substr($kelurahan, 0,3);
-		if ($kelurahan == "013 Lain-lain") {
-			$kelurahan = $this->input->post('kelurahan_lain');
-		}else{
-			$kelurahan = substr($kelurahan, 4);
-		}
+			$kelurahan = $this->input->post('kelurahan');
+			$kd_kelurahan = substr($kelurahan, 0,3);
+			$kelurahan_lain = '';
+			if ($kelurahan == "013 Lain-lain") {
+				$kelurahan_lain = $this->input->post('kelurahan_lain');
+			}
 
 		// manipulasi kecamatan
-		$kecamatan = $this->input->post('kecamatan');
-		if ($kecamatan == 'other') {
-			$kecamatan = $this->input->post('kecamatan_lain');
-		}
+			$kecamatan_lain = '';
+			$kecamatan = $this->input->post('kecamatan');
+			if ($kecamatan == 'other') {
+				$kecamatan_lain = $this->input->post('kecamatan_lain');
+			}
 
 		// manipulasi kota
-		$kota = $this->input->post('kota');
-		if ($kota == 'other') {
-			$kota = $this->input->post('kota_lain');
-		}
-
+			$kota = $this->input->post('kota');
+			if ($kota == 'other') {
+				$kota_lain = $this->input->post('kota_lain');
+			}
 
 		// ambil jenis kelamin
-		$jenis_kelamin = $this->input->post('jenis_kelamin');
-		if ($jenis_kelamin == 'Laki-laki') {
-			$kode_jenis_kelamin = '01';
-		}else{
-			$kode_jenis_kelamin = '02';
-		}
+			$jenis_kelamin = $this->input->post('jenis_kelamin');
+			if ($jenis_kelamin == 'Laki-laki') {
+				$kode_jenis_kelamin = '01';
+			}else{
+				$kode_jenis_kelamin = '02';
+			}
 
 		// hitung umur
-		$tgl_lahir  = new DateTime($this->input->post('tanggal_lahir'));
-		$now 		= new DateTime();
-		$usia		= $now->diff($tgl_lahir)->y;
+			$tgl_lahir  = new DateTime($this->input->post('tanggal_lahir'));
+			$now 		= new DateTime();
+			$usia		= $now->diff($tgl_lahir)->y;
 
 		if ($usia <= "14") {
 			$kode_usia = "01";
@@ -185,27 +189,39 @@ class Petugas extends CI_Controller
 							'tempat_lahir'	=>ucwords($this->input->post('tempat_lahir')),
 							'tanggal_lahir' =>$tgl_lahir->format('Y-m-d'),
 							'usia'			=>$usia,
-							'alamat'		=>	"Jalan ".ucwords($this->input->post('jalan')).
-												" RT".$this->input->post('RT').
-												" RW".$this->input->post('RW').
-												" Kelurahan ".ucwords($kelurahan).
-												" Kecamatan ".ucwords($kecamatan).
-												" Kota ".ucwords($kota),
+							'jalan'			=>ucwords($this->input->post('jalan')),
+							'rt'			=>$this->input->post('RT'),
+							'rw'			=>$this->input->post('RW'),
+							'kelurahan'		=>$kelurahan,
+							'kecamatan'		=>$kecamatan,
+							'kota'			=>$kota,
 							'jenis_kelamin'	=>$this->input->post('jenis_kelamin'),
 							'pekerjaan'		=>ucwords($this->input->post('pekerjaan')),
-							'kelurahan'		=>ucwords($kelurahan),
 							'pembayaran'	=>$pembayaran,
 							'tanggal_datang'=>date("y-m-d"),
 							'nama_ayah'		=>ucwords($nama_ayah),
 							'nama_ibu'		=>ucwords($nama_ibu),
 							'nomor_pasien'	=>$no_urut."-".$kd_kelurahan."-".$kode_jenis_kelamin."-".$kode_usia."-".$bulan_datang."-".$tahun_datang
 						);
+
+		if ($kelurahan_lain !== '') {
+			$dataForm['kelurahan_lain'] = ucwords($kelurahan_lain);
+		}
+		if ($kecamatan_lain !== '') {
+			$dataForm['kecamatan_lain'] = ucwords($kecamatan_lain);
+		}
+		if ($kota_lain !== '') {
+			$dataForm['kota_lain'] = ucwords($kota_lain);
+		}
+
+		// var_dump($dataForm);
+		// die();
 		$result = json_decode($this->Kesehatan_M->create('pasien',$dataForm),false);
 		if ($result->status) {
 			alert('alert','success','Berhasil','Registrasi berhasil');
 			redirect("Petugas/pemeriksaan/".$dataForm['nomor_pasien']);
 		}else{
-			alert('alert','warning','Gagal','Duplikasi NIK');
+			alert('alert','warning','Gagal',$result->error_message->message);
 			redirect("Petugas/pendaftaran");
 		}
 	}

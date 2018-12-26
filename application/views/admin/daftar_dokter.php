@@ -47,6 +47,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<?php $i = 1; foreach ($dokter as $key => $value) { ?>
 					<tr>
 						<td>	
 							<div class="text-center">1.</div>
@@ -57,20 +58,20 @@
 							</div>
 						</td>
 						<td>
-								<div class="row">
+							<div class="row">
 								<div class="col-2">No. SIP</div>
 								<div class="col-0">:</div>
-								<div class="col-9"><?=ucwords($dokter[0]->sip)?></div>
+								<div class="col-9"><?=ucwords($value->sip)?></div>
 							</div>
 							<div class="row">
 								<div class="col-2">Nama</div>
 								<div class="col-0">:</div>
-								<div class="col-9"><?=ucwords($dokter[0]->nm_lengkap)?></div>
+								<div class="col-9"><?=ucwords($value->nama)?></div>
 							</div>
 							<div class="row">
 								<div class="col-2">Alamat</div>
 								<div class="col-0">:</div>
-								<div class="col-9"><?=ucwords($dokter[0]->alamat)?></div>
+								<div class="col-9"><?=ucwords($value->alamat)?></div>
 							</div>
 							<td>
 							<button type="button" class="btn btn-danger">Reset</button>
@@ -78,6 +79,7 @@
 						</td>
 						</td>
 					</tr>
+					<?php $i++; } ?>
 				</tbody>
 				<tfoot>
 		            <tr>

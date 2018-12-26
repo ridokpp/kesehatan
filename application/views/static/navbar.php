@@ -25,10 +25,10 @@ if ($this->session->userdata('logged_in')['akses'] == '3') {
         <a class="nav-link" href="<?php echo base_url()?>Admin/dashboard">Dashboard</a>
       </li>
       <li class="nav-item <?=($menu == 'daftar_pasien') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Admin/daftar_pasien">Daftar Pasien</a>
+        <a class="nav-link" href="<?php echo base_url()?>Admin/pasien">Daftar Pasien</a>
       </li>
       <li class="nav-item <?=($menu == 'daftar_dokter') ? 'active' : ''?>">
-        <a class="nav-link" href="<?php echo base_url()?>Admin/daftar_dokter">Daftar Dokter</a>
+        <a class="nav-link" href="<?php echo base_url()?>Admin/dokter">Daftar Dokter</a>
       </li>
       <li class="nav-item <?=($menu == 'verifikasi') ? 'active' : ''?>">
         <a class="nav-link" href="<?php echo base_url()?>Admin/verifikasi">Verifikasi</a>

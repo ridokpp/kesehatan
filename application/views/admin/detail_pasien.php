@@ -6,10 +6,11 @@
 			kotaORkabupatenLain.className 	= "input-group-prepend col-sm-9 offset-sm-3";
 			var input_element 				= document.createElement("INPUT");
 			input_element.className 		= ("form-control");
+			input_element.setAttribute("id", "kota_lain");
 			input_element.setAttribute("type", "text");
 			input_element.setAttribute("name", "kota_lain");
-			input_element.setAttribute("placeholder", "Contoh : kabupaten mojokerto / Kota surabaya");
-			input_element.setAttribute("required", "");
+			input_element.setAttribute("placeholder", "Contoh : Mojokerto");
+			
 			kotaORkabupatenLain.appendChild(input_element);
 
 			document.getElementById("kecamatanID").value ="other";kecamatanLain();
@@ -34,10 +35,11 @@
 			kecamatanLain.className 	= "input-group-prepend col-sm-8 offset-sm-4";
 			var input_element 				= document.createElement("INPUT");
 			input_element.className 		= ("form-control");
+			input_element.setAttribute("id", "kecamatan_lain");
 			input_element.setAttribute("type", "text");
 			input_element.setAttribute("name", "kecamatan_lain");
 			input_element.setAttribute("placeholder", "Contoh: lowokwaru");
-			input_element.setAttribute("required", "");
+			
 			kecamatanLain.appendChild(input_element);
 			document.getElementById("kelurahanID").value ="013 Lain-lain";kelurahanLain();
 		}else{
@@ -59,10 +61,11 @@
 			kelurahanLain.className 		= "input-group-prepend col-sm-8 offset-sm-4";
 			var input_element 				= document.createElement("INPUT");
 			input_element.className 		= ("form-control");
+			input_element.setAttribute("id", "kelurahan_lain");
 			input_element.setAttribute("type", "text");
 			input_element.setAttribute("name", "kelurahan_lain");
 			input_element.setAttribute("placeholder", "Contoh: dinoyo");
-			input_element.setAttribute("required", "");
+			
 			kelurahanLain.appendChild(input_element);
 		}else{
 			kelurahanLain.className = "";
@@ -82,7 +85,7 @@
 	}
 
 	function cekUmur(){
-		var dateinputan = new Date($('#tanggal_lahir').val());
+		var dateinputan = new Date($('#tanggal_lahirID').val());
 		tahun_lahir = dateinputan.getFullYear();
 		
 		var datenow = new Date();
@@ -95,7 +98,7 @@
 					"<div class='form-group row'>"+
 						"<label class='col-sm-3 col-form-label'>Nama Ayah</label>"+
 						"<div class='input-group-prepend col-sm-9'>"+
-							"<input type='text' class='form-control' name='nama_ayah'>"+
+							"<input type='text' class='form-control' name='nama_ayah' id='nama_ayah'>"+
 						"</div>"+
 					"</div>"+
 				"</div>"+
@@ -103,7 +106,7 @@
 					"<div class='form-group row'>"+
 						"<label class='col-sm-3 col-form-label'>Nama Ibu</label>"+
 						"<div class='input-group-prepend col-sm-9'>"+
-							"<input type='text' class='form-control' name='nama_ibu'>"+
+							"<input type='text' class='form-control' name='nama_ibu' id='nama_ibu'>"+
 						"</div>"+
 					"</div>"+
 				"</div>"+
@@ -113,33 +116,67 @@
 			$('#nama_orang_tua').html("");
 		}
 	}
+	$( document ).ready(function() {
+		$("#nomor_pasienID").val("<?=$pasien[0]->nomor_pasien?>")
+		$("#nama_lengkapID").val("<?=$pasien[0]->nama?>")
+		$("#pekerjaanID").val("<?=$pasien[0]->pekerjaan?>")
+		$("#nikID").val("<?=$pasien[0]->nik?>")
+		$("#tempat_lahirID").val("<?=$pasien[0]->tempat_lahir?>")
+		$("#tanggal_lahirID").val("<?=$pasien[0]->tanggal_lahir?>").trigger("change")
+		$("#nama_ayah").val("<?=$pasien[0]->nama_ayah?>")
+		$("#nama_ibu").val("<?=$pasien[0]->nama_ibu?>");
+
+		$("#kotaID").val("<?=$pasien[0]->kota?>").trigger("change");
+		if($("#kotaID").val() == "other"){
+			$("#kota_lain").val("<?=$pasien[0]->kota_lain?>")
+		}
+		$("#kecamatanID").val("<?=$pasien[0]->kecamatan?>").trigger("change")
+		if($("#kecamatanID").val() == "other"){
+			$("#kecamatan_lain").val("<?=$pasien[0]->kecamatan_lain?>")
+		}
+		$("#kelurahanID").val("<?=$pasien[0]->kelurahan?>").trigger("change")
+		if($("#kelurahanID").val() == "013 Lain-lain"){
+			$("#kelurahan_lain").val("<?=$pasien[0]->kelurahan_lain?>")
+		}
+
+		$("#jalanID").val("<?=$pasien[0]->jalan?>")
+		$("#rtID").val("<?=$pasien[0]->rt?>")
+		$("#rwID").val("<?=$pasien[0]->rw?>")
+		$("#jenis_kelamin").val("<?=$pasien[0]->jenis_kelamin?>")
+	});
 
 </script>
-<h3 class="text-center mt-3">Pendafataran Awal Pasien</h3>
-<form action="<?= base_url().'Petugas/submitPendaftaran'?>" method="POST">
+<h3 class="text-center mt-3">Detail Pasien</h3>
+<form action="<?= base_url().'Admin/submitUpdate'?>" method="POST">
 	<div class="container">
 		<?=$this->session->flashdata("alert");?>
 		<div class="row">
 			<div class="col">
-
+				<input type="hidden" name="id" value="<?=$pasien[0]->id?>">
+				<div class="form-group row">
+				    <label class="col-sm-1 col-form-label">Nomor Pasien</label>
+				    <div class="input-group-prepend col-sm-7">
+				      	<input type="text" class="form-control" id="nomor_pasienID" name="nomor_pasien" placeholder="Masukkan Nomor Pasien" >
+				    </div>
+				</div>
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Nama</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="" name="nama_lengkap" placeholder="Masukkan Nama Lengkap" required="">
+				      	<input type="text" class="form-control" id="nama_lengkapID" name="nama_lengkap" placeholder="Masukkan Nama Lengkap" >
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Pekerjaan</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Contoh: pelajar" required="">
+				      	<input type="text" class="form-control" id="pekerjaanID" name="pekerjaan" placeholder="Contoh: pelajar">
 				    </div>
 				</div>
 
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">NIK</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<input type="text" class="form-control" id="nik" name="nik" placeholder="Contoh : 9801239801982388">
+				      	<input type="text" class="form-control" id="nikID" name="nik" placeholder="Contoh : 9801239801982388" >
 				    </div>
 				</div>
 
@@ -154,7 +191,7 @@
 				     	<div class="form-group row">
 				   			<label class="col-sm-3 col-form-label">Tempat</label>
 				  		  	<div class="input-group-prepend col-sm-9">
-				      			<input type="text" class="form-control" id="" name="tempat_lahir" placeholder="Contoh : malang" required="">
+				      			<input type="text" class="form-control" id="tempat_lahirID" name="tempat_lahir" placeholder="Contoh : malang">
 				    		</div>
 						</div>
 					</div>
@@ -162,7 +199,7 @@
 				     	<div class="form-group row">
 				    		<label class="col-sm-4 col-form-label">Tanggal</label>
 				    		<div class="input-group-prepend col-sm-8">
-				      			<input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required="" onchange="cekUmur()">
+				      			<input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahirID" onchange="cekUmur()">
 				   			</div>
 						</div>
 					</div>
@@ -189,10 +226,10 @@
 						<div class="form-group row">
 						    <label class="col-sm-3 col-form-label">Kota</label>
 						    <div class="input-group-prepend col-sm-9">
-						      	<select class="form-control" id="kotaID" name="kota" required="" onchange="kotaORkabupatenLain()">
-									<option value="" disabled="" selected="">Kota / Kabupaten</option>
+						      	<select class="form-control" id="kotaID" name="kota" onchange="kotaORkabupatenLain()" >
+									<option value="other">Lain-lain</option>
 									<option value="Malang">Kota Malang</option>
-									<option value="other" >Lain-lain</option>
+						      		<option value="" >Kota / Kabupaten</option>
 								</select>
 						    </div>
 						    <div id="kotaORkabupatenLain">
@@ -205,7 +242,7 @@
 						<div class="form-group row">
 						    <label class="col-sm-4 col-form-label">Kecamatan</label>
 						    <div class="input-group-prepend col-sm-8">
-						      	<select class="form-control" id="kecamatanID" name="kecamatan" required="" onchange="kecamatanLain()">
+						      	<select class="form-control" id="kecamatanID" name="kecamatan" onchange="kecamatanLain()">
 									<option value="" disabled="" selected="">Kecamatan</option>
 									<option value="Kedungkandang">Kedungkandang</option>
 									<option value="other">Lain-lain</option>
@@ -220,7 +257,7 @@
 						<div class="form-group row">
 						    <label class="col-sm-4 col-form-label">Kelurahan</label>
 						    <div class="input-group-prepend col-sm-8">
-						      	<select class="form-control" id="kelurahanID" name="kelurahan" required="" onchange="kelurahanLain()">
+						      	<select class="form-control" id="kelurahanID" name="kelurahan" onchange="kelurahanLain()">
 									<option value="" disabled="" selected="">Kelurahan</option>
 									<option value="001 Arjowinangun">001 Arjowinangun</option>
 									<option value="002 Bumiayu">002 Bumiayu</option>
@@ -249,7 +286,7 @@
 						<div class="form-group row">
 						    <label class="col-sm-3 col-form-label">Jalan</label>
 						    <div class="input-group-prepend col-sm-9">
-						      	<input type="text" class="form-control" id="" name="jalan" placeholder="Contoh : mayjen sungkono no 123" required="">
+						      	<input type="text" class="form-control" id="jalanID" name="jalan" placeholder="Contoh : mayjen sungkono no 123">
 						    </div>
 						</div>	
 					</div>
@@ -257,11 +294,11 @@
 						<div class="form-group row">
 						    <label class="col-sm-1 col-form-label">RT</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RT" placeholder="Contoh: 02" required="" min="0">
+						      	<input type="number" class="form-control" id="rtID" name="RT" placeholder="Contoh: 02" min="0">
 						    </div>
 						    <label class="col-sm-1 col-form-label">RW</label>
 						    <div class="input-group-prepend col-sm-5">
-						      	<input type="number" class="form-control" id="" name="RW" placeholder="Contoh: 02" required="" min="0">
+						      	<input type="number" class="form-control" id="rwID" name="RW" placeholder="Contoh: 02" min="0">
 						    </div>
 						</div>
 					</div>
@@ -275,7 +312,7 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Gender</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<select class="form-control" name="jenis_kelamin" required="">
+				      	<select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
 							<option value="Laki-laki">Laki - Laki</option>
 							<option value="Perempuan">Perempuan</option>
 						</select>	
@@ -286,7 +323,7 @@
 				<div class="form-group row">
 				    <label class="col-sm-1 col-form-label">Pembayaran</label>
 				    <div class="input-group-prepend col-sm-7">
-				      	<select class="form-control" id="jenis_pembayaran" name="pembayaran" required="" onchange="cekPembayaran()">
+				      	<select class="form-control" id="jenis_pembayaran" name="pembayaran" onchange="cekPembayaran()">
 							<option value="Umum">Umum</option>
 							<option value="BPJS">BPJS</option>
 							<option value="RF">Royale Family</option>

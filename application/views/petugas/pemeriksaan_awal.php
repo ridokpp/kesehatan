@@ -181,7 +181,7 @@
 						:
 					</div>
 					<div class="col-7">
-						<?=$pasien[0]->alamat?>
+						<?=ucwords("Jalan ".$pasien[0]->jalan." RT ".$pasien[0]->rt." RW ".$pasien[0]->rw." ".($pasien[0]->kelurahan == '013 Lain-lain' ? "Kelurahan ".$pasien[0]->kelurahan_lain : "Kelurahan ".$pasien[0]->kelurahan)." ".($pasien[0]->kecamatan == 'other' ? "Kecamatan ".$pasien[0]->kecamatan_lain : "Kecamatan ".$pasien[0]->kecamatan)." ".($pasien[0]->kota == 'other' ? $pasien[0]->kota_lain : $pasien[0]->kota))?>
 					</div>
 				</div>
 			</div> 
