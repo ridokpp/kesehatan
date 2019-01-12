@@ -150,6 +150,7 @@ class Dokter extends CI_Controller {
 	function logistik()
 	{
 		$data['logistik'] = $this->Kesehatan_M->readS('logistik')->result();
+		$data['satuan'] = $this->Kesehatan_M->readS('satuan')->result();
 		$this->load->view('static/header');
 		$this->load->view('static/navbar');
 		$this->load->view('dokter/logistik',$data);
@@ -771,7 +772,17 @@ class Dokter extends CI_Controller {
 	*/
 	function submitEditLogistik()
 	{
-		$execQueryEdit = $this->Kesehatan_M->update('logistik',array('id'=>$this->input->post('id')),array("nama"=>$this->input->post("nama"),"stok"=>$this->input->post('stok'),"satuan"=>$this->input->post('satuan'),"kadaluarsa"=>$this->input->post("kadaluarsa")));
+		$execQueryEdit = $this->Kesehatan_M->update('logistik',
+																array('id'=>$this->input->post('id')),
+																array(
+																		"nama"=>$this->input->post("nama"),
+																		"stok"=>$this->input->post('stok'),
+																		"satuan"=>$this->input->post('satuan'),
+																		"kadaluarsa"=>$this->input->post("kadaluarsa"),
+																		"harga_jual"=>$this->input->post("harga_jual"),
+																		"harga_beli"=>$this->input->post("harga_beli")
+																	)
+													);
 		if ($execQueryEdit) {
 			alert('alert','success','Berhasil','Data berhasil diedit');
 			redirect("Dokter/logistik");
@@ -832,6 +843,30 @@ class Dokter extends CI_Controller {
 		}else{
 			redirect();
 		}		
+	}
+
+		/*
+	* funtion untuk handle form submit add logistik obat
+	*/
+	function submitAddSatuan()
+	{
+		$queryInsert['satuan'] = ucwords($this->input->post('satuan'));
+		
+		// cek adakah duplikasi nama obat
+		$cekDuplikasiObat = $this->Kesehatan_M->read('satuan',array('satuan' => $queryInsert['satuan']));
+		if ($cekDuplikasiObat->num_rows() == 0) {
+			$execQueryInsert = $this->Kesehatan_M->create('satuan',$queryInsert);
+			$execQueryInsert = json_decode($execQueryInsert);
+			if ($execQueryInsert->status) {
+				alert('alert','success','Berhasil','Data satuan berhasil dimasukkan');
+				redirect("Dokter/logistik");
+			}else{
+				var_dump($execQueryInsert->message);
+			}
+		}else{
+			alert('alert','danger','Gagal','Satuan sudah ada');
+			redirect("Dokter/logistik");
+		}
 	}
 
 }
