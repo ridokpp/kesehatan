@@ -45,7 +45,12 @@ $(document).ready(function() {
 								<div class="col-2">Alamat</div>
 								<div class="col-0">:</div>
 								<div class="col-9"><?php
-								echo ucwords("Jalan ".$value->jalan." ");
+								// echo "<pre>";
+								// var_dump($value);
+								// echo "</pre>";
+								if ($value->jalan !== '') {
+									echo ucwords($value->jalan." ");
+								}
 								if ($value->rt !== '') {
 									echo "RT".$value->rt." ";
 								}
@@ -59,7 +64,7 @@ $(document).ready(function() {
 										echo " ";
 									}
 								}else{
-									echo "Kelurahan ".$value->kelurahan." ";
+									echo "Kelurahan ".substr($value->kelurahan, 4)." ";
 								}
 
 								if ($value->kecamatan == 'other') {

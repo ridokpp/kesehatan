@@ -1,151 +1,4 @@
-<script type="text/javascript">
-	function kotaORkabupatenLain(){
-		var lain = document.getElementById("kotaID");
-		var kotaORkabupatenLain = document.getElementById("kotaORkabupatenLain");
-		if (lain.value == 'other') {
-			kotaORkabupatenLain.className 	= "input-group-prepend col-sm-9 offset-sm-3";
-			var input_element 				= document.createElement("INPUT");
-			input_element.className 		= ("form-control");
-			input_element.setAttribute("id", "kota_lain");
-			input_element.setAttribute("type", "text");
-			input_element.setAttribute("name", "kota_lain");
-			input_element.setAttribute("placeholder", "Contoh : Mojokerto");
-			
-			kotaORkabupatenLain.appendChild(input_element);
 
-			document.getElementById("kecamatanID").value ="other";kecamatanLain();
-			document.getElementById("kelurahanID").value ="013 Lain-lain";kelurahanLain();
-		}else{
-			kotaORkabupatenLain.className = "";
-			document.getElementById("kecamatanID").value ="";kecamatanLain();
-			document.getElementById("kelurahanID").value ="";kelurahanLain();
-			while (kotaORkabupatenLain.hasChildNodes()) { 
-				kotaORkabupatenLain.removeChild(kotaORkabupatenLain.firstChild);
-			}
-		}
-	}
-
-	function kecamatanLain(){
-		var lain = document.getElementById("kecamatanID");
-		var kecamatanLain = document.getElementById("kecamatanLain");
-		while (kecamatanLain.hasChildNodes()) { 
-			kecamatanLain.removeChild(kecamatanLain.firstChild);
-		}
-		if (lain.value == 'other') {
-			kecamatanLain.className 	= "input-group-prepend col-sm-8 offset-sm-4";
-			var input_element 				= document.createElement("INPUT");
-			input_element.className 		= ("form-control");
-			input_element.setAttribute("id", "kecamatan_lain");
-			input_element.setAttribute("type", "text");
-			input_element.setAttribute("name", "kecamatan_lain");
-			input_element.setAttribute("placeholder", "Contoh: lowokwaru");
-			
-			kecamatanLain.appendChild(input_element);
-			document.getElementById("kelurahanID").value ="013 Lain-lain";kelurahanLain();
-		}else{
-			kecamatanLain.className = "";
-			document.getElementById("kelurahanID").value ="";kelurahanLain();
-			while (kecamatanLain.hasChildNodes()) { 
-				kecamatanLain.removeChild(kecamatanLain.firstChild);
-			}
-		}
-	}
-	
-	function kelurahanLain(){
-		var lain = document.getElementById("kelurahanID");
-		var kelurahanLain = document.getElementById("kelurahanLain");
-		while (kelurahanLain.hasChildNodes()) { 
-			kelurahanLain.removeChild(kelurahanLain.firstChild);
-		}
-		if (lain.value == '013 Lain-lain') {
-			kelurahanLain.className 		= "input-group-prepend col-sm-8 offset-sm-4";
-			var input_element 				= document.createElement("INPUT");
-			input_element.className 		= ("form-control");
-			input_element.setAttribute("id", "kelurahan_lain");
-			input_element.setAttribute("type", "text");
-			input_element.setAttribute("name", "kelurahan_lain");
-			input_element.setAttribute("placeholder", "Contoh: dinoyo");
-			
-			kelurahanLain.appendChild(input_element);
-		}else{
-			kelurahanLain.className = "";
-			while (kelurahanLain.hasChildNodes()) { 
-				kelurahanLain.removeChild(kelurahanLain.firstChild);
-			}
-		}
-	}
-
-	function cekPembayaran(){
-		var pembayaran = $('#jenis_pembayaran').val();
-		if (pembayaran != 'BPJS') {
-			$('#nomor_bpjs').css('display','none');
-		}else{
-			$('#nomor_bpjs').css('display','');
-		}
-	}
-
-	function cekUmur(){
-		var dateinputan = new Date($('#tanggal_lahirID').val());
-		tahun_lahir = dateinputan.getFullYear();
-		
-		var datenow = new Date();
-		tahun_sekarang = datenow.getFullYear();
-		var umur = tahun_sekarang - tahun_lahir;
-		
-		if (umur <= 14) {
-			elemToRender = "<div class='row'>"+
-				"<div class='col'>"+
-					"<div class='form-group row'>"+
-						"<label class='col-sm-3 col-form-label'>Nama Ayah</label>"+
-						"<div class='input-group-prepend col-sm-9'>"+
-							"<input type='text' class='form-control' name='nama_ayah' id='nama_ayah'>"+
-						"</div>"+
-					"</div>"+
-				"</div>"+
-				"<div class='col'>"+
-					"<div class='form-group row'>"+
-						"<label class='col-sm-3 col-form-label'>Nama Ibu</label>"+
-						"<div class='input-group-prepend col-sm-9'>"+
-							"<input type='text' class='form-control' name='nama_ibu' id='nama_ibu'>"+
-						"</div>"+
-					"</div>"+
-				"</div>"+
-			"<div>";
-			$('#nama_orang_tua').html(elemToRender);
-		}else{
-			$('#nama_orang_tua').html("");
-		}
-	}
-	$( document ).ready(function() {
-		$("#nomor_pasienID").val("<?=$pasien[0]->nomor_pasien?>")
-		$("#nama_lengkapID").val("<?=$pasien[0]->nama?>")
-		$("#pekerjaanID").val("<?=$pasien[0]->pekerjaan?>")
-		$("#nikID").val("<?=$pasien[0]->nik?>")
-		$("#tempat_lahirID").val("<?=$pasien[0]->tempat_lahir?>")
-		$("#tanggal_lahirID").val("<?=$pasien[0]->tanggal_lahir?>").trigger("change")
-		$("#nama_ayah").val("<?=$pasien[0]->nama_ayah?>")
-		$("#nama_ibu").val("<?=$pasien[0]->nama_ibu?>");
-
-		$("#kotaID").val("<?=$pasien[0]->kota?>").trigger("change");
-		if($("#kotaID").val() == "other"){
-			$("#kota_lain").val("<?=$pasien[0]->kota_lain?>")
-		}
-		$("#kecamatanID").val("<?=$pasien[0]->kecamatan?>").trigger("change")
-		if($("#kecamatanID").val() == "other"){
-			$("#kecamatan_lain").val("<?=$pasien[0]->kecamatan_lain?>")
-		}
-		$("#kelurahanID").val("<?=$pasien[0]->kelurahan?>").trigger("change")
-		if($("#kelurahanID").val() == "013 Lain-lain"){
-			$("#kelurahan_lain").val("<?=$pasien[0]->kelurahan_lain?>")
-		}
-
-		$("#jalanID").val("<?=$pasien[0]->jalan?>")
-		$("#rtID").val("<?=$pasien[0]->rt?>")
-		$("#rwID").val("<?=$pasien[0]->rw?>")
-		$("#jenis_kelamin").val("<?=$pasien[0]->jenis_kelamin?>")
-	});
-
-</script>
 <h3 class="text-center mt-3">Detail Pasien</h3>
 <form action="<?= base_url().'Admin/submitUpdate'?>" method="POST">
 	<div class="container">
@@ -345,6 +198,151 @@
 		</div>
 	</div>
 </form>			
+<script type="text/javascript">
+	function kotaORkabupatenLain(){
+		var lain = document.getElementById("kotaID");
+		var kotaORkabupatenLain = document.getElementById("kotaORkabupatenLain");
+		if (lain.value == 'other') {
+			kotaORkabupatenLain.className 	= "input-group-prepend col-sm-9 offset-sm-3";
+			var input_element 				= document.createElement("INPUT");
+			input_element.className 		= ("form-control");
+			input_element.setAttribute("id", "kota_lain");
+			input_element.setAttribute("type", "text");
+			input_element.setAttribute("name", "kota_lain");
+			input_element.setAttribute("placeholder", "Contoh : Mojokerto");
+			
+			kotaORkabupatenLain.appendChild(input_element);
 
+			document.getElementById("kecamatanID").value ="other";kecamatanLain();
+			document.getElementById("kelurahanID").value ="013 Lain-lain";kelurahanLain();
+		}else{
+			kotaORkabupatenLain.className = "";
+			document.getElementById("kecamatanID").value ="";kecamatanLain();
+			document.getElementById("kelurahanID").value ="";kelurahanLain();
+			while (kotaORkabupatenLain.hasChildNodes()) { 
+				kotaORkabupatenLain.removeChild(kotaORkabupatenLain.firstChild);
+			}
+		}
+	}
 
+	function kecamatanLain(){
+		var lain = document.getElementById("kecamatanID");
+		var kecamatanLain = document.getElementById("kecamatanLain");
+		while (kecamatanLain.hasChildNodes()) { 
+			kecamatanLain.removeChild(kecamatanLain.firstChild);
+		}
+		if (lain.value == 'other') {
+			kecamatanLain.className 	= "input-group-prepend col-sm-8 offset-sm-4";
+			var input_element 				= document.createElement("INPUT");
+			input_element.className 		= ("form-control");
+			input_element.setAttribute("id", "kecamatan_lain");
+			input_element.setAttribute("type", "text");
+			input_element.setAttribute("name", "kecamatan_lain");
+			input_element.setAttribute("placeholder", "Contoh: lowokwaru");
+			
+			kecamatanLain.appendChild(input_element);
+			document.getElementById("kelurahanID").value ="013 Lain-lain";kelurahanLain();
+		}else{
+			kecamatanLain.className = "";
+			document.getElementById("kelurahanID").value ="";kelurahanLain();
+			while (kecamatanLain.hasChildNodes()) { 
+				kecamatanLain.removeChild(kecamatanLain.firstChild);
+			}
+		}
+	}
+	
+	function kelurahanLain(){
+		var lain = document.getElementById("kelurahanID");
+		var kelurahanLain = document.getElementById("kelurahanLain");
+		while (kelurahanLain.hasChildNodes()) { 
+			kelurahanLain.removeChild(kelurahanLain.firstChild);
+		}
+		if (lain.value == '013 Lain-lain') {
+			kelurahanLain.className 		= "input-group-prepend col-sm-8 offset-sm-4";
+			var input_element 				= document.createElement("INPUT");
+			input_element.className 		= ("form-control");
+			input_element.setAttribute("id", "kelurahan_lain");
+			input_element.setAttribute("type", "text");
+			input_element.setAttribute("name", "kelurahan_lain");
+			input_element.setAttribute("placeholder", "Contoh: dinoyo");
+			
+			kelurahanLain.appendChild(input_element);
+		}else{
+			kelurahanLain.className = "";
+			while (kelurahanLain.hasChildNodes()) { 
+				kelurahanLain.removeChild(kelurahanLain.firstChild);
+			}
+		}
+	}
 
+	function cekPembayaran(){
+		var pembayaran = $('#jenis_pembayaran').val();
+		if (pembayaran != 'BPJS') {
+			$('#nomor_bpjs').css('display','none');
+		}else{
+			$('#nomor_bpjs').css('display','');
+		}
+	}
+
+	function cekUmur(){
+		var dateinputan = new Date($('#tanggal_lahirID').val());
+		tahun_lahir = dateinputan.getFullYear();
+		
+		var datenow = new Date();
+		tahun_sekarang = datenow.getFullYear();
+		var umur = tahun_sekarang - tahun_lahir;
+		
+		if (umur <= 14) {
+			elemToRender = "<div class='row'>"+
+				"<div class='col'>"+
+					"<div class='form-group row'>"+
+						"<label class='col-sm-3 col-form-label'>Nama Ayah</label>"+
+						"<div class='input-group-prepend col-sm-9'>"+
+							"<input type='text' class='form-control' name='nama_ayah' id='nama_ayah'>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+				"<div class='col'>"+
+					"<div class='form-group row'>"+
+						"<label class='col-sm-3 col-form-label'>Nama Ibu</label>"+
+						"<div class='input-group-prepend col-sm-9'>"+
+							"<input type='text' class='form-control' name='nama_ibu' id='nama_ibu'>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+			"<div>";
+			$('#nama_orang_tua').html(elemToRender);
+		}else{
+			$('#nama_orang_tua').html("");
+		}
+	}
+	$( document ).ready(function() {
+		$("#nomor_pasienID").val("<?=$pasien[0]->nomor_pasien?>")
+		$("#nama_lengkapID").val("<?=$pasien[0]->nama?>")
+		$("#pekerjaanID").val("<?=$pasien[0]->pekerjaan?>")
+		$("#nikID").val("<?=$pasien[0]->nik?>")
+		$("#tempat_lahirID").val("<?=$pasien[0]->tempat_lahir?>")
+		$("#tanggal_lahirID").val("<?=$pasien[0]->tanggal_lahir?>").trigger("change")
+		$("#nama_ayah").val("<?=$pasien[0]->nama_ayah?>")
+		$("#nama_ibu").val("<?=$pasien[0]->nama_ibu?>");
+
+		$("#kotaID").val("<?=$pasien[0]->kota?>").trigger("change");
+		if($("#kotaID").val() == "other"){
+			$("#kota_lain").val("<?=$pasien[0]->kota_lain?>")
+		}
+		$("#kecamatanID").val("<?=$pasien[0]->kecamatan?>").trigger("change")
+		if($("#kecamatanID").val() == "other"){
+			$("#kecamatan_lain").val("<?=$pasien[0]->kecamatan_lain?>")
+		}
+		$("#kelurahanID").val("<?=$pasien[0]->kelurahan?>").trigger("change")
+		if($("#kelurahanID").val() == "013 Lain-lain"){
+			$("#kelurahan_lain").val("<?=$pasien[0]->kelurahan_lain?>")
+		}
+
+		$("#jalanID").val("<?=$pasien[0]->jalan?>")
+		$("#rtID").val("<?=$pasien[0]->rt?>")
+		$("#rwID").val("<?=$pasien[0]->rw?>")
+		$("#jenis_kelamin").val("<?=$pasien[0]->jenis_kelamin?>")
+	});
+
+</script>

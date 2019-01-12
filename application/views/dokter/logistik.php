@@ -110,7 +110,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="id" value="" id="idobat">
+                        <input type="hidden" name="id" value="" id="idobat">
                         <div class="row mt-3">
                             <div class="col">Nama Obat</div>
                             <div class="col-1">:</div>
