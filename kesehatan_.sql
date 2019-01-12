@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-01-12 21:59:07
+Date: 2019-01-12 23:43:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -10552,16 +10552,18 @@ CREATE TABLE `logistik` (
   `stok` int(11) DEFAULT NULL,
   `satuan` varchar(255) DEFAULT NULL,
   `kadaluarsa` date DEFAULT NULL,
-  `harga_jual` int(11) DEFAULT NULL,
-  `harga_beli` int(11) DEFAULT NULL,
+  `harga_jual_satuan` int(11) DEFAULT NULL,
+  `harga_beli_satuan` int(11) DEFAULT NULL,
+  `satuan_per_box` varchar(255) DEFAULT NULL,
+  `harga_beli_per_box` varchar(255) DEFAULT NULL,
+  `harga_jual_per_strip_10` varchar(255) DEFAULT NULL,
+  `presentase` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of logistik
 -- ----------------------------
-INSERT INTO `logistik` VALUES ('1', 'Amoxicillin 500mg', '20', 'Butir', '2018-12-21', '5000', null);
-INSERT INTO `logistik` VALUES ('2', 'Parasetamol 150 gr', '10', 'Pil', '2018-12-21', '2000', null);
 
 -- ----------------------------
 -- Table structure for log_kunjungan
@@ -10717,6 +10719,32 @@ CREATE TABLE `rekam_medis` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for satuan
+-- ----------------------------
+DROP TABLE IF EXISTS `satuan`;
+CREATE TABLE `satuan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `satuan` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of satuan
+-- ----------------------------
+INSERT INTO `satuan` VALUES ('1', 'Capsul');
+INSERT INTO `satuan` VALUES ('2', 'Syrup 60ml');
+INSERT INTO `satuan` VALUES ('3', 'Tablet');
+INSERT INTO `satuan` VALUES ('4', 'KSR');
+INSERT INTO `satuan` VALUES ('5', 'Sachet');
+INSERT INTO `satuan` VALUES ('6', 'Ampul 1ml');
+INSERT INTO `satuan` VALUES ('7', 'Ampul 2ml');
+INSERT INTO `satuan` VALUES ('8', 'Vial 15ml');
+INSERT INTO `satuan` VALUES ('9', 'Padat');
+INSERT INTO `satuan` VALUES ('10', 'Drop-Eye');
+INSERT INTO `satuan` VALUES ('11', 'Zalf-Eye');
+INSERT INTO `satuan` VALUES ('12', 'Gel-Skin');
+
+-- ----------------------------
 -- Table structure for settingan
 -- ----------------------------
 DROP TABLE IF EXISTS `settingan`;
@@ -10729,7 +10757,7 @@ CREATE TABLE `settingan` (
 -- ----------------------------
 -- Records of settingan
 -- ----------------------------
-INSERT INTO `settingan` VALUES ('1', '2019-01-08 19:10:02');
+INSERT INTO `settingan` VALUES ('1', '2019-01-12 22:00:59');
 
 -- ----------------------------
 -- Table structure for suratrujukan
