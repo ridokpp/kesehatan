@@ -243,62 +243,70 @@
     <!-- Modal satuan Obat -->
 
 
-    <table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th class="text-center" style="width: 5%">No.</th>
-                <th>Nama Obat</th>
-                <th>Jumlah Obat</th>
-                <th>Kadaluarsa</th>
-                <th class="text-center" style="width: 10%">Keterangan</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-               $i = 1;
-                foreach($logistik as $key => $value) {
-             ?>
-            <tr>
-                <td class="text-center"><?=$i?></td>
-                <td><?=$value->nama?></td>
-                <td><?=$value->stok?> <?=$value->satuan?></td>
-                <td><?=tgl_indo($value->kadaluarsa)?></td>
-                <td>
-                    <div class="text-center">
-                        <button 
-                            type="button" 
-                            data-toggle="modal" 
-                            data-target="#modalEditObat" 
-                            data-idobat="<?=$value->id?>" 
-                            data-namaobat="<?=$value->nama?>" 
-                            data-stokobat="<?=$value->stok?>" 
-                            data-satuanobat="<?=$value->satuan?>" 
-                            data-kadaluarsaobat="<?=$value->kadaluarsa?>" 
-                            data-hargajualobat="<?=$value->harga_jual_satuan?>" 
-                            data-hargabeliobat="<?=$value->harga_beli_satuan?>"
-                        >
-                            <img src="<?php echo base_url()?>assets/icon/edit2.png">
-                        </button>
-
-                        <button type="button" data-toggle="modal" data-target="#modalHapusObat" data-idobat="<?=$value->id?>">
-                            <img src="<?php echo base_url()?>assets/icon/delete.png">
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <?php $i++; } ?>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th class="text-center">No.</th>
-                <th>Nama Obat</th>
-                <th>Jumlah Obat</th>
-                <th>Kadaluarsa</th>
-                <th class="text-center">Keterangan</th>
-            </tr>
-        </tfoot>
-    </table>
 </div>
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th class="text-center" style="width: 5%">No.</th>
+            <th>Nama Obat</th>
+            <th>Stok Obat</th>
+            <th>Harga Beli/Box</th>
+            <th>Satuan/Box</th>
+            <th>Harga Beli @</th>
+            <th>Harga Jual @</th>
+            <th>Kadaluarsa</th>
+            <th class="text-center" style="width: 10%">Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+           $i = 1;
+            foreach($logistik as $key => $value) {
+         ?>
+        <tr>
+            <td class="text-center"><?=$i?></td>
+            <td><?=$value->nama?></td>
+            <td><?=$value->stok?> <?=$value->satuan?></td>
+            <td><?=tgl_indo($value->kadaluarsa)?></td>
+            <td>
+                <div class="text-center">
+                    <button 
+                        type="button" 
+                        data-toggle="modal" 
+                        data-target="#modalEditObat" 
+                        data-idobat="<?=$value->id?>" 
+                        data-namaobat="<?=$value->nama?>" 
+                        data-stokobat="<?=$value->stok?>" 
+                        data-satuanobat="<?=$value->satuan?>" 
+                        data-kadaluarsaobat="<?=$value->kadaluarsa?>" 
+                        data-hargajualobat="<?=$value->harga_jual_satuan?>" 
+                        data-hargabeliobat="<?=$value->harga_beli_satuan?>"
+                    >
+                        <img src="<?php echo base_url()?>assets/icon/edit2.png">
+                    </button>
+
+                    <button type="button" data-toggle="modal" data-target="#modalHapusObat" data-idobat="<?=$value->id?>">
+                        <img src="<?php echo base_url()?>assets/icon/delete.png">
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <?php $i++; } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th class="text-center">No.</th>
+            <th>Nama Obat</th>
+            <th>Stok Obat</th>
+            <th>Harga Beli/Box</th>
+            <th>Satuan/Box</th>
+            <th>Harga Beli @</th>
+            <th>Harga Jual @</th>
+            <th>Kadaluarsa</th>
+            <th class="text-center">Keterangan</th>
+        </tr>
+    </tfoot>
+</table>
 
 <script type="text/javascript">
 

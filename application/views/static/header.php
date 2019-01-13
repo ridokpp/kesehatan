@@ -21,6 +21,8 @@ if (!isset($title) AND !isset($pasien)) {
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/datatables-logistik/css/select.dataTables.min.css"></link> <!-- Baru Logistik -->
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/datatables-logistik/css/editor.dataTables.min.css"></link> <!-- Baru Logistik -->
 
+	<link rel="stylesheet" href="<?php echo base_url()?>assets/klinikstyle/css/klinik.css"></link>
+
 	<!-- <link rel="stylesheet" href="<?php echo base_url()?>assets/bootstrap-datepicker/css/bootstrap-datepicker3.css"/> -->
 	<script src="<?php echo base_url()?>assets/bootstrap/js/jquery-3.3.1.min.js"></script>
 	<script src="<?php echo base_url()?>assets/bootstrap/js/popper.min.js"></script>
